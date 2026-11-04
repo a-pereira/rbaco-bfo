@@ -141,5 +141,5 @@ for label, sub, sup in (("Restriction: marketing SubClassOf employee", "marketin
 out()
 
 path = os.path.join(d, "docs", "query-results.md")
-with open(path, "a", encoding="utf-8") as f:
+with open(path, "a", encoding="utf-8", newline="\n") as f:
     f.write("\n".join(lines) + "\n")

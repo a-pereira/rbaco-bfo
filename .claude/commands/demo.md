@@ -1,0 +1,12 @@
+---
+description: Show how RBACO-BFO decides an access request, from the example data to the axiom behind the decision
+argument-hint: "[a ROWLBAC pattern P1-P18, a dataset, or an access request]"
+---
+
+Demonstrate RBACO-BFO, following the section "Demonstrating" of `CLAUDE.md`. Show $ARGUMENTS; if nothing is named, show one grant and one denial from Botha and Eloff's purchase workflow (`data/purchase.ttl`).
+
+1. Read `README.md` (its two diagrams give the core pattern and the tasks) and `docs/mapping.md`, which maps each ROWLBAC pattern P1-P18 and the scenario to the RBACO terms and queries that cover it, with NIST counterparts and verdicts. Start from the row for what is to be shown.
+2. Run `"$RBACO_PY" -I -X utf8 tools/run_queries.py .` (outside a cloud session, any Python with rdflib 7.6.0). It takes about a minute and rewrites `docs/query-results.md` and `data/derived/`, which on the same inputs come out as committed, byte for byte. If `git status` then shows either as changed, report the difference with the output that shows it, as a finding apart from the demonstration.
+3. Pick a grant (`rbaco:RBACO_0000022`, access grant) or a denial (`rbaco:RBACO_0000023`, access denial) in `data/derived/<dataset>-derived.ttl` and follow it: to the access request it decides on (`RBACO_0000112`, decides on), the regulation it cites (`RBACO_0000113`, cites regulation), the role definition that regulation is assigned to, and, in `data/<dataset>.ttl`, the active role and business process instance behind the request. A denial cites the regulation that refused the request, such as a dynamic permission constraint, or nothing when no permission covered it; show which, and the conflict report on the same request, if any, with its justification (`RBACO_0000204`). Quote the triples with their `#:` label comments, and the lines of `docs/query-results.md` that report the decision.
+4. Name the axiom in `clif/rbaco-bfo-access.cl` behind the decision and quote it: [rbaco-a3] (deny-overrides) for every grant and denial, with the axiom behind a refusal, such as [rbaco-g3] for a task-bound operation or [rbaco-s15] for a dynamic permission constraint. `queries/decide-access.rq` computes the same decision. Where `docs/fol-results.md` has a Prover9 run for that scenario, cite its row and the axioms its proof uses.
+5. Change no file by hand. The run in step 2 is the only write, through the tool that owns those files.

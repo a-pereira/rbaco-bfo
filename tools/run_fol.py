@@ -3,7 +3,12 @@ Usage: run_fol.py <rbaco-bfo-dir> <bin-dir-with-prover9-and-mace4> <work-dir> <r
 
 The classified OWL is the output of a DL reasoner (HermiT through ROBOT) over rbaco-bfo-domain.ttl and its imports;
 it supplies the bridge axioms from RBACO's universals to BFO's. Writes LADR inputs and outputs to <work-dir>
-and the summary to docs/fol-results.md.
+and the summary to docs/fol-results.md. The run date and each run's seconds change from run to run, so that file
+leaves them out; the summary with them goes to <work-dir>/fol-results.md and to stdout.
+
+The binaries are prover9.exe and mace4.exe on Windows, prover9 and mace4 elsewhere. On Windows mace4 is linked with
+a 512 MB stack (tools/ladr/build_ladr.sh); elsewhere the soft stack limit sets a program's stack, so it is raised to
+512 MB for mace4 when it starts, or to the hard limit if that is lower (tools/ladr/build_ladr_linux.sh).
 
 Theories:
   RBACO     the axioms of rbaco-bfo-access.cl. The Prover9 entailments after the first take access_axioms: all but
@@ -317,16 +322,33 @@ rbaco_decided_before(c_q1, c_q2). (all q -rbaco_decided_before(q, c_q1)).
 """
 
 
+EXE = ".exe" if os.name == "nt" else ""
+STACK = 512 * 1024 * 1024  # mace4's stack (module docstring)
+if os.name == "posix":
+    import resource
+
+
+def raise_stack():
+    """Run in the child before mace4 starts (POSIX only): raise the soft stack limit to STACK, or to the hard limit
+    if that is lower."""
+    soft, hard = resource.getrlimit(resource.RLIMIT_STACK)
+    want = STACK if hard == resource.RLIM_INFINITY else min(STACK, hard)
+    if soft != resource.RLIM_INFINITY and soft < want:
+        resource.setrlimit(resource.RLIMIT_STACK, (want, hard))
+
+
 def run(tool, name, assumptions, goals=None, opts=""):
     path = os.path.join(W, name + ".in")
     body = opts + "".join(lst("assumptions", a) for a in assumptions)
     if goals:
         body += lst("goals", goals)
-    with open(path, "w", encoding="utf-8") as fh:
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(body)
     t0 = time.time()
-    with open(path, encoding="utf-8") as fin, open(os.path.join(W, name + ".out"), "w", encoding="utf-8") as fout:
-        p = subprocess.run([os.path.join(BIN, tool + ".exe")], stdin=fin, stdout=fout, stderr=subprocess.STDOUT)
+    with open(path, encoding="utf-8") as fin, \
+         open(os.path.join(W, name + ".out"), "w", encoding="utf-8", newline="\n") as fout:
+        p = subprocess.run([os.path.join(BIN, tool + EXE)], stdin=fin, stdout=fout, stderr=subprocess.STDOUT,
+                           preexec_fn=raise_stack if tool == "mace4" and os.name == "posix" else None)
     dt = time.time() - t0
     out = open(os.path.join(W, name + ".out"), encoding="utf-8", errors="replace").read()
     m = re.search(r"Exiting with (\d+) (proof|model)s?", out)
@@ -417,17 +439,27 @@ results.append(run("prover9", "p11c-second-decided-refused", [access_axioms, fac
 results.append(run("prover9", "p11d-first-decided-not-refused", [access_axioms, facts(PDSD_SAME_INSTANT)],
                    [("goal", "-rbaco_refuses_permission_dsd(c_pd, c_q1)")], P_OPTS))
 
-lines = ["# First-order results (tools/run_fol.py)", "",
-         f"Prover9 and Mace4, LADR 2009-11A, built from github.com/ai4reason/Prover9 (master, commit cdca95a5). Run {time.strftime('%Y-%m-%d')}.", "",
-         f"RBACO: {len(rbaco)} axioms. BRIDGE: {len(bridge)} axioms from the classified OWL. BFO: {len(bfo)} axioms from "
-         f"{len(MODULES)} modules ({', '.join(MODULES)}), universals expanded over {len(in_play)} in play: {', '.join(sorted(in_play))}.", "",
-         f"BFO axioms left out: {len(skipped)}. "
-         + "; ".join(f"{a} ({m}): {why}" for m, a, why in skipped if why != "names a universal not in play")
-         + f"; and {sum(1 for s in skipped if s[2] == 'names a universal not in play')} universal-declaration axioms naming a universal not in play.", "",
-         f"BFO-SIG, the {len(bfo_sig)} BFO axioms using no relation outside RBACO's BFO vocabulary: {', '.join(a for a, _ in bfo_sig)}.", "",
-         "| Run | Tool | Axioms | Result | Model size | Seconds | Non-fact axioms the proof uses |", "|---|---|---:|---|---:|---:|---|"]
-for r in results:
-    lines.append(f"| {r['name']} | {r['tool']} | {r['axioms']} | {r['verdict']} | {r['size']} | {r['seconds']} | {', '.join(r['used'])} |")
-print("\n".join(lines))
-with open(os.path.join(R, "docs", "fol-results.md"), "w", encoding="utf-8") as fh:
-    fh.write("\n".join(lines) + "\n")
+def report(timed):
+    """The summary; timed adds the run date and a Seconds column (module docstring)."""
+    lines = ["# First-order results (tools/run_fol.py)", "",
+             "Prover9 and Mace4, LADR 2009-11A, built from github.com/ai4reason/Prover9 (master, commit cdca95a5)."
+             + (f" Run {time.strftime('%Y-%m-%d')}." if timed else ""), "",
+             f"RBACO: {len(rbaco)} axioms. BRIDGE: {len(bridge)} axioms from the classified OWL. BFO: {len(bfo)} axioms from "
+             f"{len(MODULES)} modules ({', '.join(MODULES)}), universals expanded over {len(in_play)} in play: {', '.join(sorted(in_play))}.", "",
+             f"BFO axioms left out: {len(skipped)}. "
+             + "; ".join(f"{a} ({m}): {why}" for m, a, why in skipped if why != "names a universal not in play")
+             + f"; and {sum(1 for s in skipped if s[2] == 'names a universal not in play')} universal-declaration axioms naming a universal not in play.", "",
+             f"BFO-SIG, the {len(bfo_sig)} BFO axioms using no relation outside RBACO's BFO vocabulary: {', '.join(a for a, _ in bfo_sig)}.", "",
+             "| Run | Tool | Axioms | Result | Model size |" + (" Seconds |" if timed else "") + " Non-fact axioms the proof uses |",
+             "|---|---|---:|---|---:|" + ("---:|" if timed else "") + "---|"]
+    for r in results:
+        lines.append(f"| {r['name']} | {r['tool']} | {r['axioms']} | {r['verdict']} | {r['size']} |"
+                     + (f" {r['seconds']} |" if timed else "") + f" {', '.join(r['used'])} |")
+    return "\n".join(lines) + "\n"
+
+
+timed = report(True)
+print(timed, end="")
+for path, text in ((os.path.join(W, "fol-results.md"), timed), (os.path.join(R, "docs", "fol-results.md"), report(False))):
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(text)

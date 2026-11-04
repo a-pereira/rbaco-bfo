@@ -3,6 +3,7 @@ also appear when the imports are reasoned without RBACO. Usage: dl_imported.py <
 import sys, os
 from rdflib import Graph, URIRef, RDFS
 D = sys.argv[1]
+sys.stdout.reconfigure(newline="\n")  # make_inferences.sh writes the output to docs/dl/inferences.txt, LF on every platform
 def load(n):
     g = Graph(); g.parse(os.path.join(D, n), format="xml"); return g
 m, r = load("rbaco-bfo-merged.owl"), load("rbaco-bfo-reasoned.owl")

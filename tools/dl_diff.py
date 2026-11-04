@@ -6,6 +6,7 @@ from rdflib import Graph, URIRef, Literal, RDF, RDFS, OWL
 
 D = sys.argv[1]
 RBACO = "https://w3id.org/rbaco/bfo/"
+sys.stdout.reconfigure(newline="\n")  # make_inferences.sh writes the output to docs/dl/inferences.txt, LF on every platform
 
 
 def load(name):
