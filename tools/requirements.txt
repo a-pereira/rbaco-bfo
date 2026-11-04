@@ -1,0 +1,5 @@
+# The Python packages the checks need (docs/expected-results.md), pinned with the SHA-256 of their wheels:
+#   python -m pip install --require-hashes -r tools/requirements.txt
+# rdflib 7.6.0 needs only pyparsing on Python 3.11 and later.
+rdflib==7.6.0 --hash=sha256:30c0a3ebf4c0e09215f066be7246794b6492e054e782d7ac2a34c9f70a15e0dd
+pyparsing==3.3.3 --hash=sha256:ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4

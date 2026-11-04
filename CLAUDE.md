@@ -20,8 +20,10 @@ This repository is RBACO-BFO, the BFO edition of RBACO, an ontology of role-base
 4. Run the two hand-model checks in `README.md`.
 5. Report each expected result as matched or not, with the value measured.
 
-Known gap: the checks have only been run on Windows. On Linux the first-order step would fail as it stands, since `tools/run_fol.py` calls the LADR binaries with `.exe` appended and `tools/ladr/build_ladr.sh` builds them with a Windows toolchain. Three outputs would also differ from the manifest with the same content: on Windows, Python writes text with CRLF line endings, so `docs/query-results.md` and `docs/fol-results.md` have CRLF on every line and `docs/dl/inferences.txt` on the lines Python wrote (the rest come from `echo`); on Linux all three come out with LF.
+`/reverify` (`.claude/commands/reverify.md`) runs these steps. In a Claude Code cloud session, the SessionStart hook `.claude/hooks/session-start.sh` installs the tools outside the repository, checks their SHA-256, and exports `RBACO_PY`, `RBACO_ROBOT` and `RBACO_LADR`, the first three arguments of step 2.
+
+The checks run on Windows in Git Bash and on Linux, where `tools/ladr/build_ladr_linux.sh` builds the LADR binaries (design-record D21). Every text file they write has LF line endings on both, and no report holds a run time, so a run on the same inputs reproduces every file it writes, byte for byte. Known gap: the port of D21 has been run on Linux only; it has not been rerun on Windows yet.
 
 ## Demonstrating
 
-`docs/mapping.md` maps each ROWLBAC pattern to the RBACO terms and queries that cover it, and `docs/query-results.md` holds the output of the last run. To show a decision, run `tools/run_queries.py` on the example data and follow a grant or denial in `data/derived/` to the request it decides on, the regulation it cites, and the axiom in `clif/rbaco-bfo-access.cl` behind it.
+`docs/mapping.md` maps each ROWLBAC pattern to the RBACO terms and queries that cover it, and `docs/query-results.md` holds the output of the last run. To show a decision, run `tools/run_queries.py` on the example data and follow a grant or denial in `data/derived/` to the request it decides on, the regulation it cites, and the axiom in `clif/rbaco-bfo-access.cl` behind it. `/demo` (`.claude/commands/demo.md`) runs this walkthrough.

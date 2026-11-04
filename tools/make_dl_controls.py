@@ -40,6 +40,6 @@ controls = {
                              "c:pl1 a rbaco:RBACO_0000005 . c:pl2 a rbaco:RBACO_0000005 . c:pl1 owl:differentFrom c:pl2 .\n"),
 }
 for name, body in controls.items():
-    with open(os.path.join(out, name + ".ttl"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(out, name + ".ttl"), "w", encoding="utf-8", newline="\n") as fh:
         fh.write(HEAD.format(name=name) + body)
 print("\n".join(controls))

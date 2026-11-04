@@ -32,11 +32,12 @@ This repository holds the BFO edition, RBACO-BFO; in its documents, RBACO means 
 | `docs/dl/inferences.txt` | What HermiT inferred beyond the asserted axioms, and the negative controls |
 | `docs/fol-results.md` | Generated output of the last Prover9 and Mace4 run |
 | `docs/fol/` | The LADR theories the two hand-specified models were tested against, their specifications (`hand-*.py`), and the clausetester results |
-| `tools/` | The scripts that built the extract, the RDF/XML, the terms CSV and the data, and the ones that run the checks; `run_all.sh` runs every check in order. `fig_lines.py` prints the labels and line segments of a figure on a PDF page, as used for Botha and Eloff's Figure 6 |
-| `tools/ladr/` | `build_ladr.sh` and three header shims: how Prover9, Mace4 and clausetester were built on Windows |
+| `tools/` | The scripts that built the extract, the RDF/XML, the terms CSV and the data, and the ones that run the checks; `run_all.sh` runs every check in order, and `requirements.txt` pins the Python packages they need. `fig_lines.py` prints the labels and line segments of a figure on a PDF page, as used for Botha and Eloff's Figure 6 |
+| `tools/ladr/` | `build_ladr.sh` and three header shims: how Prover9, Mace4 and clausetester were built on Windows; `build_ladr_linux.sh` builds them on Linux |
 | `LICENSE.md`, `LICENSES/`, `NOTICE.md` | Which license covers which file, the two license texts, and the imports' licenses |
 | `CITATION.cff` | How to cite RBACO-BFO |
 | `CLAUDE.md` | Instructions for Claude Code sessions that reverify or demonstrate RBACO-BFO |
+| `.claude/` | For those sessions: the SessionStart hook that installs the tools in a cloud session (`hooks/session-start.sh`, registered in `settings.json`), and the commands `/reverify` and `/demo` (`commands/`) |
 | `MANIFEST.sha256` | Hash of every other file in the repository |
 
 ## Sources
@@ -59,15 +60,21 @@ The data files carry the same comments on the classes and properties they use (`
 
 ## Running the checks
 
-`tools/run_all.sh` runs every check except the hand-specified models below, in order, writing reasoner and prover output and a log per step to a folder you name. Each step is one line of the script, so a check can also be run on its own with the arguments shown there. `docs/expected-results.md` gives what each step must report.
+`tools/run_all.sh` runs every check except the hand-specified models below, in order, writing reasoner and prover output and a log per step to a folder you name. The run times go there too, so a run on the same inputs rewrites the committed reports byte for byte. Each step is one line of the script, so a check can also be run on its own with the arguments shown there. `docs/expected-results.md` gives what each step must report.
 
 ```bash
 sh tools/run_all.sh python path/to/robot.jar path/to/ladr-bin out
 ```
 
-The checks need Python 3 and rdflib 7. With rdflib 7.6.0 the query run takes about a minute; with any other version `run_queries.py` leaves out its evaluation shortcuts, which were checked on 7.6.0 only, and takes more than ten times as long (`docs/design-record.md` D17). The DL checks need Java and ROBOT 1.9.8 (`robot.jar`). The first-order checks need `prover9` and `mace4` from LADR 2009-11A; on Windows, `tools/ladr/build_ladr.sh <source> <out> <gcc-bin>` builds them, with clausetester, from github.com/ai4reason/Prover9 at commit `cdca95a5`. A fifth argument, `--full`, adds the Mace4 searches over the BFO set, which run to their time limits.
+The checks need Python 3 and rdflib 7; `tools/requirements.txt` pins rdflib 7.6.0 and pyparsing with the SHA-256 of their wheels (`python -m pip install --require-hashes -r tools/requirements.txt`). With rdflib 7.6.0 the query run takes about a minute; with any other version `run_queries.py` leaves out its evaluation shortcuts, which were checked on 7.6.0 only, and takes more than ten times as long (`docs/design-record.md` D17). The DL checks need Java and ROBOT 1.9.8 (`robot.jar`). The first-order checks need `prover9` and `mace4` from LADR 2009-11A, built with clausetester from github.com/ai4reason/Prover9 at commit `cdca95a5`: on Windows by `tools/ladr/build_ladr.sh <source> <out> <gcc-bin>`, on Linux by `tools/ladr/build_ladr_linux.sh <out>`, which fetches that commit itself. A fifth argument, `--full`, adds the Mace4 searches over the BFO set, which run to their time limits.
 
-Mace4 finds no model in 300 s for two of the regression probes' scenarios. For each, `tools/check_hand_model.py` checks a hand-specified interpretation instead. Each interpretation is saved in `docs/fol/` with the theory `run_fol.py` wrote for it on 2026-11-03 (the 48-axiom RBACO theory, the bridge and the scenario facts), and the tool runs `clausetester` on the theory and on the goals of the scenario's Prover9 runs:
+In a Claude Code cloud session, the SessionStart hook `.claude/hooks/session-start.sh` installs all of these outside the repository, checks their SHA-256, and exports their paths, so the run is:
+
+```bash
+sh tools/run_all.sh "$RBACO_PY" "$RBACO_ROBOT" "$RBACO_LADR" path/to/out
+```
+
+Mace4 finds no model in 300 s for two of the regression probes' scenarios. For each, `tools/check_hand_model.py` checks a hand-specified interpretation instead. Each interpretation is saved in `docs/fol/` with the theory `run_fol.py` writes for it (the 48-axiom RBACO theory, the bridge and the scenario facts), and the tool runs `clausetester` on the theory and on the goals of the scenario's Prover9 runs:
 
 ```bash
 python tools/check_hand_model.py docs/fol/m-t1-pdsd-same-content.in docs/fol/hand-pdsd-same-content.py path/to/clausetester hand-out

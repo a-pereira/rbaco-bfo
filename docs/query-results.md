@@ -800,7 +800,6 @@ Restriction holds in the availability counter-state: True.
 Restriction holds in the safety counter-state: True.
 
 Queries run: 32 of 32.
-Elapsed: 72 s.
 ## ROWLBAC's own rules, re-run (tools/rowlbac_checks.py)
 
 ### 1. Section 3.3.5 DSoD rule over Bob (assigned Visitor and Temporary Resident)

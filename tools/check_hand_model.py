@@ -1,6 +1,6 @@
 """Check a hand-specified finite interpretation against a LADR theory, for scenarios Mace4 does not finish, and test
 every formula in it with LADR's clausetester as well.
-Usage: check_hand_model.py <theory.in> <spec.py> <clausetester.exe> <out-dir>
+Usage: check_hand_model.py <theory.in> <spec.py> <clausetester> <out-dir>
 
 <theory.in> is a Mace4 input as run_fol.py writes it. <spec.py> defines N (domain size), CONST (constant -> element)
 and EXTRA (atoms to add, as (predicate, (elements...))), and may define GOALS (formulas to evaluate in the
@@ -13,9 +13,26 @@ empty. Every assumption and goal is then evaluated, and the false ones are print
 The interpretation is written to <out-dir>/<spec>.interp in Mace4's format, the assumptions as one list to
 <spec>-formulas.in (clausetester reads only the first list of a file) and the goals to <spec>-goals.in, and
 clausetester evaluates both independently. A clean result (every formula true) shows the theory satisfiable; no
-search is involved."""
+search is involved.
+
+<clausetester> is the path of the binary (clausetester.exe on Windows). On Windows it is linked with a 512 MB stack
+(tools/ladr/build_ladr.sh); elsewhere the soft stack limit sets a program's stack, so it is raised to 512 MB for
+clausetester when it starts, or to the hard limit if that is lower (tools/ladr/build_ladr_linux.sh)."""
 import itertools, os, re, subprocess, sys
 from collections import defaultdict
+if os.name == "posix":
+    import resource
+STACK = 512 * 1024 * 1024
+
+
+def raise_stack():
+    """Run in the child before clausetester starts (POSIX only): raise the soft stack limit to STACK, or to the hard
+    limit if that is lower."""
+    soft, hard = resource.getrlimit(resource.RLIMIT_STACK)
+    want = STACK if hard == resource.RLIM_INFINITY else min(STACK, hard)
+    if soft != resource.RLIM_INFINITY and soft < want:
+        resource.setrlimit(resource.RLIMIT_STACK, (want, hard))
+
 
 THEORY, SPEC, CT, OUT = sys.argv[1:5]
 os.makedirs(OUT, exist_ok=True)
@@ -294,14 +311,15 @@ for p, k in sorted(ARITY.items()):
     cells = [1 if combo in R[p] else 0 for combo in itertools.product(range(N), repeat=k)]
     parts.append(f"relation({p}({','.join('_' for _ in range(k))}), [{','.join(map(str, cells))}])")
 ipath = os.path.join(OUT, f"{TAG}.interp")
-open(ipath, "w", encoding="utf-8").write(f"interpretation({N}, [number=1, seconds=0], [\n  " + ",\n  ".join(parts) + "]).\n")
+open(ipath, "w", encoding="utf-8", newline="\n").write(f"interpretation({N}, [number=1, seconds=0], [\n  " + ",\n  ".join(parts) + "]).\n")
 
 
 def clausetester(name, formulas):
     path = os.path.join(OUT, f"{TAG}-{name}.in")
-    open(path, "w", encoding="utf-8").write("formulas(assumptions).\n" + "\n".join(formulas) + "\nend_of_list.\n")
+    open(path, "w", encoding="utf-8", newline="\n").write("formulas(assumptions).\n" + "\n".join(formulas) + "\nend_of_list.\n")
     with open(path, encoding="utf-8") as fin:
-        res = subprocess.run([CT, ipath, "commands"], stdin=fin, capture_output=True, text=True)
+        res = subprocess.run([CT, ipath, "commands"], stdin=fin, capture_output=True, text=True,
+                             preexec_fn=raise_stack if os.name == "posix" else None)
     out = res.stdout.splitlines()
     summary = [l for l in out if l.startswith("% interp")]
     return (summary[-1] if summary else res.stderr[-500:]), [l for l in out if re.search(r"\.\s+%\s*$", l)]

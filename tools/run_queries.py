@@ -20,7 +20,8 @@ which gives the algebra the substituted text would (prepare and q below). rdflib
 two changes to the order of its work, neither of which changes a result (rbaco_eval below). Both rely on how
 rdflib stores a translated query, and were checked against its own evaluation under rdflib 7.6.0 only; under
 another version the text is parsed at each call and rdflib's evaluator works unchanged, more slowly.
-Writes data/derived/<dataset>-derived.ttl, with label comments (annotate_ttl.py), and docs/query-results.md.
+Writes data/derived/<dataset>-derived.ttl, with label comments (annotate_ttl.py), and docs/query-results.md, and
+prints the report and the elapsed time, which changes from run to run and so is left out of the file.
 Exits 1 if a regression probe fails, after writing both.
 """
 import glob, os, re, sys, time
@@ -692,8 +693,8 @@ if not CHECKED:
     out(f"rdflib {rdflib.__version__}: queries parsed at each call and evaluated by rdflib alone "
         "(the runner's hooks were checked under 7.6.0 only).")
 out(f"Queries run: {len(used)} of {len(QUERIES)}." + (f" Not run: {', '.join(unused)}." if unused else ""))
-out(f"Elapsed: {time.time() - t0:.0f} s.")
-with open(os.path.join(d, "docs", "query-results.md"), "w", encoding="utf-8") as f:
+print(f"Elapsed: {time.time() - t0:.0f} s.")  # printed only: it changes from run to run
+with open(os.path.join(d, "docs", "query-results.md"), "w", encoding="utf-8", newline="\n") as f:
     f.write("\n".join(report) + "\n")
 if failed:
     print(f"FAILED probe expectations: {len(failed)}", file=sys.stderr)

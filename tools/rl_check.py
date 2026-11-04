@@ -213,5 +213,5 @@ for text, cls in controls:
     lines.append(f"Negative control ({text}): clashes found: {n}.")
 lines.append("")
 print("\n".join(lines))
-with open(os.path.join(d, "docs", "query-results.md"), "a", encoding="utf-8") as fh:
+with open(os.path.join(d, "docs", "query-results.md"), "a", encoding="utf-8", newline="\n") as fh:
     fh.write("\n".join(lines) + "\n")
