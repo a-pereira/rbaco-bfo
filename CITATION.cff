@@ -1,0 +1,80 @@
+cff-version: 1.2.0
+message: "If you use RBACO-BFO, please cite it with these metadata."
+title: "RBACO-BFO: Role-Based Access Control Ontology, BFO edition"
+abstract: >-
+  An ontology of role-based access control on BFO 2020, the Common Core Ontologies v2.2 and IAO. It
+  re-expresses the patterns of ROWLBAC (Finin et al., SACMAT 2008) to the semantics of the proposed NIST
+  RBAC standard (Ferraiolo et al., ACM TISSEC 2001), with tasks and separation of duty after Botha and
+  Eloff (IBM Systems Journal 2001), and comes with first-order axioms in CLIF, SPARQL derivations and
+  checks, example data, and the records of how it was verified.
+authors:
+  - family-names: Pereira
+    given-names: Anil
+repository-code: "https://github.com/a-pereira/rbaco-bfo"
+license:
+  - CC-BY-4.0
+  - BSD-3-Clause
+keywords:
+  - ontology
+  - role-based access control
+  - RBAC
+  - BFO
+  - Common Core Ontologies
+  - separation of duty
+references:
+  - type: conference-paper
+    title: "ROWLBAC: Representing Role Based Access Control in OWL"
+    authors:
+      - family-names: Finin
+        given-names: T.
+      - family-names: Joshi
+        given-names: A.
+      - family-names: Kagal
+        given-names: L.
+      - family-names: Niu
+        given-names: J.
+      - family-names: Sandhu
+        given-names: R.
+      - family-names: Winsborough
+        given-names: W.
+      - family-names: Thuraisingham
+        given-names: B.
+    collection-title: "Proceedings of the 13th ACM Symposium on Access Control Models and Technologies (SACMAT '08)"
+    start: 73
+    end: 82
+    year: 2008
+    doi: 10.1145/1377836.1377849
+  - type: article
+    title: "Proposed NIST standard for role-based access control"
+    authors:
+      - family-names: Ferraiolo
+        given-names: David F.
+      - family-names: Sandhu
+        given-names: Ravi
+      - family-names: Gavrila
+        given-names: Serban
+      - family-names: Kuhn
+        given-names: D. Richard
+      - family-names: Chandramouli
+        given-names: Ramaswamy
+    journal: "ACM Transactions on Information and System Security"
+    volume: 4
+    issue: 3
+    start: 224
+    end: 274
+    year: 2001
+    doi: 10.1145/501978.501980
+  - type: article
+    title: "Separation of duties for access control enforcement in workflow environments"
+    authors:
+      - family-names: Botha
+        given-names: R. A.
+      - family-names: Eloff
+        given-names: J. H. P.
+    journal: "IBM Systems Journal"
+    volume: 40
+    issue: 3
+    start: 666
+    end: 682
+    year: 2001
+    doi: 10.1147/sj.403.0666

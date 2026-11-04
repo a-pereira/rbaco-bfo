@@ -1,0 +1,15 @@
+# The papers are the publishers' copyright: never commit them (sources/README.md).
+sources/*.pdf
+
+# Run output. run_all.sh and check_hand_model.py write to a folder you name; the README's examples use these.
+/out/
+/hand-out/
+/runs/
+
+# Tools fetched or built for the checks.
+*.jar
+/ladr-bin/
+
+# Python
+__pycache__/
+*.pyc

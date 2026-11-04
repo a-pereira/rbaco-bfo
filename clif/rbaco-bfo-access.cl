@@ -4,7 +4,7 @@ Companion to rbaco-bfo.owl. It states, in first-order logic, the parts of the RB
 time-indexed seniority, the counting in separation-of-duty constraints over roles, permissions and tasks,
 agents counted as one, task-bound activation and operations, deny-overrides, and RT role linking.
 Written in the style of the BFO 2020 CLIF modules (ternary instance-of, time-indexed continuant relations,
-one axiom per cl:comment with an axiom ID). License: CC BY 4.0 (placeholder).
+one axiom per cl:comment with an axiom ID). License: CC BY 4.0.
 
 Name mapping. BFO 2020 names are used as in the BFO CLIF. Other names map to OWL terms as follows:
   rbaco-role-definition            RBACO_0000001   rbaco-assigned-role         RBACO_0000002

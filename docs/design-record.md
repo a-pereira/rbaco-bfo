@@ -79,7 +79,7 @@ Options: pairs as OWL disjointness, so that a violation makes the ontology incon
 - **CCO and IAO are bridged through `is about`**: `cco:ont00001808 owl:equivalentProperty obo:IAO_0000136`. *Interpretation*: the two definitions read alike. With the bridge, an IAO ICE and a CCO ICE are mutually entailed under the two ontologies' axioms: a four-line hand proof in the verification report, which HermiT confirms by inferring the two classes equivalent. The bridge's only effect on the imported classes is to place CCO's ICE subclasses under IAO ICE and IAO's directive information entity under CCO ICE (verification report, section 6).
 - **Mixed imports**: BFO 2020 core and five CCO modules by IRI (with their two further CCO dependencies resolved by the catalog), and IAO as a scripted extract.
 - **Opaque identifiers** `RBACO_0000001` onward, under the base `https://w3id.org/rbaco/bfo/` (until D20, `RBO_0000001` onward under the placeholder base `https://example.org/rbac-bfo/`), labels in `rdfs:label`. RBACO_00001xx are object properties, 2xx data properties, 3xx annotation properties, and 1xxx domain terms.
-- **License**: CC BY 4.0, a placeholder matching BFO 2020. CCO is BSD 3-Clause.
+- **License**: CC BY 4.0, matching BFO 2020, for the ontology, the data and the documents, and BSD 3-Clause for the scripts, the queries and the model specifications (`LICENSE.md`). Until 2026-11-03, CC BY 4.0 stood for everything, as a placeholder. CCO is BSD 3-Clause.
 
 ## D14. Tasks and conflicting entities (Botha and Eloff 2001)
 

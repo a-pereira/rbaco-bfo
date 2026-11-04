@@ -8,7 +8,7 @@ Status: implemented and verified. The section "Implementation" says what changed
 
 ## How the paper was read
 
-The text was extracted with pypdf 5 from the PDF supplied on 2026-10-30, now `sources/botha-eloff-2001.pdf`. Figures 3 and 6 (role hierarchies) and Table 3 were read from the PDF's drawing operators and glyph positions, not from a rendering, because no rasterizer was available. The script is `scripts/fig_lines.py` in the session scratchpad. Readings that depend on positions alone are marked as interpretation.
+The text was extracted with pypdf 5 from the PDF supplied on 2026-10-30, whose hash `sources/SHA256SUMS` records as `botha-eloff-2001.pdf`. Figures 3 and 6 (role hierarchies) and Table 3 were read from the PDF's drawing operators and glyph positions, not from a rendering, because no rasterizer was available. The script is `tools/fig_lines.py`. Readings that depend on positions alone are marked as interpretation.
 
 ## The paper's model
 

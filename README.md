@@ -1,6 +1,12 @@
-# RBACO: role-based access control on BFO
+# RBACO-BFO: Role-Based Access Control Ontology, BFO edition
 
-RBACO is a proposal for re-expressing the ROWLBAC patterns (Finin et al., "ROWLBAC: Representing Role Based Access Control in OWL", SACMAT '08, pp.73–82) on BFO 2020, using CCO v2.2 and IAO. It follows the NIST RBAC standard (Ferraiolo et al., "Proposed NIST Standard for Role-Based Access Control", ACM TISSEC 4(3), 2001, pp.224–274) wherever ROWLBAC departs from it. NIST sessions are replaced by business process instances. Tasks, permission and task separation of duty, and conflicting agents follow Botha and Eloff ("Separation of duties for access control enforcement in workflow environments", IBM Systems Journal 40(3), 2001, pp.666–682). Draft of 2026-11-01. Placeholder license CC BY 4.0. Term IRIs are under `https://w3id.org/rbaco/bfo/`, which does not resolve yet (design-record D20).
+RBACO, the Role-Based Access Control Ontology, re-expresses the ROWLBAC patterns (Finin et al., "ROWLBAC: Representing Role Based Access Control in OWL", SACMAT '08, pp.73–82) on BFO 2020, using CCO v2.2 and IAO. It follows the NIST RBAC standard (Ferraiolo et al., "Proposed NIST Standard for Role-Based Access Control", ACM TISSEC 4(3), 2001, pp.224–274) wherever ROWLBAC departs from it. NIST sessions are replaced by business process instances. Tasks, permission and task separation of duty, and conflicting agents follow Botha and Eloff ("Separation of duties for access control enforcement in workflow environments", IBM Systems Journal 40(3), 2001, pp.666–682).
+
+This repository holds the BFO edition, RBACO-BFO; in its documents, RBACO means this edition. An edition on UFO may follow in a repository of its own. The last letter of the name is O, for ontology: RBACO is not RBAC0, the base model of the RBAC96 family (Sandhu et al., "Role-Based Access Control Models", IEEE Computer 29(2), 1996, pp.38–47). It also covers role hierarchies and separation of duty constraints (design-record D8, D9), which RBAC96 adds to RBAC0 in RBAC1 and RBAC2.
+
+**Status.** A draft for review, not yet released: ontology version 2026-11-01, with the correction of design-record D19 (2026-11-03) and the rename of D20. Term IRIs are under `https://w3id.org/rbaco/bfo/`, whose w3id.org redirect is not registered yet, so they do not resolve. The example data's IRIs are under `https://example.org/rbaco/data/`.
+
+**License.** CC BY 4.0 for the ontology, the data and the documents; BSD 3-Clause for the scripts, the queries and the model specifications. The imported ontologies in `imports/` keep their own licenses. `LICENSE.md` says which file is under which, `NOTICE.md` covers the imports, and `CITATION.cff` gives the citation.
 
 ## Contents
 
@@ -14,32 +20,28 @@ RBACO is a proposal for re-expressing the ROWLBAC patterns (Finin et al., "ROWLB
 | `data/` | Example data: `us-persons.ttl` (ROWLBAC §3.1), `code-review.ttl` (CR-42), `abac.ttl` (§4.1), `rt-policy.ttl` (§4.2, Figure 4), `purchase.ttl` (Botha and Eloff's purchase workflow: ten process instances and one conflicting assignment), and `probes.ttl`, eight regression probes for the corrections of 2026-10-31 (design-record D15), read over the purchase data; `run_queries.py` fails if a probe gives a result other than the one it must. Built by `tools/build_data.py`, which writes each file in dependency order (`tools/ttl_ordered.py`): a block comes after every block it refers to, so the file reads in the order the scenario is built, with each act's interval and instants just above it. `data/derived/` holds the decisions and conflict reports the queries wrote |
 | `imports/` | Local copies of BFO 2020 core and seven CCO v2.2 modules (byte-identical, `SHA256SUMS`), and the IAO extract |
 | `imports/bfo-clif/` | The 13 BFO 2020 CLIF modules, generated 2025-12-05 (byte-identical, `SHA256SUMS`), for the first-order checks |
-| `sources/` | The three papers RBACO is built from, as supplied (byte-identical, `SHA256SUMS`); see Sources below |
+| `sources/` | Citations and hashes of the three papers RBACO is built from, which are not included (`sources/README.md`) |
 | `catalog-v001.xml` | Resolves all imports to `imports/`, so Protégé opens the ontology offline |
 | `docs/mapping.md` | ROWLBAC patterns P1–P18 and the scenario, mapped to RBACO terms and queries, with NIST counterparts and verdicts |
 | `docs/critique.md` | 17 findings on ROWLBAC, each with how it was checked |
 | `docs/design-record.md` | The decisions, the options weighed, and which parts are interpretation |
 | `docs/botha-review.md` | Botha and Eloff (2001) reviewed against the 2026-10-29 draft: alignment, the hierarchy bypass, ten proposals and how each was settled, and the Figure 6 finding from the purchase dataset |
 | `docs/verification.md` | What was checked, the measurements, and what remains open |
+| `docs/expected-results.md` | What each check must give when it is run again, and the tools it was measured with |
 | `docs/query-results.md` | Generated output of the last SPARQL and RL run |
 | `docs/dl/inferences.txt` | What HermiT inferred beyond the asserted axioms, and the negative controls |
 | `docs/fol-results.md` | Generated output of the last Prover9 and Mace4 run |
 | `docs/fol/` | The LADR theories the two hand-specified models were tested against, their specifications (`hand-*.py`), and the clausetester results |
-| `tools/` | The scripts that built the extract, the RDF/XML, the terms CSV and the data, and the ones that run the checks; `run_all.sh` runs every check in order |
+| `tools/` | The scripts that built the extract, the RDF/XML, the terms CSV and the data, and the ones that run the checks; `run_all.sh` runs every check in order. `fig_lines.py` prints the labels and line segments of a figure on a PDF page, as used for Botha and Eloff's Figure 6 |
 | `tools/ladr/` | `build_ladr.sh` and three header shims: how Prover9, Mace4 and clausetester were built on Windows |
-| `MANIFEST.sha256` | Hash of every file above, `sources/` included |
+| `LICENSE.md`, `LICENSES/`, `NOTICE.md` | Which license covers which file, the two license texts, and the imports' licenses |
+| `CITATION.cff` | How to cite RBACO-BFO |
+| `CLAUDE.md` | Instructions for Claude Code sessions that reverify or demonstrate RBACO-BFO |
+| `MANIFEST.sha256` | Hash of every other file in the repository |
 
 ## Sources
 
-Page numbers cited anywhere in this directory (`p.674`, `pp.224–274`) are the printed page numbers of these files, not PDF page indices.
-
-| File | Citation | Pages | Supplied as |
-|---|---|---:|---|
-| `sources/finin-2008-rowlbac.pdf` | T. Finin, A. Joshi, L. Kagal, J. Niu, R. Sandhu, W. Winsborough and B. Thuraisingham, "ROWLBAC: Representing Role Based Access Control in OWL", *SACMAT '08*, pp.73–82 | 10 | `ROWLBAC - Representing Role Based p73-finin.pdf` |
-| `sources/ferraiolo-2001-nist-rbac.pdf` | D. F. Ferraiolo, R. Sandhu, S. Gavrila, D. R. Kuhn and R. Chandramouli, "Proposed NIST Standard for Role-Based Access Control", *ACM TISSEC* 4(3), 2001, pp.224–274 | 51 | `Proposed NIST Standard for RBAC 501978.501980.pdf` |
-| `sources/botha-eloff-2001.pdf` | R. A. Botha and J. H. P. Eloff, "Separation of duties for access control enforcement in workflow environments", *IBM Systems Journal* 40(3), 2001, pp.666–682 | 17 | `Separation of duties - botha.pdf` |
-
-The papers are the publishers' copyright and are here for checking citations locally. They are not covered by RBACO's license; remove `sources/` before sharing this directory outside your own use.
+`sources/README.md` cites the three papers, with DOIs. Page numbers cited anywhere in this repository (`p.674`, `pp.224–274`) are their printed page numbers, not PDF page indices.
 
 ## Opening it
 
@@ -57,7 +59,7 @@ The data files carry the same comments on the classes and properties they use (`
 
 ## Running the checks
 
-`tools/run_all.sh` runs every check except the hand-specified models below, in order, writing reasoner and prover output and a log per step to a folder you name. Each step is one line of the script, so a check can also be run on its own with the arguments shown there.
+`tools/run_all.sh` runs every check except the hand-specified models below, in order, writing reasoner and prover output and a log per step to a folder you name. Each step is one line of the script, so a check can also be run on its own with the arguments shown there. `docs/expected-results.md` gives what each step must report.
 
 ```bash
 sh tools/run_all.sh python path/to/robot.jar path/to/ladr-bin out
