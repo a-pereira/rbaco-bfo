@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <!-- RBO and its domain module -->
+    <uri name="https://example.org/rbac-bfo/rbo.owl" uri="rbo.ttl"/>
+    <uri name="https://example.org/rbac-bfo/2026-11-01/rbo.owl" uri="rbo.ttl"/>
+    <uri name="https://example.org/rbac-bfo/rbo-domain.owl" uri="rbo-domain.ttl"/>
+    <uri name="https://example.org/rbac-bfo/imports/iao-extract.owl" uri="imports/iao-extract.ttl"/>
+    <!-- BFO 2020 core, by the IRI CCO imports it under (its owl:versionIRI) and by its ontology IRI -->
+    <uri name="http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl" uri="imports/bfo-core.ttl"/>
+    <uri name="http://purl.obolibrary.org/obo/bfo.owl" uri="imports/bfo-core.ttl"/>
+    <!-- CCO v2.2 (2026-08-13): the seven modules in the import closure of the five RBO imports -->
+    <uri name="https://www.commoncoreontologies.org/AgentOntology" uri="imports/AgentOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/EventOntology" uri="imports/EventOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/InformationEntityOntology" uri="imports/InformationEntityOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/GeospatialOntology" uri="imports/GeospatialOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/TimeOntology" uri="imports/TimeOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/ExtendedRelationOntology" uri="imports/ExtendedRelationOntology.ttl"/>
+    <uri name="https://www.commoncoreontologies.org/ArtifactOntology" uri="imports/ArtifactOntology.ttl"/>
+</catalog>

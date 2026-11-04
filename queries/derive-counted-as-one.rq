@@ -1,0 +1,40 @@
+# DERIVATION (intermediate, independent of time). For each conflicting agent designation, written with
+# query-internal predicates outside the ontology: the agents it counts as one (rbow:joins), the constraints
+# it applies to (rbow:appliesTo) and, for a dynamic one, the instances it applies in (rbow:appliesIn). The
+# conflict derivations and the worklist then read "an agent a designation in force counts as one with the
+# principal" (Botha and Eloff 2001, Table 1 row 3 and Table 2; clif [rbo-u3], [rbo-u4]) as one pattern:
+# ?g a <kind> ; rbow:inForceAt ?evalTime ; rbow:joins ?x , ?y ; rbow:appliesTo ?c [; rbow:appliesIn ?instance].
+#   joins     - the agent it designates (RBO_0000138), or each member (BFO_0000129) of the group it
+#               designates (RBO_0000139)
+#   appliesTo - each constraint in its constraint scope (RBO_0000140); with none, every constraint with a
+#               cardinality (RBO_0000201), as every constraint a query counts has
+#   appliesIn - each instance prescribed by a plan in its plan scope (RBO_0000115); with none, every
+#               instance something is part of (BFO_0000132) or a work item is in (RBO_0000142), which is
+#               where the queries find the instances they count in
+# Run once per dataset, before the evaluation times: none of this depends on time, and no derivation writes
+# a triple it reads.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?g rbow:joins ?agent ; rbow:appliesTo ?c ; rbow:appliesIn ?instance }
+WHERE {
+  {
+    ?g a rbo:RBO_0000045 ; rbo:RBO_0000138|rbo:RBO_0000139/^obo:BFO_0000129 ?agent .
+  } UNION {
+    ?g a rbo:RBO_0000045 ; rbo:RBO_0000140 ?c .
+  } UNION {
+    ?g a rbo:RBO_0000045 .
+    FILTER NOT EXISTS { ?g rbo:RBO_0000140 ?anyC }
+    ?c rbo:RBO_0000201 ?n .
+  } UNION {
+    ?g a rbo:RBO_0000047 ; rbo:RBO_0000115 ?plan .
+    ?instance cco:ont00001920 ?plan .
+  } UNION {
+    ?g a rbo:RBO_0000047 .
+    FILTER NOT EXISTS { ?g rbo:RBO_0000115 ?anyPlan }
+    { ?part obo:BFO_0000132 ?instance } UNION { ?item rbo:RBO_0000142 ?instance }
+  }
+}

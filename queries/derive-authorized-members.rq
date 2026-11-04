@@ -1,0 +1,29 @@
+# DERIVATION. NIST authorized users (Def. 2a, p.235) at ?evalTime, over the in-force facts and hierarchy
+# snapshot for that time.
+# A person is an authorized member of role definition ?d when an assigned role of theirs that
+# exists at ?evalTime concretizes ?d or a role definition senior to ?d, and that definition is in force
+# (a retired definition authorizes no one, and the snapshot holds no edge from it). An assigned role exists
+# from the role assignment that outputs it until the Loss of Role that has it as input.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?d rbo:RBO_0000131 ?person }
+WHERE {
+  ?gain cco:ont00001986 ?role ;
+        a rbo:RBO_0000028 ;
+        obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGain .
+  FILTER (?tGain <= ?evalTime)
+  FILTER NOT EXISTS {
+    ?loss cco:ont00001921 ?role ;
+          a cco:ont00000613 ;
+          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss .
+    FILTER (?tLoss <= ?evalTime)
+  }
+  ?role obo:BFO_0000197 ?person ;
+        obo:BFO_0000059 ?held .
+  ?held a rbo:RBO_0000001 ; rbow:inForceAt ?evalTime ;
+        rbo:RBO_0000120* ?d .
+}

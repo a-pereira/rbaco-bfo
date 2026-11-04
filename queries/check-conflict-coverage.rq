@@ -1,0 +1,50 @@
+# CHECK (warnings). Botha and Eloff's static cross-entity rules (2001, Table 3, p.679), as read from
+# the PDF's glyph positions, and the homogeneity of constraint sets. Rows are warnings.
+#   conflicting permissions on non-conflicting roles - Table 3 row 3: two permissions of a static
+#       permission set are assigned to two role definitions that no static role constraint names
+#       together
+#   one role holds conflicting permissions - both permissions are assigned to one role definition,
+#       so every holder violates the constraint
+#   conflicting tasks on non-conflicting roles - Table 3 row 4: two task specifications of a static
+#       task set require role definitions no static role constraint names together; the paper's tool
+#       "will suggest that the roles are made conflicting" (p.679)
+#   mixed set - a constraint names members of two kinds; OWL catches two of each (the kinds are
+#       disjoint), not one of each
+# Table 3 row 1 is a static violation already (derive-ssd-conflicts.rq counts designated agents as
+# one); row 2 is not checked, because its glyphs cannot be placed in their columns.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?constraint ?problem ?memberA ?memberB ?roleA ?roleB
+WHERE {
+  {
+    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000134 ?memberA , ?memberB .
+    FILTER (STR(?memberA) < STR(?memberB))
+    ?memberA rbo:RBO_0000105 ?roleA . ?memberB rbo:RBO_0000105 ?roleB .
+    FILTER (?roleA != ?roleB)
+    FILTER NOT EXISTS { ?rc a rbo:RBO_0000013 ; rbo:RBO_0000114 ?roleA , ?roleB }
+    BIND ("conflicting permissions on non-conflicting roles" AS ?problem)
+  } UNION {
+    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000134 ?memberA , ?memberB .
+    FILTER (STR(?memberA) < STR(?memberB))
+    ?memberA rbo:RBO_0000105 ?roleA . ?memberB rbo:RBO_0000105 ?roleA .
+    BIND (?roleA AS ?roleB)
+    BIND ("one role holds conflicting permissions" AS ?problem)
+  } UNION {
+    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000135 ?memberA , ?memberB .
+    FILTER (STR(?memberA) < STR(?memberB))
+    ?memberA rbo:RBO_0000132 ?roleA . ?memberB rbo:RBO_0000132 ?roleB .
+    FILTER (?roleA != ?roleB)
+    FILTER NOT EXISTS { ?rc a rbo:RBO_0000013 ; rbo:RBO_0000114 ?roleA , ?roleB }
+    BIND ("conflicting tasks on non-conflicting roles" AS ?problem)
+  } UNION {
+    ?constraint a rbo:RBO_0000012 ; ?kindA ?memberA ; ?kindB ?memberB .
+    VALUES ?kindA { rbo:RBO_0000114 rbo:RBO_0000134 rbo:RBO_0000135 }
+    VALUES ?kindB { rbo:RBO_0000114 rbo:RBO_0000134 rbo:RBO_0000135 }
+    FILTER (STR(?kindA) < STR(?kindB))
+    BIND ("mixed set" AS ?problem)
+  }
+}

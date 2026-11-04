@@ -1,0 +1,37 @@
+# CHECK. Closures the other queries read as asserted, since they run without a reasoner. Expect no rows.
+#   not asserted part of the process - an occurrent part of a task instance is not asserted part of the
+#                                 business process instance the task instance is part of. Occurrent part
+#                                 of (BFO_0000132) is transitive in BFO 2020, but the queries read one
+#                                 step: they match a request to the active roles of the instance it is
+#                                 asserted part of, so such a request would be denied
+#   task instance outside a process - a task instance is not asserted part of any business process
+#                                 instance
+#   location not asserted         - an entity is located in something located in a third entity, and is
+#                                 not asserted located in that third entity. Located in (BFO_0000171) is
+#                                 transitive at a time in the BFO 2020 CLIF (spatial.cl [ets-1]), not in
+#                                 its OWL; the object-description criteria read it one step
+# Types are read the same way: asserted types closed under rdfs:subClassOf, which run_queries.py adds before
+# any query runs, so a type that only a reasoner would infer (from a domain, a range or an equivalent class)
+# is not seen. No query can check that.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?subject ?problem ?detail
+WHERE {
+  {
+    ?subject obo:BFO_0000132 ?task .
+    ?task a rbo:RBO_0000041 ; obo:BFO_0000132 ?detail .
+    ?detail a rbo:RBO_0000004 .
+    FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?detail }
+    BIND ("not asserted part of the process" AS ?problem)
+  } UNION {
+    ?subject a rbo:RBO_0000041 .
+    FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?i . ?i a rbo:RBO_0000004 }
+    BIND ("task instance outside a process" AS ?problem) BIND ("" AS ?detail)
+  } UNION {
+    ?subject obo:BFO_0000171 ?mid . ?mid obo:BFO_0000171 ?detail .
+    FILTER (?detail != ?subject)
+    FILTER NOT EXISTS { ?subject obo:BFO_0000171 ?detail }
+    BIND ("location not asserted" AS ?problem)
+  }
+}

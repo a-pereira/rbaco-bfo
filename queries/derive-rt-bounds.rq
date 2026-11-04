@@ -1,0 +1,86 @@
+# DERIVATION, applied to a fixpoint, for one security analysis specification over the RT statements
+# in force at ?evalTime (derive-in-force.rq, run first). Sound but not complete: a derived triple
+# holds in every policy state reachable under the analysis's restrictions; an underived one may hold
+# or not.
+#   rbow:alwaysWithin (B, A)    members(B) is a subset of members(A) in every reachable state
+#   rbow:alwaysMemberOf (D, A)  D is a member of A in every reachable state
+#   rbow:closed (B)             B can gain no member outside its rbow:possibleMember values
+#   rbow:possibleMember (B, D)  D is a member of B in the current state or a state reachable by
+#                               removing statements only
+# Rules: a shrink-restricted role keeps its statements, so what they include stays included; a
+# growth-restricted role gains no statements, so it stays within anything all its statements stay
+# within. A type 3 statement is never assumed to stay within anything, since any member C of its
+# base role may add members to C.r2. These rules are this consult's construction, not ROWLBAC's.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT {
+  ?x rbow:alwaysWithin ?y .
+  ?d rbow:alwaysMemberOf ?a .
+  ?b rbow:closed true .
+  ?pb rbow:possibleMember ?pd .
+}
+WHERE {
+  ?analysis a rbo:RBO_0000039 .
+  {
+    # reflexive
+    ?x a rbo:RBO_0000033 . BIND (?x AS ?y)
+  } UNION {
+    # transitive
+    ?x rbow:alwaysWithin ?m . ?m rbow:alwaysWithin ?y .
+  } UNION {
+    # a kept simple inclusion y <- c: whatever stays within c stays within y
+    ?analysis rbo:RBO_0000130 ?y .
+    ?st a rbo:RBO_0000036 ; rbo:RBO_0000119 ?y ; rbo:RBO_0000118 ?c ; rbow:inForceAt ?evalTime .
+    ?x rbow:alwaysWithin ?c .
+  } UNION {
+    # a kept intersection y <- c1 & c2
+    ?analysis rbo:RBO_0000130 ?y .
+    ?st a rbo:RBO_0000038 ; rbo:RBO_0000116 ?y ; rbo:RBO_0000117 ?c1 , ?c2 ;
+        rbow:inForceAt ?evalTime .
+    FILTER (?c1 != ?c2)
+    ?x rbow:alwaysWithin ?c1 , ?c2 .
+  } UNION {
+    # a growth-restricted x all of whose statements in force stay within y
+    ?analysis rbo:RBO_0000129 ?x .
+    ?y a rbo:RBO_0000033 .
+    FILTER (?x != ?y)
+    FILTER NOT EXISTS {
+      ?s rbo:RBO_0000116 ?x ; a rbo:RBO_0000034 ; rbow:inForceAt ?evalTime .
+      FILTER NOT EXISTS { ?s a rbo:RBO_0000035 ; rbo:RBO_0000122 ?d1 . ?d1 rbow:alwaysMemberOf ?y }
+      FILTER NOT EXISTS { ?s a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c3 . ?c3 rbow:alwaysWithin ?y }
+      FILTER NOT EXISTS { ?s a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c4 . ?c4 rbow:alwaysWithin ?y }
+    }
+  } UNION {
+    # permanent membership through the kept statements of shrink-restricted roles
+    ?analysis rbo:RBO_0000130 ?a .
+    ?st rbo:RBO_0000116 ?a ; rbow:inForceAt ?evalTime .
+    { ?st a rbo:RBO_0000035 ; rbo:RBO_0000122 ?d . }
+    UNION
+    { ?st a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c5 . ?d rbow:alwaysMemberOf ?c5 . }
+    UNION
+    { ?st a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c6 , ?c7 . FILTER (?c6 != ?c7)
+      ?d rbow:alwaysMemberOf ?c6 , ?c7 . }
+  } UNION {
+    # closed: growth-restricted, and every statement in force adds only members of closed roles or named
+    # principals (a retired statement cannot return: reissuing it would be growth)
+    ?analysis rbo:RBO_0000129 ?b .
+    FILTER NOT EXISTS {
+      ?s2 rbo:RBO_0000116 ?b ; a rbo:RBO_0000034 ; rbow:inForceAt ?evalTime .
+      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000035 }
+      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c8 . ?c8 rbow:closed true }
+      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c9 . ?c9 rbow:closed true }
+    }
+  } UNION {
+    # possible members: what the statements in force can supply
+    ?st rbo:RBO_0000116 ?pb ; rbow:inForceAt ?evalTime .
+    { ?st a rbo:RBO_0000035 ; rbo:RBO_0000122 ?pd . }
+    UNION
+    { ?st a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c10 . ?c10 rbow:possibleMember ?pd . }
+    UNION
+    { ?st a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c11 . ?c11 rbow:possibleMember ?pd . }
+  }
+}

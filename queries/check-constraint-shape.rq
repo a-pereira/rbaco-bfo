@@ -1,0 +1,30 @@
+# CHECK. Separation of duty constraints that NIST would reject. Run over a hierarchy snapshot.
+#   cardinality above set size: n exceeds the number of members (roles, permissions or tasks) in
+#                               the set, so it can never bind
+#   hierarchical chain: two roles of one SSD set lie in one chain of the hierarchy, which NIST
+#                       forbids (p.246) since holding the senior authorizes the junior
+# Expect no rows.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?constraint ?problem ?roleA ?roleB
+WHERE {
+  {
+    {
+      SELECT ?constraint (COUNT(DISTINCT ?r) AS ?size) (SAMPLE(?n0) AS ?n) WHERE {
+        ?constraint a rbo:RBO_0000012 ; rbo:RBO_0000114|rbo:RBO_0000134|rbo:RBO_0000135 ?r ; rbo:RBO_0000201 ?n0 .
+      } GROUP BY ?constraint
+    }
+    FILTER (?n > ?size)
+    BIND ("cardinality above set size" AS ?problem)
+  }
+  UNION
+  {
+    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000114 ?roleA , ?roleB .
+    ?roleA rbo:RBO_0000120+ ?roleB .
+    BIND ("hierarchical chain in SSD set" AS ?problem)
+  }
+}

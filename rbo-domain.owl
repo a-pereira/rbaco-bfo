@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:dc11="http://purl.org/dc/elements/1.1/"
+>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001003">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001001"/>
+    <dc11:identifier>1003-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">foreign person role</rdfs:label>
+    <skos:definition xml:lang="en">A legal person role that inheres in a Person in virtue of that Person's holding no status under United States law that ROWLBAC Figure 1 places under US Person.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001010">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001009"/>
+    <dc11:identifier>1010-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US work visa holder role</rdfs:label>
+    <skos:definition xml:lang="en">A US temporary resident role whose grounding admission is for employment.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001011">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001009"/>
+    <dc11:identifier>1011-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US business visa holder role</rdfs:label>
+    <skos:definition xml:lang="en">A US temporary resident role whose grounding admission is for business activity.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001016">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0000004"/>
+    <dc11:identifier>1016-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">status eligibility review</rdfs:label>
+    <skos:definition xml:lang="en">A business process in which a Person presents a legal status and the acts that status allows are determined.</skos:definition>
+    <skos:scopeNote xml:lang="en">Hosts each of ROWLBAC's §3.1 narratives in one instance, so that deactivation and reactivation happen within one session as in the narrative. Neither ROWLBAC nor NIST names this process.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001023">
+    <owl:equivalentClass>
+      <owl:Class rdf:nodeID="nb75e0e79513c4a79852a8704bc9ffc24b5">
+        <owl:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="https://example.org/rbac-bfo/RBO_0001022"/>
+          <owl:Restriction rdf:nodeID="nb75e0e79513c4a79852a8704bc9ffc24b6">
+            <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000171"/>
+            <owl:someValuesFrom rdf:resource="https://example.org/rbac-bfo/RBO_0001019"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <dc11:identifier>1023-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">classroom printer</rdfs:label>
+    <skos:definition xml:lang="en">A printer located in some classroom.</skos:definition>
+    <skos:scopeNote xml:lang="en">The OWL defined class for ROWLBAC's first §4.1 example, faculty can use any printer located in a classroom, which ROWLBAC says can be encoded in description logic. Named by has criteria class on the example's object description.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001007">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001005"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000917"/>
+    <dc11:identifier>1007-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US permanent resident role</rdfs:label>
+    <skos:definition xml:lang="en">A Permanent Resident Role whose Government Domain is the United States.</skos:definition>
+    <skos:scopeNote xml:lang="en">A subclass of CCO's Permanent Resident Role (AgentOntology.ttl ont00000917), which is not tied to any Government Domain.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001004">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001002"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000987"/>
+    <dc11:identifier>1004-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US citizen role</rdfs:label>
+    <skos:definition xml:lang="en">A Citizen Role that inheres in a Person by virtue of that Person being legally recognized as a member of the United States.</skos:definition>
+    <skos:scopeNote xml:lang="en">A subclass of CCO's Citizen Role (AgentOntology.ttl ont00000987), which is not tied to any state.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001012">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001009"/>
+    <dc11:identifier>1012-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US student visa holder role</rdfs:label>
+    <skos:definition xml:lang="en">A US temporary resident role whose grounding admission is for study.</skos:definition>
+  </owl:Class>
+  <owl:Ontology rdf:about="https://example.org/rbac-bfo/rbo-domain.owl">
+    <owl:versionIRI rdf:resource="https://example.org/rbac-bfo/2026-11-01/rbo-domain.owl"/>
+    <owl:imports rdf:resource="https://example.org/rbac-bfo/rbo.owl"/>
+    <rdfs:label xml:lang="en">RBO domain module: ROWLBAC scenario and attribute examples</rdfs:label>
+    <dcterms:description xml:lang="en">The domain terms ROWLBAC's patterns need: the US persons role hierarchy of ROWLBAC Figure 1 as role universals, the business process type hosting its narratives, and the places, devices and university roles of its section 4.1 examples. ROWLBAC likewise pairs each base ontology with a domain ontology (section 3).</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <owl:versionInfo xml:lang="en">2026-11-01 draft for review</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001024">
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000175"/>
+    <dc11:identifier>1024-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">university member role</rdfs:label>
+    <skos:definition xml:lang="en">An Organization Member Role whose Organization is a university.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001006">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001002"/>
+    <dc11:identifier>1006-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US visitor role</rdfs:label>
+    <skos:definition xml:lang="en">A US person role that inheres in a Person in virtue of that Person's being admitted to the United States for a temporary visit.</skos:definition>
+  </owl:Class>
+  <owl:AllDisjointClasses rdf:nodeID="nb75e0e79513c4a79852a8704bc9ffc24b1">
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="https://example.org/rbac-bfo/RBO_0001018"/>
+      <rdf:Description rdf:about="https://example.org/rbac-bfo/RBO_0001019"/>
+      <rdf:Description rdf:about="https://example.org/rbac-bfo/RBO_0001020"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001025">
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000175"/>
+    <dc11:identifier>1025-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">faculty role</rdfs:label>
+    <skos:definition xml:lang="en">An Organization Member Role that inheres in a Person in virtue of that Person's appointment to teach or conduct research at a university.</skos:definition>
+    <skos:scopeNote xml:lang="en">ROWLBAC does not say whether faculty is senior to university member, so no axiom relates the two.</skos:scopeNote>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="https://example.org/rbac-bfo/RBO_0001101">
+    <rdfs:domain rdf:resource="https://www.commoncoreontologies.org/ont00001017"/>
+    <rdfs:range rdf:resource="https://example.org/rbac-bfo/RBO_0001018"/>
+    <dc11:identifier>1101-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">has office</rdfs:label>
+    <skos:definition xml:lang="en">Relates an agent to an office assigned to that agent for their work.</skos:definition>
+    <skos:scopeNote xml:lang="en">ROWLBAC's office (§4.1, second example).</skos:scopeNote>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001008">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001005"/>
+    <dc11:identifier>1008-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US permanent residency applicant role</rdfs:label>
+    <skos:definition xml:lang="en">A US resident role that inheres in a Person in virtue of that Person's pending application for permanent residence in the United States.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001001">
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
+    <dc11:identifier>1001-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">legal person role</rdfs:label>
+    <skos:definition xml:lang="en">A Role that inheres in a Person in virtue of that Person's being recognized by a legal system as a holder of rights and duties.</skos:definition>
+    <skos:scopeNote xml:lang="en">The root, Person, of ROWLBAC Figure 1. Named as a role because CCO's Person (AgentOntology.ttl ont00001262) is a kind of animal, not a role. The labels of this module follow Figure 1 and carry no legal meaning; for example ROWLBAC puts Visitor under US Person.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001021">
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000995"/>
+    <dc11:identifier>1021-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">device</rdfs:label>
+    <skos:definition xml:lang="en">A Material Artifact designed to be operated by an agent to perform some function on demand.</skos:definition>
+    <skos:scopeNote xml:lang="en">ROWLBAC's Device (§4.1). CCO has no device class.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001002">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001001"/>
+    <dc11:identifier>1002-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US person role</rdfs:label>
+    <skos:definition xml:lang="en">A legal person role that inheres in a Person in virtue of that Person's holding a status under United States law that ROWLBAC Figure 1 places under US Person.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001020">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001017"/>
+    <dc11:identifier>1020-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">laboratory room</rdfs:label>
+    <skos:definition xml:lang="en">A room designed for experimental or practical work.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001019">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001017"/>
+    <dc11:identifier>1019-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">classroom</rdfs:label>
+    <skos:definition xml:lang="en">A room designed for teaching groups of students.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001005">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001002"/>
+    <dc11:identifier>1005-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US resident role</rdfs:label>
+    <skos:definition xml:lang="en">A US person role that inheres in a Person in virtue of that Person's being recognized as residing in the United States without being a citizen.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001017">
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+    <dc11:identifier>1017-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">room</rdfs:label>
+    <skos:definition xml:lang="en">A Site bounded by the walls, floor and ceiling of a building.</skos:definition>
+    <skos:scopeNote xml:lang="en">ROWLBAC's Place (§4.1). A site, not a CCO Facility: Facility is a Material Artifact (FacilityOntology.ttl ont00000192), whereas a room is the space objects are located in, related to them by BFO located in (BFO_0000171). CCO has no room class.</skos:scopeNote>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001022">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001021"/>
+    <dc11:identifier>1022-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">printer</rdfs:label>
+    <skos:definition xml:lang="en">A device designed to produce printed copies of information content on a medium.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001018">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001017"/>
+    <dc11:identifier>1018-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">office</rdfs:label>
+    <skos:definition xml:lang="en">A room designed for the desk work of one or a few agents.</skos:definition>
+  </owl:Class>
+  <owl:Class rdf:about="https://example.org/rbac-bfo/RBO_0001009">
+    <rdfs:subClassOf rdf:resource="https://example.org/rbac-bfo/RBO_0001005"/>
+    <dc11:identifier>1009-RBO</dc11:identifier>
+    <rdfs:label xml:lang="en">US temporary resident role</rdfs:label>
+    <skos:definition xml:lang="en">A US resident role that inheres in a Person in virtue of that Person's being admitted to reside in the United States for a limited period.</skos:definition>
+  </owl:Class>
+</rdf:RDF>

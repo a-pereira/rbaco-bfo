@@ -1,0 +1,20 @@
+# DERIVATION. Snapshot of the role hierarchy at ?evalTime (bound by the caller), after derive-in-force.rq
+# for the same time. Each role inheritance statement in force at ?evalTime whose senior and junior role
+# definitions are in force gives one direct rbo:RBO_0000120 (is senior to) edge, so a retired definition
+# leaves the hierarchy along with its edges. Queries take the closure with the path
+# rbo:RBO_0000120*.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?senior rbo:RBO_0000120 ?junior }
+WHERE {
+  ?st a rbo:RBO_0000017 ;
+      rbow:inForceAt ?evalTime ;
+      rbo:RBO_0000118 ?senior ;
+      rbo:RBO_0000119 ?junior .
+  ?senior rbow:inForceAt ?evalTime .
+  ?junior rbow:inForceAt ?evalTime .
+}

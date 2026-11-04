@@ -1,0 +1,16 @@
+# COMPETENCY QUESTION (history). Which roles did each agent have active in each business process
+# instance, from when to when? An active role starts with the role activation that outputs it and
+# ends with the Loss of Role that has it as input; ?end is unbound while it lasts. This is what the
+# whole-instance DSD counting reads, and what ROWLBAC leaves outside the reasoner (section 3.5).
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?person ?instance ?definition ?start ?end
+WHERE {
+  ?active a rbo:RBO_0000003 ;
+          obo:BFO_0000197 ?person ; obo:BFO_0000059 ?definition ; rbo:RBO_0000106 ?instance .
+  ?activation cco:ont00001986 ?active ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?start .
+  OPTIONAL { ?drop cco:ont00001921 ?active ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?end . }
+}
+ORDER BY ?person ?start

@@ -1,0 +1,3 @@
+# Every file is stored and checked out byte for byte. MANIFEST.sha256 hashes exact bytes, and some
+# generated files are CRLF; without this line Git for Windows (core.autocrlf=true) would rewrite them.
+* -text

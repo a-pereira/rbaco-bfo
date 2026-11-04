@@ -1,0 +1,21 @@
+# COMPETENCY QUESTION. For each task specification, which operations does its required role grant
+# (directly or through a junior, NIST Def. 2a) that the task does not require? This is the distance
+# between Botha and Eloff's role-grained strict least privilege (2001, p.674) and operation-grained
+# least privilege. Informational: nothing is denied. Permissions count while in force at ?evalTime.
+# Run over the in-force facts and hierarchy snapshot for that time.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?task ?role (COUNT(DISTINCT ?op) AS ?extra) (GROUP_CONCAT(DISTINCT STR(?op); separator=" ") AS ?operations)
+WHERE {
+  ?task a rbo:RBO_0000040 ; rbo:RBO_0000132 ?role .
+  FILTER EXISTS { ?task rbo:RBO_0000133 ?anyOp }
+  ?p a rbo:RBO_0000007 ; rbo:RBO_0000105 ?dj ; rbo:RBO_0000101 ?op ; rbow:inForceAt ?evalTime .
+  ?role rbo:RBO_0000120* ?dj .
+  FILTER NOT EXISTS { ?task rbo:RBO_0000133 ?op }
+}
+GROUP BY ?task ?role
+ORDER BY ?task

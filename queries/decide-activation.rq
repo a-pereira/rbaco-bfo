@@ -1,0 +1,79 @@
+# CHECK. NIST AddActiveRole (p.254) for each role activation request made at ?evalTime, run over the
+# in-force facts and hierarchy snapshot for that time, after derive-task-dsd-conflicts.rq and
+# derive-dsd-conflicts.rq for the same time. Verdicts, in order:
+#   refused: not authorized         - no assigned role of the requester existing at the request's time
+#                                     concretizes a definition in force that is the requested one or
+#                                     senior to it
+#   refused: strict least privilege - the request names a work item (requests activation for) and
+#                                     asks for a definition other than the one its task requires
+#                                     (Botha and Eloff 2001, p.674; clif [rbo-k3])
+#   refused: human performer        - a human performer requirement in force and in scope names the
+#                                     work item's task, and the requester is not a person ([rbo-g1])
+#   refused: prior task             - the task requires a prior task, and the instance holds no
+#                                     finished instance of it with a person as agent ([rbo-g2])
+#   refused: DSD                    - a role DSD conflict report describes the request: a dynamic role
+#                                     constraint in force and in scope would count n or more of its roles
+#                                     for the request's principal, with agents a dynamic designation in
+#                                     force counts as one with them (derive-dsd-conflicts.rq)
+#   refused: task SoD               - a task DSD conflict report describes the request
+#   allowed
+# ?constraint names what refused it: the role or task constraint, or the human performer requirement.
+# ?consistent is false where the data disagree with the verdict: a refused request that was
+# fulfilled, or an allowed one that was not.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?areq ?person ?def ?verdict ?constraint ?fulfilled ?consistent
+WHERE {
+  ?areq a rbo:RBO_0000025 ; rbo:RBO_0000107 ?person ; rbo:RBO_0000110 ?def ;
+        obo:BFO_0000132 ?instance ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+  FILTER (?t = ?evalTime)
+  BIND (EXISTS {
+      ?gain cco:ont00001986 ?held ; a rbo:RBO_0000028 ;
+            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGain . FILTER (?tGain <= ?t)
+      FILTER NOT EXISTS { ?loss cco:ont00001921 ?held ; a cco:ont00000613 ;
+                          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss . FILTER (?tLoss <= ?t) }
+      ?held obo:BFO_0000197 ?person ; obo:BFO_0000059 ?heldDef .
+      ?heldDef rbow:inForceAt ?evalTime ; rbo:RBO_0000120* ?def .
+    } AS ?authorized)
+  OPTIONAL { ?areq rbo:RBO_0000137 ?wi . ?wi rbo:RBO_0000141 ?spec . OPTIONAL { ?spec rbo:RBO_0000132 ?reqDef } }
+  BIND (BOUND(?wi) && (!BOUND(?reqDef) || ?reqDef != ?def) AS ?notLeast)
+  OPTIONAL { {
+    SELECT ?areq (SAMPLE(?h) AS ?hReq) WHERE {
+      ?areq rbo:RBO_0000107 ?person ; obo:BFO_0000132 ?instance ; rbo:RBO_0000137/rbo:RBO_0000141 ?spec ;
+            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+      FILTER (?t = ?evalTime)
+      FILTER NOT EXISTS { ?person a cco:ont00001262 }
+      ?h a rbo:RBO_0000049 ; rbo:RBO_0000145 ?spec ; rbow:inForceAt ?evalTime .
+      FILTER (NOT EXISTS { ?h rbo:RBO_0000115 ?anyHP } || EXISTS { ?h rbo:RBO_0000115 ?hp . ?instance cco:ont00001920 ?hp })
+    } GROUP BY ?areq
+  } }
+  BIND (BOUND(?hReq) AS ?notHuman)
+  BIND (BOUND(?spec) && EXISTS { ?spec rbo:RBO_0000144 ?prior .
+      FILTER NOT EXISTS {
+        ?k1 a rbo:RBO_0000041 ; cco:ont00001920 ?prior ; obo:BFO_0000132 ?instance ;
+            cco:ont00001833 ?a1 ; obo:BFO_0000199/obo:BFO_0000224/rbo:RBO_0000205 ?tEnd .
+        ?a1 a cco:ont00001262 .
+        FILTER (?tEnd <= ?t) } } AS ?noPrior)
+  # the conflict reports derive-task-dsd-conflicts.rq and derive-dsd-conflicts.rq wrote for the request,
+  # told apart by what they count: tasks (RBO_0000147) or roles (RBO_0000126)
+  OPTIONAL { ?taskRep a rbo:RBO_0000020 ; rbo:RBO_0000128 ?areq ; rbo:RBO_0000125 ?taskC .
+             FILTER EXISTS { ?taskRep rbo:RBO_0000147 ?anyTask } }
+  OPTIONAL { ?roleRep a rbo:RBO_0000020 ; rbo:RBO_0000128 ?areq ; rbo:RBO_0000125 ?c .
+             FILTER EXISTS { ?roleRep rbo:RBO_0000126 ?anyRole } }
+  BIND (IF(!?authorized, "refused: not authorized",
+        IF(?notLeast, "refused: strict least privilege",
+        IF(?notHuman, "refused: human performer",
+        IF(?noPrior, "refused: prior task",
+        IF(BOUND(?c), "refused: DSD",
+        IF(BOUND(?taskC), "refused: task SoD", "allowed")))))) AS ?verdict)
+  BIND (IF(?verdict = "refused: human performer", ?hReq,
+        IF(?verdict = "refused: DSD", ?c,
+        IF(?verdict = "refused: task SoD", ?taskC, ?none))) AS ?constraint)
+  BIND (EXISTS { ?areq rbo:RBO_0000111 ?fulfilment } AS ?fulfilled)
+  BIND ((?verdict = "allowed") = ?fulfilled AS ?consistent)
+}
+ORDER BY ?t

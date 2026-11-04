@@ -1,0 +1,65 @@
+# COMPETENCY QUESTION (ROWLBAC section 4.1: "What devices can Marie use?"). At ?evalTime, which
+# (agent, instance, operation, object) combinations would a permission cover, with no prohibition
+# covering them? The same subject and object matching as derive-regulation-coverage.rq, applied to
+# every material entity rather than to requests that were made: regulations in force, and active roles
+# whose definition is in force, until their deactivation or the Loss of Role of the assigned role they
+# depend on. Permissions are those with an object description, reached through an active role. A
+# prohibition covers a combination when it reaches the person through any of their active roles in the
+# instance, and it names the object or its object description's criteria hold of it. One
+# naming neither covers only requests that name no object, so none here. Run over the in-force facts and
+# hierarchy snapshot for that time.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?person ?instance ?operation ?obj ?permission
+WHERE {
+  ?active a rbo:RBO_0000003 ; rbo:RBO_0000106 ?instance ;
+          obo:BFO_0000197 ?person ; obo:BFO_0000059 ?activeDef .
+  ?activeDef rbow:inForceAt ?evalTime .
+  ?activation cco:ont00001986 ?active ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tAct .
+  FILTER (?tAct <= ?evalTime)
+  FILTER NOT EXISTS { ?drop cco:ont00001921 ?active ;
+                      obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tDrop . FILTER (?tDrop <= ?evalTime) }
+  FILTER NOT EXISTS { ?active obo:BFO_0000195 ?held .
+                      ?loss cco:ont00001921 ?held ; a cco:ont00000613 ;
+                            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss . FILTER (?tLoss <= ?evalTime) }
+  ?activeDef rbo:RBO_0000120* ?regRole .
+  ?permission a rbo:RBO_0000007 ; rbo:RBO_0000105 ?regRole ; rbow:inForceAt ?evalTime ;
+              rbo:RBO_0000101 ?operation ; rbo:RBO_0000103 ?desc .
+  ?obj a obo:BFO_0000040 .
+  FILTER NOT EXISTS { ?desc rbo:RBO_0000302 ?objType .
+                      FILTER NOT EXISTS { ?obj a ?objType } }
+  FILTER NOT EXISTS { ?desc rbo:RBO_0000303 ?locType .
+                      FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?loc . ?loc a ?locType } }
+  FILTER NOT EXISTS { ?desc a rbo:RBO_0000011 .
+                      FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?office . ?person rbo:RBO_0001101 ?office } }
+  # deny-overrides: drop combinations a prohibition in force covers
+  FILTER NOT EXISTS {
+    ?proh a rbo:RBO_0000008 ; rbo:RBO_0000101 ?operation ; rbow:inForceAt ?evalTime .
+    FILTER EXISTS {
+              ?proh rbo:RBO_0000105 ?prohRole .
+              ?other rbo:RBO_0000106 ?instance ; obo:BFO_0000197 ?person ; obo:BFO_0000059 ?otherDef .
+              ?otherDef rbow:inForceAt ?evalTime ; rbo:RBO_0000120* ?prohRole .
+              ?otherAct cco:ont00001986 ?other ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tOther .
+              FILTER (?tOther <= ?evalTime)
+              FILTER NOT EXISTS { ?drop2 cco:ont00001921 ?other ;
+                                  obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tDrop2 . FILTER (?tDrop2 <= ?evalTime) }
+              FILTER NOT EXISTS { ?other obo:BFO_0000195 ?held2 .
+                                  ?loss2 cco:ont00001921 ?held2 ; a cco:ont00000613 ;
+                                         obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss2 . FILTER (?tLoss2 <= ?evalTime) }
+            }
+    FILTER (EXISTS { ?proh rbo:RBO_0000102 ?obj }
+            || EXISTS {
+              ?proh rbo:RBO_0000103 ?pDesc .
+              FILTER NOT EXISTS { ?pDesc rbo:RBO_0000302 ?pType .
+                                  FILTER NOT EXISTS { ?obj a ?pType } }
+              FILTER NOT EXISTS { ?pDesc rbo:RBO_0000303 ?pLocType .
+                                  FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?pLoc . ?pLoc a ?pLocType } }
+              FILTER NOT EXISTS { ?pDesc a rbo:RBO_0000011 .
+                                  FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?pOffice . ?person rbo:RBO_0001101 ?pOffice } }
+            })
+  }
+}
+ORDER BY ?person ?obj

@@ -1,0 +1,16 @@
+# CHECK. An RT statement is issued by the issuer of its head role: only A defines A.r.
+# Lists statements whose issuing act has some other agent. Expect no rows.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?statement ?issuer ?agent
+WHERE {
+  ?statement a rbo:RBO_0000034 ;
+             rbo:RBO_0000116 ?head .
+  ?head rbo:RBO_0000121 ?issuer .
+  ?issue cco:ont00001986 ?statement ; cco:ont00001833 ?agent .
+  FILTER (?agent != ?issuer)
+}

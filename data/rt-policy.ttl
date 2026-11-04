@@ -1,0 +1,235 @@
+@prefix cco: <https://www.commoncoreontologies.org/> .
+@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:rt-policy a owl:Ontology ;
+    rdfs:comment "ROWLBAC Figure 4: an RT access policy of a company, its fifteen statements, and an analysis specification naming the growth- and shrink-restricted roles. Figure 4 writes the type 1 statement for Alice as HR.manager; it is encoded against HR.managers, the role every other statement uses."@en ;
+    owl:imports rbo:rbo-domain.owl .                    #: RBO domain module: ROWLBAC scenario and attribute examples
+
+ex:rt-HQ a cco:ont00001017,                             #: Agent
+        cco:ont00001180 ;                               #: Organization
+    rdfs:label "principal HQ"@en .
+
+ex:rt-HR a cco:ont00001017,                             #: Agent
+        cco:ont00001180 ;                               #: Organization
+    rdfs:label "principal HR"@en .
+
+ex:rt-Alice a cco:ont00001017,                          #: Agent
+        cco:ont00001262 ;                               #: Person
+    rdfs:label "principal Alice"@en .
+
+ex:rt-Bob a cco:ont00001017,                            #: Agent
+        cco:ont00001262 ;                               #: Person
+    rdfs:label "principal Bob"@en .
+
+ex:rt-HQ.marketing a rbo:RBO_0000033 ;                  #: RT role definition
+    rdfs:label "HQ.marketing"@en ;
+    rbo:RBO_0000121 ex:rt-HQ ;                          #: has role issuer
+    rbo:RBO_0000202 "marketing"^^xsd:string .           #: has RT role name
+
+ex:rt-HQ.ops a rbo:RBO_0000033 ;                        #: RT role definition
+    rdfs:label "HQ.ops"@en ;
+    rbo:RBO_0000121 ex:rt-HQ ;                          #: has role issuer
+    rbo:RBO_0000202 "ops"^^xsd:string .                 #: has RT role name
+
+ex:rt-HQ.marketingDelg a rbo:RBO_0000033 ;              #: RT role definition
+    rdfs:label "HQ.marketingDelg"@en ;
+    rbo:RBO_0000121 ex:rt-HQ ;                          #: has role issuer
+    rbo:RBO_0000202 "marketingDelg"^^xsd:string .       #: has RT role name
+
+ex:rt-HQ.staff a rbo:RBO_0000033 ;                      #: RT role definition
+    rdfs:label "HQ.staff"@en ;
+    rbo:RBO_0000121 ex:rt-HQ ;                          #: has role issuer
+    rbo:RBO_0000202 "staff"^^xsd:string .               #: has RT role name
+
+ex:rt-HQ.specialPanel a rbo:RBO_0000033 ;               #: RT role definition
+    rdfs:label "HQ.specialPanel"@en ;
+    rbo:RBO_0000121 ex:rt-HQ ;                          #: has role issuer
+    rbo:RBO_0000202 "specialPanel"^^xsd:string .        #: has RT role name
+
+ex:rt-HR.managers a rbo:RBO_0000033 ;                   #: RT role definition
+    rdfs:label "HR.managers"@en ;
+    rbo:RBO_0000121 ex:rt-HR ;                          #: has role issuer
+    rbo:RBO_0000202 "managers"^^xsd:string .            #: has RT role name
+
+ex:rt-HR.sales a rbo:RBO_0000033 ;                      #: RT role definition
+    rdfs:label "HR.sales"@en ;
+    rbo:RBO_0000121 ex:rt-HR ;                          #: has role issuer
+    rbo:RBO_0000202 "sales"^^xsd:string .               #: has RT role name
+
+ex:rt-HR.employee a rbo:RBO_0000033 ;                   #: RT role definition
+    rdfs:label "HR.employee"@en ;
+    rbo:RBO_0000121 ex:rt-HR ;                          #: has role issuer
+    rbo:RBO_0000202 "employee"^^xsd:string .            #: has RT role name
+
+ex:rt-HR.manufacturing a rbo:RBO_0000033 ;              #: RT role definition
+    rdfs:label "HR.manufacturing"@en ;
+    rbo:RBO_0000121 ex:rt-HR ;                          #: has role issuer
+    rbo:RBO_0000202 "manufacturing"^^xsd:string .       #: has RT role name
+
+ex:rt-HR.researchDev a rbo:RBO_0000033 ;                #: RT role definition
+    rdfs:label "HR.researchDev"@en ;
+    rbo:RBO_0000121 ex:rt-HR ;                          #: has role issuer
+    rbo:RBO_0000202 "researchDev"^^xsd:string .         #: has RT role name
+
+ex:rt-stmt-01 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.marketing <- HR.managers"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.marketing ;                #: has head role
+    rbo:RBO_0000118 ex:rt-HR.managers ;                 #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.marketing .                #: has junior role definition
+
+ex:rt-stmt-02 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.marketing <- HQ.staff"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.marketing ;                #: has head role
+    rbo:RBO_0000118 ex:rt-HQ.staff ;                    #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.marketing .                #: has junior role definition
+
+ex:rt-stmt-03 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.marketing <- HR.sales"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.marketing ;                #: has head role
+    rbo:RBO_0000118 ex:rt-HR.sales ;                    #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.marketing .                #: has junior role definition
+
+ex:rt-stmt-04 a rbo:RBO_0000038 ;                       #: RT intersection inclusion statement
+    rdfs:label "HQ.marketing <- HQ.marketingDelg AND HR.employee"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.marketing ;                #: has head role
+    rbo:RBO_0000117 ex:rt-HQ.marketingDelg,             #: has body role
+        ex:rt-HR.employee .
+
+ex:rt-stmt-05 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.ops <- HR.managers"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.ops ;                      #: has head role
+    rbo:RBO_0000118 ex:rt-HR.managers ;                 #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.ops .                      #: has junior role definition
+
+ex:rt-stmt-06 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.ops <- HR.manufacturing"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.ops ;                      #: has head role
+    rbo:RBO_0000118 ex:rt-HR.manufacturing ;            #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.ops .                      #: has junior role definition
+
+ex:rt-stmt-07 a rbo:RBO_0000037 ;                       #: RT linking inclusion statement
+    rdfs:label "HQ.marketingDelg <- HR.managers.access"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.marketingDelg ;            #: has head role
+    rbo:RBO_0000123 ex:rt-HR.managers ;                 #: has linking base role
+    rbo:RBO_0000203 "access"^^xsd:string .              #: has linked role name
+
+ex:rt-stmt-08 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HR.employee <- HR.managers"@en ;
+    rbo:RBO_0000116 ex:rt-HR.employee ;                 #: has head role
+    rbo:RBO_0000118 ex:rt-HR.managers ;                 #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HR.employee .                 #: has junior role definition
+
+ex:rt-stmt-09 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HR.employee <- HR.sales"@en ;
+    rbo:RBO_0000116 ex:rt-HR.employee ;                 #: has head role
+    rbo:RBO_0000118 ex:rt-HR.sales ;                    #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HR.employee .                 #: has junior role definition
+
+ex:rt-stmt-10 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HR.employee <- HR.manufacturing"@en ;
+    rbo:RBO_0000116 ex:rt-HR.employee ;                 #: has head role
+    rbo:RBO_0000118 ex:rt-HR.manufacturing ;            #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HR.employee .                 #: has junior role definition
+
+ex:rt-stmt-11 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HR.employee <- HR.researchDev"@en ;
+    rbo:RBO_0000116 ex:rt-HR.employee ;                 #: has head role
+    rbo:RBO_0000118 ex:rt-HR.researchDev ;              #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HR.employee .                 #: has junior role definition
+
+ex:rt-stmt-12 a rbo:RBO_0000036 ;                       #: RT simple inclusion statement
+    rdfs:label "HQ.staff <- HR.managers"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.staff ;                    #: has head role
+    rbo:RBO_0000118 ex:rt-HR.managers ;                 #: has senior role definition
+    rbo:RBO_0000119 ex:rt-HQ.staff .                    #: has junior role definition
+
+ex:rt-stmt-13 a rbo:RBO_0000038 ;                       #: RT intersection inclusion statement
+    rdfs:label "HQ.staff <- HQ.specialPanel AND HR.researchDev"@en ;
+    rbo:RBO_0000116 ex:rt-HQ.staff ;                    #: has head role
+    rbo:RBO_0000117 ex:rt-HQ.specialPanel,              #: has body role
+        ex:rt-HR.researchDev .
+
+ex:rt-stmt-14 a rbo:RBO_0000035 ;                       #: RT simple member statement
+    rdfs:label "HR.managers <- Alice (Figure 4: HR.manager)"@en ;
+    rbo:RBO_0000116 ex:rt-HR.managers ;                 #: has head role
+    rbo:RBO_0000122 ex:rt-Alice .                       #: names member
+
+ex:rt-stmt-15 a rbo:RBO_0000035 ;                       #: RT simple member statement
+    rdfs:label "HR.researchDev <- Bob"@en ;
+    rbo:RBO_0000116 ex:rt-HR.researchDev ;              #: has head role
+    rbo:RBO_0000122 ex:rt-Bob .                         #: names member
+
+ex:rt-HQ-authority a cco:ont00000187 ;                  #: Authority Role
+    rdfs:label "authority of HQ over its own roles"@en ;
+    obo:BFO_0000197 ex:rt-HQ .                          #: inheres in
+
+ex:rt-issue-HQ-start a obo:BFO_0000203 ;                #: temporal instant
+    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:rt-issue-HQ-interval a obo:BFO_0000202 ;             #: temporal interval
+    obo:BFO_0000222 ex:rt-issue-HQ-start .              #: has first instant
+
+ex:rt-issue-HQ a rbo:RBO_0000031 ;                      #: policy issuing act
+    rdfs:label "policy issuing act rt-issue-HQ"@en ;
+    obo:BFO_0000055 ex:rt-HQ-authority ;                #: realizes
+    obo:BFO_0000199 ex:rt-issue-HQ-interval ;           #: occupies temporal region
+    cco:ont00001833 ex:rt-HQ ;                          #: has agent
+    cco:ont00001986 ex:rt-HQ.marketing,                 #: has output
+        ex:rt-HQ.marketingDelg,
+        ex:rt-HQ.ops,
+        ex:rt-HQ.specialPanel,
+        ex:rt-HQ.staff,
+        ex:rt-stmt-01,
+        ex:rt-stmt-02,
+        ex:rt-stmt-03,
+        ex:rt-stmt-04,
+        ex:rt-stmt-05,
+        ex:rt-stmt-06,
+        ex:rt-stmt-07,
+        ex:rt-stmt-12,
+        ex:rt-stmt-13 .
+
+ex:rt-HR-authority a cco:ont00000187 ;                  #: Authority Role
+    rdfs:label "authority of HR over its own roles"@en ;
+    obo:BFO_0000197 ex:rt-HR .                          #: inheres in
+
+ex:rt-issue-HR-start a obo:BFO_0000203 ;                #: temporal instant
+    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:rt-issue-HR-interval a obo:BFO_0000202 ;             #: temporal interval
+    obo:BFO_0000222 ex:rt-issue-HR-start .              #: has first instant
+
+ex:rt-issue-HR a rbo:RBO_0000031 ;                      #: policy issuing act
+    rdfs:label "policy issuing act rt-issue-HR"@en ;
+    obo:BFO_0000055 ex:rt-HR-authority ;                #: realizes
+    obo:BFO_0000199 ex:rt-issue-HR-interval ;           #: occupies temporal region
+    cco:ont00001833 ex:rt-HR ;                          #: has agent
+    cco:ont00001986 ex:rt-HR.employee,                  #: has output
+        ex:rt-HR.managers,
+        ex:rt-HR.manufacturing,
+        ex:rt-HR.researchDev,
+        ex:rt-HR.sales,
+        ex:rt-stmt-08,
+        ex:rt-stmt-09,
+        ex:rt-stmt-10,
+        ex:rt-stmt-11,
+        ex:rt-stmt-14,
+        ex:rt-stmt-15 .
+
+ex:rt-analysis a rbo:RBO_0000039 ;                      #: security analysis specification
+    rdfs:label "Figure 4 security analysis"@en ;
+    rbo:RBO_0000129 ex:rt-HQ.marketing,                 #: treats as growth-restricted
+        ex:rt-HQ.marketingDelg,
+        ex:rt-HQ.ops,
+        ex:rt-HQ.staff,
+        ex:rt-HR.employee ;
+    rbo:RBO_0000130 ex:rt-HQ.marketing,                 #: treats as shrink-restricted
+        ex:rt-HQ.marketingDelg,
+        ex:rt-HQ.ops,
+        ex:rt-HQ.staff,
+        ex:rt-HR.employee .

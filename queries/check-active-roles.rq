@@ -1,0 +1,40 @@
+# CHECK. Conditions on active roles that OWL cannot state, because they relate two values:
+#   the active role and the assigned role it depends on have the same bearer
+#   the active role's definition is the assigned role's definition or junior to it
+#   the activation that outputs it is part of the instance it is activated in
+#   it does not outlive the assigned role it specifically depends on (BFO_0000195): when a Loss of Role
+#   takes that assigned role as input, a deactivation of the active role begins at or before it.
+#   The derivations end such an active role at the loss anyway (derive-regulation-coverage.rq).
+# Run over a hierarchy snapshot. Expect no rows.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?active ?problem
+WHERE {
+  ?active a rbo:RBO_0000003 ;
+          obo:BFO_0000197 ?bearer ;
+          obo:BFO_0000059 ?activeDef ;
+          obo:BFO_0000195 ?assigned ;
+          rbo:RBO_0000106 ?instance .
+  ?assigned obo:BFO_0000059 ?assignedDef .
+  {
+    ?assigned obo:BFO_0000197 ?other . FILTER (?other != ?bearer)
+    BIND ("depends on another bearer's role" AS ?problem)
+  } UNION {
+    FILTER NOT EXISTS { ?assignedDef rbo:RBO_0000120* ?activeDef }
+    BIND ("definition not equal or junior to the assigned role's" AS ?problem)
+  } UNION {
+    ?activation cco:ont00001986 ?active .
+    FILTER NOT EXISTS { ?activation obo:BFO_0000132 ?instance }
+    BIND ("activation not part of its instance" AS ?problem)
+  } UNION {
+    ?loss cco:ont00001921 ?assigned ; a cco:ont00000613 ;
+          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss .
+    FILTER NOT EXISTS { ?drop cco:ont00001921 ?active ;
+                        obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tDrop . FILTER (?tDrop <= ?tLoss) }
+    BIND ("outlives the assigned role it depends on" AS ?problem)
+  }
+}

@@ -1,0 +1,73 @@
+# DERIVATION (intermediate). Which access regulations cover each access request made at ?evalTime.
+# Writes rbow:covers, a query-internal predicate outside the ontology, read by
+# derive-permission-dsd-conflicts.rq and decide-access.rq. Run over the in-force facts and hierarchy
+# snapshot for the same time. A regulation covers a request when it is in force at the request's time,
+# names the requested operation, and matches the request's subject and object:
+#   subject: the requester has an active role in the request's instance at that time whose
+#            definition is in force and is the regulation's role definition or senior to it (inherited
+#            regulations, NIST Def. 2a), and which, if the request is part of a task instance, is
+#            activated for that task instance.
+#            An active role lasts from its activation until its deactivation or the Loss of Role of the
+#            assigned role it specifically depends on (BFO_0000195), whichever comes first: it cannot
+#            outlive that role, and its bearer stays authorized for it while it lasts (clif [rbo-r2]).
+#            A deassignment therefore ends the user's active roles at once, one of the three options
+#            NIST leaves open (DeassignUser, p.252).
+#   object:  the regulation names the requested object; or it names neither object nor object
+#            description and the request names no object; or its object description's criteria
+#            hold of the requested object (type, location type, and for a requester office
+#            condition, location in the requester's office: ROWLBAC's role value map).
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?reg rbow:covers ?req }
+WHERE {
+  ?req a rbo:RBO_0000024 ;
+       rbo:RBO_0000107 ?person ;
+       rbo:RBO_0000108 ?op ;
+       obo:BFO_0000132 ?instance ;
+       obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+  FILTER (?t = ?evalTime)
+  ?reg a rbo:RBO_0000006 ;
+       rbo:RBO_0000101 ?op ;
+       rbow:inForceAt ?evalTime .
+  # subject
+  FILTER EXISTS {
+      ?reg rbo:RBO_0000105 ?regRole .
+      ?active rbo:RBO_0000106 ?instance ;
+              obo:BFO_0000197 ?person ;
+              obo:BFO_0000059 ?activeDef .
+      ?activeDef rbow:inForceAt ?evalTime .
+      ?activation cco:ont00001986 ?active ;
+                  obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tAct .
+      FILTER (?tAct <= ?t)
+      FILTER NOT EXISTS { ?drop cco:ont00001921 ?active ;
+                          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tDrop . FILTER (?tDrop <= ?t) }
+      FILTER NOT EXISTS { ?active obo:BFO_0000195 ?held .
+                          ?loss cco:ont00001921 ?held ; a cco:ont00000613 ;
+                                obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss . FILTER (?tLoss <= ?t) }
+      ?activeDef rbo:RBO_0000120* ?regRole .
+      # a request inside a task instance is served only by a role activated for that task instance
+      # (Botha and Eloff 2001, p.674; clif [rbo-a4])
+      FILTER NOT EXISTS { ?req obo:BFO_0000132 ?task . ?task a rbo:RBO_0000041 .
+                          FILTER NOT EXISTS { ?active rbo:RBO_0000136 ?task } }
+  }
+  # object
+  FILTER (
+    EXISTS { ?reg rbo:RBO_0000102 ?named . ?req rbo:RBO_0000109 ?named }
+    || ( NOT EXISTS { ?reg rbo:RBO_0000102 ?o1 } && NOT EXISTS { ?reg rbo:RBO_0000103 ?o2 }
+         && NOT EXISTS { ?req rbo:RBO_0000109 ?o3 } )
+    || EXISTS {
+      ?reg rbo:RBO_0000103 ?desc .
+      ?req rbo:RBO_0000109 ?obj .
+      FILTER NOT EXISTS { ?desc rbo:RBO_0000302 ?objType .
+                          FILTER NOT EXISTS { ?obj a ?objType } }
+      FILTER NOT EXISTS { ?desc rbo:RBO_0000303 ?locType .
+                          FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?loc . ?loc a ?locType } }
+      FILTER NOT EXISTS { ?desc a rbo:RBO_0000011 .
+                          FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?office . ?person rbo:RBO_0001101 ?office } }
+    }
+  )
+}

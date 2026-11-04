@@ -1,0 +1,28 @@
+@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:dana-req-approve-decision a rbo:RBO_0000023 ;        #: access denial
+    rdfs:label "denial of https://example.org/rbac-bfo/data/dana-req-approve" ;
+    rbo:RBO_0000112 ex:dana-req-approve .               #: decides on
+
+ex:dana-req-push-decision a rbo:RBO_0000022 ;           #: access grant
+    rdfs:label "grant of https://example.org/rbac-bfo/data/dana-req-push" ;
+    rbo:RBO_0000112 ex:dana-req-push ;                  #: decides on
+    rbo:RBO_0000113 ex:perm-submitter-push .            #: cites regulation
+
+ex:dana-request-activate-approver-1-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "DSD conflict: https://example.org/rbac-bfo/data/dana-request-activate-approver-1" ;
+    rbo:RBO_0000124 ex:dana ;                           #: describes conflict subject
+    rbo:RBO_0000125 ex:dsd-submitter-approver ;         #: describes violated constraint
+    rbo:RBO_0000126 ex:def-approver,                    #: describes conflicting role definition
+        ex:def-submitter ;
+    rbo:RBO_0000127 ex:cr-42 ;                          #: describes conflict instance
+    rbo:RBO_0000128 ex:dana-request-activate-approver-1 ;  #: describes conflicting act
+    rbo:RBO_0000204 "Violates DSD constraint DSD {Submitter, Approver}, n = 2, code change reviews, whole instance: the activation would give the requester 2 of its roles in one instance" .  #: has justification
+
+ex:eve-req-approve-decision a rbo:RBO_0000022 ;         #: access grant
+    rdfs:label "grant of https://example.org/rbac-bfo/data/eve-req-approve" ;
+    rbo:RBO_0000112 ex:eve-req-approve ;                #: decides on
+    rbo:RBO_0000113 ex:perm-approver-approve .          #: cites regulation
+

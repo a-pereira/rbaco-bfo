@@ -1,0 +1,22 @@
+@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:marie-req-use-display-d7-decision a rbo:RBO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbac-bfo/data/marie-req-use-display-d7" ;
+    rbo:RBO_0000112 ex:marie-req-use-display-d7 ;       #: decides on
+    rbo:RBO_0000113 ex:perm-member-office-devices .     #: cites regulation
+
+ex:marie-req-use-display-d8-decision a rbo:RBO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbac-bfo/data/marie-req-use-display-d8" ;
+    rbo:RBO_0000112 ex:marie-req-use-display-d8 .       #: decides on
+
+ex:marie-req-use-printer-p43-decision a rbo:RBO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbac-bfo/data/marie-req-use-printer-p43" ;
+    rbo:RBO_0000112 ex:marie-req-use-printer-p43 ;      #: decides on
+    rbo:RBO_0000113 ex:perm-faculty-classroom-printers .  #: cites regulation
+
+ex:marie-req-use-printer-p44-decision a rbo:RBO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbac-bfo/data/marie-req-use-printer-p44" ;
+    rbo:RBO_0000112 ex:marie-req-use-printer-p44 .      #: decides on
+

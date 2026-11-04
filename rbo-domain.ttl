@@ -1,0 +1,220 @@
+@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix cco: <https://www.commoncoreontologies.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc11: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+#################################################################
+#    Ontology
+#################################################################
+
+#: <https://example.org/rbac-bfo/rbo-domain.owl>  RBO domain module: ROWLBAC scenario and attribute examples
+<https://example.org/rbac-bfo/rbo-domain.owl> rdf:type owl:Ontology ;
+    owl:versionIRI <https://example.org/rbac-bfo/2026-11-01/rbo-domain.owl> ;
+    owl:imports <https://example.org/rbac-bfo/rbo.owl> ;  #: Role-Based Access Control Ontology (RBO)
+    rdfs:label "RBO domain module: ROWLBAC scenario and attribute examples"@en ;
+    dcterms:description "The domain terms ROWLBAC's patterns need: the US persons role hierarchy of ROWLBAC Figure 1 as role universals, the business process type hosting its narratives, and the places, devices and university roles of its section 4.1 examples. ROWLBAC likewise pairs each base ontology with a domain ontology (section 3)."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "2026-11-01 draft for review"@en .
+
+#################################################################
+#    Object properties
+#################################################################
+
+#: rbo:RBO_0001101  has office
+rbo:RBO_0001101 rdf:type owl:ObjectProperty ;
+    rdfs:domain cco:ont00001017 ;                       #: Agent
+    rdfs:range rbo:RBO_0001018 ;                        #: office
+    dc11:identifier "1101-RBO" ;
+    rdfs:label "has office"@en ;
+    skos:definition "Relates an agent to an office assigned to that agent for their work."@en ;
+    skos:scopeNote "ROWLBAC's office (§4.1, second example)."@en .
+
+#################################################################
+#    Role universals: ROWLBAC Figure 1
+#################################################################
+
+#: rbo:RBO_0001001  legal person role
+rbo:RBO_0001001 rdf:type owl:Class ;
+    rdfs:subClassOf obo:BFO_0000023 ;                   #: role
+    dc11:identifier "1001-RBO" ;
+    rdfs:label "legal person role"@en ;
+    skos:definition "A Role that inheres in a Person in virtue of that Person's being recognized by a legal system as a holder of rights and duties."@en ;
+    skos:scopeNote "The root, Person, of ROWLBAC Figure 1. Named as a role because CCO's Person (AgentOntology.ttl ont00001262) is a kind of animal, not a role. The labels of this module follow Figure 1 and carry no legal meaning; for example ROWLBAC puts Visitor under US Person."@en .
+
+#: rbo:RBO_0001002  US person role
+rbo:RBO_0001002 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001001 ;                   #: legal person role
+    dc11:identifier "1002-RBO" ;
+    rdfs:label "US person role"@en ;
+    skos:definition "A legal person role that inheres in a Person in virtue of that Person's holding a status under United States law that ROWLBAC Figure 1 places under US Person."@en .
+
+#: rbo:RBO_0001003  foreign person role
+rbo:RBO_0001003 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001001 ;                   #: legal person role
+    dc11:identifier "1003-RBO" ;
+    rdfs:label "foreign person role"@en ;
+    skos:definition "A legal person role that inheres in a Person in virtue of that Person's holding no status under United States law that ROWLBAC Figure 1 places under US Person."@en .
+
+#: rbo:RBO_0001004  US citizen role
+rbo:RBO_0001004 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001002 , cco:ont00000987 ;  #: US person role | Citizen Role
+    dc11:identifier "1004-RBO" ;
+    rdfs:label "US citizen role"@en ;
+    skos:definition "A Citizen Role that inheres in a Person by virtue of that Person being legally recognized as a member of the United States."@en ;
+    skos:scopeNote "A subclass of CCO's Citizen Role (AgentOntology.ttl ont00000987), which is not tied to any state."@en .
+
+#: rbo:RBO_0001005  US resident role
+rbo:RBO_0001005 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001002 ;                   #: US person role
+    dc11:identifier "1005-RBO" ;
+    rdfs:label "US resident role"@en ;
+    skos:definition "A US person role that inheres in a Person in virtue of that Person's being recognized as residing in the United States without being a citizen."@en .
+
+#: rbo:RBO_0001006  US visitor role
+rbo:RBO_0001006 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001002 ;                   #: US person role
+    dc11:identifier "1006-RBO" ;
+    rdfs:label "US visitor role"@en ;
+    skos:definition "A US person role that inheres in a Person in virtue of that Person's being admitted to the United States for a temporary visit."@en .
+
+#: rbo:RBO_0001007  US permanent resident role
+rbo:RBO_0001007 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001005 , cco:ont00000917 ;  #: US resident role | Permanent Resident Role
+    dc11:identifier "1007-RBO" ;
+    rdfs:label "US permanent resident role"@en ;
+    skos:definition "A Permanent Resident Role whose Government Domain is the United States."@en ;
+    skos:scopeNote "A subclass of CCO's Permanent Resident Role (AgentOntology.ttl ont00000917), which is not tied to any Government Domain."@en .
+
+#: rbo:RBO_0001008  US permanent residency applicant role
+rbo:RBO_0001008 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001005 ;                   #: US resident role
+    dc11:identifier "1008-RBO" ;
+    rdfs:label "US permanent residency applicant role"@en ;
+    skos:definition "A US resident role that inheres in a Person in virtue of that Person's pending application for permanent residence in the United States."@en .
+
+#: rbo:RBO_0001009  US temporary resident role
+rbo:RBO_0001009 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001005 ;                   #: US resident role
+    dc11:identifier "1009-RBO" ;
+    rdfs:label "US temporary resident role"@en ;
+    skos:definition "A US resident role that inheres in a Person in virtue of that Person's being admitted to reside in the United States for a limited period."@en .
+
+#: rbo:RBO_0001010  US work visa holder role
+rbo:RBO_0001010 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001009 ;                   #: US temporary resident role
+    dc11:identifier "1010-RBO" ;
+    rdfs:label "US work visa holder role"@en ;
+    skos:definition "A US temporary resident role whose grounding admission is for employment."@en .
+
+#: rbo:RBO_0001011  US business visa holder role
+rbo:RBO_0001011 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001009 ;                   #: US temporary resident role
+    dc11:identifier "1011-RBO" ;
+    rdfs:label "US business visa holder role"@en ;
+    skos:definition "A US temporary resident role whose grounding admission is for business activity."@en .
+
+#: rbo:RBO_0001012  US student visa holder role
+rbo:RBO_0001012 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001009 ;                   #: US temporary resident role
+    dc11:identifier "1012-RBO" ;
+    rdfs:label "US student visa holder role"@en ;
+    skos:definition "A US temporary resident role whose grounding admission is for study."@en .
+
+#################################################################
+#    The business process type
+#################################################################
+
+#: rbo:RBO_0001016  status eligibility review
+rbo:RBO_0001016 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0000004 ;                   #: business process
+    dc11:identifier "1016-RBO" ;
+    rdfs:label "status eligibility review"@en ;
+    skos:definition "A business process in which a Person presents a legal status and the acts that status allows are determined."@en ;
+    skos:scopeNote "Hosts each of ROWLBAC's §3.1 narratives in one instance, so that deactivation and reactivation happen within one session as in the narrative. Neither ROWLBAC nor NIST names this process."@en .
+
+#################################################################
+#    Places, devices and university roles: ROWLBAC section 4.1
+#################################################################
+
+#: rbo:RBO_0001017  room
+rbo:RBO_0001017 rdf:type owl:Class ;
+    rdfs:subClassOf obo:BFO_0000029 ;                   #: site
+    dc11:identifier "1017-RBO" ;
+    rdfs:label "room"@en ;
+    skos:definition "A Site bounded by the walls, floor and ceiling of a building."@en ;
+    skos:scopeNote "ROWLBAC's Place (§4.1). A site, not a CCO Facility: Facility is a Material Artifact (FacilityOntology.ttl ont00000192), whereas a room is the space objects are located in, related to them by BFO located in (BFO_0000171). CCO has no room class."@en .
+
+#: rbo:RBO_0001018  office
+rbo:RBO_0001018 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001017 ;                   #: room
+    dc11:identifier "1018-RBO" ;
+    rdfs:label "office"@en ;
+    skos:definition "A room designed for the desk work of one or a few agents."@en .
+
+#: rbo:RBO_0001019  classroom
+rbo:RBO_0001019 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001017 ;                   #: room
+    dc11:identifier "1019-RBO" ;
+    rdfs:label "classroom"@en ;
+    skos:definition "A room designed for teaching groups of students."@en .
+
+#: rbo:RBO_0001020  laboratory room
+rbo:RBO_0001020 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001017 ;                   #: room
+    dc11:identifier "1020-RBO" ;
+    rdfs:label "laboratory room"@en ;
+    skos:definition "A room designed for experimental or practical work."@en .
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members (
+      rbo:RBO_0001018                                   #: office
+      rbo:RBO_0001019                                   #: classroom
+      rbo:RBO_0001020 ) ] .                             #: laboratory room
+
+#: rbo:RBO_0001021  device
+rbo:RBO_0001021 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000995 ;                   #: Material Artifact
+    dc11:identifier "1021-RBO" ;
+    rdfs:label "device"@en ;
+    skos:definition "A Material Artifact designed to be operated by an agent to perform some function on demand."@en ;
+    skos:scopeNote "ROWLBAC's Device (§4.1). CCO has no device class."@en .
+
+#: rbo:RBO_0001022  printer
+rbo:RBO_0001022 rdf:type owl:Class ;
+    rdfs:subClassOf rbo:RBO_0001021 ;                   #: device
+    dc11:identifier "1022-RBO" ;
+    rdfs:label "printer"@en ;
+    skos:definition "A device designed to produce printed copies of information content on a medium."@en .
+
+#: rbo:RBO_0001023  classroom printer
+rbo:RBO_0001023 rdf:type owl:Class ;
+    owl:equivalentClass [ rdf:type owl:Class ;
+        owl:intersectionOf ( rbo:RBO_0001022            #: printer
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty obo:BFO_0000171 ;  #: located in
+                               owl:someValuesFrom rbo:RBO_0001019 ] ) ] ;  #: classroom
+    dc11:identifier "1023-RBO" ;
+    rdfs:label "classroom printer"@en ;
+    skos:definition "A printer located in some classroom."@en ;
+    skos:scopeNote "The OWL defined class for ROWLBAC's first §4.1 example, faculty can use any printer located in a classroom, which ROWLBAC says can be encoded in description logic. Named by has criteria class on the example's object description."@en .
+
+#: rbo:RBO_0001024  university member role
+rbo:RBO_0001024 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000175 ;                   #: Organization Member Role
+    dc11:identifier "1024-RBO" ;
+    rdfs:label "university member role"@en ;
+    skos:definition "An Organization Member Role whose Organization is a university."@en .
+
+#: rbo:RBO_0001025  faculty role
+rbo:RBO_0001025 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000175 ;                   #: Organization Member Role
+    dc11:identifier "1025-RBO" ;
+    rdfs:label "faculty role"@en ;
+    skos:definition "An Organization Member Role that inheres in a Person in virtue of that Person's appointment to teach or conduct research at a university."@en ;
+    skos:scopeNote "ROWLBAC does not say whether faculty is senior to university member, so no axiom relates the two."@en .

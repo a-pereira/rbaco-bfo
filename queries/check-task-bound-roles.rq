@@ -1,0 +1,59 @@
+# CHECK. Task instances and the active roles activated for them, against the commitments and
+# requirements OWL cannot state because they relate two values. Expect no rows.
+#   task not in the role's instance  - clif [rbo-k2]: the task instance is not an occurrent part of
+#                                      the business process instance the role is activated in
+#   not the task's required role     - [rbo-k3]: the active role concretizes a definition other than
+#                                      the one the task requires (strict least privilege)
+#   bearer is not the task's agent   - [rbo-k3]
+#   agent is not a person            - [rbo-g1]: a human performer requirement in scope, and in force
+#                                      when the task instance began (issued at or before its start and
+#                                      not retired by then), names the task's specification
+#   no prior human instance          - [rbo-g2]: the specification requires a prior one, and the
+#                                      instance holds no instance of it that ended before this one
+#                                      began with a person as agent
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?subject ?problem
+WHERE {
+  {
+    ?subject a rbo:RBO_0000003 ; rbo:RBO_0000136 ?task ; rbo:RBO_0000106 ?instance .
+    FILTER NOT EXISTS { ?task obo:BFO_0000132 ?instance }
+    BIND ("task not in the role's instance" AS ?problem)
+  } UNION {
+    ?subject a rbo:RBO_0000003 ; rbo:RBO_0000136 ?task ; obo:BFO_0000059 ?def .
+    ?task cco:ont00001920 ?spec . ?spec rbo:RBO_0000132 ?reqDef .
+    FILTER (?def != ?reqDef)
+    BIND ("not the task's required role" AS ?problem)
+  } UNION {
+    ?subject a rbo:RBO_0000003 ; rbo:RBO_0000136 ?task ; obo:BFO_0000197 ?bearer .
+    FILTER NOT EXISTS { ?task cco:ont00001833 ?bearer }
+    BIND ("bearer is not the task's agent" AS ?problem)
+  } UNION {
+    ?subject a rbo:RBO_0000041 ; cco:ont00001920 ?spec ; obo:BFO_0000132 ?instance ;
+             cco:ont00001833 ?agent ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tBegin .
+    ?instance a rbo:RBO_0000004 .
+    ?h a rbo:RBO_0000049 ; rbo:RBO_0000145 ?spec .
+    ?hIssue cco:ont00001986 ?h ; a rbo:RBO_0000031 ;
+            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tIssue . FILTER (?tIssue <= ?tBegin)
+    FILTER NOT EXISTS { ?hRetire cco:ont00001921 ?h ; a rbo:RBO_0000032 ;
+                        obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tRetire . FILTER (?tRetire <= ?tBegin) }
+    FILTER (NOT EXISTS { ?h rbo:RBO_0000115 ?anyP } || EXISTS { ?h rbo:RBO_0000115 ?p . ?instance cco:ont00001920 ?p })
+    FILTER NOT EXISTS { ?agent a cco:ont00001262 }
+    BIND ("agent is not a person" AS ?problem)
+  } UNION {
+    ?subject a rbo:RBO_0000041 ; cco:ont00001920 ?spec ; obo:BFO_0000132 ?instance ;
+             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tStart .
+    ?instance a rbo:RBO_0000004 .
+    ?spec rbo:RBO_0000144 ?prior .
+    FILTER NOT EXISTS {
+      ?k1 a rbo:RBO_0000041 ; cco:ont00001920 ?prior ; obo:BFO_0000132 ?instance ;
+          cco:ont00001833 ?a1 ; obo:BFO_0000199/obo:BFO_0000224/rbo:RBO_0000205 ?tEnd .
+      ?a1 a cco:ont00001262 .
+      FILTER (?tEnd <= ?tStart) }
+    BIND ("no prior human instance" AS ?problem)
+  }
+}

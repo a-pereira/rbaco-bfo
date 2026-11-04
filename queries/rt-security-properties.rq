@@ -1,0 +1,25 @@
+# CHECK. ROWLBAC's four security properties for its Figure 4 policy (section 4.2), against the bounds
+# derive-rt-bounds.rq derives to a fixpoint. "proven" is sound; "not proven" is not a refutation, and
+# the verification report gives a reachable counter-state for each.
+#   restriction   HR.employee contains HQ.marketing and HQ.ops
+#   access        HQ.marketing contains HQ.ops
+#   availability  Alice is always a member of HQ.marketing
+#   safety        no principal other than Alice and Bob can become a member of HQ.marketing
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX ex:   <https://example.org/rbac-bfo/data/>
+SELECT ?property ?result
+WHERE {
+  VALUES ?property { "restriction" "access" "availability" "safety" }
+  BIND (EXISTS { ex:rt-HQ.marketing rbow:alwaysWithin ex:rt-HR.employee }
+        && EXISTS { ex:rt-HQ.ops rbow:alwaysWithin ex:rt-HR.employee } AS ?restriction)
+  BIND (EXISTS { ex:rt-HQ.ops rbow:alwaysWithin ex:rt-HQ.marketing } AS ?access)
+  BIND (EXISTS { ex:rt-Alice rbow:alwaysMemberOf ex:rt-HQ.marketing } AS ?availability)
+  BIND (EXISTS { ex:rt-HQ.marketing rbow:closed true }
+        && NOT EXISTS { ex:rt-HQ.marketing rbow:possibleMember ?other .
+                        FILTER (?other NOT IN (ex:rt-Alice, ex:rt-Bob)) } AS ?safety)
+  BIND (IF(?property = "restriction", ?restriction,
+        IF(?property = "access", ?access,
+        IF(?property = "availability", ?availability, ?safety))) AS ?proven)
+  BIND (IF(?proven, "proven", "not proven") AS ?result)
+}

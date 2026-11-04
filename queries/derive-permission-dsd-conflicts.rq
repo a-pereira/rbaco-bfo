@@ -1,0 +1,79 @@
+# DERIVATION. A dynamic separation of duty conflict report for the access request decide-access.rq takes
+# next at ?evalTime, when a dynamic permission constraint refuses it (Botha and Eloff 2001, Table 2 rows 2
+# and 3, p.676; clif [rbo-s15]). Run over the in-force facts, permission contents and regulation coverage
+# for the same time, before decide-access.rq, which denies a request such a report describes, citing the
+# constraint. The runner alternates the two until every request at ?evalTime is decided.
+# Order: requests at one instant are taken one at a time in IRI order, so that the first one's decision is
+# in the graph when the second is counted (clif rbo-decided-before). The request taken is the undecided
+# one with the smallest IRI.
+# Permissions are compared by content (derive-permission-content.rq), not as individuals. The request is
+# refused when a permission covering it has the content of a member of the set and, counting that content
+# and every member content already exercised in the instance, n or more are reached. "Exercised" is read
+# as granted: a grant citing a permission with that content decides on a request that is part of the
+# instance and was decided before this one. Requests count for their principal (clif [rbo-p1]), and
+# principals a dynamic conflicting agent designation in force counts as one with the requester's count
+# together ([rbo-u4]). The constraint and the designations must be in force at ?evalTime and fit the
+# instance's plan. The report names the members whose contents were counted, read from the count itself.
+# Refusal at the request only: activations are not refused, since that would withhold the role's
+# other permissions; the worklist (cq-worklist.rq) keeps the task off the list instead.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT {
+  ?report a rbo:RBO_0000020 ;
+          rdfs:label ?label ;
+          rbo:RBO_0000124 ?x ;
+          rbo:RBO_0000125 ?c ;
+          rbo:RBO_0000146 ?counted ;
+          rbo:RBO_0000127 ?instance ;
+          rbo:RBO_0000128 ?req ;
+          rbo:RBO_0000204 ?why .
+}
+WHERE {
+  {
+    SELECT ?req ?x ?instance ?c ?n (COUNT(DISTINCT ?key) AS ?k)
+           (CONCAT(" ", GROUP_CONCAT(DISTINCT STR(?m); separator=" "), " ") AS ?members) WHERE {
+      ?req a rbo:RBO_0000024 ; obo:BFO_0000132 ?instance ;
+           obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+      ?instance a rbo:RBO_0000004 .
+      FILTER (?t = ?evalTime)
+      # the undecided request with the smallest IRI at ?evalTime
+      FILTER NOT EXISTS { ?d0 rbo:RBO_0000112 ?req }
+      FILTER NOT EXISTS { ?r0 a rbo:RBO_0000024 ;
+                              obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t0 .
+                          FILTER (?t0 = ?evalTime && STR(?r0) < STR(?req))
+                          FILTER NOT EXISTS { ?d1 rbo:RBO_0000112 ?r0 } }
+      { ?req rbo:RBO_0000143 ?x } UNION { ?req rbo:RBO_0000107 ?x FILTER NOT EXISTS { ?req rbo:RBO_0000143 ?obo } }
+      ?c a rbo:RBO_0000014 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000201 ?n .
+      FILTER (NOT EXISTS { ?c rbo:RBO_0000115 ?anyPlan }
+              || EXISTS { ?c rbo:RBO_0000115 ?plan . ?instance cco:ont00001920 ?plan })
+      # the request falls under the set: a permission covering it has the content of a member
+      FILTER EXISTS { ?c rbo:RBO_0000134/rbow:contentKey ?hitKey .
+                      ?cov rbow:covers ?req ; a rbo:RBO_0000007 ; rbow:contentKey ?hitKey }
+      ?c rbo:RBO_0000134 ?m . ?m rbow:contentKey ?key .
+      FILTER (EXISTS { ?cov2 rbow:covers ?req ; a rbo:RBO_0000007 ; rbow:contentKey ?key }
+              || EXISTS {
+        ?grant a rbo:RBO_0000022 ; rbo:RBO_0000112 ?q2 ; rbo:RBO_0000113 ?cited .
+        ?cited rbow:contentKey ?key .
+        ?q2 obo:BFO_0000132 ?instance ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t2 .
+        FILTER (?t2 < ?t || (?t2 = ?t && STR(?q2) < STR(?req)))
+        { ?q2 rbo:RBO_0000143 ?y } UNION { ?q2 rbo:RBO_0000107 ?y FILTER NOT EXISTS { ?q2 rbo:RBO_0000143 ?obo2 } }
+        FILTER (?y = ?x || EXISTS { ?g a rbo:RBO_0000047 ; rbow:inForceAt ?evalTime ; rbow:joins ?x , ?y ;
+                                    rbow:appliesTo ?c ; rbow:appliesIn ?instance })
+      })
+    } GROUP BY ?req ?x ?instance ?c ?n
+    HAVING (COUNT(DISTINCT ?key) >= ?n)
+  }
+  ?c rbo:RBO_0000134 ?counted .
+  FILTER (CONTAINS(?members, CONCAT(" ", STR(?counted), " ")))
+  OPTIONAL { ?c rdfs:label ?cLabel }
+  BIND (IRI(CONCAT(STR(?req), "-permission-dsd-conflict")) AS ?report)
+  BIND (CONCAT("permission DSD conflict: ", STR(?req)) AS ?label)
+  BIND (CONCAT("Violates DSD constraint ", COALESCE(STR(?cLabel), STR(?c)),
+               ": granting the request would give its principal, with any agent counted as one with them, ",
+               STR(?k), " of its permissions exercised in one instance ",
+               "(permissions with one operation and object scope count once)") AS ?why)
+}

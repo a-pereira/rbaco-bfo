@@ -1,0 +1,42 @@
+# COMPETENCY QUESTION (ROWLBAC section 3.5, class level: "can every student use lab printers?").
+# For each role universal that mirrors a role definition: which operations does an active role of
+# that kind permit at ?evalTime, counting inherited regulations (NIST Def. 2a) and letting a prohibition
+# on the same operation override (deny-overrides)? Regulations count while in force. Run over the
+# in-force facts and hierarchy snapshot for that time.
+# Object scopes are compared as derive-regulation-coverage.rq matches them to requests. A prohibition
+# overrides when its scope is the permission's: the same named object, the same object description, or
+# neither on both sides, since a regulation naming neither covers only requests that name no object.
+# When both sides are scoped but differently (another object, or an object description against an
+# object), the prohibition may override for some objects: whether a description's criteria hold of an
+# object can depend on the requester. A scoped and an unscoped regulation never meet. Prohibitions that
+# name no role definition depend on the person, not the role, and are not considered.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?universal ?operation ?object ?description ?answer
+WHERE {
+  ?universal rbo:RBO_0000301 ?def .
+  ?def rbo:RBO_0000120* ?junior .
+  ?perm a rbo:RBO_0000007 ; rbo:RBO_0000105 ?junior ; rbo:RBO_0000101 ?operation ;
+        rbow:inForceAt ?evalTime .
+  OPTIONAL { ?perm rbo:RBO_0000102 ?object }
+  OPTIONAL { ?perm rbo:RBO_0000103 ?description }
+  BIND (BOUND(?object) || BOUND(?description) AS ?scoped)
+  BIND (EXISTS {
+    ?def rbo:RBO_0000120* ?j2 .
+    ?proh a rbo:RBO_0000008 ; rbo:RBO_0000105 ?j2 ; rbo:RBO_0000101 ?operation ;
+          rbow:inForceAt ?evalTime .
+    FILTER ((BOUND(?object) && EXISTS { ?proh rbo:RBO_0000102 ?object })
+            || (BOUND(?description) && EXISTS { ?proh rbo:RBO_0000103 ?description })
+            || (!?scoped && NOT EXISTS { ?proh rbo:RBO_0000102 ?po } && NOT EXISTS { ?proh rbo:RBO_0000103 ?pd }))
+  } AS ?overridden)
+  BIND (EXISTS {
+    ?def rbo:RBO_0000120* ?j3 .
+    ?proh2 a rbo:RBO_0000008 ; rbo:RBO_0000105 ?j3 ; rbo:RBO_0000101 ?operation ;
+           rbow:inForceAt ?evalTime .
+    FILTER (?scoped && (EXISTS { ?proh2 rbo:RBO_0000102 ?po2 } || EXISTS { ?proh2 rbo:RBO_0000103 ?pd2 }))
+  } AS ?partly)
+  BIND (IF(?overridden, "prohibited (a prohibition overrides)",
+           IF(?partly, "permitted; a prohibition with another object scope may override", "permitted")) AS ?answer)
+}
+ORDER BY ?universal ?operation

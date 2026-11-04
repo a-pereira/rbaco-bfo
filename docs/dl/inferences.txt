@@ -1,0 +1,111 @@
+== rbo: merged 12327 triples, reasoned 12346
+  new subClassOf between named classes: 26; touching RBO: 4
+    assigned role (RBO_0000002)  ->  role (BFO_0000023)
+    role separation of duty constraint (RBO_0000042)  ->  separation of duty constraint (RBO_0000012)
+    permission separation of duty constraint (RBO_0000043)  ->  separation of duty constraint (RBO_0000012)
+    task separation of duty constraint (RBO_0000044)  ->  separation of duty constraint (RBO_0000012)
+  new equivalentClass between named classes: 1; touching RBO: 0
+    information content entity (IAO_0000030)  ->  Information Content Entity (ont00000958)
+== rbo-domain: merged 12469 triples, reasoned 12489
+  new subClassOf between named classes: 27; touching RBO: 5
+    assigned role (RBO_0000002)  ->  role (BFO_0000023)
+    role separation of duty constraint (RBO_0000042)  ->  separation of duty constraint (RBO_0000012)
+    permission separation of duty constraint (RBO_0000043)  ->  separation of duty constraint (RBO_0000012)
+    task separation of duty constraint (RBO_0000044)  ->  separation of duty constraint (RBO_0000012)
+    classroom printer (RBO_0001023)  ->  printer (RBO_0001022)
+  new equivalentClass between named classes: 1; touching RBO: 0
+    information content entity (IAO_0000030)  ->  Information Content Entity (ont00000958)
+== us-persons: 229 individuals, 1765 inferred type assertions, 40 to RBO classes
+    US person role (RBO_0001002): 4  e.g. https://example.org/rbac-bfo/data/alice-citizen-assigned-1, https://example.org/rbac-bfo/data/alice-permanent-resident-assigned-1, https://example.org/rbac-bfo/data/bob-temporary-resident-assigned-1, https://example.org/rbac-bfo/data/bob-visitor-assigned-1
+    US resident role (RBO_0001005): 2  e.g. https://example.org/rbac-bfo/data/alice-permanent-resident-assigned-1, https://example.org/rbac-bfo/data/bob-temporary-resident-assigned-1
+    access decision (RBO_0000021): 7  e.g. https://example.org/rbac-bfo/data/alice-req-jury-1-decision, https://example.org/rbac-bfo/data/alice-req-jury-2-decision, https://example.org/rbac-bfo/data/alice-req-vote-1-decision, https://example.org/rbac-bfo/data/alice-req-vote-2-decision
+    access regulation (RBO_0000006): 9  e.g. https://example.org/rbac-bfo/data/perm-bvh-work, https://example.org/rbac-bfo/data/perm-citizen-jury, https://example.org/rbac-bfo/data/perm-citizen-vote, https://example.org/rbac-bfo/data/perm-citizen-work
+    business process (RBO_0000004): 2  e.g. https://example.org/rbac-bfo/data/alice-review, https://example.org/rbac-bfo/data/bob-review
+    conflict report (RBO_0000018): 2  e.g. https://example.org/rbac-bfo/data/alice-assign-permanent-resident-1-ssd-conflict-ssd-resident-citizen, https://example.org/rbac-bfo/data/bob-request-activate-temporary-resident-1-dsd-conflict
+    dynamic separation of duty constraint (RBO_0000014): 1  e.g. https://example.org/rbac-bfo/data/dsd-visitor-tr
+    legal person role (RBO_0001001): 4  e.g. https://example.org/rbac-bfo/data/alice-citizen-assigned-1, https://example.org/rbac-bfo/data/alice-permanent-resident-assigned-1, https://example.org/rbac-bfo/data/bob-temporary-resident-assigned-1, https://example.org/rbac-bfo/data/bob-visitor-assigned-1
+    policy administration act (RBO_0000030): 5  e.g. https://example.org/rbac-bfo/data/alice-assign-citizen-1, https://example.org/rbac-bfo/data/alice-assign-permanent-resident-1, https://example.org/rbac-bfo/data/bob-assign-temporary-resident-1, https://example.org/rbac-bfo/data/bob-assign-visitor-1
+    role separation of duty constraint (RBO_0000042): 1  e.g. https://example.org/rbac-bfo/data/dsd-visitor-tr
+    separation of duty constraint (RBO_0000012): 3  e.g. https://example.org/rbac-bfo/data/dsd-visitor-tr, https://example.org/rbac-bfo/data/ssd-pr-tr, https://example.org/rbac-bfo/data/ssd-resident-citizen
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+== code-review: 152 individuals, 1218 inferred type assertions, 12 to RBO classes
+    access decision (RBO_0000021): 3  e.g. https://example.org/rbac-bfo/data/dana-req-approve-decision, https://example.org/rbac-bfo/data/dana-req-push-decision, https://example.org/rbac-bfo/data/eve-req-approve-decision
+    access regulation (RBO_0000006): 2  e.g. https://example.org/rbac-bfo/data/perm-approver-approve, https://example.org/rbac-bfo/data/perm-submitter-push
+    conflict report (RBO_0000018): 1  e.g. https://example.org/rbac-bfo/data/dana-request-activate-approver-1-dsd-conflict
+    dynamic separation of duty constraint (RBO_0000014): 1  e.g. https://example.org/rbac-bfo/data/dsd-submitter-approver
+    policy administration act (RBO_0000030): 4  e.g. https://example.org/rbac-bfo/data/dana-assign-approver-1, https://example.org/rbac-bfo/data/dana-assign-submitter-1, https://example.org/rbac-bfo/data/eve-assign-approver-1, https://example.org/rbac-bfo/data/policy-load
+    separation of duty constraint (RBO_0000012): 1  e.g. https://example.org/rbac-bfo/data/dsd-submitter-approver
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+== abac: 147 individuals, 1189 inferred type assertions, 17 to RBO classes
+    access decision (RBO_0000021): 4  e.g. https://example.org/rbac-bfo/data/marie-req-use-display-d7-decision, https://example.org/rbac-bfo/data/marie-req-use-display-d8-decision, https://example.org/rbac-bfo/data/marie-req-use-printer-p43-decision, https://example.org/rbac-bfo/data/marie-req-use-printer-p44-decision
+    access regulation (RBO_0000006): 2  e.g. https://example.org/rbac-bfo/data/perm-faculty-classroom-printers, https://example.org/rbac-bfo/data/perm-member-office-devices
+    classroom printer (RBO_0001023): 1  e.g. https://example.org/rbac-bfo/data/printer-p43
+    device (RBO_0001021): 2  e.g. https://example.org/rbac-bfo/data/printer-p43, https://example.org/rbac-bfo/data/printer-p44
+    object description (RBO_0000009): 1  e.g. https://example.org/rbac-bfo/data/desc-own-office-device
+    policy administration act (RBO_0000030): 3  e.g. https://example.org/rbac-bfo/data/marie-assign-faculty-1, https://example.org/rbac-bfo/data/marie-assign-university-member-1, https://example.org/rbac-bfo/data/policy-load
+    room (RBO_0001017): 4  e.g. https://example.org/rbac-bfo/data/classroom-c101, https://example.org/rbac-bfo/data/lab-l1, https://example.org/rbac-bfo/data/office-o12, https://example.org/rbac-bfo/data/office-o13
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+== rt-policy: 119 individuals, 1028 inferred type assertions, 37 to RBO classes
+    RT statement (RBO_0000034): 15  e.g. https://example.org/rbac-bfo/data/rt-stmt-01, https://example.org/rbac-bfo/data/rt-stmt-02, https://example.org/rbac-bfo/data/rt-stmt-03, https://example.org/rbac-bfo/data/rt-stmt-04
+    policy administration act (RBO_0000030): 2  e.g. https://example.org/rbac-bfo/data/rt-issue-HQ, https://example.org/rbac-bfo/data/rt-issue-HR
+    role definition (RBO_0000001): 10  e.g. https://example.org/rbac-bfo/data/rt-HQ.marketing, https://example.org/rbac-bfo/data/rt-HQ.marketingDelg, https://example.org/rbac-bfo/data/rt-HQ.ops, https://example.org/rbac-bfo/data/rt-HQ.specialPanel
+    role inheritance statement (RBO_0000017): 10  e.g. https://example.org/rbac-bfo/data/rt-stmt-01, https://example.org/rbac-bfo/data/rt-stmt-02, https://example.org/rbac-bfo/data/rt-stmt-03, https://example.org/rbac-bfo/data/rt-stmt-05
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+== purchase: 653 individuals, 4439 inferred type assertions, 88 to RBO classes
+    access decision (RBO_0000021): 24  e.g. https://example.org/rbac-bfo/data/dick-req-create-requisition-po-5-decision, https://example.org/rbac-bfo/data/harry-req-approve-order-po-7-decision, https://example.org/rbac-bfo/data/harry-req-approve-po-po-10-decision, https://example.org/rbac-bfo/data/harry-req-create-requisition-po-4-decision
+    access regulation (RBO_0000006): 12  e.g. https://example.org/rbac-bfo/data/perm-accountant-funds, https://example.org/rbac-bfo/data/perm-apm-approve, https://example.org/rbac-bfo/data/perm-apm-reject, https://example.org/rbac-bfo/data/perm-approver-approve
+    conflict report (RBO_0000018): 10  e.g. https://example.org/rbac-bfo/data/approval-bot-request-activate-manager-po-11-task-dsd-conflict, https://example.org/rbac-bfo/data/dick-assign-auditor-1-ssd-conflict-pssd-approve-audit, https://example.org/rbac-bfo/data/dick-assign-auditor-1-ssd-conflict-ssd-auditor-apm, https://example.org/rbac-bfo/data/dick-assign-auditor-1-ssd-conflict-tssd-approve-audit
+    conflicting agent designation (RBO_0000045): 4  e.g. https://example.org/rbac-bfo/data/ddes-audit, https://example.org/rbac-bfo/data/ddes-internal, https://example.org/rbac-bfo/data/ddes-users, https://example.org/rbac-bfo/data/sdes-family
+    dynamic separation of duty constraint (RBO_0000014): 6  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users
+    permission separation of duty constraint (RBO_0000043): 4  e.g. https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users, https://example.org/rbac-bfo/data/pssd-approve-audit, https://example.org/rbac-bfo/data/pssd-issue-approve-po
+    policy administration act (RBO_0000030): 10  e.g. https://example.org/rbac-bfo/data/approval-bot-assign-manager-1, https://example.org/rbac-bfo/data/dick-assign-auditor-1, https://example.org/rbac-bfo/data/dick-assign-manager-1, https://example.org/rbac-bfo/data/dick-assign-sc-1
+    role separation of duty constraint (RBO_0000042): 3  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/ssd-auditor-apm
+    separation of duty constraint (RBO_0000012): 11  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users
+    task separation of duty constraint (RBO_0000044): 4  e.g. https://example.org/rbac-bfo/data/tdsd-internal, https://example.org/rbac-bfo/data/tdsd-tasks, https://example.org/rbac-bfo/data/tssd-approve-audit, https://example.org/rbac-bfo/data/tssd-issue-approve-po
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+== probes: 820 individuals, 5439 inferred type assertions, 80 to RBO classes
+    access decision (RBO_0000021): 8  e.g. https://example.org/rbac-bfo/data/dick-req-create-requisition-probe-6-decision, https://example.org/rbac-bfo/data/harry-req-complete-order-form-probe-4-decision, https://example.org/rbac-bfo/data/tom-req-approve-order-probe-1-decision, https://example.org/rbac-bfo/data/tom-req-approve-order-probe-2-decision
+    access regulation (RBO_0000006): 12  e.g. https://example.org/rbac-bfo/data/perm-accountant-funds, https://example.org/rbac-bfo/data/perm-apm-approve, https://example.org/rbac-bfo/data/perm-apm-reject, https://example.org/rbac-bfo/data/perm-approver-approve
+    conflict report (RBO_0000018): 9  e.g. https://example.org/rbac-bfo/data/harry-request-activate-sc-probe-8-task-dsd-conflict, https://example.org/rbac-bfo/data/probe-issue-inh-ssd-conflict-pssd-approve-audit-dick, https://example.org/rbac-bfo/data/probe-issue-inh-ssd-conflict-pssd-approve-audit-tom, https://example.org/rbac-bfo/data/probe-issue-inh-ssd-conflict-ssd-auditor-apm-dick
+    conflicting agent designation (RBO_0000045): 5  e.g. https://example.org/rbac-bfo/data/ddes-audit, https://example.org/rbac-bfo/data/ddes-internal, https://example.org/rbac-bfo/data/ddes-users, https://example.org/rbac-bfo/data/probe-ddes-roles
+    dynamic separation of duty constraint (RBO_0000014): 7  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users
+    permission separation of duty constraint (RBO_0000043): 5  e.g. https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users, https://example.org/rbac-bfo/data/probe-pdsd-2, https://example.org/rbac-bfo/data/pssd-approve-audit
+    policy administration act (RBO_0000030): 15  e.g. https://example.org/rbac-bfo/data/approval-bot-assign-manager-1, https://example.org/rbac-bfo/data/dick-assign-auditor-1, https://example.org/rbac-bfo/data/dick-assign-manager-1, https://example.org/rbac-bfo/data/dick-assign-sc-1
+    role separation of duty constraint (RBO_0000042): 3  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/ssd-auditor-apm
+    separation of duty constraint (RBO_0000012): 12  e.g. https://example.org/rbac-bfo/data/dsd-sc-apm, https://example.org/rbac-bfo/data/dsd-sc-approver, https://example.org/rbac-bfo/data/pdsd-perms, https://example.org/rbac-bfo/data/pdsd-users
+    task separation of duty constraint (RBO_0000044): 4  e.g. https://example.org/rbac-bfo/data/tdsd-internal, https://example.org/rbac-bfo/data/tdsd-tasks, https://example.org/rbac-bfo/data/tssd-approve-audit, https://example.org/rbac-bfo/data/tssd-issue-approve-po
+    candidate merges (an individual with 2+ values for a single-valued property): 0
+
+== inferred subClassOf among imported classes (rbo-reasoned vs the imports reasoned alone)
+directive information entity (IAO_0000033) -> Information Content Entity (ont00000958)  [ONLY WITH RBO]
+Sound Frequency (ont00000008) -> Sound Process Profile (ont00000862)  [also without RBO]
+Multi-Hour Temporal Interval (ont00000063) -> temporal interval (BFO_0000202)  [also without RBO]
+Act of Homicide (ont00000191) -> Cause (ont00000978)  [also without RBO]
+Multi-Day Temporal Interval (ont00000211) -> temporal interval (BFO_0000202)  [also without RBO]
+Multi-Month Temporal Interval (ont00000329) -> temporal interval (BFO_0000202)  [also without RBO]
+Religion (ont00000616) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Organization Member (ont00000647) -> Agent (ont00001017)  [also without RBO]
+Designative Information Content Entity (ont00000686) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Ideology (ont00000696) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Electromagnetic Radiation Frequency (ont00000754) -> Wave Process Profile (ont00000752)  [also without RBO]
+Stasis of Non-Mission Capable Maintenance (ont00000783) -> Effect (ont00000660)  [also without RBO]
+Multi-Week Temporal Interval (ont00000810) -> temporal interval (BFO_0000202)  [also without RBO]
+Descriptive Information Content Entity (ont00000853) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Sound Process Profile (ont00000862) -> Wave Process Profile (ont00000752)  [also without RBO]
+Prescriptive Information Content Entity (ont00000965) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Representational Information Content Entity (ont00001069) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+Multi-Second Temporal Interval (ont00001154) -> temporal interval (BFO_0000202)  [also without RBO]
+Multi-Minute Temporal Interval (ont00001166) -> temporal interval (BFO_0000202)  [also without RBO]
+Multi-Year Temporal Interval (ont00001206) -> temporal interval (BFO_0000202)  [also without RBO]
+Act of Suicide (ont00001236) -> Cause (ont00000978)  [also without RBO]
+Media Content Entity (ont00002001) -> information content entity (IAO_0000030)  [ONLY WITH RBO]
+
+== negative controls
+c1-permission-prohibition: The ontology is inconsistent
+c2-two-instances: The ontology is inconsistent
+c3-two-timestamps: The ontology is inconsistent
+c4-unsat-class: There are 1 unsatisfiable classes
+c5-two-required-roles: The ontology is inconsistent
+c6-mixed-set: The ontology is inconsistent
+c7-same-time-permission-dsd: The ontology is inconsistent
+c8-binding-two-plans: The ontology is inconsistent

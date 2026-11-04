@@ -1,0 +1,22 @@
+# DERIVATION (intermediate, independent of time). The content of each access regulation, written as
+# rbow:contentKey, a query-internal predicate outside the ontology: its operation, named object and object
+# description, as one string. NIST's permission-to-role assignment is many-to-many (Def. 1, p.234), while
+# RBO writes one regulation per role definition it is assigned to, so regulations with the same content are
+# one NIST permission assigned to several roles. Separation of duty compares permissions by this key, not
+# by individual (clif rbo-same-content): a set naming APM's approve-order permission also catches
+# Approver's, and naming both counts one approval once. Object descriptions are compared as individuals,
+# not by their criteria. Run once per dataset, before the evaluation times.
+PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?reg rbow:contentKey ?key }
+WHERE {
+  ?reg a rbo:RBO_0000006 ;
+       rbo:RBO_0000101 ?op .
+  OPTIONAL { ?reg rbo:RBO_0000102 ?obj }
+  OPTIONAL { ?reg rbo:RBO_0000103 ?desc }
+  BIND (CONCAT(STR(?op), " ", COALESCE(STR(?obj), "-"), " ", COALESCE(STR(?desc), "-")) AS ?key)
+}
