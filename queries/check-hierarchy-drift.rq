@@ -1,19 +1,19 @@
 # CHECK. The role hierarchy is stated twice: as subclass axioms between role universals (ROWLBAC
 # approach 1), and as seniority between role definitions (approach 2), which access decisions read.
-# Lists every pair of universals mirroring definitions (rbo:RBO_0000301) on which the two disagree,
+# Lists every pair of universals mirroring definitions (rbaco:RBACO_0000301) on which the two disagree,
 # for example after a DeleteInheritance act. Run over a hierarchy snapshot. Expect no rows.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?universalA ?universalB ?subclass ?senior
 WHERE {
-  ?universalA rbo:RBO_0000301 ?defA .
-  ?universalB rbo:RBO_0000301 ?defB .
+  ?universalA rbaco:RBACO_0000301 ?defA .
+  ?universalB rbaco:RBACO_0000301 ?defB .
   FILTER (?universalA != ?universalB)
   BIND (EXISTS { ?universalA rdfs:subClassOf+ ?universalB } AS ?subclass)
-  BIND (EXISTS { ?defA rbo:RBO_0000120+ ?defB } AS ?senior)
+  BIND (EXISTS { ?defA rbaco:RBACO_0000120+ ?defB } AS ?senior)
   FILTER (?subclass != ?senior)
 }

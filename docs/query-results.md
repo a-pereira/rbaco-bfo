@@ -1,4 +1,4 @@
-Ontology closure loaded: 12589 triples (rbo, rbo-domain, BFO 2020 core, 7 CCO modules, IAO extract).
+Ontology closure loaded: 12589 triples (rbaco-bfo, rbaco-bfo-domain, BFO 2020 core, 7 CCO modules, IAO extract).
 
 # Query results
 
@@ -134,13 +134,13 @@ Evaluation times: 15; hierarchy snapshot edges at the last: 11.
 
 | universal | operation | object | description | answer |
 |---|---|---|---|---|
-| rbo:RBO_0001004 | ex:op-jury |  |  | permitted |
-| rbo:RBO_0001004 | ex:op-vote |  |  | permitted |
-| rbo:RBO_0001004 | ex:op-work |  |  | permitted |
-| rbo:RBO_0001007 | ex:op-work |  |  | permitted |
-| rbo:RBO_0001008 | ex:op-work |  |  | permitted |
-| rbo:RBO_0001010 | ex:op-work |  |  | permitted |
-| rbo:RBO_0001011 | ex:op-work |  |  | permitted |
+| rbaco:RBACO_0001004 | ex:op-jury |  |  | permitted |
+| rbaco:RBACO_0001004 | ex:op-vote |  |  | permitted |
+| rbaco:RBACO_0001004 | ex:op-work |  |  | permitted |
+| rbaco:RBACO_0001007 | ex:op-work |  |  | permitted |
+| rbaco:RBACO_0001008 | ex:op-work |  |  | permitted |
+| rbaco:RBACO_0001010 | ex:op-work |  |  | permitted |
+| rbaco:RBACO_0001011 | ex:op-work |  |  | permitted |
 
 Derived triples written to data/derived/us-persons-derived.ttl: 43.
 
@@ -259,7 +259,7 @@ Derived triples written to data/derived/code-review-derived.ttl: 20.
 
 ## CR-42 variant with same-time DSD counting
 
-Variant: ex:dsd-submitter-approver retyped from rbo:RBO_0000016 to rbo:RBO_0000015.
+Variant: ex:dsd-submitter-approver retyped from rbaco:RBACO_0000016 to rbaco:RBACO_0000015.
 
 Evaluation times: 10; hierarchy snapshot edges at the last: 0.
 
@@ -399,8 +399,8 @@ Evaluation times: 9; hierarchy snapshot edges at the last: 0.
 
 | universal | operation | object | description | answer |
 |---|---|---|---|---|
-| rbo:RBO_0001024 | ex:op-use-device |  | ex:desc-own-office-device | permitted |
-| rbo:RBO_0001025 | ex:op-use-device |  | ex:desc-classroom-printer | permitted |
+| rbaco:RBACO_0001024 | ex:op-use-device |  | ex:desc-own-office-device | permitted |
+| rbaco:RBACO_0001025 | ex:op-use-device |  | ex:desc-classroom-printer | permitted |
 
 **cq-usable-objects.rq**
 
@@ -800,7 +800,7 @@ Restriction holds in the availability counter-state: True.
 Restriction holds in the safety counter-state: True.
 
 Queries run: 32 of 32.
-Elapsed: 63 s.
+Elapsed: 72 s.
 ## ROWLBAC's own rules, re-run (tools/rowlbac_checks.py)
 
 ### 1. Section 3.3.5 DSoD rule over Bob (assigned Visitor and Temporary Resident)
@@ -833,7 +833,7 @@ Access: ops SubClassOf marketing: NOT entailed; 3 counter-assignments, e.g. true
 TBox: 1613 subclass edges, 60 disjoint pairs, 214 someValuesFrom, 103 intersections, 41 unions.
 
 abac: 67 typed nodes, 1423 type assertions after closure, 295 edges; clashes: 0.
-  classified as classroom printer (RBO_0001023, a defined class): printer-p43
+  classified as classroom printer (RBACO_0001023, a defined class): printer-p43
 code-review: 72 typed nodes, 1524 type assertions after closure, 378 edges; clashes: 0.
 probes: 742 typed nodes, 14503 type assertions after closure, 4331 edges; clashes: 0.
 purchase: 574 typed nodes, 11631 type assertions after closure, 3675 edges; clashes: 0.

@@ -1,56 +1,56 @@
-@prefix ex: <https://example.org/rbac-bfo/data/> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix ex: <https://example.org/rbaco/data/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-ex:alice-assign-permanent-resident-1-ssd-conflict-ssd-resident-citizen a rbo:RBO_0000019 ;  #: static separation of duty conflict report
-    rdfs:label "SSD conflict: https://example.org/rbac-bfo/data/alice-assign-permanent-resident-1" ;
-    rbo:RBO_0000124 ex:alice ;                          #: describes conflict subject
-    rbo:RBO_0000125 ex:ssd-resident-citizen ;           #: describes violated constraint
-    rbo:RBO_0000126 ex:def-citizen,                     #: describes conflicting role definition
+ex:alice-assign-permanent-resident-1-ssd-conflict-ssd-resident-citizen a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/alice-assign-permanent-resident-1" ;
+    rbaco:RBACO_0000124 ex:alice ;                      #: describes conflict subject
+    rbaco:RBACO_0000125 ex:ssd-resident-citizen ;       #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-citizen,                 #: describes conflicting role definition
         ex:def-resident ;
-    rbo:RBO_0000128 ex:alice-assign-permanent-resident-1 ;  #: describes conflicting act
-    rbo:RBO_0000204 "Violates SSD constraint SSD {Resident, Citizen}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
+    rbaco:RBACO_0000128 ex:alice-assign-permanent-resident-1 ;  #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates SSD constraint SSD {Resident, Citizen}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
 
-ex:alice-req-jury-1-decision a rbo:RBO_0000022 ;        #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/alice-req-jury-1" ;
-    rbo:RBO_0000112 ex:alice-req-jury-1 ;               #: decides on
-    rbo:RBO_0000113 ex:perm-citizen-jury .              #: cites regulation
+ex:alice-req-jury-1-decision a rbaco:RBACO_0000022 ;    #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/alice-req-jury-1" ;
+    rbaco:RBACO_0000112 ex:alice-req-jury-1 ;           #: decides on
+    rbaco:RBACO_0000113 ex:perm-citizen-jury .          #: cites regulation
 
-ex:alice-req-jury-2-decision a rbo:RBO_0000023 ;        #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/alice-req-jury-2" ;
-    rbo:RBO_0000112 ex:alice-req-jury-2 .               #: decides on
+ex:alice-req-jury-2-decision a rbaco:RBACO_0000023 ;    #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/alice-req-jury-2" ;
+    rbaco:RBACO_0000112 ex:alice-req-jury-2 .           #: decides on
 
-ex:alice-req-vote-1-decision a rbo:RBO_0000022 ;        #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/alice-req-vote-1" ;
-    rbo:RBO_0000112 ex:alice-req-vote-1 ;               #: decides on
-    rbo:RBO_0000113 ex:perm-citizen-vote .              #: cites regulation
+ex:alice-req-vote-1-decision a rbaco:RBACO_0000022 ;    #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/alice-req-vote-1" ;
+    rbaco:RBACO_0000112 ex:alice-req-vote-1 ;           #: decides on
+    rbaco:RBACO_0000113 ex:perm-citizen-vote .          #: cites regulation
 
-ex:alice-req-vote-2-decision a rbo:RBO_0000023 ;        #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/alice-req-vote-2" ;
-    rbo:RBO_0000112 ex:alice-req-vote-2 .               #: decides on
+ex:alice-req-vote-2-decision a rbaco:RBACO_0000023 ;    #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/alice-req-vote-2" ;
+    rbaco:RBACO_0000112 ex:alice-req-vote-2 .           #: decides on
 
-ex:alice-req-work-1-decision a rbo:RBO_0000022 ;        #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/alice-req-work-1" ;
-    rbo:RBO_0000112 ex:alice-req-work-1 ;               #: decides on
-    rbo:RBO_0000113 ex:perm-citizen-work .              #: cites regulation
+ex:alice-req-work-1-decision a rbaco:RBACO_0000022 ;    #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/alice-req-work-1" ;
+    rbaco:RBACO_0000112 ex:alice-req-work-1 ;           #: decides on
+    rbaco:RBACO_0000113 ex:perm-citizen-work .          #: cites regulation
 
-ex:alice-req-work-2-decision a rbo:RBO_0000022 ;        #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/alice-req-work-2" ;
-    rbo:RBO_0000112 ex:alice-req-work-2 ;               #: decides on
-    rbo:RBO_0000113 ex:perm-pr-work .                   #: cites regulation
+ex:alice-req-work-2-decision a rbaco:RBACO_0000022 ;    #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/alice-req-work-2" ;
+    rbaco:RBACO_0000112 ex:alice-req-work-2 ;           #: decides on
+    rbaco:RBACO_0000113 ex:perm-pr-work .               #: cites regulation
 
-ex:bob-req-work-1-decision a rbo:RBO_0000023 ;          #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/bob-req-work-1" ;
-    rbo:RBO_0000112 ex:bob-req-work-1 ;                 #: decides on
-    rbo:RBO_0000113 ex:proh-visitor-work .              #: cites regulation
+ex:bob-req-work-1-decision a rbaco:RBACO_0000023 ;      #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/bob-req-work-1" ;
+    rbaco:RBACO_0000112 ex:bob-req-work-1 ;             #: decides on
+    rbaco:RBACO_0000113 ex:proh-visitor-work .          #: cites regulation
 
-ex:bob-request-activate-temporary-resident-1-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "DSD conflict: https://example.org/rbac-bfo/data/bob-request-activate-temporary-resident-1" ;
-    rbo:RBO_0000124 ex:bob ;                            #: describes conflict subject
-    rbo:RBO_0000125 ex:dsd-visitor-tr ;                 #: describes violated constraint
-    rbo:RBO_0000126 ex:def-temporary-resident,          #: describes conflicting role definition
+ex:bob-request-activate-temporary-resident-1-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "DSD conflict: https://example.org/rbaco/data/bob-request-activate-temporary-resident-1" ;
+    rbaco:RBACO_0000124 ex:bob ;                        #: describes conflict subject
+    rbaco:RBACO_0000125 ex:dsd-visitor-tr ;             #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-temporary-resident,      #: describes conflicting role definition
         ex:def-visitor ;
-    rbo:RBO_0000127 ex:bob-review ;                     #: describes conflict instance
-    rbo:RBO_0000128 ex:bob-request-activate-temporary-resident-1 ;  #: describes conflicting act
-    rbo:RBO_0000204 "Violates DSD constraint DSD {Visitor, Temporary Resident}, n = 2, global: the activation would give the requester 2 of its roles in one instance" .  #: has justification
+    rbaco:RBACO_0000127 ex:bob-review ;                 #: describes conflict instance
+    rbaco:RBACO_0000128 ex:bob-request-activate-temporary-resident-1 ;  #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates DSD constraint DSD {Visitor, Temporary Resident}, n = 2, global: the activation would give the requester 2 of its roles in one instance" .  #: has justification
 

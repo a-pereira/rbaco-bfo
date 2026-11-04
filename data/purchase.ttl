@@ -1,15 +1,15 @@
 @prefix cco: <https://www.commoncoreontologies.org/> .
-@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix ex: <https://example.org/rbaco/data/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:purchase a owl:Ontology ;
     rdfs:comment "Botha and Eloff (2001): the purchase order workflow of Figure 2 on the role hierarchy of Figure 3, with Figure 6's Approver role, run under each of Table 2's dynamic interpretations (conflicting roles, permissions, users, tasks) in plans of their own, an internal purchase order process with a human performer requirement, a prior-task guard and a partial task binding, task-bound operations in the Figure 6 plan, and the static cross-entity rules of Tables 1 and 3. Each instance is one scenario."@en ;
-    owl:imports rbo:rbo-domain.owl .                    #: RBO domain module: ROWLBAC scenario and attribute examples
+    owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:officer a cco:ont00001262 ;                          #: Person
     rdfs:label "the security officer"@en .
@@ -18,110 +18,110 @@ ex:officer-authority a cco:ont00000187 ;                #: Authority Role
     rdfs:label "authority role of the security officer"@en ;
     obo:BFO_0000197 ex:officer .                        #: inheres in
 
-ex:def-employee a rbo:RBO_0000001 ;                     #: role definition
+ex:def-employee a rbaco:RBACO_0000001 ;                 #: role definition
     rdfs:label "Employee role definition"@en .
 
 ex:rec-def-employee a cco:ont00000253 ;                 #: Information Bearing Entity
     rdfs:label "database record of the Employee role definition"@en ;
     obo:BFO_0000101 ex:def-employee .                   #: is carrier of
 
-ex:def-sc a rbo:RBO_0000001 ;                           #: role definition
+ex:def-sc a rbaco:RBACO_0000001 ;                       #: role definition
     rdfs:label "Stock Controller role definition"@en .
 
 ex:rec-def-sc a cco:ont00000253 ;                       #: Information Bearing Entity
     rdfs:label "database record of the Stock Controller role definition"@en ;
     obo:BFO_0000101 ex:def-sc .                         #: is carrier of
 
-ex:def-buyer a rbo:RBO_0000001 ;                        #: role definition
+ex:def-buyer a rbaco:RBACO_0000001 ;                    #: role definition
     rdfs:label "Buyer role definition"@en .
 
 ex:rec-def-buyer a cco:ont00000253 ;                    #: Information Bearing Entity
     rdfs:label "database record of the Buyer role definition"@en ;
     obo:BFO_0000101 ex:def-buyer .                      #: is carrier of
 
-ex:def-accountant a rbo:RBO_0000001 ;                   #: role definition
+ex:def-accountant a rbaco:RBACO_0000001 ;               #: role definition
     rdfs:label "Accountant role definition"@en .
 
 ex:rec-def-accountant a cco:ont00000253 ;               #: Information Bearing Entity
     rdfs:label "database record of the Accountant role definition"@en ;
     obo:BFO_0000101 ex:def-accountant .                 #: is carrier of
 
-ex:def-clerk a rbo:RBO_0000001 ;                        #: role definition
+ex:def-clerk a rbaco:RBACO_0000001 ;                    #: role definition
     rdfs:label "Clerk role definition"@en .
 
 ex:rec-def-clerk a cco:ont00000253 ;                    #: Information Bearing Entity
     rdfs:label "database record of the Clerk role definition"@en ;
     obo:BFO_0000101 ex:def-clerk .                      #: is carrier of
 
-ex:def-apm a rbo:RBO_0000001 ;                          #: role definition
+ex:def-apm a rbaco:RBACO_0000001 ;                      #: role definition
     rdfs:label "Assistant Purchase Manager role definition"@en .
 
 ex:rec-def-apm a cco:ont00000253 ;                      #: Information Bearing Entity
     rdfs:label "database record of the Assistant Purchase Manager role definition"@en ;
     obo:BFO_0000101 ex:def-apm .                        #: is carrier of
 
-ex:def-approver a rbo:RBO_0000001 ;                     #: role definition
+ex:def-approver a rbaco:RBACO_0000001 ;                 #: role definition
     rdfs:label "Approver role definition"@en .
 
 ex:rec-def-approver a cco:ont00000253 ;                 #: Information Bearing Entity
     rdfs:label "database record of the Approver role definition"@en ;
     obo:BFO_0000101 ex:def-approver .                   #: is carrier of
 
-ex:def-manager a rbo:RBO_0000001 ;                      #: role definition
+ex:def-manager a rbaco:RBACO_0000001 ;                  #: role definition
     rdfs:label "Manager role definition"@en .
 
 ex:rec-def-manager a cco:ont00000253 ;                  #: Information Bearing Entity
     rdfs:label "database record of the Manager role definition"@en ;
     obo:BFO_0000101 ex:def-manager .                    #: is carrier of
 
-ex:def-stores a rbo:RBO_0000001 ;                       #: role definition
+ex:def-stores a rbaco:RBACO_0000001 ;                   #: role definition
     rdfs:label "Stores role definition"@en .
 
 ex:rec-def-stores a cco:ont00000253 ;                   #: Information Bearing Entity
     rdfs:label "database record of the Stores role definition"@en ;
     obo:BFO_0000101 ex:def-stores .                     #: is carrier of
 
-ex:def-auditor a rbo:RBO_0000001 ;                      #: role definition
+ex:def-auditor a rbaco:RBACO_0000001 ;                  #: role definition
     rdfs:label "Auditor role definition"@en .
 
 ex:rec-def-auditor a cco:ont00000253 ;                  #: Information Bearing Entity
     rdfs:label "database record of the Auditor role definition"@en ;
     obo:BFO_0000101 ex:def-auditor .                    #: is carrier of
 
-ex:inh-apm-buyer a rbo:RBO_0000017 ;                    #: role inheritance statement
+ex:inh-apm-buyer a rbaco:RBACO_0000017 ;                #: role inheritance statement
     rdfs:label "apm inherits from buyer"@en ;
-    rbo:RBO_0000118 ex:def-apm ;                        #: has senior role definition
-    rbo:RBO_0000119 ex:def-buyer .                      #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-apm ;                    #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-buyer .                  #: has junior role definition
 
-ex:inh-apm-accountant a rbo:RBO_0000017 ;               #: role inheritance statement
+ex:inh-apm-accountant a rbaco:RBACO_0000017 ;           #: role inheritance statement
     rdfs:label "apm inherits from accountant"@en ;
-    rbo:RBO_0000118 ex:def-apm ;                        #: has senior role definition
-    rbo:RBO_0000119 ex:def-accountant .                 #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-apm ;                    #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-accountant .             #: has junior role definition
 
-ex:inh-buyer-sc a rbo:RBO_0000017 ;                     #: role inheritance statement
+ex:inh-buyer-sc a rbaco:RBACO_0000017 ;                 #: role inheritance statement
     rdfs:label "buyer inherits from sc"@en ;
-    rbo:RBO_0000118 ex:def-buyer ;                      #: has senior role definition
-    rbo:RBO_0000119 ex:def-sc .                         #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-buyer ;                  #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-sc .                     #: has junior role definition
 
-ex:inh-accountant-clerk a rbo:RBO_0000017 ;             #: role inheritance statement
+ex:inh-accountant-clerk a rbaco:RBACO_0000017 ;         #: role inheritance statement
     rdfs:label "accountant inherits from clerk"@en ;
-    rbo:RBO_0000118 ex:def-accountant ;                 #: has senior role definition
-    rbo:RBO_0000119 ex:def-clerk .                      #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-accountant ;             #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-clerk .                  #: has junior role definition
 
-ex:inh-sc-employee a rbo:RBO_0000017 ;                  #: role inheritance statement
+ex:inh-sc-employee a rbaco:RBACO_0000017 ;              #: role inheritance statement
     rdfs:label "sc inherits from employee"@en ;
-    rbo:RBO_0000118 ex:def-sc ;                         #: has senior role definition
-    rbo:RBO_0000119 ex:def-employee .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-sc ;                     #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-employee .               #: has junior role definition
 
-ex:inh-clerk-employee a rbo:RBO_0000017 ;               #: role inheritance statement
+ex:inh-clerk-employee a rbaco:RBACO_0000017 ;           #: role inheritance statement
     rdfs:label "clerk inherits from employee"@en ;
-    rbo:RBO_0000118 ex:def-clerk ;                      #: has senior role definition
-    rbo:RBO_0000119 ex:def-employee .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-clerk ;                  #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-employee .               #: has junior role definition
 
-ex:inh-apm-approver a rbo:RBO_0000017 ;                 #: role inheritance statement
+ex:inh-apm-approver a rbaco:RBACO_0000017 ;             #: role inheritance statement
     rdfs:label "apm inherits from approver"@en ;
-    rbo:RBO_0000118 ex:def-apm ;                        #: has senior role definition
-    rbo:RBO_0000119 ex:def-approver .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-apm ;                    #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-approver .               #: has junior role definition
 
 ex:op-create-requisition a obo:IAO_0000104 ;            #: plan specification
     rdfs:label "create requisition procedure"@en .
@@ -156,165 +156,165 @@ ex:op-issue-items a obo:IAO_0000104 ;                   #: plan specification
 ex:op-approve-audit a obo:IAO_0000104 ;                 #: plan specification
     rdfs:label "approve audit procedure"@en .
 
-ex:perm-employee-email a rbo:RBO_0000007 ;              #: access permission
+ex:perm-employee-email a rbaco:RBACO_0000007 ;          #: access permission
     rdfs:label "Employee: permitted send e-mail"@en ;
-    rbo:RBO_0000101 ex:op-send-email ;                  #: has operation
-    rbo:RBO_0000105 ex:def-employee .                   #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-send-email ;              #: has operation
+    rbaco:RBACO_0000105 ex:def-employee .               #: is assigned to role definition
 
-ex:perm-sc-requisition a rbo:RBO_0000007 ;              #: access permission
+ex:perm-sc-requisition a rbaco:RBACO_0000007 ;          #: access permission
     rdfs:label "Stock Controller: permitted create requisition"@en ;
-    rbo:RBO_0000101 ex:op-create-requisition ;          #: has operation
-    rbo:RBO_0000105 ex:def-sc .                         #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-create-requisition ;      #: has operation
+    rbaco:RBACO_0000105 ex:def-sc .                     #: is assigned to role definition
 
-ex:perm-buyer-order a rbo:RBO_0000007 ;                 #: access permission
+ex:perm-buyer-order a rbaco:RBACO_0000007 ;             #: access permission
     rdfs:label "Buyer: permitted create order"@en ;
-    rbo:RBO_0000101 ex:op-create-order ;                #: has operation
-    rbo:RBO_0000105 ex:def-buyer .                      #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-create-order ;            #: has operation
+    rbaco:RBACO_0000105 ex:def-buyer .                  #: is assigned to role definition
 
-ex:perm-buyer-view a rbo:RBO_0000007 ;                  #: access permission
+ex:perm-buyer-view a rbaco:RBACO_0000007 ;              #: access permission
     rdfs:label "Buyer: permitted view order"@en ;
-    rbo:RBO_0000101 ex:op-view-order ;                  #: has operation
-    rbo:RBO_0000105 ex:def-buyer .                      #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-view-order ;              #: has operation
+    rbaco:RBACO_0000105 ex:def-buyer .                  #: is assigned to role definition
 
-ex:perm-accountant-funds a rbo:RBO_0000007 ;            #: access permission
+ex:perm-accountant-funds a rbaco:RBACO_0000007 ;        #: access permission
     rdfs:label "Accountant: permitted confirm funds"@en ;
-    rbo:RBO_0000101 ex:op-confirm-funds ;               #: has operation
-    rbo:RBO_0000105 ex:def-accountant .                 #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-confirm-funds ;           #: has operation
+    rbaco:RBACO_0000105 ex:def-accountant .             #: is assigned to role definition
 
-ex:perm-apm-approve a rbo:RBO_0000007 ;                 #: access permission
+ex:perm-apm-approve a rbaco:RBACO_0000007 ;             #: access permission
     rdfs:label "Assistant Purchase Manager: permitted approve order"@en ;
-    rbo:RBO_0000101 ex:op-approve-order ;               #: has operation
-    rbo:RBO_0000105 ex:def-apm .                        #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-approve-order ;           #: has operation
+    rbaco:RBACO_0000105 ex:def-apm .                    #: is assigned to role definition
 
-ex:perm-apm-reject a rbo:RBO_0000007 ;                  #: access permission
+ex:perm-apm-reject a rbaco:RBACO_0000007 ;              #: access permission
     rdfs:label "Assistant Purchase Manager: permitted create rejection letter"@en ;
-    rbo:RBO_0000101 ex:op-create-rejection-letter ;     #: has operation
-    rbo:RBO_0000105 ex:def-apm .                        #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-create-rejection-letter ;  #: has operation
+    rbaco:RBACO_0000105 ex:def-apm .                    #: is assigned to role definition
 
-ex:perm-approver-approve a rbo:RBO_0000007 ;            #: access permission
+ex:perm-approver-approve a rbaco:RBACO_0000007 ;        #: access permission
     rdfs:label "Approver: permitted approve order"@en ;
-    rbo:RBO_0000101 ex:op-approve-order ;               #: has operation
-    rbo:RBO_0000105 ex:def-approver .                   #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-approve-order ;           #: has operation
+    rbaco:RBACO_0000105 ex:def-approver .               #: is assigned to role definition
 
-ex:perm-manager-form a rbo:RBO_0000007 ;                #: access permission
+ex:perm-manager-form a rbaco:RBACO_0000007 ;            #: access permission
     rdfs:label "Manager: permitted complete order form"@en ;
-    rbo:RBO_0000101 ex:op-complete-order-form ;         #: has operation
-    rbo:RBO_0000105 ex:def-manager .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-complete-order-form ;     #: has operation
+    rbaco:RBACO_0000105 ex:def-manager .                #: is assigned to role definition
 
-ex:perm-manager-approve-po a rbo:RBO_0000007 ;          #: access permission
+ex:perm-manager-approve-po a rbaco:RBACO_0000007 ;      #: access permission
     rdfs:label "Manager: permitted approve purchase order"@en ;
-    rbo:RBO_0000101 ex:op-approve-po ;                  #: has operation
-    rbo:RBO_0000105 ex:def-manager .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-approve-po ;              #: has operation
+    rbaco:RBACO_0000105 ex:def-manager .                #: is assigned to role definition
 
-ex:perm-stores-issue a rbo:RBO_0000007 ;                #: access permission
+ex:perm-stores-issue a rbaco:RBACO_0000007 ;            #: access permission
     rdfs:label "Stores: permitted issue items"@en ;
-    rbo:RBO_0000101 ex:op-issue-items ;                 #: has operation
-    rbo:RBO_0000105 ex:def-stores .                     #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-issue-items ;             #: has operation
+    rbaco:RBACO_0000105 ex:def-stores .                 #: is assigned to role definition
 
-ex:perm-auditor-audit a rbo:RBO_0000007 ;               #: access permission
+ex:perm-auditor-audit a rbaco:RBACO_0000007 ;           #: access permission
     rdfs:label "Auditor: permitted approve audit"@en ;
-    rbo:RBO_0000101 ex:op-approve-audit ;               #: has operation
-    rbo:RBO_0000105 ex:def-auditor .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-approve-audit ;           #: has operation
+    rbaco:RBACO_0000105 ex:def-auditor .                #: is assigned to role definition
 
-ex:plan-t2-roles a rbo:RBO_0000005 ;                    #: business process plan
+ex:plan-t2-roles a rbaco:RBACO_0000005 ;                #: business process plan
     rdfs:label "purchase order process, conflicting roles plan"@en .
 
-ex:plan-t2-perms a rbo:RBO_0000005 ;                    #: business process plan
+ex:plan-t2-perms a rbaco:RBACO_0000005 ;                #: business process plan
     rdfs:label "purchase order process, conflicting permissions plan"@en .
 
-ex:plan-t2-users a rbo:RBO_0000005 ;                    #: business process plan
+ex:plan-t2-users a rbaco:RBACO_0000005 ;                #: business process plan
     rdfs:label "purchase order process, conflicting users plan"@en .
 
-ex:plan-t2-tasks a rbo:RBO_0000005 ;                    #: business process plan
+ex:plan-t2-tasks a rbaco:RBACO_0000005 ;                #: business process plan
     rdfs:label "purchase order process, conflicting tasks plan"@en .
 
-ex:plan-fig6 a rbo:RBO_0000005 ;                        #: business process plan
+ex:plan-fig6 a rbaco:RBACO_0000005 ;                    #: business process plan
     rdfs:label "purchase order process, Figure 6 hierarchy plan"@en .
 
-ex:plan-internal-po a rbo:RBO_0000005 ;                 #: business process plan
+ex:plan-internal-po a rbaco:RBACO_0000005 ;             #: business process plan
     rdfs:label "internal purchase order process plan"@en .
 
-ex:plan-audit a rbo:RBO_0000005 ;                       #: business process plan
+ex:plan-audit a rbaco:RBACO_0000005 ;                   #: business process plan
     rdfs:label "purchase audit process plan"@en .
 
-ex:ts-prepare-requisition a rbo:RBO_0000040 ;           #: task specification
+ex:ts-prepare-requisition a rbaco:RBACO_0000040 ;       #: task specification
     rdfs:label "prepare requisition task specification"@en ;
     obo:BFO_0000176 ex:plan-fig6,                       #: continuant part of
         ex:plan-t2-perms,
         ex:plan-t2-roles,
         ex:plan-t2-tasks,
         ex:plan-t2-users ;
-    rbo:RBO_0000132 ex:def-sc ;                         #: requires role definition
-    rbo:RBO_0000133 ex:op-create-requisition .          #: requires operation
+    rbaco:RBACO_0000132 ex:def-sc ;                     #: requires role definition
+    rbaco:RBACO_0000133 ex:op-create-requisition .      #: requires operation
 
-ex:ts-order-stock a rbo:RBO_0000040 ;                   #: task specification
+ex:ts-order-stock a rbaco:RBACO_0000040 ;               #: task specification
     rdfs:label "order stock task specification"@en ;
     obo:BFO_0000176 ex:plan-t2-perms,                   #: continuant part of
         ex:plan-t2-roles,
         ex:plan-t2-tasks,
         ex:plan-t2-users ;
-    rbo:RBO_0000132 ex:def-buyer ;                      #: requires role definition
-    rbo:RBO_0000133 ex:op-create-order,                 #: requires operation
+    rbaco:RBACO_0000132 ex:def-buyer ;                  #: requires role definition
+    rbaco:RBACO_0000133 ex:op-create-order,             #: requires operation
         ex:op-view-order .
 
-ex:ts-check-funds a rbo:RBO_0000040 ;                   #: task specification
+ex:ts-check-funds a rbaco:RBACO_0000040 ;               #: task specification
     rdfs:label "check funds task specification"@en ;
     obo:BFO_0000176 ex:plan-t2-perms,                   #: continuant part of
         ex:plan-t2-roles,
         ex:plan-t2-tasks,
         ex:plan-t2-users ;
-    rbo:RBO_0000132 ex:def-accountant ;                 #: requires role definition
-    rbo:RBO_0000133 ex:op-confirm-funds .               #: requires operation
+    rbaco:RBACO_0000132 ex:def-accountant ;             #: requires role definition
+    rbaco:RBACO_0000133 ex:op-confirm-funds .           #: requires operation
 
-ex:ts-approve-order a rbo:RBO_0000040 ;                 #: task specification
+ex:ts-approve-order a rbaco:RBACO_0000040 ;             #: task specification
     rdfs:label "approve order task specification"@en ;
     obo:BFO_0000176 ex:plan-t2-perms,                   #: continuant part of
         ex:plan-t2-roles,
         ex:plan-t2-tasks,
         ex:plan-t2-users ;
-    rbo:RBO_0000132 ex:def-apm ;                        #: requires role definition
-    rbo:RBO_0000133 ex:op-approve-order .               #: requires operation
+    rbaco:RBACO_0000132 ex:def-apm ;                    #: requires role definition
+    rbaco:RBACO_0000133 ex:op-approve-order .           #: requires operation
 
-ex:ts-send-order a rbo:RBO_0000040 ;                    #: task specification
+ex:ts-send-order a rbaco:RBACO_0000040 ;                #: task specification
     rdfs:label "send order task specification"@en ;
     obo:BFO_0000176 ex:plan-t2-perms,                   #: continuant part of
         ex:plan-t2-roles,
         ex:plan-t2-tasks,
         ex:plan-t2-users ;
-    rbo:RBO_0000132 ex:def-buyer ;                      #: requires role definition
-    rbo:RBO_0000133 ex:op-send-email,                   #: requires operation
+    rbaco:RBACO_0000132 ex:def-buyer ;                  #: requires role definition
+    rbaco:RBACO_0000133 ex:op-send-email,               #: requires operation
         ex:op-view-order .
 
-ex:ts-approve-order-fig6 a rbo:RBO_0000040 ;            #: task specification
+ex:ts-approve-order-fig6 a rbaco:RBACO_0000040 ;        #: task specification
     rdfs:label "approve order (Figure 6) task specification"@en ;
     obo:BFO_0000176 ex:plan-fig6 ;                      #: continuant part of
-    rbo:RBO_0000132 ex:def-approver ;                   #: requires role definition
-    rbo:RBO_0000133 ex:op-approve-order .               #: requires operation
+    rbaco:RBACO_0000132 ex:def-approver ;               #: requires role definition
+    rbaco:RBACO_0000133 ex:op-approve-order .           #: requires operation
 
-ex:ts-complete-form a rbo:RBO_0000040 ;                 #: task specification
+ex:ts-complete-form a rbaco:RBACO_0000040 ;             #: task specification
     rdfs:label "complete order form task specification"@en ;
     obo:BFO_0000176 ex:plan-internal-po ;               #: continuant part of
-    rbo:RBO_0000132 ex:def-manager ;                    #: requires role definition
-    rbo:RBO_0000133 ex:op-complete-order-form .         #: requires operation
+    rbaco:RBACO_0000132 ex:def-manager ;                #: requires role definition
+    rbaco:RBACO_0000133 ex:op-complete-order-form .     #: requires operation
 
-ex:ts-approve-po a rbo:RBO_0000040 ;                    #: task specification
+ex:ts-approve-po a rbaco:RBACO_0000040 ;                #: task specification
     rdfs:label "approve purchase order task specification"@en ;
     obo:BFO_0000176 ex:plan-internal-po ;               #: continuant part of
-    rbo:RBO_0000132 ex:def-manager ;                    #: requires role definition
-    rbo:RBO_0000133 ex:op-approve-po .                  #: requires operation
+    rbaco:RBACO_0000132 ex:def-manager ;                #: requires role definition
+    rbaco:RBACO_0000133 ex:op-approve-po .              #: requires operation
 
-ex:ts-issue-items a rbo:RBO_0000040 ;                   #: task specification
+ex:ts-issue-items a rbaco:RBACO_0000040 ;               #: task specification
     rdfs:label "issue items task specification"@en ;
     obo:BFO_0000176 ex:plan-internal-po ;               #: continuant part of
-    rbo:RBO_0000132 ex:def-stores ;                     #: requires role definition
-    rbo:RBO_0000133 ex:op-issue-items ;                 #: requires operation
-    rbo:RBO_0000144 ex:ts-approve-po .                  #: requires prior
+    rbaco:RBACO_0000132 ex:def-stores ;                 #: requires role definition
+    rbaco:RBACO_0000133 ex:op-issue-items ;             #: requires operation
+    rbaco:RBACO_0000144 ex:ts-approve-po .              #: requires prior
 
-ex:ts-approve-audit a rbo:RBO_0000040 ;                 #: task specification
+ex:ts-approve-audit a rbaco:RBACO_0000040 ;             #: task specification
     rdfs:label "approve audit task specification"@en ;
     obo:BFO_0000176 ex:plan-audit ;                     #: continuant part of
-    rbo:RBO_0000132 ex:def-auditor ;                    #: requires role definition
-    rbo:RBO_0000133 ex:op-approve-audit .               #: requires operation
+    rbaco:RBACO_0000132 ex:def-auditor ;                #: requires role definition
+    rbaco:RBACO_0000133 ex:op-approve-audit .           #: requires operation
 
 ex:tom-dick-family a cco:ont00000837 ;                  #: Family
     rdfs:label "the family of Tom and Dick"@en .
@@ -339,123 +339,123 @@ ex:dick a cco:ont00001262 ;                             #: Person
 ex:harry a cco:ont00001262 ;                            #: Person
     rdfs:label "Harry"@en .
 
-ex:ssd-auditor-apm a rbo:RBO_0000013 ;                  #: static separation of duty constraint
+ex:ssd-auditor-apm a rbaco:RBACO_0000013 ;              #: static separation of duty constraint
     rdfs:label "SSD {Auditor, APM}, n = 2"@en ;
-    rbo:RBO_0000114 ex:def-apm,                         #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-apm,                     #: has constrained role definition
         ex:def-auditor ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:pssd-approve-audit a rbo:RBO_0000013 ;               #: static separation of duty constraint
+ex:pssd-approve-audit a rbaco:RBACO_0000013 ;           #: static separation of duty constraint
     rdfs:label "permission SSD {APM: approve order, Auditor: approve audit}, n = 2"@en ;
-    rbo:RBO_0000134 ex:perm-apm-approve,                #: has constrained permission
+    rbaco:RBACO_0000134 ex:perm-apm-approve,            #: has constrained permission
         ex:perm-auditor-audit ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:tssd-approve-audit a rbo:RBO_0000013 ;               #: static separation of duty constraint
+ex:tssd-approve-audit a rbaco:RBACO_0000013 ;           #: static separation of duty constraint
     rdfs:label "task SSD {approve order, approve audit}, n = 2"@en ;
-    rbo:RBO_0000135 ex:ts-approve-audit,                #: has constrained task specification
+    rbaco:RBACO_0000135 ex:ts-approve-audit,            #: has constrained task specification
         ex:ts-approve-order ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:sdes-family a rbo:RBO_0000046 ;                      #: static conflicting agent designation
+ex:sdes-family a rbaco:RBACO_0000046 ;                  #: static conflicting agent designation
     rdfs:label "static conflicting agents: the members of Tom and Dick's family"@en ;
-    rbo:RBO_0000139 ex:tom-dick-family .                #: designates conflicting group
+    rbaco:RBACO_0000139 ex:tom-dick-family .            #: designates conflicting group
 
-ex:pssd-issue-approve-po a rbo:RBO_0000013 ;            #: static separation of duty constraint
+ex:pssd-issue-approve-po a rbaco:RBACO_0000013 ;        #: static separation of duty constraint
     rdfs:label "permission SSD {Stores: issue items, Manager: approve purchase order}, n = 2"@en ;
-    rbo:RBO_0000134 ex:perm-manager-approve-po,         #: has constrained permission
+    rbaco:RBACO_0000134 ex:perm-manager-approve-po,     #: has constrained permission
         ex:perm-stores-issue ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:tssd-issue-approve-po a rbo:RBO_0000013 ;            #: static separation of duty constraint
+ex:tssd-issue-approve-po a rbaco:RBACO_0000013 ;        #: static separation of duty constraint
     rdfs:label "task SSD {issue items, approve purchase order}, n = 2"@en ;
-    rbo:RBO_0000135 ex:ts-approve-po,                   #: has constrained task specification
+    rbaco:RBACO_0000135 ex:ts-approve-po,               #: has constrained task specification
         ex:ts-issue-items ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:dsd-sc-apm a rbo:RBO_0000016 ;                       #: whole-instance dynamic separation of duty constraint
+ex:dsd-sc-apm a rbaco:RBACO_0000016 ;                   #: whole-instance dynamic separation of duty constraint
     rdfs:label "DSD {Stock Controller, APM}, n = 2, conflicting roles plan"@en ;
-    rbo:RBO_0000114 ex:def-apm,                         #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-apm,                     #: has constrained role definition
         ex:def-sc ;
-    rbo:RBO_0000115 ex:plan-t2-roles ;                  #: applies within
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000115 ex:plan-t2-roles ;              #: applies within
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:pdsd-perms a rbo:RBO_0000016 ;                       #: whole-instance dynamic separation of duty constraint
+ex:pdsd-perms a rbaco:RBACO_0000016 ;                   #: whole-instance dynamic separation of duty constraint
     rdfs:label "permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting permissions plan"@en ;
-    rbo:RBO_0000115 ex:plan-t2-perms ;                  #: applies within
-    rbo:RBO_0000134 ex:perm-apm-approve,                #: has constrained permission
+    rbaco:RBACO_0000115 ex:plan-t2-perms ;              #: applies within
+    rbaco:RBACO_0000134 ex:perm-apm-approve,            #: has constrained permission
         ex:perm-sc-requisition ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:pdsd-users a rbo:RBO_0000016 ;                       #: whole-instance dynamic separation of duty constraint
+ex:pdsd-users a rbaco:RBACO_0000016 ;                   #: whole-instance dynamic separation of duty constraint
     rdfs:label "permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting users plan"@en ;
-    rbo:RBO_0000115 ex:plan-t2-users ;                  #: applies within
-    rbo:RBO_0000134 ex:perm-apm-approve,                #: has constrained permission
+    rbaco:RBACO_0000115 ex:plan-t2-users ;              #: applies within
+    rbaco:RBACO_0000134 ex:perm-apm-approve,            #: has constrained permission
         ex:perm-sc-requisition ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:ddes-users a rbo:RBO_0000047 ;                       #: dynamic conflicting agent designation
+ex:ddes-users a rbaco:RBACO_0000047 ;                   #: dynamic conflicting agent designation
     rdfs:label "dynamic conflicting agents Tom and Dick, conflicting users plan"@en ;
-    rbo:RBO_0000115 ex:plan-t2-users ;                  #: applies within
-    rbo:RBO_0000138 ex:dick,                            #: designates conflicting agent
+    rbaco:RBACO_0000115 ex:plan-t2-users ;              #: applies within
+    rbaco:RBACO_0000138 ex:dick,                        #: designates conflicting agent
         ex:tom .
 
-ex:tdsd-tasks a rbo:RBO_0000016 ;                       #: whole-instance dynamic separation of duty constraint
+ex:tdsd-tasks a rbaco:RBACO_0000016 ;                   #: whole-instance dynamic separation of duty constraint
     rdfs:label "task DSD {prepare requisition, approve order}, n = 2, conflicting tasks plan"@en ;
-    rbo:RBO_0000115 ex:plan-t2-tasks ;                  #: applies within
-    rbo:RBO_0000135 ex:ts-approve-order,                #: has constrained task specification
+    rbaco:RBACO_0000115 ex:plan-t2-tasks ;              #: applies within
+    rbaco:RBACO_0000135 ex:ts-approve-order,            #: has constrained task specification
         ex:ts-prepare-requisition ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:dsd-sc-approver a rbo:RBO_0000016 ;                  #: whole-instance dynamic separation of duty constraint
+ex:dsd-sc-approver a rbaco:RBACO_0000016 ;              #: whole-instance dynamic separation of duty constraint
     rdfs:label "DSD {Stock Controller, Approver}, n = 2, Figure 6 plan"@en ;
-    rbo:RBO_0000114 ex:def-approver,                    #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-approver,                #: has constrained role definition
         ex:def-sc ;
-    rbo:RBO_0000115 ex:plan-fig6 ;                      #: applies within
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000115 ex:plan-fig6 ;                  #: applies within
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:tdsd-internal a rbo:RBO_0000016 ;                    #: whole-instance dynamic separation of duty constraint
+ex:tdsd-internal a rbaco:RBACO_0000016 ;                #: whole-instance dynamic separation of duty constraint
     rdfs:label "task DSD {complete order form, approve purchase order}, n = 2, internal purchase orders"@en ;
-    rbo:RBO_0000115 ex:plan-internal-po ;               #: applies within
-    rbo:RBO_0000135 ex:ts-approve-po,                   #: has constrained task specification
+    rbaco:RBACO_0000115 ex:plan-internal-po ;           #: applies within
+    rbaco:RBACO_0000135 ex:ts-approve-po,               #: has constrained task specification
         ex:ts-complete-form ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:ddes-internal a rbo:RBO_0000047 ;                    #: dynamic conflicting agent designation
+ex:ddes-internal a rbaco:RBACO_0000047 ;                #: dynamic conflicting agent designation
     rdfs:label "dynamic conflicting agents Tom and Dick, internal purchase orders"@en ;
-    rbo:RBO_0000115 ex:plan-internal-po ;               #: applies within
-    rbo:RBO_0000138 ex:dick,                            #: designates conflicting agent
+    rbaco:RBACO_0000115 ex:plan-internal-po ;           #: applies within
+    rbaco:RBACO_0000138 ex:dick,                        #: designates conflicting agent
         ex:tom .
 
-ex:human-approve-po a rbo:RBO_0000049 ;                 #: human performer requirement
+ex:human-approve-po a rbaco:RBACO_0000049 ;             #: human performer requirement
     rdfs:label "a person approves internal purchase orders"@en ;
-    rbo:RBO_0000115 ex:plan-internal-po ;               #: applies within
-    rbo:RBO_0000145 ex:ts-approve-po .                  #: requires human agent for
+    rbaco:RBACO_0000115 ex:plan-internal-po ;           #: applies within
+    rbaco:RBACO_0000145 ex:ts-approve-po .              #: requires human agent for
 
-ex:ddes-audit a rbo:RBO_0000047 ;                       #: dynamic conflicting agent designation
+ex:ddes-audit a rbaco:RBACO_0000047 ;                   #: dynamic conflicting agent designation
     rdfs:label "dynamic conflicting agents Dick and Harry, purchase audits"@en ;
-    rbo:RBO_0000115 ex:plan-audit ;                     #: applies within
-    rbo:RBO_0000138 ex:dick,                            #: designates conflicting agent
+    rbaco:RBACO_0000115 ex:plan-audit ;                 #: applies within
+    rbaco:RBACO_0000138 ex:dick,                        #: designates conflicting agent
         ex:harry .
 
-ex:tbr-fig6 a rbo:RBO_0000050 ;                         #: task-bound operation requirement
+ex:tbr-fig6 a rbaco:RBACO_0000050 ;                     #: task-bound operation requirement
     rdfs:label "create requisition and approve order only within a task that requires them, Figure 6 plan"@en ;
-    rbo:RBO_0000115 ex:plan-fig6 ;                      #: applies within
-    rbo:RBO_0000148 ex:op-approve-order,                #: requires task binding for
+    rbaco:RBACO_0000115 ex:plan-fig6 ;                  #: applies within
+    rbaco:RBACO_0000148 ex:op-approve-order,            #: requires task binding for
         ex:op-create-requisition .
 
-ex:tbr-internal a rbo:RBO_0000050 ;                     #: task-bound operation requirement
+ex:tbr-internal a rbaco:RBACO_0000050 ;                 #: task-bound operation requirement
     rdfs:label "approve purchase order only within a task that requires it, internal purchase orders"@en ;
-    rbo:RBO_0000115 ex:plan-internal-po ;               #: applies within
-    rbo:RBO_0000148 ex:op-approve-po .                  #: requires task binding for
+    rbaco:RBACO_0000115 ex:plan-internal-po ;           #: applies within
+    rbaco:RBACO_0000148 ex:op-approve-po .              #: requires task binding for
 
 ex:policy-load-start a obo:BFO_0000203 ;                #: temporal instant
-    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:policy-load-interval a obo:BFO_0000202 ;             #: temporal interval
     obo:BFO_0000222 ex:policy-load-start .              #: has first instant
 
-ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
+ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
     rdfs:label "policy issuing act policy-load"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000199 ex:policy-load-interval ;           #: occupies temporal region
@@ -528,18 +528,18 @@ ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
 [] a owl:AllDifferent ;
     owl:distinctMembers ( ex:def-employee ex:def-sc ex:def-buyer ex:def-accountant ex:def-clerk ex:def-apm ex:def-approver ex:def-manager ex:def-stores ex:def-auditor ex:perm-employee-email ex:perm-sc-requisition ex:perm-buyer-order ex:perm-buyer-view ex:perm-accountant-funds ex:perm-apm-approve ex:perm-apm-reject ex:perm-approver-approve ex:perm-manager-form ex:perm-manager-approve-po ex:perm-stores-issue ex:perm-auditor-audit ex:ts-prepare-requisition ex:ts-order-stock ex:ts-check-funds ex:ts-approve-order ex:ts-send-order ex:ts-approve-order-fig6 ex:ts-complete-form ex:ts-approve-po ex:ts-issue-items ex:ts-approve-audit ) .
 
-ex:tom-apm-assigned-1 a rbo:RBO_0000002 ;               #: assigned role
+ex:tom-apm-assigned-1 a rbaco:RBACO_0000002 ;           #: assigned role
     rdfs:label "tom's assigned apm role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000197 ex:tom .                            #: inheres in
 
 ex:tom-assign-apm-1-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-assign-apm-1-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:tom-assign-apm-1-start .         #: has first instant
 
-ex:tom-assign-apm-1 a rbo:RBO_0000028 ;                 #: role assignment
+ex:tom-assign-apm-1 a rbaco:RBACO_0000028 ;             #: role assignment
     rdfs:label "assignment of tom to apm"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:tom ;                            #: has participant
@@ -547,18 +547,18 @@ ex:tom-assign-apm-1 a rbo:RBO_0000028 ;                 #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:tom-apm-assigned-1 .             #: has output
 
-ex:tom-manager-assigned-1 a rbo:RBO_0000002 ;           #: assigned role
+ex:tom-manager-assigned-1 a rbaco:RBACO_0000002 ;       #: assigned role
     rdfs:label "tom's assigned manager role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000197 ex:tom .                            #: inheres in
 
 ex:tom-assign-manager-1-start a obo:BFO_0000203 ;       #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-assign-manager-1-interval a obo:BFO_0000202 ;    #: temporal interval
     obo:BFO_0000222 ex:tom-assign-manager-1-start .     #: has first instant
 
-ex:tom-assign-manager-1 a rbo:RBO_0000028 ;             #: role assignment
+ex:tom-assign-manager-1 a rbaco:RBACO_0000028 ;         #: role assignment
     rdfs:label "assignment of tom to manager"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:tom ;                            #: has participant
@@ -566,18 +566,18 @@ ex:tom-assign-manager-1 a rbo:RBO_0000028 ;             #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:tom-manager-assigned-1 .         #: has output
 
-ex:dick-sc-assigned-1 a rbo:RBO_0000002 ;               #: assigned role
+ex:dick-sc-assigned-1 a rbaco:RBACO_0000002 ;           #: assigned role
     rdfs:label "dick's assigned sc role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-sc ;                         #: concretizes
     obo:BFO_0000197 ex:dick .                           #: inheres in
 
 ex:dick-assign-sc-1-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-assign-sc-1-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:dick-assign-sc-1-start .         #: has first instant
 
-ex:dick-assign-sc-1 a rbo:RBO_0000028 ;                 #: role assignment
+ex:dick-assign-sc-1 a rbaco:RBACO_0000028 ;             #: role assignment
     rdfs:label "assignment of dick to sc"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:dick ;                           #: has participant
@@ -585,18 +585,18 @@ ex:dick-assign-sc-1 a rbo:RBO_0000028 ;                 #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:dick-sc-assigned-1 .             #: has output
 
-ex:dick-manager-assigned-1 a rbo:RBO_0000002 ;          #: assigned role
+ex:dick-manager-assigned-1 a rbaco:RBACO_0000002 ;      #: assigned role
     rdfs:label "dick's assigned manager role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000197 ex:dick .                           #: inheres in
 
 ex:dick-assign-manager-1-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-assign-manager-1-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:dick-assign-manager-1-start .    #: has first instant
 
-ex:dick-assign-manager-1 a rbo:RBO_0000028 ;            #: role assignment
+ex:dick-assign-manager-1 a rbaco:RBACO_0000028 ;        #: role assignment
     rdfs:label "assignment of dick to manager"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:dick ;                           #: has participant
@@ -604,18 +604,18 @@ ex:dick-assign-manager-1 a rbo:RBO_0000028 ;            #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:dick-manager-assigned-1 .        #: has output
 
-ex:harry-apm-assigned-1 a rbo:RBO_0000002 ;             #: assigned role
+ex:harry-apm-assigned-1 a rbaco:RBACO_0000002 ;         #: assigned role
     rdfs:label "harry's assigned apm role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000197 ex:harry .                          #: inheres in
 
 ex:harry-assign-apm-1-start a obo:BFO_0000203 ;         #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-assign-apm-1-interval a obo:BFO_0000202 ;      #: temporal interval
     obo:BFO_0000222 ex:harry-assign-apm-1-start .       #: has first instant
 
-ex:harry-assign-apm-1 a rbo:RBO_0000028 ;               #: role assignment
+ex:harry-assign-apm-1 a rbaco:RBACO_0000028 ;           #: role assignment
     rdfs:label "assignment of harry to apm"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:harry ;                          #: has participant
@@ -623,18 +623,18 @@ ex:harry-assign-apm-1 a rbo:RBO_0000028 ;               #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:harry-apm-assigned-1 .           #: has output
 
-ex:harry-manager-assigned-1 a rbo:RBO_0000002 ;         #: assigned role
+ex:harry-manager-assigned-1 a rbaco:RBACO_0000002 ;     #: assigned role
     rdfs:label "harry's assigned manager role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000197 ex:harry .                          #: inheres in
 
 ex:harry-assign-manager-1-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-assign-manager-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-assign-manager-1-start .   #: has first instant
 
-ex:harry-assign-manager-1 a rbo:RBO_0000028 ;           #: role assignment
+ex:harry-assign-manager-1 a rbaco:RBACO_0000028 ;       #: role assignment
     rdfs:label "assignment of harry to manager"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:harry ;                          #: has participant
@@ -642,18 +642,18 @@ ex:harry-assign-manager-1 a rbo:RBO_0000028 ;           #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:harry-manager-assigned-1 .       #: has output
 
-ex:stores-host-stores-assigned-1 a rbo:RBO_0000002 ;    #: assigned role
+ex:stores-host-stores-assigned-1 a rbaco:RBACO_0000002 ;  #: assigned role
     rdfs:label "stores-host's assigned stores role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-stores ;                     #: concretizes
     obo:BFO_0000197 ex:stores-host .                    #: inheres in
 
 ex:stores-host-assign-stores-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-assign-stores-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-assign-stores-1-start .  #: has first instant
 
-ex:stores-host-assign-stores-1 a rbo:RBO_0000028 ;      #: role assignment
+ex:stores-host-assign-stores-1 a rbaco:RBACO_0000028 ;  #: role assignment
     rdfs:label "assignment of stores-host to stores"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:stores-host ;                    #: has participant
@@ -661,18 +661,18 @@ ex:stores-host-assign-stores-1 a rbo:RBO_0000028 ;      #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:stores-host-stores-assigned-1 .  #: has output
 
-ex:approval-bot-manager-assigned-1 a rbo:RBO_0000002 ;  #: assigned role
+ex:approval-bot-manager-assigned-1 a rbaco:RBACO_0000002 ;  #: assigned role
     rdfs:label "approval-bot's assigned manager role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000197 ex:approval-bot .                   #: inheres in
 
 ex:approval-bot-assign-manager-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:approval-bot-assign-manager-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:approval-bot-assign-manager-1-start .  #: has first instant
 
-ex:approval-bot-assign-manager-1 a rbo:RBO_0000028 ;    #: role assignment
+ex:approval-bot-assign-manager-1 a rbaco:RBACO_0000028 ;  #: role assignment
     rdfs:label "assignment of approval-bot to manager"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:approval-bot ;                   #: has participant
@@ -681,27 +681,27 @@ ex:approval-bot-assign-manager-1 a rbo:RBO_0000028 ;    #: role assignment
     cco:ont00001986 ex:approval-bot-manager-assigned-1 .  #: has output
 
 ex:po-1-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-1-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-1-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-1-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-1-end .                       #: has last instant
 
-ex:po-1 a rbo:RBO_0000004 ;                             #: business process
+ex:po-1 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-1"@en ;
     obo:BFO_0000199 ex:po-1-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-roles .                  #: prescribed by
 
-ex:wi-po-1-order-stock a rbo:RBO_0000048 ;              #: work item
+ex:wi-po-1-order-stock a rbaco:RBACO_0000048 ;          #: work item
     rdfs:label "work item: order-stock in po-1"@en ;
-    rbo:RBO_0000141 ex:ts-order-stock ;                 #: is work item for
-    rbo:RBO_0000142 ex:po-1 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-order-stock ;             #: is work item for
+    rbaco:RBACO_0000142 ex:po-1 .                       #: is work item in
 
 ex:issue-wi-po-1-order-stock-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-1-order-stock-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-1-order-stock-start .  #: has first instant
@@ -713,42 +713,42 @@ ex:issue-wi-po-1-order-stock a cco:ont00000228 ;        #: Planned Act
     cco:ont00001986 ex:wi-po-1-order-stock .            #: has output
 
 ex:tom-request-activate-apm-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-1-start .  #: has first instant
 
-ex:tom-request-activate-apm-po-1 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-1 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-1-order-stock .            #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-1-order-stock .        #: requests activation for
 
 ex:tom-request-activate-buyer-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-buyer-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-buyer-po-1-start .  #: has first instant
 
 ex:tom-activate-buyer-po-1-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-buyer-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-activate-buyer-po-1-start .  #: has first instant
 
 ex:task-po-1-order-stock-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-1-order-stock-end a obo:BFO_0000203 ;        #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-1-order-stock-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:task-po-1-order-stock-start ;    #: has first instant
     obo:BFO_0000224 ex:task-po-1-order-stock-end .      #: has last instant
 
-ex:task-po-1-order-stock a rbo:RBO_0000041 ;            #: task instance
+ex:task-po-1-order-stock a rbaco:RBACO_0000041 ;        #: task instance
     rdfs:label "tom's task instance for wi-po-1-order-stock"@en ;
     obo:BFO_0000132 ex:po-1 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-1-order-stock-interval ;  #: occupies temporal region
@@ -756,107 +756,107 @@ ex:task-po-1-order-stock a rbo:RBO_0000041 ;            #: task instance
     cco:ont00001920 ex:ts-order-stock,                  #: prescribed by
         ex:wi-po-1-order-stock .
 
-ex:tom-buyer-active-po-1 a rbo:RBO_0000003 ;            #: active role
+ex:tom-buyer-active-po-1 a rbaco:RBACO_0000003 ;        #: active role
     rdfs:label "tom's active buyer role in po-1"@en ;
     obo:BFO_0000059 ex:def-buyer ;                      #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-1 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-1-order-stock .          #: is activated for
+    rbaco:RBACO_0000106 ex:po-1 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-1-order-stock .      #: is activated for
 
-ex:tom-activate-buyer-po-1 a rbo:RBO_0000026 ;          #: role activation
+ex:tom-activate-buyer-po-1 a rbaco:RBACO_0000026 ;      #: role activation
     rdfs:label "activation of buyer by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-1 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-buyer-po-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-buyer-active-po-1 .          #: has output
 
-ex:tom-request-activate-buyer-po-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:tom-request-activate-buyer-po-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate buyer"@en ;
     obo:BFO_0000132 ex:po-1 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-buyer-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-buyer ;                      #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-buyer-po-1 ;        #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-1-order-stock .            #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-buyer ;                  #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-buyer-po-1 ;    #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-1-order-stock .        #: requests activation for
 
 ex:tom-req-create-order-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-order-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-order-po-1-start .  #: has first instant
 
-ex:tom-req-create-order-po-1 a rbo:RBO_0000024 ;        #: access request
+ex:tom-req-create-order-po-1 a rbaco:RBACO_0000024 ;    #: access request
     rdfs:label "tom asks to op-create-order"@en ;
     obo:BFO_0000132 ex:po-1,                            #: occurrent part of
         ex:task-po-1-order-stock ;
     obo:BFO_0000199 ex:tom-req-create-order-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-order .                #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-order .            #: requests operation
 
 ex:tom-req-view-order-po-1-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:11:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:11:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-view-order-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-view-order-po-1-start .  #: has first instant
 
-ex:tom-req-view-order-po-1 a rbo:RBO_0000024 ;          #: access request
+ex:tom-req-view-order-po-1 a rbaco:RBACO_0000024 ;      #: access request
     rdfs:label "tom asks to op-view-order"@en ;
     obo:BFO_0000132 ex:po-1,                            #: occurrent part of
         ex:task-po-1-order-stock ;
     obo:BFO_0000199 ex:tom-req-view-order-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-view-order .                  #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-view-order .              #: requests operation
 
 ex:tom-req-send-email-po-1-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:12:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:12:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-send-email-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-send-email-po-1-start .  #: has first instant
 
-ex:tom-req-send-email-po-1 a rbo:RBO_0000024 ;          #: access request
+ex:tom-req-send-email-po-1 a rbaco:RBACO_0000024 ;      #: access request
     rdfs:label "tom asks to op-send-email"@en ;
     obo:BFO_0000132 ex:po-1,                            #: occurrent part of
         ex:task-po-1-order-stock ;
     obo:BFO_0000199 ex:tom-req-send-email-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-send-email .                  #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-send-email .              #: requests operation
 
 ex:tom-req-create-requisition-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:13:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:13:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-requisition-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-requisition-po-1-start .  #: has first instant
 
-ex:tom-req-create-requisition-po-1 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-create-requisition-po-1 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-1,                            #: occurrent part of
         ex:task-po-1-order-stock ;
     obo:BFO_0000199 ex:tom-req-create-requisition-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:tom-req-approve-order-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:14:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:14:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-1-start .  #: has first instant
 
-ex:tom-req-approve-order-po-1 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-1 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-1,                            #: occurrent part of
         ex:task-po-1-order-stock ;
     obo:BFO_0000199 ex:tom-req-approve-order-po-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-buyer-po-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-03T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-03T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-buyer-po-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-buyer-po-1-start .  #: has first instant
 
-ex:tom-deactivate-buyer-po-1 a rbo:RBO_0000027 ;        #: role deactivation
+ex:tom-deactivate-buyer-po-1 a rbaco:RBACO_0000027 ;    #: role deactivation
     rdfs:label "deactivation of buyer by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-1 ;                           #: occurrent part of
@@ -864,87 +864,87 @@ ex:tom-deactivate-buyer-po-1 a rbo:RBO_0000027 ;        #: role deactivation
     cco:ont00001921 ex:tom-buyer-active-po-1 .          #: has input
 
 ex:po-2-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-2-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-2-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-2-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-2-end .                       #: has last instant
 
-ex:po-2 a rbo:RBO_0000004 ;                             #: business process
+ex:po-2 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-2"@en ;
     obo:BFO_0000199 ex:po-2-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-roles .                  #: prescribed by
 
 ex:tom-request-activate-apm-po-2-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-2-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-2-start .  #: has first instant
 
 ex:tom-activate-apm-po-2-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-2-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-2-start .    #: has first instant
 
-ex:tom-apm-active-po-2 a rbo:RBO_0000003 ;              #: active role
+ex:tom-apm-active-po-2 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "tom's active apm role in po-2"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-2 .                           #: is activated in
+    rbaco:RBACO_0000106 ex:po-2 .                       #: is activated in
 
-ex:tom-activate-apm-po-2 a rbo:RBO_0000026 ;            #: role activation
+ex:tom-activate-apm-po-2 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-2 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-2-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-2 .            #: has output
 
-ex:tom-request-activate-apm-po-2 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-2 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-2 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-2-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-2 .          #: is fulfilled by
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-2 .      #: is fulfilled by
 
 ex:tom-req-create-requisition-po-2-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-requisition-po-2-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-requisition-po-2-start .  #: has first instant
 
-ex:tom-req-create-requisition-po-2 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-create-requisition-po-2 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-2 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-req-create-requisition-po-2-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:tom-req-approve-order-po-2-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-2-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-2-start .  #: has first instant
 
-ex:tom-req-approve-order-po-2 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-2 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-2 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-req-approve-order-po-2-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-apm-po-2-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-04T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-04T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-2-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-2-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-2 a rbo:RBO_0000027 ;          #: role deactivation
+ex:tom-deactivate-apm-po-2 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-2 ;                           #: occurrent part of
@@ -952,87 +952,87 @@ ex:tom-deactivate-apm-po-2 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-2 .            #: has input
 
 ex:po-3-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-3-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-3-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-3-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-3-end .                       #: has last instant
 
-ex:po-3 a rbo:RBO_0000004 ;                             #: business process
+ex:po-3 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-3"@en ;
     obo:BFO_0000199 ex:po-3-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-perms .                  #: prescribed by
 
 ex:tom-request-activate-apm-po-3-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-3-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-3-start .  #: has first instant
 
 ex:tom-activate-apm-po-3-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-3-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-3-start .    #: has first instant
 
-ex:tom-apm-active-po-3 a rbo:RBO_0000003 ;              #: active role
+ex:tom-apm-active-po-3 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "tom's active apm role in po-3"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-3 .                           #: is activated in
+    rbaco:RBACO_0000106 ex:po-3 .                       #: is activated in
 
-ex:tom-activate-apm-po-3 a rbo:RBO_0000026 ;            #: role activation
+ex:tom-activate-apm-po-3 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-3 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-3-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-3 .            #: has output
 
-ex:tom-request-activate-apm-po-3 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-3 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-3 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-3-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-3 .          #: is fulfilled by
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-3 .      #: is fulfilled by
 
 ex:tom-req-create-requisition-po-3-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-requisition-po-3-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-requisition-po-3-start .  #: has first instant
 
-ex:tom-req-create-requisition-po-3 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-create-requisition-po-3 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-3 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-req-create-requisition-po-3-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:tom-req-approve-order-po-3-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-3-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-3-start .  #: has first instant
 
-ex:tom-req-approve-order-po-3 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-3 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-3 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-req-approve-order-po-3-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-apm-po-3-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-3-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-3-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-3 a rbo:RBO_0000027 ;          #: role deactivation
+ex:tom-deactivate-apm-po-3 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-3 ;                           #: occurrent part of
@@ -1040,27 +1040,27 @@ ex:tom-deactivate-apm-po-3 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-3 .            #: has input
 
 ex:po-4-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-4-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-4-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-4-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-4-end .                       #: has last instant
 
-ex:po-4 a rbo:RBO_0000004 ;                             #: business process
+ex:po-4 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-4"@en ;
     obo:BFO_0000199 ex:po-4-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-roles .                  #: prescribed by
 
-ex:wi-po-4-prepare-requisition a rbo:RBO_0000048 ;      #: work item
+ex:wi-po-4-prepare-requisition a rbaco:RBACO_0000048 ;  #: work item
     rdfs:label "work item: prepare-requisition in po-4"@en ;
-    rbo:RBO_0000141 ex:ts-prepare-requisition ;         #: is work item for
-    rbo:RBO_0000142 ex:po-4 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-prepare-requisition ;     #: is work item for
+    rbaco:RBACO_0000142 ex:po-4 .                       #: is work item in
 
 ex:issue-wi-po-4-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-4-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-4-prepare-requisition-start .  #: has first instant
@@ -1071,13 +1071,13 @@ ex:issue-wi-po-4-prepare-requisition a cco:ont00000228 ;  #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-4-prepare-requisition .    #: has output
 
-ex:wi-po-4-approve-order a rbo:RBO_0000048 ;            #: work item
+ex:wi-po-4-approve-order a rbaco:RBACO_0000048 ;        #: work item
     rdfs:label "work item: approve-order in po-4"@en ;
-    rbo:RBO_0000141 ex:ts-approve-order ;               #: is work item for
-    rbo:RBO_0000142 ex:po-4 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-order ;           #: is work item for
+    rbaco:RBACO_0000142 ex:po-4 .                       #: is work item in
 
 ex:issue-wi-po-4-approve-order-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-4-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-4-approve-order-start .  #: has first instant
@@ -1089,28 +1089,28 @@ ex:issue-wi-po-4-approve-order a cco:ont00000228 ;      #: Planned Act
     cco:ont00001986 ex:wi-po-4-approve-order .          #: has output
 
 ex:harry-request-activate-sc-po-4-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-sc-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-sc-po-4-start .  #: has first instant
 
 ex:harry-activate-sc-po-4-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-activate-sc-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-activate-sc-po-4-start .   #: has first instant
 
 ex:task-po-4-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-4-prepare-requisition-end a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-4-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-4-prepare-requisition-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-4-prepare-requisition-end .  #: has last instant
 
-ex:task-po-4-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
+ex:task-po-4-prepare-requisition a rbaco:RBACO_0000041 ;  #: task instance
     rdfs:label "harry's task instance for wi-po-4-prepare-requisition"@en ;
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-4-prepare-requisition-interval ;  #: occupies temporal region
@@ -1118,51 +1118,51 @@ ex:task-po-4-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
     cco:ont00001920 ex:ts-prepare-requisition,          #: prescribed by
         ex:wi-po-4-prepare-requisition .
 
-ex:harry-sc-active-po-4 a rbo:RBO_0000003 ;             #: active role
+ex:harry-sc-active-po-4 a rbaco:RBACO_0000003 ;         #: active role
     rdfs:label "harry's active sc role in po-4"@en ;
     obo:BFO_0000059 ex:def-sc ;                         #: concretizes
     obo:BFO_0000195 ex:harry-apm-assigned-1 ;           #: specifically depends on
     obo:BFO_0000197 ex:harry ;                          #: inheres in
-    rbo:RBO_0000106 ex:po-4 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-4-prepare-requisition .  #: is activated for
+    rbaco:RBACO_0000106 ex:po-4 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-4-prepare-requisition .  #: is activated for
 
-ex:harry-activate-sc-po-4 a rbo:RBO_0000026 ;           #: role activation
+ex:harry-activate-sc-po-4 a rbaco:RBACO_0000026 ;       #: role activation
     rdfs:label "activation of sc by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-activate-sc-po-4-interval ;  #: occupies temporal region
     cco:ont00001986 ex:harry-sc-active-po-4 .           #: has output
 
-ex:harry-request-activate-sc-po-4 a rbo:RBO_0000025 ;   #: role activation request
+ex:harry-request-activate-sc-po-4 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate sc"@en ;
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-sc-po-4-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-sc ;                         #: requests activation of
-    rbo:RBO_0000111 ex:harry-activate-sc-po-4 ;         #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-4-prepare-requisition .    #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-sc ;                     #: requests activation of
+    rbaco:RBACO_0000111 ex:harry-activate-sc-po-4 ;     #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-4-prepare-requisition .  #: requests activation for
 
 ex:harry-req-create-requisition-po-4-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-req-create-requisition-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-req-create-requisition-po-4-start .  #: has first instant
 
-ex:harry-req-create-requisition-po-4 a rbo:RBO_0000024 ;  #: access request
+ex:harry-req-create-requisition-po-4 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "harry asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-4,                            #: occurrent part of
         ex:task-po-4-prepare-requisition ;
     obo:BFO_0000199 ex:harry-req-create-requisition-po-4-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:harry-deactivate-sc-po-4-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-deactivate-sc-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-deactivate-sc-po-4-start .  #: has first instant
 
-ex:harry-deactivate-sc-po-4 a rbo:RBO_0000027 ;         #: role deactivation
+ex:harry-deactivate-sc-po-4 a rbaco:RBACO_0000027 ;     #: role deactivation
     rdfs:label "deactivation of sc by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
@@ -1170,42 +1170,42 @@ ex:harry-deactivate-sc-po-4 a rbo:RBO_0000027 ;         #: role deactivation
     cco:ont00001921 ex:harry-sc-active-po-4 .           #: has input
 
 ex:harry-request-activate-apm-po-4-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-apm-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-apm-po-4-start .  #: has first instant
 
-ex:harry-request-activate-apm-po-4 a rbo:RBO_0000025 ;  #: role activation request
+ex:harry-request-activate-apm-po-4 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-apm-po-4-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-4-approve-order .          #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-4-approve-order .      #: requests activation for
 
 ex:tom-request-activate-apm-po-4-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-4-start .  #: has first instant
 
 ex:tom-activate-apm-po-4-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-4-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-4-start .    #: has first instant
 
 ex:task-po-4-approve-order-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-4-approve-order-end a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-4-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-4-approve-order-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-4-approve-order-end .    #: has last instant
 
-ex:task-po-4-approve-order a rbo:RBO_0000041 ;          #: task instance
+ex:task-po-4-approve-order a rbaco:RBACO_0000041 ;      #: task instance
     rdfs:label "tom's task instance for wi-po-4-approve-order"@en ;
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-4-approve-order-interval ;  #: occupies temporal region
@@ -1213,51 +1213,51 @@ ex:task-po-4-approve-order a rbo:RBO_0000041 ;          #: task instance
     cco:ont00001920 ex:ts-approve-order,                #: prescribed by
         ex:wi-po-4-approve-order .
 
-ex:tom-apm-active-po-4 a rbo:RBO_0000003 ;              #: active role
+ex:tom-apm-active-po-4 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "tom's active apm role in po-4"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-4 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-4-approve-order .        #: is activated for
+    rbaco:RBACO_0000106 ex:po-4 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-4-approve-order .    #: is activated for
 
-ex:tom-activate-apm-po-4 a rbo:RBO_0000026 ;            #: role activation
+ex:tom-activate-apm-po-4 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-4-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-4 .            #: has output
 
-ex:tom-request-activate-apm-po-4 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-4 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-4-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-4 ;          #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-4-approve-order .          #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-4 ;      #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-4-approve-order .      #: requests activation for
 
 ex:tom-req-approve-order-po-4-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-4-start .  #: has first instant
 
-ex:tom-req-approve-order-po-4 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-4 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-4,                            #: occurrent part of
         ex:task-po-4-approve-order ;
     obo:BFO_0000199 ex:tom-req-approve-order-po-4-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-apm-po-4-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-4-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-4-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-4 a rbo:RBO_0000027 ;          #: role deactivation
+ex:tom-deactivate-apm-po-4 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-4 ;                           #: occurrent part of
@@ -1265,27 +1265,27 @@ ex:tom-deactivate-apm-po-4 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-4 .            #: has input
 
 ex:po-5-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-5-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-5-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-5-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-5-end .                       #: has last instant
 
-ex:po-5 a rbo:RBO_0000004 ;                             #: business process
+ex:po-5 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-5"@en ;
     obo:BFO_0000199 ex:po-5-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-users .                  #: prescribed by
 
-ex:wi-po-5-prepare-requisition a rbo:RBO_0000048 ;      #: work item
+ex:wi-po-5-prepare-requisition a rbaco:RBACO_0000048 ;  #: work item
     rdfs:label "work item: prepare-requisition in po-5"@en ;
-    rbo:RBO_0000141 ex:ts-prepare-requisition ;         #: is work item for
-    rbo:RBO_0000142 ex:po-5 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-prepare-requisition ;     #: is work item for
+    rbaco:RBACO_0000142 ex:po-5 .                       #: is work item in
 
 ex:issue-wi-po-5-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-5-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-5-prepare-requisition-start .  #: has first instant
@@ -1296,13 +1296,13 @@ ex:issue-wi-po-5-prepare-requisition a cco:ont00000228 ;  #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-5-prepare-requisition .    #: has output
 
-ex:wi-po-5-approve-order a rbo:RBO_0000048 ;            #: work item
+ex:wi-po-5-approve-order a rbaco:RBACO_0000048 ;        #: work item
     rdfs:label "work item: approve-order in po-5"@en ;
-    rbo:RBO_0000141 ex:ts-approve-order ;               #: is work item for
-    rbo:RBO_0000142 ex:po-5 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-order ;           #: is work item for
+    rbaco:RBACO_0000142 ex:po-5 .                       #: is work item in
 
 ex:issue-wi-po-5-approve-order-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-5-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-5-approve-order-start .  #: has first instant
@@ -1314,28 +1314,28 @@ ex:issue-wi-po-5-approve-order a cco:ont00000228 ;      #: Planned Act
     cco:ont00001986 ex:wi-po-5-approve-order .          #: has output
 
 ex:dick-request-activate-sc-po-5-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-request-activate-sc-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dick-request-activate-sc-po-5-start .  #: has first instant
 
 ex:dick-activate-sc-po-5-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-activate-sc-po-5-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:dick-activate-sc-po-5-start .    #: has first instant
 
 ex:task-po-5-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-5-prepare-requisition-end a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-5-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-5-prepare-requisition-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-5-prepare-requisition-end .  #: has last instant
 
-ex:task-po-5-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
+ex:task-po-5-prepare-requisition a rbaco:RBACO_0000041 ;  #: task instance
     rdfs:label "dick's task instance for wi-po-5-prepare-requisition"@en ;
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-5-prepare-requisition-interval ;  #: occupies temporal region
@@ -1343,51 +1343,51 @@ ex:task-po-5-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
     cco:ont00001920 ex:ts-prepare-requisition,          #: prescribed by
         ex:wi-po-5-prepare-requisition .
 
-ex:dick-sc-active-po-5 a rbo:RBO_0000003 ;              #: active role
+ex:dick-sc-active-po-5 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "dick's active sc role in po-5"@en ;
     obo:BFO_0000059 ex:def-sc ;                         #: concretizes
     obo:BFO_0000195 ex:dick-sc-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:dick ;                           #: inheres in
-    rbo:RBO_0000106 ex:po-5 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-5-prepare-requisition .  #: is activated for
+    rbaco:RBACO_0000106 ex:po-5 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-5-prepare-requisition .  #: is activated for
 
-ex:dick-activate-sc-po-5 a rbo:RBO_0000026 ;            #: role activation
+ex:dick-activate-sc-po-5 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of sc by dick"@en ;
     obo:BFO_0000057 ex:dick ;                           #: has participant
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:dick-activate-sc-po-5-interval ;  #: occupies temporal region
     cco:ont00001986 ex:dick-sc-active-po-5 .            #: has output
 
-ex:dick-request-activate-sc-po-5 a rbo:RBO_0000025 ;    #: role activation request
+ex:dick-request-activate-sc-po-5 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "dick asks to activate sc"@en ;
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:dick-request-activate-sc-po-5-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:dick ;                           #: has requester
-    rbo:RBO_0000110 ex:def-sc ;                         #: requests activation of
-    rbo:RBO_0000111 ex:dick-activate-sc-po-5 ;          #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-5-prepare-requisition .    #: requests activation for
+    rbaco:RBACO_0000107 ex:dick ;                       #: has requester
+    rbaco:RBACO_0000110 ex:def-sc ;                     #: requests activation of
+    rbaco:RBACO_0000111 ex:dick-activate-sc-po-5 ;      #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-5-prepare-requisition .  #: requests activation for
 
 ex:dick-req-create-requisition-po-5-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-req-create-requisition-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dick-req-create-requisition-po-5-start .  #: has first instant
 
-ex:dick-req-create-requisition-po-5 a rbo:RBO_0000024 ;  #: access request
+ex:dick-req-create-requisition-po-5 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "dick asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-5,                            #: occurrent part of
         ex:task-po-5-prepare-requisition ;
     obo:BFO_0000199 ex:dick-req-create-requisition-po-5-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:dick ;                           #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:dick ;                       #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:dick-deactivate-sc-po-5-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-deactivate-sc-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dick-deactivate-sc-po-5-start .  #: has first instant
 
-ex:dick-deactivate-sc-po-5 a rbo:RBO_0000027 ;          #: role deactivation
+ex:dick-deactivate-sc-po-5 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of sc by dick"@en ;
     obo:BFO_0000057 ex:dick ;                           #: has participant
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
@@ -1395,28 +1395,28 @@ ex:dick-deactivate-sc-po-5 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:dick-sc-active-po-5 .            #: has input
 
 ex:tom-request-activate-apm-po-5-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-5-start .  #: has first instant
 
 ex:tom-activate-apm-po-5-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-5-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-5-start .    #: has first instant
 
 ex:task-po-5-approve-order-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-5-approve-order-end a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-5-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-5-approve-order-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-5-approve-order-end .    #: has last instant
 
-ex:task-po-5-approve-order a rbo:RBO_0000041 ;          #: task instance
+ex:task-po-5-approve-order a rbaco:RBACO_0000041 ;      #: task instance
     rdfs:label "tom's task instance for wi-po-5-approve-order"@en ;
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-5-approve-order-interval ;  #: occupies temporal region
@@ -1424,51 +1424,51 @@ ex:task-po-5-approve-order a rbo:RBO_0000041 ;          #: task instance
     cco:ont00001920 ex:ts-approve-order,                #: prescribed by
         ex:wi-po-5-approve-order .
 
-ex:tom-apm-active-po-5 a rbo:RBO_0000003 ;              #: active role
+ex:tom-apm-active-po-5 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "tom's active apm role in po-5"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-5 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-5-approve-order .        #: is activated for
+    rbaco:RBACO_0000106 ex:po-5 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-5-approve-order .    #: is activated for
 
-ex:tom-activate-apm-po-5 a rbo:RBO_0000026 ;            #: role activation
+ex:tom-activate-apm-po-5 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-5-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-5 .            #: has output
 
-ex:tom-request-activate-apm-po-5 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-5 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-5-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-5 ;          #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-5-approve-order .          #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-5 ;      #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-5-approve-order .      #: requests activation for
 
 ex:tom-req-approve-order-po-5-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-5-start .  #: has first instant
 
-ex:tom-req-approve-order-po-5 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-5 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-5,                            #: occurrent part of
         ex:task-po-5-approve-order ;
     obo:BFO_0000199 ex:tom-req-approve-order-po-5-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-apm-po-5-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-5-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-5-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-5 a rbo:RBO_0000027 ;          #: role deactivation
+ex:tom-deactivate-apm-po-5 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-5 ;                           #: occurrent part of
@@ -1476,27 +1476,27 @@ ex:tom-deactivate-apm-po-5 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-5 .            #: has input
 
 ex:po-6-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-6-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-6-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-6-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-6-end .                       #: has last instant
 
-ex:po-6 a rbo:RBO_0000004 ;                             #: business process
+ex:po-6 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-6"@en ;
     obo:BFO_0000199 ex:po-6-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-t2-tasks .                  #: prescribed by
 
-ex:wi-po-6-prepare-requisition a rbo:RBO_0000048 ;      #: work item
+ex:wi-po-6-prepare-requisition a rbaco:RBACO_0000048 ;  #: work item
     rdfs:label "work item: prepare-requisition in po-6"@en ;
-    rbo:RBO_0000141 ex:ts-prepare-requisition ;         #: is work item for
-    rbo:RBO_0000142 ex:po-6 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-prepare-requisition ;     #: is work item for
+    rbaco:RBACO_0000142 ex:po-6 .                       #: is work item in
 
 ex:issue-wi-po-6-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-6-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-6-prepare-requisition-start .  #: has first instant
@@ -1507,13 +1507,13 @@ ex:issue-wi-po-6-prepare-requisition a cco:ont00000228 ;  #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-6-prepare-requisition .    #: has output
 
-ex:wi-po-6-approve-order a rbo:RBO_0000048 ;            #: work item
+ex:wi-po-6-approve-order a rbaco:RBACO_0000048 ;        #: work item
     rdfs:label "work item: approve-order in po-6"@en ;
-    rbo:RBO_0000141 ex:ts-approve-order ;               #: is work item for
-    rbo:RBO_0000142 ex:po-6 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-order ;           #: is work item for
+    rbaco:RBACO_0000142 ex:po-6 .                       #: is work item in
 
 ex:issue-wi-po-6-approve-order-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-6-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-6-approve-order-start .  #: has first instant
@@ -1525,28 +1525,28 @@ ex:issue-wi-po-6-approve-order a cco:ont00000228 ;      #: Planned Act
     cco:ont00001986 ex:wi-po-6-approve-order .          #: has output
 
 ex:harry-request-activate-sc-po-6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-sc-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-sc-po-6-start .  #: has first instant
 
 ex:harry-activate-sc-po-6-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-activate-sc-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-activate-sc-po-6-start .   #: has first instant
 
 ex:task-po-6-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-6-prepare-requisition-end a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-6-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-6-prepare-requisition-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-6-prepare-requisition-end .  #: has last instant
 
-ex:task-po-6-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
+ex:task-po-6-prepare-requisition a rbaco:RBACO_0000041 ;  #: task instance
     rdfs:label "harry's task instance for wi-po-6-prepare-requisition"@en ;
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-6-prepare-requisition-interval ;  #: occupies temporal region
@@ -1554,51 +1554,51 @@ ex:task-po-6-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
     cco:ont00001920 ex:ts-prepare-requisition,          #: prescribed by
         ex:wi-po-6-prepare-requisition .
 
-ex:harry-sc-active-po-6 a rbo:RBO_0000003 ;             #: active role
+ex:harry-sc-active-po-6 a rbaco:RBACO_0000003 ;         #: active role
     rdfs:label "harry's active sc role in po-6"@en ;
     obo:BFO_0000059 ex:def-sc ;                         #: concretizes
     obo:BFO_0000195 ex:harry-apm-assigned-1 ;           #: specifically depends on
     obo:BFO_0000197 ex:harry ;                          #: inheres in
-    rbo:RBO_0000106 ex:po-6 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-6-prepare-requisition .  #: is activated for
+    rbaco:RBACO_0000106 ex:po-6 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-6-prepare-requisition .  #: is activated for
 
-ex:harry-activate-sc-po-6 a rbo:RBO_0000026 ;           #: role activation
+ex:harry-activate-sc-po-6 a rbaco:RBACO_0000026 ;       #: role activation
     rdfs:label "activation of sc by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-activate-sc-po-6-interval ;  #: occupies temporal region
     cco:ont00001986 ex:harry-sc-active-po-6 .           #: has output
 
-ex:harry-request-activate-sc-po-6 a rbo:RBO_0000025 ;   #: role activation request
+ex:harry-request-activate-sc-po-6 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate sc"@en ;
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-sc-po-6-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-sc ;                         #: requests activation of
-    rbo:RBO_0000111 ex:harry-activate-sc-po-6 ;         #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-6-prepare-requisition .    #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-sc ;                     #: requests activation of
+    rbaco:RBACO_0000111 ex:harry-activate-sc-po-6 ;     #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-6-prepare-requisition .  #: requests activation for
 
 ex:harry-req-create-requisition-po-6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-req-create-requisition-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-req-create-requisition-po-6-start .  #: has first instant
 
-ex:harry-req-create-requisition-po-6 a rbo:RBO_0000024 ;  #: access request
+ex:harry-req-create-requisition-po-6 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "harry asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-6,                            #: occurrent part of
         ex:task-po-6-prepare-requisition ;
     obo:BFO_0000199 ex:harry-req-create-requisition-po-6-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:harry-deactivate-sc-po-6-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-deactivate-sc-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-deactivate-sc-po-6-start .  #: has first instant
 
-ex:harry-deactivate-sc-po-6 a rbo:RBO_0000027 ;         #: role deactivation
+ex:harry-deactivate-sc-po-6 a rbaco:RBACO_0000027 ;     #: role deactivation
     rdfs:label "deactivation of sc by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
@@ -1606,42 +1606,42 @@ ex:harry-deactivate-sc-po-6 a rbo:RBO_0000027 ;         #: role deactivation
     cco:ont00001921 ex:harry-sc-active-po-6 .           #: has input
 
 ex:harry-request-activate-apm-po-6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-apm-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-apm-po-6-start .  #: has first instant
 
-ex:harry-request-activate-apm-po-6 a rbo:RBO_0000025 ;  #: role activation request
+ex:harry-request-activate-apm-po-6 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-apm-po-6-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-6-approve-order .          #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-6-approve-order .      #: requests activation for
 
 ex:tom-request-activate-apm-po-6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-6-start .  #: has first instant
 
 ex:tom-activate-apm-po-6-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-6-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-6-start .    #: has first instant
 
 ex:task-po-6-approve-order-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-6-approve-order-end a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-6-approve-order-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-6-approve-order-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-6-approve-order-end .    #: has last instant
 
-ex:task-po-6-approve-order a rbo:RBO_0000041 ;          #: task instance
+ex:task-po-6-approve-order a rbaco:RBACO_0000041 ;      #: task instance
     rdfs:label "tom's task instance for wi-po-6-approve-order"@en ;
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-6-approve-order-interval ;  #: occupies temporal region
@@ -1649,51 +1649,51 @@ ex:task-po-6-approve-order a rbo:RBO_0000041 ;          #: task instance
     cco:ont00001920 ex:ts-approve-order,                #: prescribed by
         ex:wi-po-6-approve-order .
 
-ex:tom-apm-active-po-6 a rbo:RBO_0000003 ;              #: active role
+ex:tom-apm-active-po-6 a rbaco:RBACO_0000003 ;          #: active role
     rdfs:label "tom's active apm role in po-6"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-6 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-6-approve-order .        #: is activated for
+    rbaco:RBACO_0000106 ex:po-6 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-6-approve-order .    #: is activated for
 
-ex:tom-activate-apm-po-6 a rbo:RBO_0000026 ;            #: role activation
+ex:tom-activate-apm-po-6 a rbaco:RBACO_0000026 ;        #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-6-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-6 .            #: has output
 
-ex:tom-request-activate-apm-po-6 a rbo:RBO_0000025 ;    #: role activation request
+ex:tom-request-activate-apm-po-6 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-6-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-6 ;          #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-6-approve-order .          #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-6 ;      #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-6-approve-order .      #: requests activation for
 
 ex:tom-req-approve-order-po-6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-6-start .  #: has first instant
 
-ex:tom-req-approve-order-po-6 a rbo:RBO_0000024 ;       #: access request
+ex:tom-req-approve-order-po-6 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-6,                            #: occurrent part of
         ex:task-po-6-approve-order ;
     obo:BFO_0000199 ex:tom-req-approve-order-po-6-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-deactivate-apm-po-6-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-08T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-08T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-6-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-6 a rbo:RBO_0000027 ;          #: role deactivation
+ex:tom-deactivate-apm-po-6 a rbaco:RBACO_0000027 ;      #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-6 ;                           #: occurrent part of
@@ -1701,27 +1701,27 @@ ex:tom-deactivate-apm-po-6 a rbo:RBO_0000027 ;          #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-6 .            #: has input
 
 ex:po-7-start a obo:BFO_0000203 ;                       #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-7-end a obo:BFO_0000203 ;                         #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-7-interval a obo:BFO_0000202 ;                    #: temporal interval
     obo:BFO_0000222 ex:po-7-start ;                     #: has first instant
     obo:BFO_0000224 ex:po-7-end .                       #: has last instant
 
-ex:po-7 a rbo:RBO_0000004 ;                             #: business process
+ex:po-7 a rbaco:RBACO_0000004 ;                         #: business process
     rdfs:label "purchase order po-7"@en ;
     obo:BFO_0000199 ex:po-7-interval ;                  #: occupies temporal region
     cco:ont00001920 ex:plan-fig6 .                      #: prescribed by
 
-ex:wi-po-7-prepare-requisition a rbo:RBO_0000048 ;      #: work item
+ex:wi-po-7-prepare-requisition a rbaco:RBACO_0000048 ;  #: work item
     rdfs:label "work item: prepare-requisition in po-7"@en ;
-    rbo:RBO_0000141 ex:ts-prepare-requisition ;         #: is work item for
-    rbo:RBO_0000142 ex:po-7 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-prepare-requisition ;     #: is work item for
+    rbaco:RBACO_0000142 ex:po-7 .                       #: is work item in
 
 ex:issue-wi-po-7-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-7-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-7-prepare-requisition-start .  #: has first instant
@@ -1732,13 +1732,13 @@ ex:issue-wi-po-7-prepare-requisition a cco:ont00000228 ;  #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-7-prepare-requisition .    #: has output
 
-ex:wi-po-7-approve-order-fig6 a rbo:RBO_0000048 ;       #: work item
+ex:wi-po-7-approve-order-fig6 a rbaco:RBACO_0000048 ;   #: work item
     rdfs:label "work item: approve-order-fig6 in po-7"@en ;
-    rbo:RBO_0000141 ex:ts-approve-order-fig6 ;          #: is work item for
-    rbo:RBO_0000142 ex:po-7 .                           #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-order-fig6 ;      #: is work item for
+    rbaco:RBACO_0000142 ex:po-7 .                       #: is work item in
 
 ex:issue-wi-po-7-approve-order-fig6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-7-approve-order-fig6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-7-approve-order-fig6-start .  #: has first instant
@@ -1750,28 +1750,28 @@ ex:issue-wi-po-7-approve-order-fig6 a cco:ont00000228 ;  #: Planned Act
     cco:ont00001986 ex:wi-po-7-approve-order-fig6 .     #: has output
 
 ex:tom-request-activate-sc-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-sc-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-sc-po-7-start .  #: has first instant
 
 ex:tom-activate-sc-po-7-start a obo:BFO_0000203 ;       #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-sc-po-7-interval a obo:BFO_0000202 ;    #: temporal interval
     obo:BFO_0000222 ex:tom-activate-sc-po-7-start .     #: has first instant
 
 ex:task-po-7-prepare-requisition-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-7-prepare-requisition-end a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-7-prepare-requisition-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-7-prepare-requisition-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-7-prepare-requisition-end .  #: has last instant
 
-ex:task-po-7-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
+ex:task-po-7-prepare-requisition a rbaco:RBACO_0000041 ;  #: task instance
     rdfs:label "tom's task instance for wi-po-7-prepare-requisition"@en ;
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-7-prepare-requisition-interval ;  #: occupies temporal region
@@ -1779,51 +1779,51 @@ ex:task-po-7-prepare-requisition a rbo:RBO_0000041 ;    #: task instance
     cco:ont00001920 ex:ts-prepare-requisition,          #: prescribed by
         ex:wi-po-7-prepare-requisition .
 
-ex:tom-sc-active-po-7 a rbo:RBO_0000003 ;               #: active role
+ex:tom-sc-active-po-7 a rbaco:RBACO_0000003 ;           #: active role
     rdfs:label "tom's active sc role in po-7"@en ;
     obo:BFO_0000059 ex:def-sc ;                         #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-7 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-7-prepare-requisition .  #: is activated for
+    rbaco:RBACO_0000106 ex:po-7 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-7-prepare-requisition .  #: is activated for
 
-ex:tom-activate-sc-po-7 a rbo:RBO_0000026 ;             #: role activation
+ex:tom-activate-sc-po-7 a rbaco:RBACO_0000026 ;         #: role activation
     rdfs:label "activation of sc by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-sc-po-7-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-sc-active-po-7 .             #: has output
 
-ex:tom-request-activate-sc-po-7 a rbo:RBO_0000025 ;     #: role activation request
+ex:tom-request-activate-sc-po-7 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate sc"@en ;
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-sc-po-7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-sc ;                         #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-sc-po-7 ;           #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-7-prepare-requisition .    #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-sc ;                     #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-sc-po-7 ;       #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-7-prepare-requisition .  #: requests activation for
 
 ex:tom-req-create-requisition-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-requisition-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-requisition-po-7-start .  #: has first instant
 
-ex:tom-req-create-requisition-po-7 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-create-requisition-po-7 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-7,                            #: occurrent part of
         ex:task-po-7-prepare-requisition ;
     obo:BFO_0000199 ex:tom-req-create-requisition-po-7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:tom-deactivate-sc-po-7-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-sc-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-sc-po-7-start .   #: has first instant
 
-ex:tom-deactivate-sc-po-7 a rbo:RBO_0000027 ;           #: role deactivation
+ex:tom-deactivate-sc-po-7 a rbaco:RBACO_0000027 ;       #: role deactivation
     rdfs:label "deactivation of sc by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
@@ -1831,42 +1831,42 @@ ex:tom-deactivate-sc-po-7 a rbo:RBO_0000027 ;           #: role deactivation
     cco:ont00001921 ex:tom-sc-active-po-7 .             #: has input
 
 ex:tom-request-activate-approver-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-approver-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-approver-po-7-start .  #: has first instant
 
-ex:tom-request-activate-approver-po-7 a rbo:RBO_0000025 ;  #: role activation request
+ex:tom-request-activate-approver-po-7 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate approver"@en ;
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-approver-po-7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-approver ;                   #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-7-approve-order-fig6 .     #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-approver ;               #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-7-approve-order-fig6 .  #: requests activation for
 
 ex:harry-request-activate-approver-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-approver-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-approver-po-7-start .  #: has first instant
 
 ex:harry-activate-approver-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-activate-approver-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-activate-approver-po-7-start .  #: has first instant
 
 ex:task-po-7-approve-order-fig6-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-7-approve-order-fig6-end a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-7-approve-order-fig6-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-7-approve-order-fig6-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-7-approve-order-fig6-end .  #: has last instant
 
-ex:task-po-7-approve-order-fig6 a rbo:RBO_0000041 ;     #: task instance
+ex:task-po-7-approve-order-fig6 a rbaco:RBACO_0000041 ;  #: task instance
     rdfs:label "harry's task instance for wi-po-7-approve-order-fig6"@en ;
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:task-po-7-approve-order-fig6-interval ;  #: occupies temporal region
@@ -1874,51 +1874,51 @@ ex:task-po-7-approve-order-fig6 a rbo:RBO_0000041 ;     #: task instance
     cco:ont00001920 ex:ts-approve-order-fig6,           #: prescribed by
         ex:wi-po-7-approve-order-fig6 .
 
-ex:harry-approver-active-po-7 a rbo:RBO_0000003 ;       #: active role
+ex:harry-approver-active-po-7 a rbaco:RBACO_0000003 ;   #: active role
     rdfs:label "harry's active approver role in po-7"@en ;
     obo:BFO_0000059 ex:def-approver ;                   #: concretizes
     obo:BFO_0000195 ex:harry-apm-assigned-1 ;           #: specifically depends on
     obo:BFO_0000197 ex:harry ;                          #: inheres in
-    rbo:RBO_0000106 ex:po-7 ;                           #: is activated in
-    rbo:RBO_0000136 ex:task-po-7-approve-order-fig6 .   #: is activated for
+    rbaco:RBACO_0000106 ex:po-7 ;                       #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-7-approve-order-fig6 .  #: is activated for
 
-ex:harry-activate-approver-po-7 a rbo:RBO_0000026 ;     #: role activation
+ex:harry-activate-approver-po-7 a rbaco:RBACO_0000026 ;  #: role activation
     rdfs:label "activation of approver by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-activate-approver-po-7-interval ;  #: occupies temporal region
     cco:ont00001986 ex:harry-approver-active-po-7 .     #: has output
 
-ex:harry-request-activate-approver-po-7 a rbo:RBO_0000025 ;  #: role activation request
+ex:harry-request-activate-approver-po-7 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate approver"@en ;
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-approver-po-7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-approver ;                   #: requests activation of
-    rbo:RBO_0000111 ex:harry-activate-approver-po-7 ;   #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-7-approve-order-fig6 .     #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-approver ;               #: requests activation of
+    rbaco:RBACO_0000111 ex:harry-activate-approver-po-7 ;  #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-7-approve-order-fig6 .  #: requests activation for
 
 ex:harry-req-approve-order-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-req-approve-order-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-req-approve-order-po-7-start .  #: has first instant
 
-ex:harry-req-approve-order-po-7 a rbo:RBO_0000024 ;     #: access request
+ex:harry-req-approve-order-po-7 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "harry asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-7,                            #: occurrent part of
         ex:task-po-7-approve-order-fig6 ;
     obo:BFO_0000199 ex:harry-req-approve-order-po-7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:harry-deactivate-approver-po-7-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-09T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-09T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-deactivate-approver-po-7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-deactivate-approver-po-7-start .  #: has first instant
 
-ex:harry-deactivate-approver-po-7 a rbo:RBO_0000027 ;   #: role deactivation
+ex:harry-deactivate-approver-po-7 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of approver by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-7 ;                           #: occurrent part of
@@ -1926,100 +1926,100 @@ ex:harry-deactivate-approver-po-7 a rbo:RBO_0000027 ;   #: role deactivation
     cco:ont00001921 ex:harry-approver-active-po-7 .     #: has input
 
 ex:po-7b-start a obo:BFO_0000203 ;                      #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-7b-end a obo:BFO_0000203 ;                        #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-7b-interval a obo:BFO_0000202 ;                   #: temporal interval
     obo:BFO_0000222 ex:po-7b-start ;                    #: has first instant
     obo:BFO_0000224 ex:po-7b-end .                      #: has last instant
 
-ex:po-7b a rbo:RBO_0000004 ;                            #: business process
+ex:po-7b a rbaco:RBACO_0000004 ;                        #: business process
     rdfs:label "purchase order po-7b"@en ;
     obo:BFO_0000199 ex:po-7b-interval ;                 #: occupies temporal region
     cco:ont00001920 ex:plan-fig6 .                      #: prescribed by
 
 ex:tom-request-activate-apm-po-7b-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-apm-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-apm-po-7b-start .  #: has first instant
 
 ex:tom-activate-apm-po-7b-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-apm-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-activate-apm-po-7b-start .   #: has first instant
 
-ex:tom-apm-active-po-7b a rbo:RBO_0000003 ;             #: active role
+ex:tom-apm-active-po-7b a rbaco:RBACO_0000003 ;         #: active role
     rdfs:label "tom's active apm role in po-7b"@en ;
     obo:BFO_0000059 ex:def-apm ;                        #: concretizes
     obo:BFO_0000195 ex:tom-apm-assigned-1 ;             #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-7b .                          #: is activated in
+    rbaco:RBACO_0000106 ex:po-7b .                      #: is activated in
 
-ex:tom-activate-apm-po-7b a rbo:RBO_0000026 ;           #: role activation
+ex:tom-activate-apm-po-7b a rbaco:RBACO_0000026 ;       #: role activation
     rdfs:label "activation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-apm-po-7b-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-apm-active-po-7b .           #: has output
 
-ex:tom-request-activate-apm-po-7b a rbo:RBO_0000025 ;   #: role activation request
+ex:tom-request-activate-apm-po-7b a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate apm"@en ;
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-apm-po-7b-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-apm ;                        #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-apm-po-7b .         #: is fulfilled by
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-apm ;                    #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-apm-po-7b .     #: is fulfilled by
 
 ex:tom-req-create-requisition-po-7b-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-create-requisition-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-create-requisition-po-7b-start .  #: has first instant
 
-ex:tom-req-create-requisition-po-7b a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-create-requisition-po-7b a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-create-requisition"@en ;
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-req-create-requisition-po-7b-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-create-requisition .          #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-create-requisition .      #: requests operation
 
 ex:tom-req-approve-order-po-7b-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-approve-order-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-approve-order-po-7b-start .  #: has first instant
 
-ex:tom-req-approve-order-po-7b a rbo:RBO_0000024 ;      #: access request
+ex:tom-req-approve-order-po-7b a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-approve-order"@en ;
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-req-approve-order-po-7b-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-order .               #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-order .           #: requests operation
 
 ex:tom-req-send-email-po-7b-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:15:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:15:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-send-email-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-send-email-po-7b-start .  #: has first instant
 
-ex:tom-req-send-email-po-7b a rbo:RBO_0000024 ;         #: access request
+ex:tom-req-send-email-po-7b a rbaco:RBACO_0000024 ;     #: access request
     rdfs:label "tom asks to op-send-email"@en ;
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-req-send-email-po-7b-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-send-email .                  #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-send-email .              #: requests operation
 
 ex:tom-deactivate-apm-po-7b-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-10T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-10T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-apm-po-7b-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-apm-po-7b-start .  #: has first instant
 
-ex:tom-deactivate-apm-po-7b a rbo:RBO_0000027 ;         #: role deactivation
+ex:tom-deactivate-apm-po-7b a rbaco:RBACO_0000027 ;     #: role deactivation
     rdfs:label "deactivation of apm by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-7b ;                          #: occurrent part of
@@ -2027,27 +2027,27 @@ ex:tom-deactivate-apm-po-7b a rbo:RBO_0000027 ;         #: role deactivation
     cco:ont00001921 ex:tom-apm-active-po-7b .           #: has input
 
 ex:po-10-start a obo:BFO_0000203 ;                      #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-10-end a obo:BFO_0000203 ;                        #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-10-interval a obo:BFO_0000202 ;                   #: temporal interval
     obo:BFO_0000222 ex:po-10-start ;                    #: has first instant
     obo:BFO_0000224 ex:po-10-end .                      #: has last instant
 
-ex:po-10 a rbo:RBO_0000004 ;                            #: business process
+ex:po-10 a rbaco:RBACO_0000004 ;                        #: business process
     rdfs:label "purchase order po-10"@en ;
     obo:BFO_0000199 ex:po-10-interval ;                 #: occupies temporal region
     cco:ont00001920 ex:plan-internal-po .               #: prescribed by
 
-ex:wi-po-10-complete-form a rbo:RBO_0000048 ;           #: work item
+ex:wi-po-10-complete-form a rbaco:RBACO_0000048 ;       #: work item
     rdfs:label "work item: complete-form in po-10"@en ;
-    rbo:RBO_0000141 ex:ts-complete-form ;               #: is work item for
-    rbo:RBO_0000142 ex:po-10 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-complete-form ;           #: is work item for
+    rbaco:RBACO_0000142 ex:po-10 .                      #: is work item in
 
 ex:issue-wi-po-10-complete-form-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-10-complete-form-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-10-complete-form-start .  #: has first instant
@@ -2058,13 +2058,13 @@ ex:issue-wi-po-10-complete-form a cco:ont00000228 ;     #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-10-complete-form .         #: has output
 
-ex:wi-po-10-approve-po a rbo:RBO_0000048 ;              #: work item
+ex:wi-po-10-approve-po a rbaco:RBACO_0000048 ;          #: work item
     rdfs:label "work item: approve-po in po-10"@en ;
-    rbo:RBO_0000141 ex:ts-approve-po ;                  #: is work item for
-    rbo:RBO_0000142 ex:po-10 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-po ;              #: is work item for
+    rbaco:RBACO_0000142 ex:po-10 .                      #: is work item in
 
 ex:issue-wi-po-10-approve-po-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-10-approve-po-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-10-approve-po-start .  #: has first instant
@@ -2075,13 +2075,13 @@ ex:issue-wi-po-10-approve-po a cco:ont00000228 ;        #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-10-approve-po .            #: has output
 
-ex:wi-po-10-issue-items a rbo:RBO_0000048 ;             #: work item
+ex:wi-po-10-issue-items a rbaco:RBACO_0000048 ;         #: work item
     rdfs:label "work item: issue-items in po-10"@en ;
-    rbo:RBO_0000141 ex:ts-issue-items ;                 #: is work item for
-    rbo:RBO_0000142 ex:po-10 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-issue-items ;             #: is work item for
+    rbaco:RBACO_0000142 ex:po-10 .                      #: is work item in
 
 ex:issue-wi-po-10-issue-items-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-10-issue-items-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-10-issue-items-start .  #: has first instant
@@ -2093,28 +2093,28 @@ ex:issue-wi-po-10-issue-items a cco:ont00000228 ;       #: Planned Act
     cco:ont00001986 ex:wi-po-10-issue-items .           #: has output
 
 ex:tom-request-activate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-manager-po-10-start .  #: has first instant
 
 ex:tom-activate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-activate-manager-po-10-start .  #: has first instant
 
 ex:task-po-10-complete-form-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-complete-form-end a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-complete-form-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-10-complete-form-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-10-complete-form-end .   #: has last instant
 
-ex:task-po-10-complete-form a rbo:RBO_0000041 ;         #: task instance
+ex:task-po-10-complete-form a rbaco:RBACO_0000041 ;     #: task instance
     rdfs:label "tom's task instance for wi-po-10-complete-form"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:task-po-10-complete-form-interval ;  #: occupies temporal region
@@ -2122,51 +2122,51 @@ ex:task-po-10-complete-form a rbo:RBO_0000041 ;         #: task instance
     cco:ont00001920 ex:ts-complete-form,                #: prescribed by
         ex:wi-po-10-complete-form .
 
-ex:tom-manager-active-po-10 a rbo:RBO_0000003 ;         #: active role
+ex:tom-manager-active-po-10 a rbaco:RBACO_0000003 ;     #: active role
     rdfs:label "tom's active manager role in po-10"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000195 ex:tom-manager-assigned-1 ;         #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-10 ;                          #: is activated in
-    rbo:RBO_0000136 ex:task-po-10-complete-form .       #: is activated for
+    rbaco:RBACO_0000106 ex:po-10 ;                      #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-10-complete-form .   #: is activated for
 
-ex:tom-activate-manager-po-10 a rbo:RBO_0000026 ;       #: role activation
+ex:tom-activate-manager-po-10 a rbaco:RBACO_0000026 ;   #: role activation
     rdfs:label "activation of manager by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-manager-po-10-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-manager-active-po-10 .       #: has output
 
-ex:tom-request-activate-manager-po-10 a rbo:RBO_0000025 ;  #: role activation request
+ex:tom-request-activate-manager-po-10 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate manager"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-manager-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-manager ;                    #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-manager-po-10 ;     #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-10-complete-form .         #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-manager ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-manager-po-10 ;  #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-10-complete-form .     #: requests activation for
 
 ex:tom-req-complete-order-form-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-complete-order-form-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-complete-order-form-po-10-start .  #: has first instant
 
-ex:tom-req-complete-order-form-po-10 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-complete-order-form-po-10 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-complete-order-form"@en ;
     obo:BFO_0000132 ex:po-10,                           #: occurrent part of
         ex:task-po-10-complete-form ;
     obo:BFO_0000199 ex:tom-req-complete-order-form-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-complete-order-form .         #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-complete-order-form .     #: requests operation
 
 ex:tom-deactivate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-manager-po-10-start .  #: has first instant
 
-ex:tom-deactivate-manager-po-10 a rbo:RBO_0000027 ;     #: role deactivation
+ex:tom-deactivate-manager-po-10 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of manager by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
@@ -2174,42 +2174,42 @@ ex:tom-deactivate-manager-po-10 a rbo:RBO_0000027 ;     #: role deactivation
     cco:ont00001921 ex:tom-manager-active-po-10 .       #: has input
 
 ex:dick-request-activate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:40:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-request-activate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dick-request-activate-manager-po-10-start .  #: has first instant
 
-ex:dick-request-activate-manager-po-10 a rbo:RBO_0000025 ;  #: role activation request
+ex:dick-request-activate-manager-po-10 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "dick asks to activate manager"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dick-request-activate-manager-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:dick ;                           #: has requester
-    rbo:RBO_0000110 ex:def-manager ;                    #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-10-approve-po .            #: requests activation for
+    rbaco:RBACO_0000107 ex:dick ;                       #: has requester
+    rbaco:RBACO_0000110 ex:def-manager ;                #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-10-approve-po .        #: requests activation for
 
 ex:harry-request-activate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-request-activate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-request-activate-manager-po-10-start .  #: has first instant
 
 ex:harry-activate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-activate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-activate-manager-po-10-start .  #: has first instant
 
 ex:task-po-10-approve-po-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:45:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-approve-po-end a obo:BFO_0000203 ;        #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-approve-po-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:task-po-10-approve-po-start ;    #: has first instant
     obo:BFO_0000224 ex:task-po-10-approve-po-end .      #: has last instant
 
-ex:task-po-10-approve-po a rbo:RBO_0000041 ;            #: task instance
+ex:task-po-10-approve-po a rbaco:RBACO_0000041 ;        #: task instance
     rdfs:label "harry's task instance for wi-po-10-approve-po"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:task-po-10-approve-po-interval ;  #: occupies temporal region
@@ -2217,51 +2217,51 @@ ex:task-po-10-approve-po a rbo:RBO_0000041 ;            #: task instance
     cco:ont00001920 ex:ts-approve-po,                   #: prescribed by
         ex:wi-po-10-approve-po .
 
-ex:harry-manager-active-po-10 a rbo:RBO_0000003 ;       #: active role
+ex:harry-manager-active-po-10 a rbaco:RBACO_0000003 ;   #: active role
     rdfs:label "harry's active manager role in po-10"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000195 ex:harry-manager-assigned-1 ;       #: specifically depends on
     obo:BFO_0000197 ex:harry ;                          #: inheres in
-    rbo:RBO_0000106 ex:po-10 ;                          #: is activated in
-    rbo:RBO_0000136 ex:task-po-10-approve-po .          #: is activated for
+    rbaco:RBACO_0000106 ex:po-10 ;                      #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-10-approve-po .      #: is activated for
 
-ex:harry-activate-manager-po-10 a rbo:RBO_0000026 ;     #: role activation
+ex:harry-activate-manager-po-10 a rbaco:RBACO_0000026 ;  #: role activation
     rdfs:label "activation of manager by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:harry-activate-manager-po-10-interval ;  #: occupies temporal region
     cco:ont00001986 ex:harry-manager-active-po-10 .     #: has output
 
-ex:harry-request-activate-manager-po-10 a rbo:RBO_0000025 ;  #: role activation request
+ex:harry-request-activate-manager-po-10 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "harry asks to activate manager"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:harry-request-activate-manager-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000110 ex:def-manager ;                    #: requests activation of
-    rbo:RBO_0000111 ex:harry-activate-manager-po-10 ;   #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-10-approve-po .            #: requests activation for
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-manager ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:harry-activate-manager-po-10 ;  #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-10-approve-po .        #: requests activation for
 
 ex:harry-req-approve-po-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T09:50:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-req-approve-po-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-req-approve-po-po-10-start .  #: has first instant
 
-ex:harry-req-approve-po-po-10 a rbo:RBO_0000024 ;       #: access request
+ex:harry-req-approve-po-po-10 a rbaco:RBACO_0000024 ;   #: access request
     rdfs:label "harry asks to op-approve-po"@en ;
     obo:BFO_0000132 ex:po-10,                           #: occurrent part of
         ex:task-po-10-approve-po ;
     obo:BFO_0000199 ex:harry-req-approve-po-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:harry ;                          #: has requester
-    rbo:RBO_0000108 ex:op-approve-po .                  #: requests operation
+    rbaco:RBACO_0000107 ex:harry ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-po .              #: requests operation
 
 ex:harry-deactivate-manager-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:harry-deactivate-manager-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:harry-deactivate-manager-po-10-start .  #: has first instant
 
-ex:harry-deactivate-manager-po-10 a rbo:RBO_0000027 ;   #: role deactivation
+ex:harry-deactivate-manager-po-10 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of manager by harry"@en ;
     obo:BFO_0000057 ex:harry ;                          #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
@@ -2269,28 +2269,28 @@ ex:harry-deactivate-manager-po-10 a rbo:RBO_0000027 ;   #: role deactivation
     cco:ont00001921 ex:harry-manager-active-po-10 .     #: has input
 
 ex:stores-host-request-activate-stores-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-request-activate-stores-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-request-activate-stores-po-10-start .  #: has first instant
 
 ex:stores-host-activate-stores-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-activate-stores-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-activate-stores-po-10-start .  #: has first instant
 
 ex:task-po-10-issue-items-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-issue-items-end a obo:BFO_0000203 ;       #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-10-issue-items-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-10-issue-items-start ;   #: has first instant
     obo:BFO_0000224 ex:task-po-10-issue-items-end .     #: has last instant
 
-ex:task-po-10-issue-items a rbo:RBO_0000041 ;           #: task instance
+ex:task-po-10-issue-items a rbaco:RBACO_0000041 ;       #: task instance
     rdfs:label "stores-host's task instance for wi-po-10-issue-items"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:task-po-10-issue-items-interval ;  #: occupies temporal region
@@ -2298,51 +2298,51 @@ ex:task-po-10-issue-items a rbo:RBO_0000041 ;           #: task instance
     cco:ont00001920 ex:ts-issue-items,                  #: prescribed by
         ex:wi-po-10-issue-items .
 
-ex:stores-host-stores-active-po-10 a rbo:RBO_0000003 ;  #: active role
+ex:stores-host-stores-active-po-10 a rbaco:RBACO_0000003 ;  #: active role
     rdfs:label "stores-host's active stores role in po-10"@en ;
     obo:BFO_0000059 ex:def-stores ;                     #: concretizes
     obo:BFO_0000195 ex:stores-host-stores-assigned-1 ;  #: specifically depends on
     obo:BFO_0000197 ex:stores-host ;                    #: inheres in
-    rbo:RBO_0000106 ex:po-10 ;                          #: is activated in
-    rbo:RBO_0000136 ex:task-po-10-issue-items .         #: is activated for
+    rbaco:RBACO_0000106 ex:po-10 ;                      #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-10-issue-items .     #: is activated for
 
-ex:stores-host-activate-stores-po-10 a rbo:RBO_0000026 ;  #: role activation
+ex:stores-host-activate-stores-po-10 a rbaco:RBACO_0000026 ;  #: role activation
     rdfs:label "activation of stores by stores-host"@en ;
     obo:BFO_0000057 ex:stores-host ;                    #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:stores-host-activate-stores-po-10-interval ;  #: occupies temporal region
     cco:ont00001986 ex:stores-host-stores-active-po-10 .  #: has output
 
-ex:stores-host-request-activate-stores-po-10 a rbo:RBO_0000025 ;  #: role activation request
+ex:stores-host-request-activate-stores-po-10 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "stores-host asks to activate stores"@en ;
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
     obo:BFO_0000199 ex:stores-host-request-activate-stores-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:stores-host ;                    #: has requester
-    rbo:RBO_0000110 ex:def-stores ;                     #: requests activation of
-    rbo:RBO_0000111 ex:stores-host-activate-stores-po-10 ;  #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-10-issue-items .           #: requests activation for
+    rbaco:RBACO_0000107 ex:stores-host ;                #: has requester
+    rbaco:RBACO_0000110 ex:def-stores ;                 #: requests activation of
+    rbaco:RBACO_0000111 ex:stores-host-activate-stores-po-10 ;  #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-10-issue-items .       #: requests activation for
 
 ex:stores-host-req-issue-items-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:15:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:15:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-req-issue-items-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-req-issue-items-po-10-start .  #: has first instant
 
-ex:stores-host-req-issue-items-po-10 a rbo:RBO_0000024 ;  #: access request
+ex:stores-host-req-issue-items-po-10 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "stores-host asks to op-issue-items"@en ;
     obo:BFO_0000132 ex:po-10,                           #: occurrent part of
         ex:task-po-10-issue-items ;
     obo:BFO_0000199 ex:stores-host-req-issue-items-po-10-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:stores-host ;                    #: has requester
-    rbo:RBO_0000108 ex:op-issue-items .                 #: requests operation
+    rbaco:RBACO_0000107 ex:stores-host ;                #: has requester
+    rbaco:RBACO_0000108 ex:op-issue-items .             #: requests operation
 
 ex:stores-host-deactivate-stores-po-10-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-11T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-11T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-deactivate-stores-po-10-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-deactivate-stores-po-10-start .  #: has first instant
 
-ex:stores-host-deactivate-stores-po-10 a rbo:RBO_0000027 ;  #: role deactivation
+ex:stores-host-deactivate-stores-po-10 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of stores by stores-host"@en ;
     obo:BFO_0000057 ex:stores-host ;                    #: has participant
     obo:BFO_0000132 ex:po-10 ;                          #: occurrent part of
@@ -2350,27 +2350,27 @@ ex:stores-host-deactivate-stores-po-10 a rbo:RBO_0000027 ;  #: role deactivation
     cco:ont00001921 ex:stores-host-stores-active-po-10 .  #: has input
 
 ex:po-11-start a obo:BFO_0000203 ;                      #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-11-end a obo:BFO_0000203 ;                        #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:po-11-interval a obo:BFO_0000202 ;                   #: temporal interval
     obo:BFO_0000222 ex:po-11-start ;                    #: has first instant
     obo:BFO_0000224 ex:po-11-end .                      #: has last instant
 
-ex:po-11 a rbo:RBO_0000004 ;                            #: business process
+ex:po-11 a rbaco:RBACO_0000004 ;                        #: business process
     rdfs:label "purchase order po-11"@en ;
     obo:BFO_0000199 ex:po-11-interval ;                 #: occupies temporal region
     cco:ont00001920 ex:plan-internal-po .               #: prescribed by
 
-ex:wi-po-11-complete-form a rbo:RBO_0000048 ;           #: work item
+ex:wi-po-11-complete-form a rbaco:RBACO_0000048 ;       #: work item
     rdfs:label "work item: complete-form in po-11"@en ;
-    rbo:RBO_0000141 ex:ts-complete-form ;               #: is work item for
-    rbo:RBO_0000142 ex:po-11 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-complete-form ;           #: is work item for
+    rbaco:RBACO_0000142 ex:po-11 .                      #: is work item in
 
 ex:issue-wi-po-11-complete-form-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-11-complete-form-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-11-complete-form-start .  #: has first instant
@@ -2381,13 +2381,13 @@ ex:issue-wi-po-11-complete-form a cco:ont00000228 ;     #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-11-complete-form .         #: has output
 
-ex:wi-po-11-approve-po a rbo:RBO_0000048 ;              #: work item
+ex:wi-po-11-approve-po a rbaco:RBACO_0000048 ;          #: work item
     rdfs:label "work item: approve-po in po-11"@en ;
-    rbo:RBO_0000141 ex:ts-approve-po ;                  #: is work item for
-    rbo:RBO_0000142 ex:po-11 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-approve-po ;              #: is work item for
+    rbaco:RBACO_0000142 ex:po-11 .                      #: is work item in
 
 ex:issue-wi-po-11-approve-po-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-11-approve-po-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-11-approve-po-start .  #: has first instant
@@ -2398,13 +2398,13 @@ ex:issue-wi-po-11-approve-po a cco:ont00000228 ;        #: Planned Act
     cco:ont00001833 ex:workflow-engine ;                #: has agent
     cco:ont00001986 ex:wi-po-11-approve-po .            #: has output
 
-ex:wi-po-11-issue-items a rbo:RBO_0000048 ;             #: work item
+ex:wi-po-11-issue-items a rbaco:RBACO_0000048 ;         #: work item
     rdfs:label "work item: issue-items in po-11"@en ;
-    rbo:RBO_0000141 ex:ts-issue-items ;                 #: is work item for
-    rbo:RBO_0000142 ex:po-11 .                          #: is work item in
+    rbaco:RBACO_0000141 ex:ts-issue-items ;             #: is work item for
+    rbaco:RBACO_0000142 ex:po-11 .                      #: is work item in
 
 ex:issue-wi-po-11-issue-items-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:issue-wi-po-11-issue-items-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:issue-wi-po-11-issue-items-start .  #: has first instant
@@ -2416,28 +2416,28 @@ ex:issue-wi-po-11-issue-items a cco:ont00000228 ;       #: Planned Act
     cco:ont00001986 ex:wi-po-11-issue-items .           #: has output
 
 ex:tom-request-activate-manager-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-request-activate-manager-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-request-activate-manager-po-11-start .  #: has first instant
 
 ex:tom-activate-manager-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-activate-manager-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-activate-manager-po-11-start .  #: has first instant
 
 ex:task-po-11-complete-form-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-11-complete-form-end a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:task-po-11-complete-form-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:task-po-11-complete-form-start ;  #: has first instant
     obo:BFO_0000224 ex:task-po-11-complete-form-end .   #: has last instant
 
-ex:task-po-11-complete-form a rbo:RBO_0000041 ;         #: task instance
+ex:task-po-11-complete-form a rbaco:RBACO_0000041 ;     #: task instance
     rdfs:label "tom's task instance for wi-po-11-complete-form"@en ;
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
     obo:BFO_0000199 ex:task-po-11-complete-form-interval ;  #: occupies temporal region
@@ -2445,51 +2445,51 @@ ex:task-po-11-complete-form a rbo:RBO_0000041 ;         #: task instance
     cco:ont00001920 ex:ts-complete-form,                #: prescribed by
         ex:wi-po-11-complete-form .
 
-ex:tom-manager-active-po-11 a rbo:RBO_0000003 ;         #: active role
+ex:tom-manager-active-po-11 a rbaco:RBACO_0000003 ;     #: active role
     rdfs:label "tom's active manager role in po-11"@en ;
     obo:BFO_0000059 ex:def-manager ;                    #: concretizes
     obo:BFO_0000195 ex:tom-manager-assigned-1 ;         #: specifically depends on
     obo:BFO_0000197 ex:tom ;                            #: inheres in
-    rbo:RBO_0000106 ex:po-11 ;                          #: is activated in
-    rbo:RBO_0000136 ex:task-po-11-complete-form .       #: is activated for
+    rbaco:RBACO_0000106 ex:po-11 ;                      #: is activated in
+    rbaco:RBACO_0000136 ex:task-po-11-complete-form .   #: is activated for
 
-ex:tom-activate-manager-po-11 a rbo:RBO_0000026 ;       #: role activation
+ex:tom-activate-manager-po-11 a rbaco:RBACO_0000026 ;   #: role activation
     rdfs:label "activation of manager by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-activate-manager-po-11-interval ;  #: occupies temporal region
     cco:ont00001986 ex:tom-manager-active-po-11 .       #: has output
 
-ex:tom-request-activate-manager-po-11 a rbo:RBO_0000025 ;  #: role activation request
+ex:tom-request-activate-manager-po-11 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "tom asks to activate manager"@en ;
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
     obo:BFO_0000199 ex:tom-request-activate-manager-po-11-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000110 ex:def-manager ;                    #: requests activation of
-    rbo:RBO_0000111 ex:tom-activate-manager-po-11 ;     #: is fulfilled by
-    rbo:RBO_0000137 ex:wi-po-11-complete-form .         #: requests activation for
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-manager ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:tom-activate-manager-po-11 ;  #: is fulfilled by
+    rbaco:RBACO_0000137 ex:wi-po-11-complete-form .     #: requests activation for
 
 ex:tom-req-complete-order-form-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-req-complete-order-form-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-req-complete-order-form-po-11-start .  #: has first instant
 
-ex:tom-req-complete-order-form-po-11 a rbo:RBO_0000024 ;  #: access request
+ex:tom-req-complete-order-form-po-11 a rbaco:RBACO_0000024 ;  #: access request
     rdfs:label "tom asks to op-complete-order-form"@en ;
     obo:BFO_0000132 ex:po-11,                           #: occurrent part of
         ex:task-po-11-complete-form ;
     obo:BFO_0000199 ex:tom-req-complete-order-form-po-11-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:tom ;                            #: has requester
-    rbo:RBO_0000108 ex:op-complete-order-form .         #: requests operation
+    rbaco:RBACO_0000107 ex:tom ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-complete-order-form .     #: requests operation
 
 ex:tom-deactivate-manager-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:tom-deactivate-manager-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:tom-deactivate-manager-po-11-start .  #: has first instant
 
-ex:tom-deactivate-manager-po-11 a rbo:RBO_0000027 ;     #: role deactivation
+ex:tom-deactivate-manager-po-11 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of manager by tom"@en ;
     obo:BFO_0000057 ex:tom ;                            #: has participant
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
@@ -2497,46 +2497,46 @@ ex:tom-deactivate-manager-po-11 a rbo:RBO_0000027 ;     #: role deactivation
     cco:ont00001921 ex:tom-manager-active-po-11 .       #: has input
 
 ex:approval-bot-request-activate-manager-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:approval-bot-request-activate-manager-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:approval-bot-request-activate-manager-po-11-start .  #: has first instant
 
-ex:approval-bot-request-activate-manager-po-11 a rbo:RBO_0000025 ;  #: role activation request
+ex:approval-bot-request-activate-manager-po-11 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "approval-bot asks to activate manager"@en ;
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
     obo:BFO_0000199 ex:approval-bot-request-activate-manager-po-11-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:approval-bot ;                   #: has requester
-    rbo:RBO_0000110 ex:def-manager ;                    #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-11-approve-po ;            #: requests activation for
-    rbo:RBO_0000143 ex:tom .                            #: is performed on behalf of
+    rbaco:RBACO_0000107 ex:approval-bot ;               #: has requester
+    rbaco:RBACO_0000110 ex:def-manager ;                #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-11-approve-po ;        #: requests activation for
+    rbaco:RBACO_0000143 ex:tom .                        #: is performed on behalf of
 
 ex:stores-host-request-activate-stores-po-11-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-12T09:35:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-12T09:35:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:stores-host-request-activate-stores-po-11-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:stores-host-request-activate-stores-po-11-start .  #: has first instant
 
-ex:stores-host-request-activate-stores-po-11 a rbo:RBO_0000025 ;  #: role activation request
+ex:stores-host-request-activate-stores-po-11 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "stores-host asks to activate stores"@en ;
     obo:BFO_0000132 ex:po-11 ;                          #: occurrent part of
     obo:BFO_0000199 ex:stores-host-request-activate-stores-po-11-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:stores-host ;                    #: has requester
-    rbo:RBO_0000110 ex:def-stores ;                     #: requests activation of
-    rbo:RBO_0000137 ex:wi-po-11-issue-items .           #: requests activation for
+    rbaco:RBACO_0000107 ex:stores-host ;                #: has requester
+    rbaco:RBACO_0000110 ex:def-stores ;                 #: requests activation of
+    rbaco:RBACO_0000137 ex:wi-po-11-issue-items .       #: requests activation for
 
-ex:dick-auditor-assigned-1 a rbo:RBO_0000002 ;          #: assigned role
+ex:dick-auditor-assigned-1 a rbaco:RBACO_0000002 ;      #: assigned role
     rdfs:label "dick's assigned auditor role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-auditor ;                    #: concretizes
     obo:BFO_0000197 ex:dick .                           #: inheres in
 
 ex:dick-assign-auditor-1-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-20T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-20T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dick-assign-auditor-1-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:dick-assign-auditor-1-start .    #: has first instant
 
-ex:dick-assign-auditor-1 a rbo:RBO_0000028 ;            #: role assignment
+ex:dick-assign-auditor-1 a rbaco:RBACO_0000028 ;        #: role assignment
     rdfs:label "assignment of dick to auditor"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:dick ;                           #: has participant

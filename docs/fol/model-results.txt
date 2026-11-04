@@ -1,5 +1,5 @@
 Explicit-model checks (build_model.py, LADR clausetester), 2026-10-29. Kept as a record: the script and the m1 and m3 theories were retired on 2026-11-01 (docs/design-record.md D18)
-Theory: folrun m1 / m3 inputs: RBO 23 + BRIDGE 32 + BFO 207 axioms + scenario facts
+Theory: folrun m1 / m3 inputs: RBACO 23 + BRIDGE 32 + BFO 207 axioms + scenario facts
 == whole
 elements 20; formulas 275; % interp 1 models 297 of 297 clauses.
 == same
@@ -7,18 +7,18 @@ elements 20; formulas 280; % interp 1 models 302 of 302 clauses.
 goal: false in the model
 == control (one fact removed: concretizes(a1, dsub, t1))
 elements 20; formulas 275; % interp 1 models 295 of 297 clauses.
-FALSE: rbo_r2
+FALSE: rbaco_r2
 FALSE: concretizes(c_a1,c_dsub,c_t1).
 
 Hand-specified models (tools/check_hand_model.py, LADR clausetester), 2026-10-31; rechecked 2026-11-03 on the theories after docs/design-record.md D19
-Theories: m-t1-pdsd-same-content.in and m-t1-pdsd-same-instant.in as run_fol.py wrote them on 2026-11-03: RBO 48 + BRIDGE 50 axioms + 16 and 20 lines of scenario facts. On the theories of 2026-10-31, with 15 and 19 lines, the three counts below were 136 of 136, 147 of 147 and 134 of 136
+Theories: m-t1-pdsd-same-content.in and m-t1-pdsd-same-instant.in as run_fol.py wrote them on 2026-11-03: RBACO 48 + BRIDGE 50 axioms + 16 and 20 lines of scenario facts. On the theories of 2026-10-31, with 15 and 19 lines, the three counts below were 136 of 136, 147 of 147 and 134 of 136
 == hand-pdsd-same-content (probe 1)
 elements 3; formulas 137; false here: 0; % interp 1 models 137 of 137 clauses.
-goal rbo_refuses_permission_dsd(c_pd, c_q2): true here; clausetester: % interp 1 models 1 of 1 clauses.
+goal rbaco_refuses_permission_dsd(c_pd, c_q2): true here; clausetester: % interp 1 models 1 of 1 clauses.
 == hand-pdsd-same-instant (probe 3)
 elements 5; formulas 149; false here: 0; % interp 1 models 149 of 149 clauses.
-goals rbo_refuses_permission_dsd(c_pd, c_q2) and -rbo_refuses_permission_dsd(c_pd, c_q1): true here; clausetester: % interp 1 models 2 of 2 clauses.
+goals rbaco_refuses_permission_dsd(c_pd, c_q2) and -rbaco_refuses_permission_dsd(c_pd, c_q1): true here; clausetester: % interp 1 models 2 of 2 clauses.
 == control (probe 1 with Tom's assigned role not concretizing the Approver definition)
 elements 3; formulas 137; false here: 2; % interp 1 models 135 of 137 clauses.
-FALSE: rbo_r2
+FALSE: rbaco_r2
 FALSE: owl_active_role_sdep

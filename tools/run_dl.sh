@@ -1,13 +1,13 @@
 #!/bin/sh
-# Run HermiT (via ROBOT) on the RBO ontologies and on each dataset merged with its derived file (the
+# Run HermiT (via ROBOT) on the RBACO ontologies and on each dataset merged with its derived file (the
 # regression probes also with data/purchase.ttl, which they extend).
-# Usage: run_dl.sh <rbo-dir> <robot.jar> <out-dir>
+# Usage: run_dl.sh <rbaco-bfo-dir> <robot.jar> <out-dir>
 R="$1"; JAR="$2"; OUT="$3"
 mkdir -p "$OUT"
 cd "$R" || exit 2
 robot() { java -Xmx6G -jar "$JAR" "$@"; }
 
-for ont in rbo rbo-domain; do
+for ont in rbaco-bfo rbaco-bfo-domain; do
   echo "=== $ont"
   robot --catalog catalog-v001.xml merge --input "$ont.ttl" --output "$OUT/$ont-merged.owl" || exit 3
   robot --catalog catalog-v001.xml reason --input "$OUT/$ont-merged.owl" --reasoner HermiT \

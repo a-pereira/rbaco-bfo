@@ -1,5 +1,5 @@
 #!/bin/sh
-# Usage: run_dl_controls.sh <rbo-dir> <robot.jar> <controls-dir>
+# Usage: run_dl_controls.sh <rbaco-bfo-dir> <robot.jar> <controls-dir>
 R="$1"; JAR="$2"; C="$3"
 cd "$R" || exit 2
 for f in "$C"/c*.ttl; do

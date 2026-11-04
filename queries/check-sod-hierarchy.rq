@@ -4,70 +4,70 @@
 # errors: no axiom is broken. (A senior-junior pair in a static role set is check-constraint-shape.rq's
 # "hierarchical chain in SSD set", which NIST forbids.)
 #   dynamic role set with senior-junior pair - activating the senior alone never fires the constraint,
-#       since only explicit activations count (clif [rbo-s3]), while the senior's holder receives the
-#       junior's regulations ([rbo-a0]): the hierarchy bypass. Remedies: re-engineer the hierarchy
+#       since only explicit activations count (clif [rbaco-s3]), while the senior's holder receives the
+#       junior's regulations ([rbaco-a0]): the hierarchy bypass. Remedies: re-engineer the hierarchy
 #       with a role junior to the senior only (Botha and Eloff 2001, Figure 6, p.676), or constrain
 #       permissions or tasks instead.
 #   static task set sharing a required role  - every holder of that role violates the constraint
 #   static task set with senior required role - every holder of the senior role violates it (the
 #       static form of the same problem)
-#   dynamic set partly task-bound - a task-bound operation requirement (RBO_0000050) in force, in a
+#   dynamic set partly task-bound - a task-bound operation requirement (RBACO_0000050) in force, in a
 #       compatible scope, names memberA, one of the set's operations, but none names memberB. The set's
 #       operations are those of the permissions in force assigned to its role definitions (not
 #       inherited), its permissions' operations, or its task specifications' required operations. A
 #       requirement is compatible when it applies within no plan or within a plan the set applies
 #       within. An unbound activation then still reaches memberB, so the set is enforced only in part
-#       ([rbo-g3]). Name every operation of the set, or none.
+#       ([rbaco-g3]). Name every operation of the set, or none.
 #   permission set operation under another object scope - memberB, a permission in force outside the
 #       set, has the operation of memberA, a member, but an object scope (named object or object
 #       description) no member has. Permissions count by content (derive-permission-content.rq), so
 #       memberB is not counted. Add it to the set if the constraint means the operation on any object.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?constraint ?problem ?memberA ?memberB
 WHERE {
-  ?constraint rbow:inForceAt ?evalTime .
+  ?constraint rbacow:inForceAt ?evalTime .
   {
-    ?constraint a rbo:RBO_0000014 ; rbo:RBO_0000114 ?memberA , ?memberB .
-    ?memberA rbo:RBO_0000120+ ?memberB .
+    ?constraint a rbaco:RBACO_0000014 ; rbaco:RBACO_0000114 ?memberA , ?memberB .
+    ?memberA rbaco:RBACO_0000120+ ?memberB .
     BIND ("dynamic role set with senior-junior pair" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000135 ?memberA , ?memberB .
-    ?memberA rbo:RBO_0000132 ?d . ?memberB rbo:RBO_0000132 ?d .
+    ?constraint a rbaco:RBACO_0000013 ; rbaco:RBACO_0000135 ?memberA , ?memberB .
+    ?memberA rbaco:RBACO_0000132 ?d . ?memberB rbaco:RBACO_0000132 ?d .
     FILTER (STR(?memberA) < STR(?memberB))
     BIND ("static task set sharing a required role" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000135 ?memberA , ?memberB .
-    ?memberA rbo:RBO_0000132 ?dA . ?memberB rbo:RBO_0000132 ?dB .
-    ?dA rbo:RBO_0000120+ ?dB .
+    ?constraint a rbaco:RBACO_0000013 ; rbaco:RBACO_0000135 ?memberA , ?memberB .
+    ?memberA rbaco:RBACO_0000132 ?dA . ?memberB rbaco:RBACO_0000132 ?dB .
+    ?dA rbaco:RBACO_0000120+ ?dB .
     BIND ("static task set with senior required role" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000014 .
-    { ?constraint rbo:RBO_0000114 ?dA . ?pA rbo:RBO_0000105 ?dA ; rbo:RBO_0000101 ?memberA ;
-                  a rbo:RBO_0000007 ; rbow:inForceAt ?evalTime }
-    UNION { ?constraint rbo:RBO_0000134/rbo:RBO_0000101 ?memberA }
-    UNION { ?constraint rbo:RBO_0000135/rbo:RBO_0000133 ?memberA }
-    { ?constraint rbo:RBO_0000114 ?dB . ?pB rbo:RBO_0000105 ?dB ; rbo:RBO_0000101 ?memberB ;
-                  a rbo:RBO_0000007 ; rbow:inForceAt ?evalTime }
-    UNION { ?constraint rbo:RBO_0000134/rbo:RBO_0000101 ?memberB }
-    UNION { ?constraint rbo:RBO_0000135/rbo:RBO_0000133 ?memberB }
-    FILTER EXISTS { ?hA a rbo:RBO_0000050 ; rbo:RBO_0000148 ?memberA ; rbow:inForceAt ?evalTime .
-                    FILTER (NOT EXISTS { ?hA rbo:RBO_0000115 ?anyA }
-                            || EXISTS { ?hA rbo:RBO_0000115 ?plA . ?constraint rbo:RBO_0000115 ?plA }) }
-    FILTER NOT EXISTS { ?hB a rbo:RBO_0000050 ; rbo:RBO_0000148 ?memberB ; rbow:inForceAt ?evalTime .
-                        FILTER (NOT EXISTS { ?hB rbo:RBO_0000115 ?anyB }
-                                || EXISTS { ?hB rbo:RBO_0000115 ?plB . ?constraint rbo:RBO_0000115 ?plB }) }
+    ?constraint a rbaco:RBACO_0000014 .
+    { ?constraint rbaco:RBACO_0000114 ?dA . ?pA rbaco:RBACO_0000105 ?dA ; rbaco:RBACO_0000101 ?memberA ;
+                  a rbaco:RBACO_0000007 ; rbacow:inForceAt ?evalTime }
+    UNION { ?constraint rbaco:RBACO_0000134/rbaco:RBACO_0000101 ?memberA }
+    UNION { ?constraint rbaco:RBACO_0000135/rbaco:RBACO_0000133 ?memberA }
+    { ?constraint rbaco:RBACO_0000114 ?dB . ?pB rbaco:RBACO_0000105 ?dB ; rbaco:RBACO_0000101 ?memberB ;
+                  a rbaco:RBACO_0000007 ; rbacow:inForceAt ?evalTime }
+    UNION { ?constraint rbaco:RBACO_0000134/rbaco:RBACO_0000101 ?memberB }
+    UNION { ?constraint rbaco:RBACO_0000135/rbaco:RBACO_0000133 ?memberB }
+    FILTER EXISTS { ?hA a rbaco:RBACO_0000050 ; rbaco:RBACO_0000148 ?memberA ; rbacow:inForceAt ?evalTime .
+                    FILTER (NOT EXISTS { ?hA rbaco:RBACO_0000115 ?anyA }
+                            || EXISTS { ?hA rbaco:RBACO_0000115 ?plA . ?constraint rbaco:RBACO_0000115 ?plA }) }
+    FILTER NOT EXISTS { ?hB a rbaco:RBACO_0000050 ; rbaco:RBACO_0000148 ?memberB ; rbacow:inForceAt ?evalTime .
+                        FILTER (NOT EXISTS { ?hB rbaco:RBACO_0000115 ?anyB }
+                                || EXISTS { ?hB rbaco:RBACO_0000115 ?plB . ?constraint rbaco:RBACO_0000115 ?plB }) }
     BIND ("dynamic set partly task-bound" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000012 ; rbo:RBO_0000134 ?memberA .
-    ?memberA rbo:RBO_0000101 ?op .
-    ?memberB a rbo:RBO_0000007 ; rbo:RBO_0000101 ?op ; rbow:inForceAt ?evalTime ;
-             rbow:contentKey ?keyB .
-    FILTER NOT EXISTS { ?constraint rbo:RBO_0000134/rbow:contentKey ?keyB }
+    ?constraint a rbaco:RBACO_0000012 ; rbaco:RBACO_0000134 ?memberA .
+    ?memberA rbaco:RBACO_0000101 ?op .
+    ?memberB a rbaco:RBACO_0000007 ; rbaco:RBACO_0000101 ?op ; rbacow:inForceAt ?evalTime ;
+             rbacow:contentKey ?keyB .
+    FILTER NOT EXISTS { ?constraint rbaco:RBACO_0000134/rbacow:contentKey ?keyB }
     BIND ("permission set operation under another object scope" AS ?problem)
   }
 }

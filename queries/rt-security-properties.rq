@@ -5,18 +5,18 @@
 #   access        HQ.marketing contains HQ.ops
 #   availability  Alice is always a member of HQ.marketing
 #   safety        no principal other than Alice and Bob can become a member of HQ.marketing
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
-PREFIX ex:   <https://example.org/rbac-bfo/data/>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
+PREFIX ex:   <https://example.org/rbaco/data/>
 SELECT ?property ?result
 WHERE {
   VALUES ?property { "restriction" "access" "availability" "safety" }
-  BIND (EXISTS { ex:rt-HQ.marketing rbow:alwaysWithin ex:rt-HR.employee }
-        && EXISTS { ex:rt-HQ.ops rbow:alwaysWithin ex:rt-HR.employee } AS ?restriction)
-  BIND (EXISTS { ex:rt-HQ.ops rbow:alwaysWithin ex:rt-HQ.marketing } AS ?access)
-  BIND (EXISTS { ex:rt-Alice rbow:alwaysMemberOf ex:rt-HQ.marketing } AS ?availability)
-  BIND (EXISTS { ex:rt-HQ.marketing rbow:closed true }
-        && NOT EXISTS { ex:rt-HQ.marketing rbow:possibleMember ?other .
+  BIND (EXISTS { ex:rt-HQ.marketing rbacow:alwaysWithin ex:rt-HR.employee }
+        && EXISTS { ex:rt-HQ.ops rbacow:alwaysWithin ex:rt-HR.employee } AS ?restriction)
+  BIND (EXISTS { ex:rt-HQ.ops rbacow:alwaysWithin ex:rt-HQ.marketing } AS ?access)
+  BIND (EXISTS { ex:rt-Alice rbacow:alwaysMemberOf ex:rt-HQ.marketing } AS ?availability)
+  BIND (EXISTS { ex:rt-HQ.marketing rbacow:closed true }
+        && NOT EXISTS { ex:rt-HQ.marketing rbacow:possibleMember ?other .
                         FILTER (?other NOT IN (ex:rt-Alice, ex:rt-Bob)) } AS ?safety)
   BIND (IF(?property = "restriction", ?restriction,
         IF(?property = "access", ?access,

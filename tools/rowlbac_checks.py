@@ -1,6 +1,6 @@
 """Re-run three of ROWLBAC's own constructs, as the paper prints them, to test claims the critique makes.
 
-Usage: rowlbac_checks.py <rbo-dir>
+Usage: rowlbac_checks.py <rbaco-bfo-dir>
 
 1. Section 3.3.5 DSoD rule (roles as classes), translated from N3 to SPARQL, over the section 3.3
    assertions for Bob. Run twice: on the disjointWith triple as printed, and with its symmetric

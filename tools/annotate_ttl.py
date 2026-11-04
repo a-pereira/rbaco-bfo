@@ -1,20 +1,20 @@
-"""Write rdfs:label comments into RBO's Turtle, or check that they are current.
+"""Write rdfs:label comments into RBACO's Turtle, or check that they are current.
 
-Usage: annotate_ttl.py <rbo-dir> [--check]
+Usage: annotate_ttl.py <rbaco-bfo-dir> [--check]
 
-Files: rbo.ttl, rbo-domain.ttl, data/*.ttl and data/derived/*.ttl. build_data.py and run_queries.py call
+Files: rbaco-bfo.ttl, rbaco-bfo-domain.ttl, data/*.ttl and data/derived/*.ttl. build_data.py and run_queries.py call
 annotate_file on each data file they write, so regenerated data keeps its comments. In the data, the
 individuals' own IRIs are readable and carry no comment; the classes and properties they use do.
 
-RBO's IRIs are opaque (RBO_0000113, cco:ont00001808), so each term block gets a header line naming its
+RBACO's IRIs are opaque (RBACO_0000113, cco:ont00001808), so each term block gets a header line naming its
 label, and each line that names a labeled IRI outside the subject position gets a trailing comment with
 the labels in the order the IRIs appear:
 
-    #: rbo:RBO_0000113  cites regulation
-    rbo:RBO_0000113 rdf:type owl:ObjectProperty ;
+    #: rbaco:RBACO_0000113  cites regulation
+    rbaco:RBACO_0000113 rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf cco:ont00001808 ;                #: is about
 
-Labels come from rbo.ttl, rbo-domain.ttl and imports/*.ttl, never from the data. W3C, Dublin Core and SKOS terms are not
+Labels come from rbaco-bfo.ttl, rbaco-bfo-domain.ttl and imports/*.ttl, never from the data. W3C, Dublin Core and SKOS terms are not
 annotated. The tool owns every comment beginning "#:" and nothing else: it removes them and writes them
 afresh, so a second run changes nothing, and banners and hand-written comments are kept. A comment is not
 part of the graph, and before writing, the tool checks that the new text parses to a graph isomorphic to
@@ -32,7 +32,7 @@ import sys
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDFS
 
-FILES = ["rbo.ttl", "rbo-domain.ttl"]
+FILES = ["rbaco-bfo.ttl", "rbaco-bfo-domain.ttl"]
 SKIP_NS = ("http://www.w3.org/", "http://purl.org/dc/", "http://www.w3.org/2004/02/skos/")
 MARK = "#:"
 COLUMN = 56

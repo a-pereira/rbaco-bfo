@@ -1,6 +1,6 @@
 """Run every query in queries/ against the example datasets and record the results.
 
-Usage: run_queries.py <rbo-dir>
+Usage: run_queries.py <rbaco-bfo-dir>
 
 For each dataset, first close its rdf:type triples under rdfs:subClassOf, as the path a/rdfs:subClassOf*
 reads them, so that the queries match types with plain rdf:type; the reports and decisions written later
@@ -17,7 +17,7 @@ membership and the analysis bounds to a fixpoint and test three counter-states.
 ?evalTime in a query file is a placeholder for an xsd:dateTime literal. A query called with a time is
 translated once, with a stand-in literal in that place, and each call writes its time over the stand-in,
 which gives the algebra the substituted text would (prepare and q below). rdflib evaluates the queries with
-two changes to the order of its work, neither of which changes a result (rbo_eval below). Both rely on how
+two changes to the order of its work, neither of which changes a result (rbaco_eval below). Both rely on how
 rdflib stores a translated query, and were checked against its own evaluation under rdflib 7.6.0 only; under
 another version the text is parsed at each call and rdflib's evaluator works unchanged, more slowly.
 Writes data/derived/<dataset>-derived.ttl, with label comments (annotate_ttl.py), and docs/query-results.md.
@@ -37,11 +37,11 @@ from pyparsing import ParseResults
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import annotate_ttl
 
-RBO = Namespace("https://example.org/rbac-bfo/")
-RBOW = Namespace("https://example.org/rbac-bfo/work#")
+RBACO = Namespace("https://w3id.org/rbaco/bfo/")
+RBACOW = Namespace("https://example.org/rbaco/work#")
 OBO = Namespace("http://purl.obolibrary.org/obo/")
 CCO = Namespace("https://www.commoncoreontologies.org/")
-EX = Namespace("https://example.org/rbac-bfo/data/")
+EX = Namespace("https://example.org/rbaco/data/")
 
 d = sys.argv[1]
 qdir = os.path.join(d, "queries")
@@ -54,7 +54,7 @@ used = set()
 
 # Two changes to the order in which rdflib does a query's work. Neither changes a solution.
 EXISTS = ("Builtin_EXISTS", "Builtin_NOTEXISTS")
-LEFT = {"Join": "p1", "LeftJoin": "p1", "Minus": "p1", "Filter": "p", "Extend": "p", "RboFilter": "p"}
+LEFT = {"Join": "p1", "LeftJoin": "p1", "Minus": "p1", "Filter": "p", "Extend": "p", "RbacoFilter": "p"}
 
 
 def join_order(ctx, part):
@@ -143,7 +143,7 @@ def pushdown(part):
             node = clone(chain[i], {LEFT[chain[i].name]: node})
         cheap = [c for c in placed[i] if not costly(c)]
         for group in ([cheap] if cheap else []) + [[c] for c in placed[i] if costly(c)]:
-            node = CompValue("RboFilter", expr=and_(*group), p=node, _vars=dict.get(node, "_vars"),
+            node = CompValue("RbacoFilter", expr=and_(*group), p=node, _vars=dict.get(node, "_vars"),
                              scope=dict.get(part, "_vars"), isolated=not part.no_isolated_scope)
     return node
 
@@ -156,7 +156,7 @@ def clone(p, items):
     return c
 
 
-def rbo_filter(ctx, part):
+def rbaco_filter(ctx, part):
     """rdflib's evalFilter, with the scope of the filter it replaces."""
     expr, scope = dict.__getitem__(part, "expr"), dict.__getitem__(part, "scope")
     isolated = dict.__getitem__(part, "isolated")
@@ -165,15 +165,15 @@ def rbo_filter(ctx, part):
             yield c
 
 
-def rbo_eval(ctx, part):
+def rbaco_eval(ctx, part):
     if part.name == "BGP":
         return evalBGP(ctx, join_order(ctx, part))
-    if part.name == "RboFilter":
-        return rbo_filter(ctx, part)
+    if part.name == "RbacoFilter":
+        return rbaco_filter(ctx, part)
     if part.name == "Filter":
-        rewritten = part.__dict__.get("rbo_pushdown")
+        rewritten = part.__dict__.get("rbaco_pushdown")
         if rewritten is None:
-            rewritten = part.__dict__["rbo_pushdown"] = pushdown(part)
+            rewritten = part.__dict__["rbaco_pushdown"] = pushdown(part)
         if rewritten is not False:
             return evalPart(ctx, rewritten)
     raise NotImplementedError()
@@ -182,7 +182,7 @@ def rbo_eval(ctx, part):
 # The rdflib version the hooks and the prepared queries were checked under (module docstring).
 CHECKED = rdflib.__version__ == "7.6.0"
 if CHECKED:
-    CUSTOM_EVALS["rbo"] = rbo_eval
+    CUSTOM_EVALS["rbaco"] = rbaco_eval
 
 
 def out(line=""):
@@ -270,7 +270,7 @@ def q(name, g, at=None):
             t = dict.__getitem__(c, k) if isinstance(c, dict) else c[k]
             c[k] = t[:i] + (lit,) + t[i + 1:]
     for f in filters:
-        f.__dict__.pop("rbo_pushdown", None)
+        f.__dict__.pop("rbaco_pushdown", None)
     res = g.query(query)
     res.bindings  # evaluate a SELECT now, before a later call writes another time into the same algebra
     return res
@@ -308,7 +308,7 @@ def short(n):
     if n is None:
         return ""
     s = str(n)
-    for pre, ns in (("ex:", EX), ("rbo:", RBO)):
+    for pre, ns in (("ex:", EX), ("rbaco:", RBACO)):
         s = s.replace(str(ns), pre)
     return s
 
@@ -362,14 +362,14 @@ def qtable(name, res):
 
 t0 = time.time()
 onto = Graph()
-for f in ["rbo.ttl", "rbo-domain.ttl"] + sorted(glob.glob(os.path.join(d, "imports", "*.ttl"))):
+for f in ["rbaco-bfo.ttl", "rbaco-bfo-domain.ttl"] + sorted(glob.glob(os.path.join(d, "imports", "*.ttl"))):
     onto.parse(os.path.join(d, f) if not os.path.isabs(f) else f, format="turtle")
-out(f"Ontology closure loaded: {len(onto)} triples (rbo, rbo-domain, BFO 2020 core, 7 CCO modules, IAO extract).")
+out(f"Ontology closure loaded: {len(onto)} triples (rbaco-bfo, rbaco-bfo-domain, BFO 2020 core, 7 CCO modules, IAO extract).")
 out()
 
-TIMED = """PREFIX rbo: <https://example.org/rbac-bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT DISTINCT ?t WHERE { VALUES ?c { rbo:RBO_0000024 rbo:RBO_0000025 rbo:RBO_0000028 rbo:RBO_0000031 }
-  ?x a ?c ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t } ORDER BY ?t"""
+TIMED = """PREFIX rbaco: <https://w3id.org/rbaco/bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT DISTINCT ?t WHERE { VALUES ?c { rbaco:RBACO_0000024 rbaco:RBACO_0000025 rbaco:RBACO_0000028 rbaco:RBACO_0000031 }
+  ?x a ?c ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t } ORDER BY ?t"""
 
 
 def snapshot(g, at, prev):
@@ -402,7 +402,7 @@ def run_rbac(name, title, retype=None, brief=False, worklists=(), extra=None, si
     g = onto + data
     close = type_closure(g)
     derived = Graph()
-    for p, ns in (("rbo", RBO), ("ex", EX), ("obo", OBO), ("cco", CCO)):
+    for p, ns in (("rbaco", RBACO), ("ex", EX), ("obo", OBO), ("cco", CCO)):
         derived.bind(p, ns)
     for name_ in ("derive-permission-content", "derive-counted-as-one"):
         for tr in q(name_, g):
@@ -446,28 +446,28 @@ def run_rbac(name, title, retype=None, brief=False, worklists=(), extra=None, si
     table(verdicts, ["time", "request", "definition", "verdict", "constraint", "fulfilled", "consistent"], keys=(0,))
     out("### Access decisions (decide-access.rq)")
     out()
-    rows = g.query("""PREFIX rbo: <https://example.org/rbac-bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
+    rows = g.query("""PREFIX rbaco: <https://w3id.org/rbaco/bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
       SELECT ?req ?op ?obj ?cls ?t (GROUP_CONCAT(DISTINCT STR(?cite); separator=" ") AS ?cites) WHERE {
-        ?dec rbo:RBO_0000112 ?req ; a ?cls . VALUES ?cls { rbo:RBO_0000022 rbo:RBO_0000023 }
-        ?req rbo:RBO_0000108 ?op ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
-        OPTIONAL { ?req rbo:RBO_0000109 ?obj } OPTIONAL { ?dec rbo:RBO_0000113 ?cite } }
+        ?dec rbaco:RBACO_0000112 ?req ; a ?cls . VALUES ?cls { rbaco:RBACO_0000022 rbaco:RBACO_0000023 }
+        ?req rbaco:RBACO_0000108 ?op ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t .
+        OPTIONAL { ?req rbaco:RBACO_0000109 ?obj } OPTIONAL { ?dec rbaco:RBACO_0000113 ?cite } }
       GROUP BY ?req ?op ?obj ?cls ?t ORDER BY ?t ?req""")
-    table([(r.req, r.op, r.obj, "grant" if r.cls == RBO.RBO_0000022 else "denial",
+    table([(r.req, r.op, r.obj, "grant" if r.cls == RBACO.RBACO_0000022 else "denial",
             " ".join(short(URIRef(c)) for c in str(r.cites).split()) if r.cites else "")
            for r in rows if shown(r.t)],
           ["request", "operation", "object", "decision", "cites"])
     out("### Conflict reports (derive-ssd-conflicts.rq, derive-permission-dsd-conflicts.rq, "
         "derive-task-dsd-conflicts.rq, derive-dsd-conflicts.rq)")
     out()
-    rows = g.query("""PREFIX rbo: <https://example.org/rbac-bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
+    rows = g.query("""PREFIX rbaco: <https://w3id.org/rbaco/bfo/> PREFIX obo: <http://purl.obolibrary.org/obo/>
       SELECT ?rep ?cls ?who ?c ?act ?t (GROUP_CONCAT(DISTINCT STR(?r); separator=" ") AS ?members) ?why WHERE {
-        ?rep a ?cls . VALUES ?cls { rbo:RBO_0000019 rbo:RBO_0000020 }
-        ?rep rbo:RBO_0000124 ?who ; rbo:RBO_0000125 ?c ; rbo:RBO_0000128 ?act ;
-             rbo:RBO_0000126|rbo:RBO_0000146|rbo:RBO_0000147 ?r ;
-             rbo:RBO_0000204 ?why .
-        OPTIONAL { ?act obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t } }
+        ?rep a ?cls . VALUES ?cls { rbaco:RBACO_0000019 rbaco:RBACO_0000020 }
+        ?rep rbaco:RBACO_0000124 ?who ; rbaco:RBACO_0000125 ?c ; rbaco:RBACO_0000128 ?act ;
+             rbaco:RBACO_0000126|rbaco:RBACO_0000146|rbaco:RBACO_0000147 ?r ;
+             rbaco:RBACO_0000204 ?why .
+        OPTIONAL { ?act obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t } }
       GROUP BY ?rep ?cls ?who ?c ?act ?t ?why ORDER BY ?rep""")
-    table([(r.rep, "SSD" if r.cls == RBO.RBO_0000019 else "DSD", r.who, r.c, r.act,
+    table([(r.rep, "SSD" if r.cls == RBACO.RBACO_0000019 else "DSD", r.who, r.c, r.act,
             " ".join(short(URIRef(x)) for x in str(r.members).split()), r.why) for r in rows if shown(r.t)],
           ["report", "kind", "subject", "constraint", "act", "members counted", "justification"], keys=(0,))
     last = times[-1]
@@ -548,9 +548,9 @@ def run_probes():
     rows = []
     for req, (want, cites) in PROBE_DECISIONS.items():
         dec = EX[f"{req}-decision"]
-        kinds = {"grant" for c in g.objects(dec, RDF.type) if c == RBO.RBO_0000022} | \
-                {"denial" for c in g.objects(dec, RDF.type) if c == RBO.RBO_0000023}
-        got_cites = sorted(local(c) for c in g.objects(dec, RBO.RBO_0000113))
+        kinds = {"grant" for c in g.objects(dec, RDF.type) if c == RBACO.RBACO_0000022} | \
+                {"denial" for c in g.objects(dec, RDF.type) if c == RBACO.RBACO_0000023}
+        got_cites = sorted(local(c) for c in g.objects(dec, RBACO.RBACO_0000113))
         got = " ".join(sorted(kinds)) + (f" citing {' '.join(got_cites) or 'nothing'}" if cites is not None else "")
         exp = want + (f" citing {' '.join(cites) or 'nothing'}" if cites is not None else "")
         rows.append((req, exp, got))
@@ -559,9 +559,9 @@ def run_probes():
         verdict, consistent = seen.get(areq, ("(no verdict)", False))
         rows.append((areq, f"{want}, consistent", f"{verdict}, {'consistent' if consistent else 'inconsistent'}"))
     act = EX["probe-issue-inh"]
-    got_ssd = sorted(local(r) for r in g.subjects(RBO.RBO_0000128, act))
+    got_ssd = sorted(local(r) for r in g.subjects(RBACO.RBACO_0000128, act))
     rows.append(("SSD reports at probe-issue-inh", " ".join(PROBE_SSD), " ".join(got_ssd)))
-    got_dsd = sorted(local(r) for r in g.subjects(RBO.RBO_0000128, EX["tom-request-activate-apm-probe-5"]))
+    got_dsd = sorted(local(r) for r in g.subjects(RBACO.RBACO_0000128, EX["tom-request-activate-apm-probe-5"]))
     rows.append(("DSD reports on tom-request-activate-apm-probe-5", "(none)", " ".join(got_dsd) or "(none)"))
     res = q("check-active-roles", g)
     got_active = sorted((local(r.active), str(r.problem)) for r in res)
@@ -590,7 +590,7 @@ def fixpoint(g, name, at, cap=50):
 
 
 def members(g, role):
-    return sorted(short(m) for m in g.objects(EX[role], RBO.RBO_0000131))
+    return sorted(short(m) for m in g.objects(EX[role], RBACO.RBACO_0000131))
 
 
 def rt_state(data, at, label):
@@ -622,11 +622,11 @@ def run_rt():
     res = q("rt-security-properties", g, at)
     out("**rt-security-properties.rq**"); out()
     table(list(res), [str(v) for v in res.vars])
-    within = sorted((short(a), short(b)) for a, b in g.subject_objects(RBOW.alwaysWithin) if a != b)
+    within = sorted((short(a), short(b)) for a, b in g.subject_objects(RBACOW.alwaysWithin) if a != b)
     out("Derived alwaysWithin pairs (non-reflexive): " + "; ".join(f"{a} in {b}" for a, b in within))
     out()
-    growth = set(g.objects(EX["rt-analysis"], RBO.RBO_0000129))
-    shrink = set(g.objects(EX["rt-analysis"], RBO.RBO_0000130))
+    growth = set(g.objects(EX["rt-analysis"], RBACO.RBACO_0000129))
+    shrink = set(g.objects(EX["rt-analysis"], RBACO.RBACO_0000130))
     later = "2026-01-03T00:00:00Z"
 
     def counter(label, add=None, retire=None):
@@ -635,20 +635,20 @@ def run_rt():
             head, member, issuer = add
             assert EX[head] not in growth, f"{head} is growth-restricted"
             st, act = EX["rt-stmt-cs"], EX["rt-cs-issue"]
-            cs.add((st, RDF.type, RBO.RBO_0000035)); cs.add((st, RBO.RBO_0000116, EX[head]))
-            cs.add((st, RBO.RBO_0000122, EX[member]))
+            cs.add((st, RDF.type, RBACO.RBACO_0000035)); cs.add((st, RBACO.RBACO_0000116, EX[head]))
+            cs.add((st, RBACO.RBACO_0000122, EX[member]))
             cs.add((EX[member], RDF.type, CCO.ont00001262))
-            cs.add((act, RDF.type, RBO.RBO_0000031)); cs.add((act, CCO.ont00001986, st))
+            cs.add((act, RDF.type, RBACO.RBACO_0000031)); cs.add((act, CCO.ont00001986, st))
             cs.add((act, CCO.ont00001833, EX[issuer]))
         if retire:
-            head = data.value(EX[retire], RBO.RBO_0000116)
+            head = data.value(EX[retire], RBACO.RBACO_0000116)
             assert head not in shrink, f"{short(head)} is shrink-restricted"
             act = EX["rt-cs-retire"]
-            cs.add((act, RDF.type, RBO.RBO_0000032)); cs.add((act, CCO.ont00001921, EX[retire]))
+            cs.add((act, RDF.type, RBACO.RBACO_0000032)); cs.add((act, CCO.ont00001921, EX[retire]))
         act = EX["rt-cs-issue"] if add else EX["rt-cs-retire"]
         iv, i0 = EX["rt-cs-interval"], EX["rt-cs-start"]
         cs.add((act, OBO.BFO_0000199, iv)); cs.add((iv, OBO.BFO_0000222, i0))
-        cs.add((i0, RBO.RBO_0000205, Literal(later, datatype=XSD.dateTime)))
+        cs.add((i0, RBACO.RBACO_0000205, Literal(later, datatype=XSD.dateTime)))
         return rt_state(cs, later, label)
 
     out("### Counter-states (each respects the analysis's growth and shrink restrictions)")
@@ -681,7 +681,7 @@ out()
 run_rbac("us-persons", "ROWLBAC section 3.1 scenario (data/us-persons.ttl)")
 run_rbac("code-review", "Code change review CR-42 (data/code-review.ttl)")
 run_rbac("code-review", "CR-42 variant with same-time DSD counting", brief=True,
-         retype=("dsd-submitter-approver", RBO.RBO_0000016, RBO.RBO_0000015))
+         retype=("dsd-submitter-approver", RBACO.RBACO_0000016, RBACO.RBACO_0000015))
 run_rbac("abac", "ROWLBAC section 4.1 attribute examples (data/abac.ttl)")
 run_rbac("purchase", "Botha and Eloff 2001 purchase order workflow (data/purchase.ttl)",
          worklists=("2026-01-07T09:30:00Z", "2026-01-11T09:30:00Z", "2026-01-11T10:05:00Z"))

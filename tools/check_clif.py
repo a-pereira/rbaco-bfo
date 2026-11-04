@@ -58,7 +58,7 @@ def walk(node, bound, top):
             problems.append(f"nested term in {h}")
         elif h == "instance-of" and k == 2:
             continue  # the universal, a constant (BFO style)
-        elif a not in bound and not a.startswith(("rbo-", "rt-", "cco-")) and not re.fullmatch(r"\d+", a):
+        elif a not in bound and not a.startswith(("rbaco-", "rt-", "cco-")) and not re.fullmatch(r"\d+", a):
             problems.append(f"free variable {a} in ({h} ...)")
 for form in tree:
     walk(form, set(), True)

@@ -1,14 +1,14 @@
 @prefix cco: <https://www.commoncoreontologies.org/> .
-@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix ex: <https://example.org/rbaco/data/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:abac a owl:Ontology ;
     rdfs:comment "ROWLBAC section 4.1: faculty can use any printer located in a classroom (an OWL defined class), and a university member can use any device located in her office (a role value map, decided by query only). Marie holds both roles."@en ;
-    owl:imports rbo:rbo-domain.owl .                    #: RBO domain module: ROWLBAC scenario and attribute examples
+    owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:officer a cco:ont00001262 ;                          #: Person
     rdfs:label "the security officer"@en .
@@ -17,89 +17,89 @@ ex:officer-authority a cco:ont00000187 ;                #: Authority Role
     rdfs:label "authority role of the security officer"@en ;
     obo:BFO_0000197 ex:officer .                        #: inheres in
 
-ex:def-faculty a rbo:RBO_0000001 ;                      #: role definition
+ex:def-faculty a rbaco:RBACO_0000001 ;                  #: role definition
     rdfs:label "Faculty role definition"@en .
 
 ex:rec-def-faculty a cco:ont00000253 ;                  #: Information Bearing Entity
     rdfs:label "database record of the Faculty role definition"@en ;
     obo:BFO_0000101 ex:def-faculty .                    #: is carrier of
 
-ex:def-university-member a rbo:RBO_0000001 ;            #: role definition
+ex:def-university-member a rbaco:RBACO_0000001 ;        #: role definition
     rdfs:label "University Member role definition"@en .
 
 ex:rec-def-university-member a cco:ont00000253 ;        #: Information Bearing Entity
     rdfs:label "database record of the University Member role definition"@en ;
     obo:BFO_0000101 ex:def-university-member .          #: is carrier of
 
-#: rbo:RBO_0001025  faculty role
-rbo:RBO_0001025 rbo:RBO_0000301 ex:def-faculty .        #: corresponds to role definition
+#: rbaco:RBACO_0001025  faculty role
+rbaco:RBACO_0001025 rbaco:RBACO_0000301 ex:def-faculty .  #: corresponds to role definition
 
-#: rbo:RBO_0001024  university member role
-rbo:RBO_0001024 rbo:RBO_0000301 ex:def-university-member .  #: corresponds to role definition
+#: rbaco:RBACO_0001024  university member role
+rbaco:RBACO_0001024 rbaco:RBACO_0000301 ex:def-university-member .  #: corresponds to role definition
 
-ex:classroom-c101 a rbo:RBO_0001019 ;                   #: classroom
+ex:classroom-c101 a rbaco:RBACO_0001019 ;               #: classroom
     rdfs:label "classroom C101"@en .
 
-ex:lab-l1 a rbo:RBO_0001020 ;                           #: laboratory room
+ex:lab-l1 a rbaco:RBACO_0001020 ;                       #: laboratory room
     rdfs:label "laboratory L1"@en .
 
-ex:office-o12 a rbo:RBO_0001018 ;                       #: office
+ex:office-o12 a rbaco:RBACO_0001018 ;                   #: office
     rdfs:label "office O12"@en .
 
-ex:office-o13 a rbo:RBO_0001018 ;                       #: office
+ex:office-o13 a rbaco:RBACO_0001018 ;                   #: office
     rdfs:label "office O13"@en .
 
-ex:printer-p43 a rbo:RBO_0001022 ;                      #: printer
+ex:printer-p43 a rbaco:RBACO_0001022 ;                  #: printer
     rdfs:label "printer p43"@en ;
     obo:BFO_0000171 ex:classroom-c101 .                 #: located in
 
-ex:printer-p44 a rbo:RBO_0001022 ;                      #: printer
+ex:printer-p44 a rbaco:RBACO_0001022 ;                  #: printer
     rdfs:label "printer p44"@en ;
     obo:BFO_0000171 ex:lab-l1 .                         #: located in
 
-ex:display-d7 a rbo:RBO_0001021 ;                       #: device
+ex:display-d7 a rbaco:RBACO_0001021 ;                   #: device
     rdfs:label "display d7"@en ;
     obo:BFO_0000171 ex:office-o12 .                     #: located in
 
-ex:display-d8 a rbo:RBO_0001021 ;                       #: device
+ex:display-d8 a rbaco:RBACO_0001021 ;                   #: device
     rdfs:label "display d8"@en ;
     obo:BFO_0000171 ex:office-o13 .                     #: located in
 
 ex:op-use-device a obo:IAO_0000104 ;                    #: plan specification
     rdfs:label "device use procedure"@en .
 
-ex:desc-classroom-printer a rbo:RBO_0000009 ;           #: object description
+ex:desc-classroom-printer a rbaco:RBACO_0000009 ;       #: object description
     rdfs:label "any printer located in a classroom"@en ;
-    rbo:RBO_0000302 rbo:RBO_0001022 ;                   #: has object type criterion | printer
-    rbo:RBO_0000303 rbo:RBO_0001019 ;                   #: has object location type criterion | classroom
-    rbo:RBO_0000305 rbo:RBO_0001023 .                   #: has criteria class | classroom printer
+    rbaco:RBACO_0000302 rbaco:RBACO_0001022 ;           #: has object type criterion | printer
+    rbaco:RBACO_0000303 rbaco:RBACO_0001019 ;           #: has object location type criterion | classroom
+    rbaco:RBACO_0000305 rbaco:RBACO_0001023 .           #: has criteria class | classroom printer
 
-ex:desc-own-office-device a rbo:RBO_0000011 ;           #: requester office condition
+ex:desc-own-office-device a rbaco:RBACO_0000011 ;       #: requester office condition
     rdfs:label "any device located in the requester's office"@en ;
-    rbo:RBO_0000302 rbo:RBO_0001021 .                   #: has object type criterion | device
+    rbaco:RBACO_0000302 rbaco:RBACO_0001021 .           #: has object type criterion | device
 
-ex:perm-faculty-classroom-printers a rbo:RBO_0000007 ;  #: access permission
+ex:perm-faculty-classroom-printers a rbaco:RBACO_0000007 ;  #: access permission
     rdfs:label "Faculty: use any printer located in a classroom"@en ;
-    rbo:RBO_0000101 ex:op-use-device ;                  #: has operation
-    rbo:RBO_0000103 ex:desc-classroom-printer ;         #: has object description
-    rbo:RBO_0000105 ex:def-faculty .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-use-device ;              #: has operation
+    rbaco:RBACO_0000103 ex:desc-classroom-printer ;     #: has object description
+    rbaco:RBACO_0000105 ex:def-faculty .                #: is assigned to role definition
 
-ex:perm-member-office-devices a rbo:RBO_0000007 ;       #: access permission
+ex:perm-member-office-devices a rbaco:RBACO_0000007 ;   #: access permission
     rdfs:label "University member: use any device located in her office"@en ;
-    rbo:RBO_0000101 ex:op-use-device ;                  #: has operation
-    rbo:RBO_0000103 ex:desc-own-office-device ;         #: has object description
-    rbo:RBO_0000105 ex:def-university-member .          #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-use-device ;              #: has operation
+    rbaco:RBACO_0000103 ex:desc-own-office-device ;     #: has object description
+    rbaco:RBACO_0000105 ex:def-university-member .      #: is assigned to role definition
 
-ex:plan-teaching-day a rbo:RBO_0000005 ;                #: business process plan
+ex:plan-teaching-day a rbaco:RBACO_0000005 ;            #: business process plan
     rdfs:label "teaching day plan"@en .
 
 ex:policy-load-start a obo:BFO_0000203 ;                #: temporal instant
-    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:policy-load-interval a obo:BFO_0000202 ;             #: temporal interval
     obo:BFO_0000222 ex:policy-load-start .              #: has first instant
 
-ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
+ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
     rdfs:label "policy issuing act policy-load"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000199 ex:policy-load-interval ;           #: occupies temporal region
@@ -112,20 +112,20 @@ ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
 
 ex:marie a cco:ont00001262 ;                            #: Person
     rdfs:label "Marie"@en ;
-    rbo:RBO_0001101 ex:office-o12 .                     #: has office
+    rbaco:RBACO_0001101 ex:office-o12 .                 #: has office
 
-ex:marie-faculty-assigned-1 a rbo:RBO_0001025 ;         #: faculty role
+ex:marie-faculty-assigned-1 a rbaco:RBACO_0001025 ;     #: faculty role
     rdfs:label "marie's assigned faculty role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-faculty ;                    #: concretizes
     obo:BFO_0000197 ex:marie .                          #: inheres in
 
 ex:marie-assign-faculty-1-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-assign-faculty-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-assign-faculty-1-start .   #: has first instant
 
-ex:marie-assign-faculty-1 a rbo:RBO_0000028 ;           #: role assignment
+ex:marie-assign-faculty-1 a rbaco:RBACO_0000028 ;       #: role assignment
     rdfs:label "assignment of marie to faculty"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:marie ;                          #: has participant
@@ -133,18 +133,18 @@ ex:marie-assign-faculty-1 a rbo:RBO_0000028 ;           #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:marie-faculty-assigned-1 .       #: has output
 
-ex:marie-university-member-assigned-1 a rbo:RBO_0001024 ;  #: university member role
+ex:marie-university-member-assigned-1 a rbaco:RBACO_0001024 ;  #: university member role
     rdfs:label "marie's assigned university-member role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-university-member ;          #: concretizes
     obo:BFO_0000197 ex:marie .                          #: inheres in
 
 ex:marie-assign-university-member-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-assign-university-member-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-assign-university-member-1-start .  #: has first instant
 
-ex:marie-assign-university-member-1 a rbo:RBO_0000028 ;  #: role assignment
+ex:marie-assign-university-member-1 a rbaco:RBACO_0000028 ;  #: role assignment
     rdfs:label "assignment of marie to university-member"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:marie ;                          #: has participant
@@ -153,140 +153,140 @@ ex:marie-assign-university-member-1 a rbo:RBO_0000028 ;  #: role assignment
     cco:ont00001986 ex:marie-university-member-assigned-1 .  #: has output
 
 ex:marie-day-start a obo:BFO_0000203 ;                  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-day-end a obo:BFO_0000203 ;                    #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T18:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T18:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-day-interval a obo:BFO_0000202 ;               #: temporal interval
     obo:BFO_0000222 ex:marie-day-start ;                #: has first instant
     obo:BFO_0000224 ex:marie-day-end .                  #: has last instant
 
-ex:marie-day a rbo:RBO_0000004 ;                        #: business process
+ex:marie-day a rbaco:RBACO_0000004 ;                    #: business process
     rdfs:label "Marie's teaching day"@en ;
     obo:BFO_0000199 ex:marie-day-interval ;             #: occupies temporal region
     cco:ont00001920 ex:plan-teaching-day .              #: prescribed by
 
 ex:marie-request-activate-faculty-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T08:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T08:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-request-activate-faculty-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-request-activate-faculty-1-start .  #: has first instant
 
 ex:marie-activate-faculty-1-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T08:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T08:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-activate-faculty-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-activate-faculty-1-start .  #: has first instant
 
-ex:marie-faculty-active-1 a rbo:RBO_0000003 ;           #: active role
+ex:marie-faculty-active-1 a rbaco:RBACO_0000003 ;       #: active role
     rdfs:label "marie's active faculty role in marie-day"@en ;
     obo:BFO_0000059 ex:def-faculty ;                    #: concretizes
     obo:BFO_0000195 ex:marie-faculty-assigned-1 ;       #: specifically depends on
     obo:BFO_0000197 ex:marie ;                          #: inheres in
-    rbo:RBO_0000106 ex:marie-day .                      #: is activated in
+    rbaco:RBACO_0000106 ex:marie-day .                  #: is activated in
 
-ex:marie-activate-faculty-1 a rbo:RBO_0000026 ;         #: role activation
+ex:marie-activate-faculty-1 a rbaco:RBACO_0000026 ;     #: role activation
     rdfs:label "activation of faculty by marie"@en ;
     obo:BFO_0000057 ex:marie ;                          #: has participant
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-activate-faculty-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:marie-faculty-active-1 .         #: has output
 
-ex:marie-request-activate-faculty-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:marie-request-activate-faculty-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "marie asks to activate faculty"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-request-activate-faculty-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000110 ex:def-faculty ;                    #: requests activation of
-    rbo:RBO_0000111 ex:marie-activate-faculty-1 .       #: is fulfilled by
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-faculty ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:marie-activate-faculty-1 .   #: is fulfilled by
 
 ex:marie-request-activate-university-member-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T08:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T08:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-request-activate-university-member-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-request-activate-university-member-1-start .  #: has first instant
 
 ex:marie-activate-university-member-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T08:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T08:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-activate-university-member-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-activate-university-member-1-start .  #: has first instant
 
-ex:marie-university-member-active-1 a rbo:RBO_0000003 ;  #: active role
+ex:marie-university-member-active-1 a rbaco:RBACO_0000003 ;  #: active role
     rdfs:label "marie's active university-member role in marie-day"@en ;
     obo:BFO_0000059 ex:def-university-member ;          #: concretizes
     obo:BFO_0000195 ex:marie-university-member-assigned-1 ;  #: specifically depends on
     obo:BFO_0000197 ex:marie ;                          #: inheres in
-    rbo:RBO_0000106 ex:marie-day .                      #: is activated in
+    rbaco:RBACO_0000106 ex:marie-day .                  #: is activated in
 
-ex:marie-activate-university-member-1 a rbo:RBO_0000026 ;  #: role activation
+ex:marie-activate-university-member-1 a rbaco:RBACO_0000026 ;  #: role activation
     rdfs:label "activation of university-member by marie"@en ;
     obo:BFO_0000057 ex:marie ;                          #: has participant
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-activate-university-member-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:marie-university-member-active-1 .  #: has output
 
-ex:marie-request-activate-university-member-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:marie-request-activate-university-member-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "marie asks to activate university-member"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-request-activate-university-member-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000110 ex:def-university-member ;          #: requests activation of
-    rbo:RBO_0000111 ex:marie-activate-university-member-1 .  #: is fulfilled by
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-university-member ;      #: requests activation of
+    rbaco:RBACO_0000111 ex:marie-activate-university-member-1 .  #: is fulfilled by
 
 ex:marie-req-use-printer-p43-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-req-use-printer-p43-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-req-use-printer-p43-start .  #: has first instant
 
-ex:marie-req-use-printer-p43 a rbo:RBO_0000024 ;        #: access request
+ex:marie-req-use-printer-p43 a rbaco:RBACO_0000024 ;    #: access request
     rdfs:label "marie asks to op-use-device on printer-p43"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-req-use-printer-p43-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000108 ex:op-use-device ;                  #: requests operation
-    rbo:RBO_0000109 ex:printer-p43 .                    #: requests access to
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:printer-p43 .                #: requests access to
 
 ex:marie-req-use-printer-p44-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:02:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:02:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-req-use-printer-p44-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-req-use-printer-p44-start .  #: has first instant
 
-ex:marie-req-use-printer-p44 a rbo:RBO_0000024 ;        #: access request
+ex:marie-req-use-printer-p44 a rbaco:RBACO_0000024 ;    #: access request
     rdfs:label "marie asks to op-use-device on printer-p44"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-req-use-printer-p44-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000108 ex:op-use-device ;                  #: requests operation
-    rbo:RBO_0000109 ex:printer-p44 .                    #: requests access to
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:printer-p44 .                #: requests access to
 
 ex:marie-req-use-display-d7-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:03:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:03:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-req-use-display-d7-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-req-use-display-d7-start .  #: has first instant
 
-ex:marie-req-use-display-d7 a rbo:RBO_0000024 ;         #: access request
+ex:marie-req-use-display-d7 a rbaco:RBACO_0000024 ;     #: access request
     rdfs:label "marie asks to op-use-device on display-d7"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-req-use-display-d7-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000108 ex:op-use-device ;                  #: requests operation
-    rbo:RBO_0000109 ex:display-d7 .                     #: requests access to
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:display-d7 .                 #: requests access to
 
 ex:marie-req-use-display-d8-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-07T09:04:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-07T09:04:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:marie-req-use-display-d8-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:marie-req-use-display-d8-start .  #: has first instant
 
-ex:marie-req-use-display-d8 a rbo:RBO_0000024 ;         #: access request
+ex:marie-req-use-display-d8 a rbaco:RBACO_0000024 ;     #: access request
     rdfs:label "marie asks to op-use-device on display-d8"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-req-use-display-d8-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:marie ;                          #: has requester
-    rbo:RBO_0000108 ex:op-use-device ;                  #: requests operation
-    rbo:RBO_0000109 ex:display-d8 .                     #: requests access to
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:display-d8 .                 #: requests access to

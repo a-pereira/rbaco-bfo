@@ -1,10 +1,10 @@
-# CHECK. NIST's role hierarchy is a partial order (Def. 2a, p.235). rbo:RBO_0000120 is its strict
+# CHECK. NIST's role hierarchy is a partial order (Def. 2a, p.235). rbaco:RBACO_0000120 is its strict
 # part, so a role definition senior to itself means two definitions are each senior to the other:
 # antisymmetry fails, which OWL 2 cannot state. Run over a hierarchy snapshot. Expect no rows.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-SELECT DISTINCT ?def WHERE { ?def rbo:RBO_0000120+ ?def }
+SELECT DISTINCT ?def WHERE { ?def rbaco:RBACO_0000120+ ?def }

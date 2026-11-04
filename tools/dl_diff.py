@@ -5,7 +5,7 @@ from collections import defaultdict
 from rdflib import Graph, URIRef, Literal, RDF, RDFS, OWL
 
 D = sys.argv[1]
-RBO = "https://example.org/rbac-bfo/"
+RBACO = "https://w3id.org/rbaco/bfo/"
 
 
 def load(name):
@@ -22,26 +22,26 @@ def named(n):
     return isinstance(n, URIRef)
 
 
-for ont in ("rbo", "rbo-domain"):
+for ont in ("rbaco-bfo", "rbaco-bfo-domain"):
     m, r = load(f"{ont}-merged.owl"), load(f"{ont}-reasoned.owl")
     print(f"== {ont}: merged {len(m)} triples, reasoned {len(r)}")
     for p in (RDFS.subClassOf, OWL.equivalentClass):
         new = [(s, o) for s, o in r.subject_objects(p) if named(s) and named(o) and (s, p, o) not in m]
-        rbo_new = [(s, o) for s, o in new if str(s).startswith(RBO) or str(o).startswith(RBO)]
-        print(f"  new {p.split('#')[-1]} between named classes: {len(new)}; touching RBO: {len(rbo_new)}")
-        for s, o in sorted(rbo_new if p == RDFS.subClassOf else new):
+        rbaco_new = [(s, o) for s, o in new if str(s).startswith(RBACO) or str(o).startswith(RBACO)]
+        print(f"  new {p.split('#')[-1]} between named classes: {len(new)}; touching RBACO: {len(rbaco_new)}")
+        for s, o in sorted(rbaco_new if p == RDFS.subClassOf else new):
             print(f"    {lab(r, s)}  ->  {lab(r, o)}")
 
 for ds in ("us-persons", "code-review", "abac", "rt-policy", "purchase", "probes"):
     m, r = load(f"{ds}-merged.owl"), load(f"{ds}-reasoned.owl")
     inds = set(m.subjects(RDF.type, OWL.NamedIndividual)) | {s for s, o in m.subject_objects(RDF.type)
-                                                             if str(s).startswith(RBO) and "#" in str(s)}
+                                                             if str(s).startswith(RBACO) and "#" in str(s)}
     new = [(s, o) for s, o in r.subject_objects(RDF.type) if s in inds and named(o)
            and (s, RDF.type, o) not in m and o != OWL.NamedIndividual]
-    rbo_new = sorted({(s, o) for s, o in new if str(o).startswith(RBO)})
-    print(f"== {ds}: {len(inds)} individuals, {len(new)} inferred type assertions, {len(rbo_new)} to RBO classes")
+    rbaco_new = sorted({(s, o) for s, o in new if str(o).startswith(RBACO)})
+    print(f"== {ds}: {len(inds)} individuals, {len(new)} inferred type assertions, {len(rbaco_new)} to RBACO classes")
     by = defaultdict(list)
-    for s, o in rbo_new:
+    for s, o in rbaco_new:
         by[lab(m, o)].append(str(s).rsplit("#", 1)[-1])
     for c, xs in sorted(by.items()):
         print(f"    {c}: {len(xs)}  e.g. {', '.join(sorted(xs)[:4])}")

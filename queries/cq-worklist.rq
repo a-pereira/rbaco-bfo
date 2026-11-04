@@ -25,8 +25,8 @@
 # facts, permission contents and hierarchy snapshot for that time.
 # The three counts are subqueries joined on agent and work item; each binds its own variables, with names
 # no other part of the query uses, so it gives the same answer evaluated alone or correlated.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -34,57 +34,57 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?agent ?workItem ?task ?instance ?why
 WHERE {
   {
-    ?k a rbo:RBO_0000041 ; cco:ont00001920 ?workItem ; cco:ont00001833 ?agent ;
-       obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tk .
-    ?workItem a rbo:RBO_0000048 ; rbo:RBO_0000141 ?task ; rbo:RBO_0000142 ?instance .
+    ?k a rbaco:RBACO_0000041 ; cco:ont00001920 ?workItem ; cco:ont00001833 ?agent ;
+       obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tk .
+    ?workItem a rbaco:RBACO_0000048 ; rbaco:RBACO_0000141 ?task ; rbaco:RBACO_0000142 ?instance .
     FILTER (?tk <= ?evalTime)
-    FILTER NOT EXISTS { ?k obo:BFO_0000199/obo:BFO_0000224/rbo:RBO_0000205 ?tEnd . FILTER (?tEnd <= ?evalTime) }
+    FILTER NOT EXISTS { ?k obo:BFO_0000199/obo:BFO_0000224/rbaco:RBACO_0000205 ?tEnd . FILTER (?tEnd <= ?evalTime) }
     BIND ("accepted" AS ?why)
   } UNION {
-    ?workItem a rbo:RBO_0000048 ; rbo:RBO_0000141 ?task ; rbo:RBO_0000142 ?instance .
-    ?wIssue cco:ont00001986 ?workItem ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tw .
+    ?workItem a rbaco:RBACO_0000048 ; rbaco:RBACO_0000141 ?task ; rbaco:RBACO_0000142 ?instance .
+    ?wIssue cco:ont00001986 ?workItem ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tw .
     FILTER (?tw <= ?evalTime)
-    FILTER NOT EXISTS { ?k0 cco:ont00001920 ?workItem ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tk0 .
+    FILTER NOT EXISTS { ?k0 cco:ont00001920 ?workItem ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tk0 .
                         FILTER (?tk0 <= ?evalTime) }
-    ?task rbo:RBO_0000132 ?reqDef .
-    ?gain cco:ont00001986 ?held ; a rbo:RBO_0000028 ;
-          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGain . FILTER (?tGain <= ?evalTime)
+    ?task rbaco:RBACO_0000132 ?reqDef .
+    ?gain cco:ont00001986 ?held ; a rbaco:RBACO_0000028 ;
+          obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tGain . FILTER (?tGain <= ?evalTime)
     FILTER NOT EXISTS { ?loss cco:ont00001921 ?held ; a cco:ont00000613 ;
-                        obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss . FILTER (?tLoss <= ?evalTime) }
+                        obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tLoss . FILTER (?tLoss <= ?evalTime) }
     ?held obo:BFO_0000197 ?agent ; obo:BFO_0000059 ?heldDef .
-    ?heldDef rbow:inForceAt ?evalTime ; rbo:RBO_0000120* ?reqDef .
+    ?heldDef rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000120* ?reqDef .
     # human performer
     FILTER (EXISTS { ?agent a cco:ont00001262 } || NOT EXISTS {
-      ?h a rbo:RBO_0000049 ; rbo:RBO_0000145 ?task ; rbow:inForceAt ?evalTime .
-      FILTER (NOT EXISTS { ?h rbo:RBO_0000115 ?anyHP } || EXISTS { ?h rbo:RBO_0000115 ?hp . ?instance cco:ont00001920 ?hp }) })
+      ?h a rbaco:RBACO_0000049 ; rbaco:RBACO_0000145 ?task ; rbacow:inForceAt ?evalTime .
+      FILTER (NOT EXISTS { ?h rbaco:RBACO_0000115 ?anyHP } || EXISTS { ?h rbaco:RBACO_0000115 ?hp . ?instance cco:ont00001920 ?hp }) })
     # prior task
-    FILTER NOT EXISTS { ?task rbo:RBO_0000144 ?prior .
-      FILTER NOT EXISTS { ?k1 a rbo:RBO_0000041 ; cco:ont00001920 ?prior ; obo:BFO_0000132 ?instance ;
-                          cco:ont00001833 ?a1 ; obo:BFO_0000199/obo:BFO_0000224/rbo:RBO_0000205 ?tE1 .
+    FILTER NOT EXISTS { ?task rbaco:RBACO_0000144 ?prior .
+      FILTER NOT EXISTS { ?k1 a rbaco:RBACO_0000041 ; cco:ont00001920 ?prior ; obo:BFO_0000132 ?instance ;
+                          cco:ont00001833 ?a1 ; obo:BFO_0000199/obo:BFO_0000224/rbaco:RBACO_0000205 ?tE1 .
                           ?a1 a cco:ont00001262 . FILTER (?tE1 <= ?evalTime) } }
     # role DSD
     OPTIONAL { {
       SELECT ?agent ?workItem ?roleC WHERE {
-        ?rAnyHeld a rbo:RBO_0000002 ; obo:BFO_0000197 ?agent .
-        ?workItem a rbo:RBO_0000048 ; rbo:RBO_0000141 ?rTask ; rbo:RBO_0000142 ?rInstance .
-        ?rTask rbo:RBO_0000132 ?rReqDef .
-        ?roleC a rbo:RBO_0000014 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000114 ?rReqDef , ?rm ;
-               rbo:RBO_0000201 ?rn .
-        FILTER (NOT EXISTS { ?roleC rbo:RBO_0000115 ?rAnyPlan }
-                || EXISTS { ?roleC rbo:RBO_0000115 ?rPlan . ?rInstance cco:ont00001920 ?rPlan })
+        ?rAnyHeld a rbaco:RBACO_0000002 ; obo:BFO_0000197 ?agent .
+        ?workItem a rbaco:RBACO_0000048 ; rbaco:RBACO_0000141 ?rTask ; rbaco:RBACO_0000142 ?rInstance .
+        ?rTask rbaco:RBACO_0000132 ?rReqDef .
+        ?roleC a rbaco:RBACO_0000014 ; rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000114 ?rReqDef , ?rm ;
+               rbaco:RBACO_0000201 ?rn .
+        FILTER (NOT EXISTS { ?roleC rbaco:RBACO_0000115 ?rAnyPlan }
+                || EXISTS { ?roleC rbaco:RBACO_0000115 ?rPlan . ?rInstance cco:ont00001920 ?rPlan })
         FILTER (?rm = ?rReqDef || EXISTS {
-          ?rActive rbo:RBO_0000106 ?rInstance ; obo:BFO_0000197 ?rY ; obo:BFO_0000059 ?rm .
-          ?rActivation cco:ont00001986 ?rActive ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?rtAct .
+          ?rActive rbaco:RBACO_0000106 ?rInstance ; obo:BFO_0000197 ?rY ; obo:BFO_0000059 ?rm .
+          ?rActivation cco:ont00001986 ?rActive ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?rtAct .
           FILTER (?rtAct <= ?evalTime)
-          FILTER (EXISTS { ?roleC a rbo:RBO_0000016 }
+          FILTER (EXISTS { ?roleC a rbaco:RBACO_0000016 }
                   || (NOT EXISTS { ?rDrop cco:ont00001921 ?rActive ;
-                                   obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?rtDrop . FILTER (?rtDrop <= ?evalTime) }
+                                   obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?rtDrop . FILTER (?rtDrop <= ?evalTime) }
                       && NOT EXISTS { ?rActive obo:BFO_0000195 ?rHeld .
                                       ?rLoss cco:ont00001921 ?rHeld ; a cco:ont00000613 ;
-                                             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?rtLoss .
+                                             obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?rtLoss .
                                       FILTER (?rtLoss <= ?evalTime) }))
-          FILTER (?rY = ?agent || EXISTS { ?rG a rbo:RBO_0000047 ; rbow:inForceAt ?evalTime ; rbow:joins ?agent , ?rY ;
-                                           rbow:appliesTo ?roleC ; rbow:appliesIn ?rInstance })
+          FILTER (?rY = ?agent || EXISTS { ?rG a rbaco:RBACO_0000047 ; rbacow:inForceAt ?evalTime ; rbacow:joins ?agent , ?rY ;
+                                           rbacow:appliesTo ?roleC ; rbacow:appliesIn ?rInstance })
         })
       } GROUP BY ?agent ?workItem ?roleC ?rn
       HAVING (COUNT(DISTINCT ?rm) >= ?rn)
@@ -92,20 +92,20 @@ WHERE {
     # task SoD
     OPTIONAL { {
       SELECT ?agent ?workItem ?taskC WHERE {
-        ?tAnyHeld a rbo:RBO_0000002 ; obo:BFO_0000197 ?agent .
-        ?workItem a rbo:RBO_0000048 ; rbo:RBO_0000141 ?tTask ; rbo:RBO_0000142 ?tInstance .
-        ?taskC a rbo:RBO_0000014 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000135 ?tTask , ?tm ;
-               rbo:RBO_0000201 ?tn .
-        FILTER (NOT EXISTS { ?taskC rbo:RBO_0000115 ?tAnyPlan }
-                || EXISTS { ?taskC rbo:RBO_0000115 ?tPlan . ?tInstance cco:ont00001920 ?tPlan })
+        ?tAnyHeld a rbaco:RBACO_0000002 ; obo:BFO_0000197 ?agent .
+        ?workItem a rbaco:RBACO_0000048 ; rbaco:RBACO_0000141 ?tTask ; rbaco:RBACO_0000142 ?tInstance .
+        ?taskC a rbaco:RBACO_0000014 ; rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000135 ?tTask , ?tm ;
+               rbaco:RBACO_0000201 ?tn .
+        FILTER (NOT EXISTS { ?taskC rbaco:RBACO_0000115 ?tAnyPlan }
+                || EXISTS { ?taskC rbaco:RBACO_0000115 ?tPlan . ?tInstance cco:ont00001920 ?tPlan })
         FILTER (?tm = ?tTask || EXISTS {
-          ?tK a rbo:RBO_0000041 ; cco:ont00001920 ?tm ; obo:BFO_0000132 ?tInstance ;
-              obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tStart .
+          ?tK a rbaco:RBACO_0000041 ; cco:ont00001920 ?tm ; obo:BFO_0000132 ?tInstance ;
+              obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tStart .
           FILTER (?tStart <= ?evalTime)
           FILTER NOT EXISTS { ?tK cco:ont00001920 ?workItem }
-          { ?tK rbo:RBO_0000143 ?tY } UNION { ?tK cco:ont00001833 ?tY FILTER NOT EXISTS { ?tK rbo:RBO_0000143 ?tObo } }
-          FILTER (?tY = ?agent || EXISTS { ?tG a rbo:RBO_0000047 ; rbow:inForceAt ?evalTime ; rbow:joins ?agent , ?tY ;
-                                           rbow:appliesTo ?taskC ; rbow:appliesIn ?tInstance })
+          { ?tK rbaco:RBACO_0000143 ?tY } UNION { ?tK cco:ont00001833 ?tY FILTER NOT EXISTS { ?tK rbaco:RBACO_0000143 ?tObo } }
+          FILTER (?tY = ?agent || EXISTS { ?tG a rbaco:RBACO_0000047 ; rbacow:inForceAt ?evalTime ; rbacow:joins ?agent , ?tY ;
+                                           rbacow:appliesTo ?taskC ; rbacow:appliesIn ?tInstance })
         })
       } GROUP BY ?agent ?workItem ?taskC ?tn
       HAVING (COUNT(DISTINCT ?tm) >= ?tn)
@@ -113,21 +113,21 @@ WHERE {
     # permission SoD, through the operations the task requires
     OPTIONAL { {
       SELECT ?agent ?workItem ?permC WHERE {
-        ?pAnyHeld a rbo:RBO_0000002 ; obo:BFO_0000197 ?agent .
-        ?workItem a rbo:RBO_0000048 ; rbo:RBO_0000141 ?pTask ; rbo:RBO_0000142 ?pInstance .
-        ?permC a rbo:RBO_0000014 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000201 ?pn .
-        FILTER (NOT EXISTS { ?permC rbo:RBO_0000115 ?pAnyPlan }
-                || EXISTS { ?permC rbo:RBO_0000115 ?pPlan . ?pInstance cco:ont00001920 ?pPlan })
-        FILTER EXISTS { ?permC rbo:RBO_0000134/rbo:RBO_0000101 ?pNeedOp . ?pTask rbo:RBO_0000133 ?pNeedOp }
-        ?permC rbo:RBO_0000134 ?pm . ?pm rbow:contentKey ?pKey .
-        FILTER (EXISTS { ?pm rbo:RBO_0000101 ?pOp . ?pTask rbo:RBO_0000133 ?pOp } || EXISTS {
-          ?pGrant a rbo:RBO_0000022 ; rbo:RBO_0000112 ?pQ ; rbo:RBO_0000113 ?pCited .
-          ?pCited rbow:contentKey ?pKey .
-          ?pQ obo:BFO_0000132 ?pInstance ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?pTq .
+        ?pAnyHeld a rbaco:RBACO_0000002 ; obo:BFO_0000197 ?agent .
+        ?workItem a rbaco:RBACO_0000048 ; rbaco:RBACO_0000141 ?pTask ; rbaco:RBACO_0000142 ?pInstance .
+        ?permC a rbaco:RBACO_0000014 ; rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000201 ?pn .
+        FILTER (NOT EXISTS { ?permC rbaco:RBACO_0000115 ?pAnyPlan }
+                || EXISTS { ?permC rbaco:RBACO_0000115 ?pPlan . ?pInstance cco:ont00001920 ?pPlan })
+        FILTER EXISTS { ?permC rbaco:RBACO_0000134/rbaco:RBACO_0000101 ?pNeedOp . ?pTask rbaco:RBACO_0000133 ?pNeedOp }
+        ?permC rbaco:RBACO_0000134 ?pm . ?pm rbacow:contentKey ?pKey .
+        FILTER (EXISTS { ?pm rbaco:RBACO_0000101 ?pOp . ?pTask rbaco:RBACO_0000133 ?pOp } || EXISTS {
+          ?pGrant a rbaco:RBACO_0000022 ; rbaco:RBACO_0000112 ?pQ ; rbaco:RBACO_0000113 ?pCited .
+          ?pCited rbacow:contentKey ?pKey .
+          ?pQ obo:BFO_0000132 ?pInstance ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?pTq .
           FILTER (?pTq <= ?evalTime)
-          { ?pQ rbo:RBO_0000143 ?pY } UNION { ?pQ rbo:RBO_0000107 ?pY FILTER NOT EXISTS { ?pQ rbo:RBO_0000143 ?pObo } }
-          FILTER (?pY = ?agent || EXISTS { ?pG a rbo:RBO_0000047 ; rbow:inForceAt ?evalTime ; rbow:joins ?agent , ?pY ;
-                                           rbow:appliesTo ?permC ; rbow:appliesIn ?pInstance })
+          { ?pQ rbaco:RBACO_0000143 ?pY } UNION { ?pQ rbaco:RBACO_0000107 ?pY FILTER NOT EXISTS { ?pQ rbaco:RBACO_0000143 ?pObo } }
+          FILTER (?pY = ?agent || EXISTS { ?pG a rbaco:RBACO_0000047 ; rbacow:inForceAt ?evalTime ; rbacow:joins ?agent , ?pY ;
+                                           rbacow:appliesTo ?permC ; rbacow:appliesIn ?pInstance })
         })
       } GROUP BY ?agent ?workItem ?permC ?pn
       HAVING (COUNT(DISTINCT ?pKey) >= ?pn)

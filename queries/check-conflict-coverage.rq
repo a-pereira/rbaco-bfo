@@ -12,8 +12,8 @@
 #       disjoint), not one of each
 # Table 3 row 1 is a static violation already (derive-ssd-conflicts.rq counts designated agents as
 # one); row 2 is not checked, because its glyphs cannot be placed in their columns.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -21,29 +21,29 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?constraint ?problem ?memberA ?memberB ?roleA ?roleB
 WHERE {
   {
-    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000134 ?memberA , ?memberB .
+    ?constraint a rbaco:RBACO_0000013 ; rbaco:RBACO_0000134 ?memberA , ?memberB .
     FILTER (STR(?memberA) < STR(?memberB))
-    ?memberA rbo:RBO_0000105 ?roleA . ?memberB rbo:RBO_0000105 ?roleB .
+    ?memberA rbaco:RBACO_0000105 ?roleA . ?memberB rbaco:RBACO_0000105 ?roleB .
     FILTER (?roleA != ?roleB)
-    FILTER NOT EXISTS { ?rc a rbo:RBO_0000013 ; rbo:RBO_0000114 ?roleA , ?roleB }
+    FILTER NOT EXISTS { ?rc a rbaco:RBACO_0000013 ; rbaco:RBACO_0000114 ?roleA , ?roleB }
     BIND ("conflicting permissions on non-conflicting roles" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000134 ?memberA , ?memberB .
+    ?constraint a rbaco:RBACO_0000013 ; rbaco:RBACO_0000134 ?memberA , ?memberB .
     FILTER (STR(?memberA) < STR(?memberB))
-    ?memberA rbo:RBO_0000105 ?roleA . ?memberB rbo:RBO_0000105 ?roleA .
+    ?memberA rbaco:RBACO_0000105 ?roleA . ?memberB rbaco:RBACO_0000105 ?roleA .
     BIND (?roleA AS ?roleB)
     BIND ("one role holds conflicting permissions" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000013 ; rbo:RBO_0000135 ?memberA , ?memberB .
+    ?constraint a rbaco:RBACO_0000013 ; rbaco:RBACO_0000135 ?memberA , ?memberB .
     FILTER (STR(?memberA) < STR(?memberB))
-    ?memberA rbo:RBO_0000132 ?roleA . ?memberB rbo:RBO_0000132 ?roleB .
+    ?memberA rbaco:RBACO_0000132 ?roleA . ?memberB rbaco:RBACO_0000132 ?roleB .
     FILTER (?roleA != ?roleB)
-    FILTER NOT EXISTS { ?rc a rbo:RBO_0000013 ; rbo:RBO_0000114 ?roleA , ?roleB }
+    FILTER NOT EXISTS { ?rc a rbaco:RBACO_0000013 ; rbaco:RBACO_0000114 ?roleA , ?roleB }
     BIND ("conflicting tasks on non-conflicting roles" AS ?problem)
   } UNION {
-    ?constraint a rbo:RBO_0000012 ; ?kindA ?memberA ; ?kindB ?memberB .
-    VALUES ?kindA { rbo:RBO_0000114 rbo:RBO_0000134 rbo:RBO_0000135 }
-    VALUES ?kindB { rbo:RBO_0000114 rbo:RBO_0000134 rbo:RBO_0000135 }
+    ?constraint a rbaco:RBACO_0000012 ; ?kindA ?memberA ; ?kindB ?memberB .
+    VALUES ?kindA { rbaco:RBACO_0000114 rbaco:RBACO_0000134 rbaco:RBACO_0000135 }
+    VALUES ?kindB { rbaco:RBACO_0000114 rbaco:RBACO_0000134 rbaco:RBACO_0000135 }
     FILTER (STR(?kindA) < STR(?kindB))
     BIND ("mixed set" AS ?problem)
   }

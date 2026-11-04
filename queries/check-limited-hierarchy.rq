@@ -2,18 +2,18 @@
 # single immediate descendant. Lists role definitions with two or more immediate juniors in a
 # hierarchy snapshot, excluding RT roles, whose simple inclusions are not RBAC hierarchy edits.
 # No rows means the hierarchy is limited; rows are allowed in a general hierarchy.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?senior (COUNT(DISTINCT ?junior) AS ?immediateJuniors)
 WHERE {
-  ?senior rbo:RBO_0000120 ?junior .
-  FILTER NOT EXISTS { ?senior a rbo:RBO_0000033 }
+  ?senior rbaco:RBACO_0000120 ?junior .
+  FILTER NOT EXISTS { ?senior a rbaco:RBACO_0000033 }
   # immediate: no third definition strictly between them
-  FILTER NOT EXISTS { ?senior rbo:RBO_0000120+ ?mid . ?mid rbo:RBO_0000120+ ?junior .
+  FILTER NOT EXISTS { ?senior rbaco:RBACO_0000120+ ?mid . ?mid rbaco:RBACO_0000120+ ?junior .
                       FILTER (?mid != ?senior && ?mid != ?junior) }
 }
 GROUP BY ?senior

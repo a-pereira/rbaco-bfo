@@ -1,6 +1,6 @@
 # CHECK. Task specifications and the requests made inside their instances. Run over a hierarchy
 # snapshot. Expect no rows.
-#   no required role            - OWL requires exactly one (RBO_0000040), but under the open world a
+#   no required role            - OWL requires exactly one (RBACO_0000040), but under the open world a
 #                                 missing value is incomplete, not inconsistent, so only this check sees it
 #   not part of a plan          - no business process plan has it as a continuant part
 #   required operation uncovered - a required operation (requires operation) has no permission on the
@@ -8,8 +8,8 @@
 #                                 that role can perform the task
 #   request outside the task's needs - an access request that is part of a task instance names an
 #                                 operation the task does not require (flagged, not denied)
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -17,23 +17,23 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?subject ?problem ?detail
 WHERE {
   {
-    ?subject a rbo:RBO_0000040 .
-    FILTER NOT EXISTS { ?subject rbo:RBO_0000132 ?d }
+    ?subject a rbaco:RBACO_0000040 .
+    FILTER NOT EXISTS { ?subject rbaco:RBACO_0000132 ?d }
     BIND ("no required role" AS ?problem) BIND ("" AS ?detail)
   } UNION {
-    ?subject a rbo:RBO_0000040 .
-    FILTER NOT EXISTS { ?subject obo:BFO_0000176 ?plan . ?plan a rbo:RBO_0000005 }
+    ?subject a rbaco:RBACO_0000040 .
+    FILTER NOT EXISTS { ?subject obo:BFO_0000176 ?plan . ?plan a rbaco:RBACO_0000005 }
     BIND ("not part of a plan" AS ?problem) BIND ("" AS ?detail)
   } UNION {
-    ?subject a rbo:RBO_0000040 ; rbo:RBO_0000132 ?d ; rbo:RBO_0000133 ?detail .
-    FILTER NOT EXISTS { ?p a rbo:RBO_0000007 ; rbo:RBO_0000101 ?detail ; rbo:RBO_0000105 ?dj .
-                        ?d rbo:RBO_0000120* ?dj }
+    ?subject a rbaco:RBACO_0000040 ; rbaco:RBACO_0000132 ?d ; rbaco:RBACO_0000133 ?detail .
+    FILTER NOT EXISTS { ?p a rbaco:RBACO_0000007 ; rbaco:RBACO_0000101 ?detail ; rbaco:RBACO_0000105 ?dj .
+                        ?d rbaco:RBACO_0000120* ?dj }
     BIND ("required operation uncovered" AS ?problem)
   } UNION {
-    ?subject a rbo:RBO_0000024 ; obo:BFO_0000132 ?task ; rbo:RBO_0000108 ?detail .
-    ?task a rbo:RBO_0000041 ; cco:ont00001920 ?spec .
-    ?spec a rbo:RBO_0000040 .
-    FILTER NOT EXISTS { ?spec rbo:RBO_0000133 ?detail }
+    ?subject a rbaco:RBACO_0000024 ; obo:BFO_0000132 ?task ; rbaco:RBACO_0000108 ?detail .
+    ?task a rbaco:RBACO_0000041 ; cco:ont00001920 ?spec .
+    ?spec a rbaco:RBACO_0000040 .
+    FILTER NOT EXISTS { ?spec rbaco:RBACO_0000133 ?detail }
     BIND ("request outside the task's needs" AS ?problem)
   }
 }

@@ -1,6 +1,6 @@
 """A partial OWL 2 RL consistency check that needs no Java. The complete check is HermiT, in the DL step of
 run_all.sh (run_dl.sh); this one also runs the two witness tests for the is-about bridge, which that step does not.
-Usage: rl_check.py <rbo-dir>
+Usage: rl_check.py <rbaco-bfo-dir>
 
 Materializes a subset of the OWL 2 RL/RDF rules over the ontology closure plus each dataset (data/*.ttl
 and data/derived/*.ttl; the probes with purchase.ttl), then reports clashes. Rules applied, named as in the OWL 2 RL profile tables:
@@ -19,7 +19,7 @@ from rdflib.collection import Collection
 
 d = sys.argv[1]
 onto = Graph()
-for f in ["rbo.ttl", "rbo-domain.ttl"] + sorted(glob.glob(os.path.join(d, "imports", "*.ttl"))):
+for f in ["rbaco-bfo.ttl", "rbaco-bfo-domain.ttl"] + sorted(glob.glob(os.path.join(d, "imports", "*.ttl"))):
     onto.parse(f if os.path.isabs(f) else os.path.join(d, f), format="turtle")
 
 
@@ -180,30 +180,30 @@ for f in sorted(glob.glob(os.path.join(d, "data", "*.ttl"))):
     for x, kind, a, b in cl[:20]:
         lines.append(f"  CLASH {x} : {kind} {label(a)} / {label(b)}")
     cp = sorted(str(x).rsplit("/", 1)[-1] for x, cs in types.items()
-                if URIRef("https://example.org/rbac-bfo/RBO_0001023") in cs)
+                if URIRef("https://w3id.org/rbaco/bfo/RBACO_0001023") in cs)
     if cp:
-        lines.append(f"  classified as classroom printer (RBO_0001023, a defined class): {', '.join(cp)}")
+        lines.append(f"  classified as classroom printer (RBACO_0001023, a defined class): {', '.join(cp)}")
 lines.append("")
 
 IAO_ICE, CCO_ICE = URIRef("http://purl.obolibrary.org/obo/IAO_0000030"), URIRef("https://www.commoncoreontologies.org/ont00000958")
 IAO_ABOUT, CCO_ABOUT = URIRef("http://purl.obolibrary.org/obo/IAO_0000136"), URIRef("https://www.commoncoreontologies.org/ont00001808")
 ENT = URIRef("http://purl.obolibrary.org/obo/BFO_0000001")
-W = "https://example.org/rbac-bfo/work#"
+W = "https://example.org/rbaco/work#"
 for start, about, other in ((IAO_ICE, IAO_ABOUT, CCO_ICE), (CCO_ICE, CCO_ABOUT, IAO_ICE)):
     ab = Graph(); x, y = URIRef(W + "x"), URIRef(W + "y")
     ab.add((x, RDF.type, start)); ab.add((x, about, y)); ab.add((y, RDF.type, ENT))
     types, _ = materialize(ab)
     lines.append(f"Bridge witness: x a {label(start)}, x {label(about)} y  =>  x a {label(other)}: {other in types[x]}.")
 lines.append("")
-RBO = "https://example.org/rbac-bfo/RBO_"
+RBACO = "https://w3id.org/rbaco/bfo/RBACO_"
 controls = [
-    ("asserted: a permission that is also a prohibition", [(RBO + "0000007",), (RBO + "0000008",)]),
+    ("asserted: a permission that is also a prohibition", [(RBACO + "0000007",), (RBACO + "0000008",)]),
     ("via the complement in assigned role's definition: an assigned role typed active role",
-     [(RBO + "0000002",), (RBO + "0000003",)]),
+     [(RBACO + "0000002",), (RBACO + "0000003",)]),
     ("inferred: a role definition (Prescriptive ICE) typed SSD report (Descriptive ICE)",
-     [(RBO + "0000001",), (RBO + "0000019",)]),
+     [(RBACO + "0000001",), (RBACO + "0000019",)]),
     ("inferred: an access request (a process) typed information content entity (a continuant)",
-     [(RBO + "0000024",), ("https://www.commoncoreontologies.org/ont00000958",)]),
+     [(RBACO + "0000024",), ("https://www.commoncoreontologies.org/ont00000958",)]),
 ]
 for text, cls in controls:
     ab = Graph(); x = URIRef(W + "control")

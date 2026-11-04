@@ -1,4 +1,4 @@
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix cco: <https://www.commoncoreontologies.org/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -13,21 +13,21 @@
 #    Ontology
 #################################################################
 
-#: <https://example.org/rbac-bfo/rbo.owl>  Role-Based Access Control Ontology (RBO)
-<https://example.org/rbac-bfo/rbo.owl> rdf:type owl:Ontology ;
-    owl:versionIRI <https://example.org/rbac-bfo/2026-11-01/rbo.owl> ;
+#: <https://w3id.org/rbaco/bfo/rbaco-bfo.owl>  Role-Based Access Control Ontology, BFO edition (RBACO-BFO)
+<https://w3id.org/rbaco/bfo/rbaco-bfo.owl> rdf:type owl:Ontology ;
+    owl:versionIRI <https://w3id.org/rbaco/bfo/2026-11-01/rbaco-bfo.owl> ;
     owl:imports <http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl> ,
                 <https://www.commoncoreontologies.org/AgentOntology> ,  #: Agent Ontology
                 <https://www.commoncoreontologies.org/EventOntology> ,  #: Event Ontology
                 <https://www.commoncoreontologies.org/InformationEntityOntology> ,  #: Information Entity Ontology
                 <https://www.commoncoreontologies.org/ArtifactOntology> ,  #: Artifact Ontology
                 <https://www.commoncoreontologies.org/ExtendedRelationOntology> ,  #: Extended Relation Ontology
-                <https://example.org/rbac-bfo/imports/iao-extract.owl> ;
-    rdfs:label "Role-Based Access Control Ontology (RBO)"@en ;
-    dcterms:title "Role-Based Access Control Ontology (RBO)"@en ;
+                <https://w3id.org/rbaco/bfo/imports/iao-extract.owl> ;
+    rdfs:label "Role-Based Access Control Ontology, BFO edition (RBACO-BFO)"@en ;
+    dcterms:title "Role-Based Access Control Ontology, BFO edition (RBACO-BFO)"@en ;
     dcterms:description "A BFO 2020 and CCO conformant ontology covering the patterns of ROWLBAC (Finin et al., SACMAT 2008) to the semantics of the proposed NIST RBAC standard (Ferraiolo et al., ACM TISSEC 4(3), 2001). Sessions are business process instances, and tasks within them carry the separation of duty patterns of Botha and Eloff (IBM Systems Journal 40(3), 2001). An RBAC role is a role definition (an information content entity) concretized by a BFO role of each assigned person. Constraints are regulations whose violations are found by SPARQL queries and recorded as conflict reports."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    rdfs:comment "Placeholder namespace: example.org resolves to nothing. Replace https://example.org/rbac-bfo/ with an owned base before publication."@en ;
+    rdfs:comment "The w3id.org redirect for https://w3id.org/rbaco/bfo/ is not registered yet, so these IRIs do not resolve."@en ;
     owl:versionInfo "2026-11-01 draft for review, with tasks and conflicting entities after Botha and Eloff 2001, task-bound operations, and conflict reports over role, permission and task members"@en .
 
 #################################################################
@@ -41,28 +41,28 @@ skos:editorialNote rdf:type owl:AnnotationProperty .
 dcterms:source rdf:type owl:AnnotationProperty .
 dc11:identifier rdf:type owl:AnnotationProperty .
 
-#: rbo:RBO_0000301  corresponds to role definition
-rbo:RBO_0000301 rdf:type owl:AnnotationProperty ;
-    dc11:identifier "301-RBO" ;
+#: rbaco:RBACO_0000301  corresponds to role definition
+rbaco:RBACO_0000301 rdf:type owl:AnnotationProperty ;
+    dc11:identifier "301-RBACO" ;
     rdfs:label "corresponds to role definition"@en ;
     skos:definition "Relates a role universal (an OWL class) to the role definition individual in an access-control system whose seniority edges the universal's subclass axioms mirror."@en ;
     skos:scopeNote "Used by the hierarchy drift check (queries/check-hierarchy-drift.rq). An annotation, so it carries no OWL semantics and keeps class and individual apart."@en .
 
-#: rbo:RBO_0000302  has object type criterion
-rbo:RBO_0000302 rdf:type owl:AnnotationProperty ;
-    dc11:identifier "302-RBO" ;
+#: rbaco:RBACO_0000302  has object type criterion
+rbaco:RBACO_0000302 rdf:type owl:AnnotationProperty ;
+    dc11:identifier "302-RBACO" ;
     rdfs:label "has object type criterion"@en ;
     skos:definition "Relates an object description to a class whose instances the described objects must be."@en .
 
-#: rbo:RBO_0000303  has object location type criterion
-rbo:RBO_0000303 rdf:type owl:AnnotationProperty ;
-    dc11:identifier "303-RBO" ;
+#: rbaco:RBACO_0000303  has object location type criterion
+rbaco:RBACO_0000303 rdf:type owl:AnnotationProperty ;
+    dc11:identifier "303-RBACO" ;
     rdfs:label "has object location type criterion"@en ;
     skos:definition "Relates an object description to a class whose instances the described objects must be located in."@en .
 
-#: rbo:RBO_0000305  has criteria class
-rbo:RBO_0000305 rdf:type owl:AnnotationProperty ;
-    dc11:identifier "305-RBO" ;
+#: rbaco:RBACO_0000305  has criteria class
+rbaco:RBACO_0000305 rdf:type owl:AnnotationProperty ;
+    dc11:identifier "305-RBACO" ;
     rdfs:label "has criteria class"@en ;
     skos:definition "Relates a description to an OWL defined class equivalent to its criteria, where the criteria are expressible in OWL 2 DL."@en ;
     skos:scopeNote "Lets a DL reasoner classify matching objects (ROWLBAC §4.1, first example). Criteria that need a role value map have no criteria class."@en .
@@ -79,498 +79,498 @@ cco:ont00001808 owl:equivalentProperty obo:IAO_0000136 ;  #: is about
 #    Object properties
 #################################################################
 
-#: rbo:RBO_0000101  has operation
-rbo:RBO_0000101 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000101  has operation
+rbaco:RBACO_0000101 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000006 ;                       #: access regulation
+    rdfs:domain rbaco:RBACO_0000006 ;                   #: access regulation
     rdfs:range obo:IAO_0000104 ;                        #: plan specification
-    dc11:identifier "101-RBO" ;
+    dc11:identifier "101-RBACO" ;
     rdfs:label "has operation"@en ;
     skos:definition "Relates an access regulation to the plan specification whose execution it permits or prohibits."@en ;
     skos:scopeNote "NIST defines an operation as an executable image of a program (Ferraiolo et al. 2001, p.233). IAO files software under plan specification (IAO_0000010). For acts that are not program executions, such as voting, the operation is a procedure stated as information."@en .
 
-#: rbo:RBO_0000102  has access object
-rbo:RBO_0000102 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000102  has access object
+rbaco:RBACO_0000102 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000006 ;                       #: access regulation
-    dc11:identifier "102-RBO" ;
+    rdfs:domain rbaco:RBACO_0000006 ;                   #: access regulation
+    dc11:identifier "102-RBACO" ;
     rdfs:label "has access object"@en ;
     skos:definition "Relates an access regulation to the one entity on which its operation is permitted or prohibited."@en ;
-    skos:scopeNote "Optional: ROWLBAC allows actions with no object, such as login (§3.2.1). A regulation may name an object description instead (rbo:RBO_0000103)."@en .
+    skos:scopeNote "Optional: ROWLBAC allows actions with no object, such as login (§3.2.1). A regulation may name an object description instead (rbaco:RBACO_0000103)."@en .
 
-#: rbo:RBO_0000103  has object description
-rbo:RBO_0000103 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000103  has object description
+rbaco:RBACO_0000103 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf obo:BFO_0000178 ;                #: has continuant part
-    rdfs:domain rbo:RBO_0000006 ;                       #: access regulation
-    rdfs:range rbo:RBO_0000009 ;                        #: object description
-    dc11:identifier "103-RBO" ;
+    rdfs:domain rbaco:RBACO_0000006 ;                   #: access regulation
+    rdfs:range rbaco:RBACO_0000009 ;                    #: object description
+    dc11:identifier "103-RBACO" ;
     rdfs:label "has object description"@en ;
     skos:definition "Relates an access regulation to the description, part of it, that states which objects the regulation covers."@en ;
     skos:scopeNote "Parthood between information content entities follows CCO's Plan, which has an Objective as continuant part (AgentOntology.ttl ont00000974)."@en .
 
-#: rbo:RBO_0000105  is assigned to role definition
-rbo:RBO_0000105 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000105  is assigned to role definition
+rbaco:RBACO_0000105 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000006 ;                       #: access regulation
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "105-RBO" ;
+    rdfs:domain rbaco:RBACO_0000006 ;                   #: access regulation
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "105-RBACO" ;
     rdfs:label "is assigned to role definition"@en ;
     skos:definition "Relates an access regulation to the role definition it is assigned to."@en ;
     skos:scopeNote "NIST permission assignment, PA (Ferraiolo et al. 2001, Def. 1, p.234). Each regulation is assigned to at most one role definition, so the same (operation, object) pair granted to two roles is two regulations. Revoking one is a policy retiring act with that regulation as input."@en .
 
-#: rbo:RBO_0000106  is activated in
-rbo:RBO_0000106 rdf:type owl:ObjectProperty ;
-    rdfs:domain rbo:RBO_0000003 ;                       #: active role
-    rdfs:range rbo:RBO_0000004 ;                        #: business process
-    dc11:identifier "106-RBO" ;
+#: rbaco:RBACO_0000106  is activated in
+rbaco:RBACO_0000106 rdf:type owl:ObjectProperty ;
+    rdfs:domain rbaco:RBACO_0000003 ;                   #: active role
+    rdfs:range rbaco:RBACO_0000004 ;                    #: business process
+    dc11:identifier "106-RBACO" ;
     rdfs:label "is activated in"@en ;
     skos:definition "Relates an active role to the business process instance in which it was activated and within which it authorizes access."@en ;
     skos:scopeNote "New because no held relation fits. A specifically dependent continuant cannot depend on a process (BFO 2020 CLIF, specific-dependency [kkl-1]); RO's existence-overlaps family takes an independent continuant as subject (ro.owl RO_0002487); RO's is active in (RO_0002432) means enabling an activity located in a structure."@en .
 
-#: rbo:RBO_0000107  has requester
-rbo:RBO_0000107 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000107  has requester
+rbaco:RBACO_0000107 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001833 ;                #: has agent
     rdfs:domain obo:BFO_0000015 ;                       #: process
     rdfs:range cco:ont00001017 ;                        #: Agent
-    dc11:identifier "107-RBO" ;
+    dc11:identifier "107-RBACO" ;
     rdfs:label "has requester"@en ;
     skos:definition "Relates a request act to the agent who makes the request."@en ;
     skos:scopeNote "ROWLBAC's subject (§3.2.1). NIST's CheckAccess takes a session (p.254); a session shared by several participants needs the requester named."@en .
 
-#: rbo:RBO_0000108  requests operation
-rbo:RBO_0000108 rdf:type owl:ObjectProperty ;
-    rdfs:domain rbo:RBO_0000024 ;                       #: access request
+#: rbaco:RBACO_0000108  requests operation
+rbaco:RBACO_0000108 rdf:type owl:ObjectProperty ;
+    rdfs:domain rbaco:RBACO_0000024 ;                   #: access request
     rdfs:range obo:IAO_0000104 ;                        #: plan specification
-    dc11:identifier "108-RBO" ;
+    dc11:identifier "108-RBACO" ;
     rdfs:label "requests operation"@en ;
     skos:definition "Relates an access request to the operation the requester asks to perform."@en .
 
-#: rbo:RBO_0000109  requests access to
-rbo:RBO_0000109 rdf:type owl:ObjectProperty ;
-    rdfs:domain rbo:RBO_0000024 ;                       #: access request
-    dc11:identifier "109-RBO" ;
+#: rbaco:RBACO_0000109  requests access to
+rbaco:RBACO_0000109 rdf:type owl:ObjectProperty ;
+    rdfs:domain rbaco:RBACO_0000024 ;                   #: access request
+    dc11:identifier "109-RBACO" ;
     rdfs:label "requests access to"@en ;
     skos:definition "Relates an access request to the object on which the requester asks to perform the operation."@en .
 
-#: rbo:RBO_0000110  requests activation of
-rbo:RBO_0000110 rdf:type owl:ObjectProperty ;
-    rdfs:domain rbo:RBO_0000025 ;                       #: role activation request
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "110-RBO" ;
+#: rbaco:RBACO_0000110  requests activation of
+rbaco:RBACO_0000110 rdf:type owl:ObjectProperty ;
+    rdfs:domain rbaco:RBACO_0000025 ;                   #: role activation request
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "110-RBACO" ;
     rdfs:label "requests activation of"@en ;
     skos:definition "Relates a role activation request to the role definition the requester asks to activate."@en .
 
-#: rbo:RBO_0000111  is fulfilled by
-rbo:RBO_0000111 rdf:type owl:ObjectProperty , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
-    rdfs:domain rbo:RBO_0000025 ;                       #: role activation request
-    rdfs:range rbo:RBO_0000026 ;                        #: role activation
-    dc11:identifier "111-RBO" ;
+#: rbaco:RBACO_0000111  is fulfilled by
+rbaco:RBACO_0000111 rdf:type owl:ObjectProperty , owl:FunctionalProperty , owl:InverseFunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000025 ;                   #: role activation request
+    rdfs:range rbaco:RBACO_0000026 ;                    #: role activation
+    dc11:identifier "111-RBACO" ;
     rdfs:label "is fulfilled by"@en ;
     skos:definition "Relates a role activation request to the role activation that granted it."@en ;
     skos:scopeNote "A refused activation is a request with no fulfillment; nothing else marks it. Functional and inverse functional: a request is fulfilled by at most one activation, and an activation fulfills at most one request."@en .
 
-#: rbo:RBO_0000112  decides on
-rbo:RBO_0000112 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000112  decides on
+rbaco:RBACO_0000112 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000021 ;                       #: access decision
-    rdfs:range rbo:RBO_0000024 ;                        #: access request
-    dc11:identifier "112-RBO" ;
+    rdfs:domain rbaco:RBACO_0000021 ;                   #: access decision
+    rdfs:range rbaco:RBACO_0000024 ;                    #: access request
+    dc11:identifier "112-RBACO" ;
     rdfs:label "decides on"@en ;
     skos:definition "Relates an access decision to the access request it answers."@en .
 
-#: rbo:RBO_0000113  cites regulation
-rbo:RBO_0000113 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000113  cites regulation
+rbaco:RBACO_0000113 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000021 ;                       #: access decision
+    rdfs:domain rbaco:RBACO_0000021 ;                   #: access decision
     rdfs:range [ rdf:type owl:Class ; owl:unionOf (
-        rbo:RBO_0000006                                 #: access regulation
-        rbo:RBO_0000012                                 #: separation of duty constraint
-        rbo:RBO_0000050 ) ] ;                           #: task-bound operation requirement
-    dc11:identifier "113-RBO" ;
+        rbaco:RBACO_0000006                             #: access regulation
+        rbaco:RBACO_0000012                             #: separation of duty constraint
+        rbaco:RBACO_0000050 ) ] ;                       #: task-bound operation requirement
+    dc11:identifier "113-RBACO" ;
     rdfs:label "cites regulation"@en ;
     skos:definition "Relates an access decision to a regulation on which it rests."@en ;
     skos:scopeNote "A grant cites the permission it used. A denial cites the prohibition that overrode a permission, the task-bound operation requirement the request failed, the permission-based separation of duty constraint that refused it, or nothing when no permission applied. The range admits separation of duty constraints and task-bound operation requirements so that citing one does not classify it as an access regulation."@en .
 
-#: rbo:RBO_0000114  has constrained role definition
-rbo:RBO_0000114 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000114  has constrained role definition
+rbaco:RBACO_0000114 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000012 ;                       #: separation of duty constraint
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "114-RBO" ;
+    rdfs:domain rbaco:RBACO_0000012 ;                   #: separation of duty constraint
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "114-RBACO" ;
     rdfs:label "has constrained role definition"@en ;
     skos:definition "Relates a separation of duty constraint to a role definition in its role set."@en .
 
-#: rbo:RBO_0000115  applies within
-rbo:RBO_0000115 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000115  applies within
+rbaco:RBACO_0000115 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
     rdfs:domain [ rdf:type owl:Class ; owl:unionOf (
-        rbo:RBO_0000014                                 #: dynamic separation of duty constraint
-        rbo:RBO_0000047                                 #: dynamic conflicting agent designation
-        rbo:RBO_0000049                                 #: human performer requirement
-        rbo:RBO_0000050 ) ] ;                           #: task-bound operation requirement
-    rdfs:range rbo:RBO_0000005 ;                        #: business process plan
-    dc11:identifier "115-RBO" ;
+        rbaco:RBACO_0000014                             #: dynamic separation of duty constraint
+        rbaco:RBACO_0000047                             #: dynamic conflicting agent designation
+        rbaco:RBACO_0000049                             #: human performer requirement
+        rbaco:RBACO_0000050 ) ] ;                       #: task-bound operation requirement
+    rdfs:range rbaco:RBACO_0000005 ;                    #: business process plan
+    dc11:identifier "115-RBACO" ;
     rdfs:label "applies within"@en ;
     skos:definition "Relates a dynamic separation of duty constraint, a dynamic conflicting agent designation, a human performer requirement or a task-bound operation requirement to the business process plan whose instances it governs."@en ;
     skos:scopeNote "A constraint, designation or requirement with no value applies in every instance. Botha and Eloff 2001 scope conflicting tasks to one process definition (Figure 8, p.678). NIST: the set name indicates the transaction or business process in which common user membership must be restricted (Ferraiolo et al. 2001, p.245), and creating a DSD set has identical semantics (p.246)."@en .
 
-#: rbo:RBO_0000116  has head role
-rbo:RBO_0000116 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000116  has head role
+rbaco:RBACO_0000116 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001942 ;                #: prescribes
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "116-RBO" ;
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "116-RBACO" ;
     rdfs:label "has head role"@en ;
     skos:definition "Relates a membership statement to the role definition whose membership it determines."@en ;
     skos:scopeNote "In RT, the role on the left of the arrow. In a role inheritance statement, the junior role, whose authorized members include the senior's."@en .
 
-#: rbo:RBO_0000117  has body role
-rbo:RBO_0000117 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000117  has body role
+rbaco:RBACO_0000117 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "117-RBO" ;
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "117-RBACO" ;
     rdfs:label "has body role"@en ;
     skos:definition "Relates a membership statement to a role definition whose members it adds to the head role."@en .
 
-#: rbo:RBO_0000118  has senior role definition
-rbo:RBO_0000118 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000117 ;                #: has body role
-    rdfs:domain rbo:RBO_0000017 ;                       #: role inheritance statement
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "118-RBO" ;
+#: rbaco:RBACO_0000118  has senior role definition
+rbaco:RBACO_0000118 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000117 ;            #: has body role
+    rdfs:domain rbaco:RBACO_0000017 ;                   #: role inheritance statement
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "118-RBACO" ;
     rdfs:label "has senior role definition"@en ;
     skos:definition "Relates a role inheritance statement to its senior role definition, which acquires the junior's regulations."@en .
 
-#: rbo:RBO_0000119  has junior role definition
-rbo:RBO_0000119 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000116 ;                #: has head role
-    rdfs:domain rbo:RBO_0000017 ;                       #: role inheritance statement
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "119-RBO" ;
+#: rbaco:RBACO_0000119  has junior role definition
+rbaco:RBACO_0000119 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000116 ;            #: has head role
+    rdfs:domain rbaco:RBACO_0000017 ;                   #: role inheritance statement
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "119-RBACO" ;
     rdfs:label "has junior role definition"@en ;
     skos:definition "Relates a role inheritance statement to its junior role definition, whose authorized members include the senior's."@en .
 
-#: rbo:RBO_0000120  is senior to
-rbo:RBO_0000120 rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
-    rdfs:domain rbo:RBO_0000001 ;                       #: role definition
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "120-RBO" ;
+#: rbaco:RBACO_0000120  is senior to
+rbaco:RBACO_0000120 rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:domain rbaco:RBACO_0000001 ;                   #: role definition
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "120-RBACO" ;
     rdfs:label "is senior to"@en ;
     skos:definition "Relates a role definition to a distinct role definition below it in the role hierarchy, according to the role inheritance statements in force at one evaluation time."@en ;
     skos:scopeNote "Snapshot property: derived by queries/derive-hierarchy-snapshot.rq for one evaluation time and never asserted in base data. NIST's ordering is a partial order (Def. 2a, p.235). This property is its strict part; reflexivity is supplied by the zero-length path in queries, and acyclicity, which with transitivity gives antisymmetry, is checked by queries/check-hierarchy-cycles.rq because OWL 2 cannot state it."@en .
 
-#: rbo:RBO_0000121  has role issuer
-rbo:RBO_0000121 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000033 ;                       #: RT role definition
+#: rbaco:RBACO_0000121  has role issuer
+rbaco:RBACO_0000121 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000033 ;                   #: RT role definition
     rdfs:range cco:ont00001017 ;                        #: Agent
-    dc11:identifier "121-RBO" ;
+    dc11:identifier "121-RBACO" ;
     rdfs:label "has role issuer"@en ;
     skos:definition "Relates an RT role definition to the principal whose role it is, the A of A.r."@en .
 
-#: rbo:RBO_0000122  names member
-rbo:RBO_0000122 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000122  names member
+rbaco:RBACO_0000122 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000035 ;                       #: RT simple member statement
+    rdfs:domain rbaco:RBACO_0000035 ;                   #: RT simple member statement
     rdfs:range obo:BFO_0000040 ;                        #: material entity
-    dc11:identifier "122-RBO" ;
+    dc11:identifier "122-RBACO" ;
     rdfs:label "names member"@en ;
     skos:definition "Relates an RT simple member statement to the principal it makes a member of its head role."@en .
 
-#: rbo:RBO_0000123  has linking base role
-rbo:RBO_0000123 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000117 ;                #: has body role
-    rdfs:domain rbo:RBO_0000037 ;                       #: RT linking inclusion statement
-    rdfs:range rbo:RBO_0000033 ;                        #: RT role definition
-    dc11:identifier "123-RBO" ;
+#: rbaco:RBACO_0000123  has linking base role
+rbaco:RBACO_0000123 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000117 ;            #: has body role
+    rdfs:domain rbaco:RBACO_0000037 ;                   #: RT linking inclusion statement
+    rdfs:range rbaco:RBACO_0000033 ;                    #: RT role definition
+    dc11:identifier "123-RBACO" ;
     rdfs:label "has linking base role"@en ;
     skos:definition "Relates an RT linking inclusion statement A.r <- B.r1.r2 to B.r1, whose members' r2 roles are included."@en .
 
-#: rbo:RBO_0000124  describes conflict subject
-rbo:RBO_0000124 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000124  describes conflict subject
+rbaco:RBACO_0000124 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
     rdfs:range cco:ont00001017 ;                        #: Agent
-    dc11:identifier "124-RBO" ;
+    dc11:identifier "124-RBACO" ;
     rdfs:label "describes conflict subject"@en ;
     skos:definition "Relates a conflict report to the agent the breach is charged to: the agent holding, exercising or performing the members involved (the principal, for an act done on another agent's behalf), counted together with any agent a conflicting agent designation makes one with them."@en .
 
-#: rbo:RBO_0000125  describes violated constraint
-rbo:RBO_0000125 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000125  describes violated constraint
+rbaco:RBACO_0000125 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
-    rdfs:range rbo:RBO_0000012 ;                        #: separation of duty constraint
-    dc11:identifier "125-RBO" ;
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
+    rdfs:range rbaco:RBACO_0000012 ;                    #: separation of duty constraint
+    dc11:identifier "125-RBACO" ;
     rdfs:label "describes violated constraint"@en ;
     skos:definition "Relates a conflict report to the separation of duty constraint it reports breached."@en .
 
-#: rbo:RBO_0000126  describes conflicting role definition
-rbo:RBO_0000126 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000149 ;                #: describes conflicting member
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "126-RBO" ;
+#: rbaco:RBACO_0000126  describes conflicting role definition
+rbaco:RBACO_0000126 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000149 ;            #: describes conflicting member
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "126-RBACO" ;
     rdfs:label "describes conflicting role definition"@en ;
     skos:definition "Relates a conflict report to a role definition from the constraint's set that the agent holds or would hold."@en ;
     skos:scopeNote "ROWLBAC's ssod-role (§3.4.4)."@en .
 
-#: rbo:RBO_0000127  describes conflict instance
-rbo:RBO_0000127 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000127  describes conflict instance
+rbaco:RBACO_0000127 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000020 ;                       #: dynamic separation of duty conflict report
-    rdfs:range rbo:RBO_0000004 ;                        #: business process
-    dc11:identifier "127-RBO" ;
+    rdfs:domain rbaco:RBACO_0000020 ;                   #: dynamic separation of duty conflict report
+    rdfs:range rbaco:RBACO_0000004 ;                    #: business process
+    dc11:identifier "127-RBACO" ;
     rdfs:label "describes conflict instance"@en ;
     skos:definition "Relates a dynamic separation of duty conflict report to the business process instance in which the breach would occur."@en .
 
-#: rbo:RBO_0000128  describes conflicting act
-rbo:RBO_0000128 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000128  describes conflicting act
+rbaco:RBACO_0000128 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
     rdfs:range obo:BFO_0000015 ;                        #: process
-    dc11:identifier "128-RBO" ;
+    dc11:identifier "128-RBACO" ;
     rdfs:label "describes conflicting act"@en ;
     skos:definition "Relates a conflict report to the act that produced the breach: the role assignment or policy issuing act that completed it, or the activation or access request refused for it."@en .
 
-#: rbo:RBO_0000129  treats as growth-restricted
-rbo:RBO_0000129 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000129  treats as growth-restricted
+rbaco:RBACO_0000129 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000039 ;                       #: security analysis specification
-    rdfs:range rbo:RBO_0000033 ;                        #: RT role definition
-    dc11:identifier "129-RBO" ;
+    rdfs:domain rbaco:RBACO_0000039 ;                   #: security analysis specification
+    rdfs:range rbaco:RBACO_0000033 ;                    #: RT role definition
+    dc11:identifier "129-RBACO" ;
     rdfs:label "treats as growth-restricted"@en ;
     skos:definition "Relates a security analysis specification to an RT role definition that the analysis assumes will gain no new defining statements."@en ;
     skos:scopeNote "An assumption of one analysis, not a fact about the role: the restrictions are not actually enforced, but are assumptions underlying the analysis (ROWLBAC §4.2)."@en .
 
-#: rbo:RBO_0000130  treats as shrink-restricted
-rbo:RBO_0000130 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000130  treats as shrink-restricted
+rbaco:RBACO_0000130 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000039 ;                       #: security analysis specification
-    rdfs:range rbo:RBO_0000033 ;                        #: RT role definition
-    dc11:identifier "130-RBO" ;
+    rdfs:domain rbaco:RBACO_0000039 ;                   #: security analysis specification
+    rdfs:range rbaco:RBACO_0000033 ;                    #: RT role definition
+    dc11:identifier "130-RBACO" ;
     rdfs:label "treats as shrink-restricted"@en ;
     skos:definition "Relates a security analysis specification to an RT role definition that the analysis assumes will lose none of its defining statements."@en .
 
-#: rbo:RBO_0000131  has authorized member
-rbo:RBO_0000131 rdf:type owl:ObjectProperty ;
-    rdfs:domain rbo:RBO_0000001 ;                       #: role definition
+#: rbaco:RBACO_0000131  has authorized member
+rbaco:RBACO_0000131 rdf:type owl:ObjectProperty ;
+    rdfs:domain rbaco:RBACO_0000001 ;                   #: role definition
     rdfs:range obo:BFO_0000040 ;                        #: material entity
-    dc11:identifier "131-RBO" ;
+    dc11:identifier "131-RBACO" ;
     rdfs:label "has authorized member"@en ;
     skos:definition "Relates a role definition to a material entity that, at one evaluation time, holds an assigned role concretizing it or a senior role definition, or is a member by the RT statements in force."@en ;
     skos:scopeNote "Snapshot property: derived by queries/derive-authorized-members.rq and queries/derive-rt-membership.rq, never asserted in base data. NIST authorized_users (Def. 2a, p.235)."@en .
 
-#: rbo:RBO_0000132  requires role definition
-rbo:RBO_0000132 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000132  requires role definition
+rbaco:RBACO_0000132 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000040 ;                       #: task specification
-    rdfs:range rbo:RBO_0000001 ;                        #: role definition
-    dc11:identifier "132-RBO" ;
+    rdfs:domain rbaco:RBACO_0000040 ;                   #: task specification
+    rdfs:range rbaco:RBACO_0000001 ;                    #: role definition
+    dc11:identifier "132-RBACO" ;
     rdfs:label "requires role definition"@en ;
     skos:definition "Relates a task specification to the one role definition whose holders, or holders of a senior one, may perform its instances."@en ;
-    skos:scopeNote "Botha and Eloff 2001: each task of the purchase process names one role (Figure 2, p.669), and a WSession activates the role associated with the task, the most junior role the task requires (p.674). Access in a task instance is granted through this role only (clif/rbo-access.cl [rbo-a4])."@en .
+    skos:scopeNote "Botha and Eloff 2001: each task of the purchase process names one role (Figure 2, p.669), and a WSession activates the role associated with the task, the most junior role the task requires (p.674). Access in a task instance is granted through this role only (clif/rbaco-bfo-access.cl [rbaco-a4])."@en .
 
-#: rbo:RBO_0000133  requires operation
-rbo:RBO_0000133 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000133  requires operation
+rbaco:RBACO_0000133 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000040 ;                       #: task specification
+    rdfs:domain rbaco:RBACO_0000040 ;                   #: task specification
     rdfs:range obo:IAO_0000104 ;                        #: plan specification
-    dc11:identifier "133-RBO" ;
+    dc11:identifier "133-RBACO" ;
     rdfs:label "requires operation"@en ;
     skos:definition "Relates a task specification to an operation its instances need."@en ;
-    skos:scopeNote "A statement of need, not a grant: access is decided through the required role definition. It becomes a condition of access only for an operation a task-bound operation requirement (RBO_0000050) names: a request for that operation is then denied unless it is part of a task instance whose specification requires the operation. Read by queries/decide-access.rq, queries/check-task-specs.rq (coverage, least-privilege slack, requests outside the task's needs), queries/check-conflict-coverage.rq, queries/check-sod-hierarchy.rq and queries/cq-worklist.rq."@en .
+    skos:scopeNote "A statement of need, not a grant: access is decided through the required role definition. It becomes a condition of access only for an operation a task-bound operation requirement (RBACO_0000050) names: a request for that operation is then denied unless it is part of a task instance whose specification requires the operation. Read by queries/decide-access.rq, queries/check-task-specs.rq (coverage, least-privilege slack, requests outside the task's needs), queries/check-conflict-coverage.rq, queries/check-sod-hierarchy.rq and queries/cq-worklist.rq."@en .
 
-#: rbo:RBO_0000134  has constrained permission
-rbo:RBO_0000134 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000134  has constrained permission
+rbaco:RBACO_0000134 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000012 ;                       #: separation of duty constraint
-    rdfs:range rbo:RBO_0000007 ;                        #: access permission
-    dc11:identifier "134-RBO" ;
+    rdfs:domain rbaco:RBACO_0000012 ;                   #: separation of duty constraint
+    rdfs:range rbaco:RBACO_0000007 ;                    #: access permission
+    dc11:identifier "134-RBACO" ;
     rdfs:label "has constrained permission"@en ;
     skos:definition "Relates a separation of duty constraint to an access permission in its permission set."@en ;
     skos:scopeNote "Botha and Eloff 2001: conflicting permissions are those that \"together, provide more ability than required to a single user\" (p.671)."@en .
 
-#: rbo:RBO_0000135  has constrained task specification
-rbo:RBO_0000135 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000135  has constrained task specification
+rbaco:RBACO_0000135 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000012 ;                       #: separation of duty constraint
-    rdfs:range rbo:RBO_0000040 ;                        #: task specification
-    dc11:identifier "135-RBO" ;
+    rdfs:domain rbaco:RBACO_0000012 ;                   #: separation of duty constraint
+    rdfs:range rbaco:RBACO_0000040 ;                    #: task specification
+    dc11:identifier "135-RBACO" ;
     rdfs:label "has constrained task specification"@en ;
     skos:definition "Relates a separation of duty constraint to a task specification in its task set."@en .
 
-#: rbo:RBO_0000136  is activated for
-rbo:RBO_0000136 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000003 ;                       #: active role
-    rdfs:range rbo:RBO_0000041 ;                        #: task instance
-    dc11:identifier "136-RBO" ;
+#: rbaco:RBACO_0000136  is activated for
+rbaco:RBACO_0000136 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000003 ;                   #: active role
+    rdfs:range rbaco:RBACO_0000041 ;                    #: task instance
+    dc11:identifier "136-RBACO" ;
     rdfs:label "is activated for"@en ;
     skos:definition "Relates an active role to the task instance it was activated to perform."@en ;
-    skos:scopeNote "Botha and Eloff's WSession, \"a run-time mapping of one user to the most junior role required for a specific task\" (2001, p.674). Optional, because \"not all access control decisions in an organization will be made in the context of a workflow\" (p.671). The task instance is an occurrent part of the business process instance the role is activated in ([rbo-k2]); the role concretizes the task's required role definition itself and inheres in the task instance's agent ([rbo-k3]). Several WSessions for one task instance are several active roles over time."@en .
+    skos:scopeNote "Botha and Eloff's WSession, \"a run-time mapping of one user to the most junior role required for a specific task\" (2001, p.674). Optional, because \"not all access control decisions in an organization will be made in the context of a workflow\" (p.671). The task instance is an occurrent part of the business process instance the role is activated in ([rbaco-k2]); the role concretizes the task's required role definition itself and inheres in the task instance's agent ([rbaco-k3]). Several WSessions for one task instance are several active roles over time."@en .
 
-#: rbo:RBO_0000137  requests activation for
-rbo:RBO_0000137 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000025 ;                       #: role activation request
-    rdfs:range rbo:RBO_0000048 ;                        #: work item
-    dc11:identifier "137-RBO" ;
+#: rbaco:RBACO_0000137  requests activation for
+rbaco:RBACO_0000137 rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000025 ;                   #: role activation request
+    rdfs:range rbaco:RBACO_0000048 ;                    #: work item
+    dc11:identifier "137-RBACO" ;
     rdfs:label "requests activation for"@en ;
     skos:definition "Relates a role activation request to the work item the requested active role would serve."@en ;
     skos:scopeNote "A work item, not a task instance, because a refused request leaves no task instance to name: the task instance begins only when the activation is granted, prescribed by the work item, with the requester as agent. Functional: a request serves one work item. The request is where strict least privilege, task-based separation of duty, the human-performer requirement and the prior-task guard are enforced (queries/decide-activation.rq), since task acceptance is recorded as the task instance's agent and is no act of its own."@en .
 
-#: rbo:RBO_0000138  designates conflicting agent
-rbo:RBO_0000138 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000138  designates conflicting agent
+rbaco:RBACO_0000138 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000045 ;                       #: conflicting agent designation
+    rdfs:domain rbaco:RBACO_0000045 ;                   #: conflicting agent designation
     rdfs:range cco:ont00001017 ;                        #: Agent
-    dc11:identifier "138-RBO" ;
+    dc11:identifier "138-RBACO" ;
     rdfs:label "designates conflicting agent"@en ;
     skos:definition "Relates a conflicting agent designation to an agent it names."@en .
 
-#: rbo:RBO_0000139  designates conflicting group
-rbo:RBO_0000139 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000139  designates conflicting group
+rbaco:RBACO_0000139 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000045 ;                       #: conflicting agent designation
+    rdfs:domain rbaco:RBACO_0000045 ;                   #: conflicting agent designation
     rdfs:range cco:ont00000300 ;                        #: Group of Agents
-    dc11:identifier "139-RBO" ;
+    dc11:identifier "139-RBACO" ;
     rdfs:label "designates conflicting group"@en ;
     skos:definition "Relates a conflicting agent designation to a group of agents whose member parts at a time count as one agent at that time."@en ;
-    skos:scopeNote "Member part of (BFO_0000129) is time-indexed in BFO 2020, so a group such as a CCO Family (ont00000837) gains and loses members without the designation changing ([rbo-u3]). The SPARQL queries read member part of without its time, as OWL states it."@en .
+    skos:scopeNote "Member part of (BFO_0000129) is time-indexed in BFO 2020, so a group such as a CCO Family (ont00000837) gains and loses members without the designation changing ([rbaco-u3]). The SPARQL queries read member part of without its time, as OWL states it."@en .
 
-#: rbo:RBO_0000140  applies to constraint
-rbo:RBO_0000140 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000140  applies to constraint
+rbaco:RBACO_0000140 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000045 ;                       #: conflicting agent designation
-    rdfs:range rbo:RBO_0000012 ;                        #: separation of duty constraint
-    dc11:identifier "140-RBO" ;
+    rdfs:domain rbaco:RBACO_0000045 ;                   #: conflicting agent designation
+    rdfs:range rbaco:RBACO_0000012 ;                    #: separation of duty constraint
+    dc11:identifier "140-RBACO" ;
     rdfs:label "applies to constraint"@en ;
     skos:definition "Relates a conflicting agent designation to a separation of duty constraint it applies to."@en ;
     skos:scopeNote "A designation with no value applies to every constraint of its kind: a static designation to every static constraint, a dynamic one to every dynamic constraint."@en .
 
-#: rbo:RBO_0000141  is work item for
-rbo:RBO_0000141 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000141  is work item for
+rbaco:RBACO_0000141 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000048 ;                       #: work item
-    rdfs:range rbo:RBO_0000040 ;                        #: task specification
-    dc11:identifier "141-RBO" ;
+    rdfs:domain rbaco:RBACO_0000048 ;                   #: work item
+    rdfs:range rbaco:RBACO_0000040 ;                    #: task specification
+    dc11:identifier "141-RBACO" ;
     rdfs:label "is work item for"@en ;
     skos:definition "Relates a work item to the task specification whose instance it prescribes."@en .
 
-#: rbo:RBO_0000142  is work item in
-rbo:RBO_0000142 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000142  is work item in
+rbaco:RBACO_0000142 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000048 ;                       #: work item
-    rdfs:range rbo:RBO_0000004 ;                        #: business process
-    dc11:identifier "142-RBO" ;
+    rdfs:domain rbaco:RBACO_0000048 ;                   #: work item
+    rdfs:range rbaco:RBACO_0000004 ;                    #: business process
+    dc11:identifier "142-RBACO" ;
     rdfs:label "is work item in"@en ;
     skos:definition "Relates a work item to the business process instance its task instance would be part of."@en .
 
-#: rbo:RBO_0000143  is performed on behalf of
-rbo:RBO_0000143 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000143  is performed on behalf of
+rbaco:RBACO_0000143 rdf:type owl:ObjectProperty ;
     rdfs:domain cco:ont00000228 ;                       #: Planned Act
     rdfs:range cco:ont00001017 ;                        #: Agent
-    dc11:identifier "143-RBO" ;
+    dc11:identifier "143-RBACO" ;
     rdfs:label "is performed on behalf of"@en ;
     skos:definition "Relates a planned act to the agent on whose behalf its agent performed it."@en ;
-    skos:scopeNote "Separation of duty compares the principal of an act: the agent it was performed on behalf of, if any, else its agent ([rbo-p1]). A relation between acts and agents, not between agents, because one workflow host acts for many people. The counterpart in PROV-O (W3C Recommendation 2013-04-30) is prov:actedOnBehalfOf qualified by a prov:Delegation naming the activity; PROV-O is not imported, since it is not built on BFO."@en ;
+    skos:scopeNote "Separation of duty compares the principal of an act: the agent it was performed on behalf of, if any, else its agent ([rbaco-p1]). A relation between acts and agents, not between agents, because one workflow host acts for many people. The counterpart in PROV-O (W3C Recommendation 2013-04-30) is prov:actedOnBehalfOf qualified by a prov:Delegation naming the activity; PROV-O is not imported, since it is not built on BFO."@en ;
     rdfs:seeAlso <http://www.w3.org/ns/prov#qualifiedDelegation> .
 
-#: rbo:RBO_0000144  requires prior
-rbo:RBO_0000144 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000144  requires prior
+rbaco:RBACO_0000144 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000040 ;                       #: task specification
-    rdfs:range rbo:RBO_0000040 ;                        #: task specification
-    dc11:identifier "144-RBO" ;
+    rdfs:domain rbaco:RBACO_0000040 ;                   #: task specification
+    rdfs:range rbaco:RBACO_0000040 ;                    #: task specification
+    dc11:identifier "144-RBACO" ;
     rdfs:label "requires prior"@en ;
     skos:definition "Relates a task specification to one of which an instance must have finished, with a person as agent, earlier in the same business process instance before an instance of the first may be activated for."@en ;
-    skos:scopeNote "The completion guard for human-in-the-loop processes ([rbo-g2]). Unconditional: routing predicates such as the approval threshold of Botha and Eloff's purchase process (VALUE >= 10 000, Figure 2, p.669) are not modeled, so a branching route makes its branches separate plans. The guard belongs to the specification, not to a plan: the human performer and task-binding requirements are scoped to plans by applies within (RBO_0000115), but a specification that requires prior another carries the guard into every plan it is part of. In the examples the one guarded specification, issue items, is part of a single plan, while five others are each part of four or five."@en .
+    skos:scopeNote "The completion guard for human-in-the-loop processes ([rbaco-g2]). Unconditional: routing predicates such as the approval threshold of Botha and Eloff's purchase process (VALUE >= 10 000, Figure 2, p.669) are not modeled, so a branching route makes its branches separate plans. The guard belongs to the specification, not to a plan: the human performer and task-binding requirements are scoped to plans by applies within (RBACO_0000115), but a specification that requires prior another carries the guard into every plan it is part of. In the examples the one guarded specification, issue items, is part of a single plan, while five others are each part of four or five."@en .
 
-#: rbo:RBO_0000145  requires human agent for
-rbo:RBO_0000145 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000145  requires human agent for
+rbaco:RBACO_0000145 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000049 ;                       #: human performer requirement
-    rdfs:range rbo:RBO_0000040 ;                        #: task specification
-    dc11:identifier "145-RBO" ;
+    rdfs:domain rbaco:RBACO_0000049 ;                   #: human performer requirement
+    rdfs:range rbaco:RBACO_0000040 ;                    #: task specification
+    dc11:identifier "145-RBACO" ;
     rdfs:label "requires human agent for"@en ;
     skos:definition "Relates a human performer requirement to the task specification whose instances must have a person as agent."@en .
 
-#: rbo:RBO_0000148  requires task binding for
-rbo:RBO_0000148 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000148  requires task binding for
+rbaco:RBACO_0000148 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001808 ;                #: is about
-    rdfs:domain rbo:RBO_0000050 ;                       #: task-bound operation requirement
+    rdfs:domain rbaco:RBACO_0000050 ;                   #: task-bound operation requirement
     rdfs:range obo:IAO_0000104 ;                        #: plan specification
-    dc11:identifier "148-RBO" ;
+    dc11:identifier "148-RBACO" ;
     rdfs:label "requires task binding for"@en ;
     skos:definition "Relates a task-bound operation requirement to an operation that may be requested only within a task instance whose specification requires it."@en .
 
-#: rbo:RBO_0000146  describes conflicting permission
-rbo:RBO_0000146 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000149 ;                #: describes conflicting member
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
-    rdfs:range rbo:RBO_0000007 ;                        #: access permission
-    dc11:identifier "146-RBO" ;
+#: rbaco:RBACO_0000146  describes conflicting permission
+rbaco:RBACO_0000146 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000149 ;            #: describes conflicting member
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
+    rdfs:range rbaco:RBACO_0000007 ;                    #: access permission
+    dc11:identifier "146-RBACO" ;
     rdfs:label "describes conflicting permission"@en ;
     skos:definition "Relates a conflict report to a permission of the violated constraint's set that the subject holds or has exercised."@en .
 
-#: rbo:RBO_0000147  describes conflicting task specification
-rbo:RBO_0000147 rdf:type owl:ObjectProperty ;
-    rdfs:subPropertyOf rbo:RBO_0000149 ;                #: describes conflicting member
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
-    rdfs:range rbo:RBO_0000040 ;                        #: task specification
-    dc11:identifier "147-RBO" ;
+#: rbaco:RBACO_0000147  describes conflicting task specification
+rbaco:RBACO_0000147 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rbaco:RBACO_0000149 ;            #: describes conflicting member
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
+    rdfs:range rbaco:RBACO_0000040 ;                    #: task specification
+    dc11:identifier "147-RBACO" ;
     rdfs:label "describes conflicting task specification"@en ;
     skos:definition "Relates a conflict report to a task specification of the violated constraint's set that the subject can perform or has performed."@en .
 
-#: rbo:RBO_0000149  describes conflicting member
-rbo:RBO_0000149 rdf:type owl:ObjectProperty ;
+#: rbaco:RBACO_0000149  describes conflicting member
+rbaco:RBACO_0000149 rdf:type owl:ObjectProperty ;
     rdfs:subPropertyOf cco:ont00001982 ;                #: describes
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
     rdfs:range cco:ont00000965 ;                        #: Prescriptive Information Content Entity
-    dc11:identifier "149-RBO" ;
+    dc11:identifier "149-RBACO" ;
     rdfs:label "describes conflicting member"@en ;
     skos:definition "Relates a conflict report to a member of the violated constraint's set that the breach counts: a role definition, access permission or task specification."@en ;
-    skos:scopeNote "The parent of RBO_0000126, RBO_0000146 and RBO_0000147, so that a conflict report's minimum of two members holds whatever kind of set it describes. A permission report names every member whose content was counted, so members of one content are named together and count once."@en .
+    skos:scopeNote "The parent of RBACO_0000126, RBACO_0000146 and RBACO_0000147, so that a conflict report's minimum of two members holds whatever kind of set it describes. A permission report names every member whose content was counted, so members of one content are named together and count once."@en .
 
 #################################################################
 #    Data properties
 #################################################################
 
-#: rbo:RBO_0000201  has cardinality
-rbo:RBO_0000201 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000012 ;                       #: separation of duty constraint
+#: rbaco:RBACO_0000201  has cardinality
+rbaco:RBACO_0000201 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000012 ;                   #: separation of duty constraint
     rdfs:range xsd:positiveInteger ;
-    dc11:identifier "201-RBO" ;
+    dc11:identifier "201-RBACO" ;
     rdfs:label "has cardinality"@en ;
     skos:definition "The number n such that no agent may hold, exercise or perform n or more members of the constraint's set."@en ;
     skos:scopeNote "NIST requires n >= 2 (Defs. 3a and 4, pp.240-241); the class axiom on separation of duty constraint states it. That n is at most the size of the set is checked by queries/check-constraint-shape.rq. CCO deprecates its generic integer value property in favor of domain-specific ones."@en .
 
-#: rbo:RBO_0000202  has RT role name
-rbo:RBO_0000202 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000033 ;                       #: RT role definition
+#: rbaco:RBACO_0000202  has RT role name
+rbaco:RBACO_0000202 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000033 ;                   #: RT role definition
     rdfs:range xsd:string ;
-    dc11:identifier "202-RBO" ;
+    dc11:identifier "202-RBACO" ;
     rdfs:label "has RT role name"@en ;
     skos:definition "The role name r of an RT role A.r, which RT linking inclusion matches across issuers."@en .
 
-#: rbo:RBO_0000203  has linked role name
-rbo:RBO_0000203 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
-    rdfs:domain rbo:RBO_0000037 ;                       #: RT linking inclusion statement
+#: rbaco:RBACO_0000203  has linked role name
+rbaco:RBACO_0000203 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain rbaco:RBACO_0000037 ;                   #: RT linking inclusion statement
     rdfs:range xsd:string ;
-    dc11:identifier "203-RBO" ;
+    dc11:identifier "203-RBACO" ;
     rdfs:label "has linked role name"@en ;
     skos:definition "The role name r2 of an RT linking inclusion statement A.r <- B.r1.r2."@en .
 
-#: rbo:RBO_0000204  has justification
-rbo:RBO_0000204 rdf:type owl:DatatypeProperty ;
-    rdfs:domain rbo:RBO_0000018 ;                       #: conflict report
+#: rbaco:RBACO_0000204  has justification
+rbaco:RBACO_0000204 rdf:type owl:DatatypeProperty ;
+    rdfs:domain rbaco:RBACO_0000018 ;                   #: conflict report
     rdfs:range xsd:string ;
-    dc11:identifier "204-RBO" ;
+    dc11:identifier "204-RBACO" ;
     rdfs:label "has justification"@en ;
     skos:definition "A human-readable statement of why the conflict report was produced."@en ;
     skos:scopeNote "ROWLBAC's justification (§3.3.5)."@en .
 
-#: rbo:RBO_0000205  has timestamp
-rbo:RBO_0000205 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+#: rbaco:RBACO_0000205  has timestamp
+rbaco:RBACO_0000205 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
     rdfs:domain obo:BFO_0000203 ;                       #: temporal instant
     rdfs:range xsd:dateTime ;
-    dc11:identifier "205-RBO" ;
+    dc11:identifier "205-RBACO" ;
     rdfs:label "has timestamp"@en ;
     skos:definition "The calendar date and clock time at which a temporal instant falls."@en ;
     skos:scopeNote "CCO deprecates its generic datetime value property in favor of domain-specific ones."@en .
@@ -579,43 +579,43 @@ rbo:RBO_0000205 rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
 #    Classes: roles and role definitions
 #################################################################
 
-#: rbo:RBO_0000001  role definition
-rbo:RBO_0000001 rdf:type owl:Class ;
+#: rbaco:RBACO_0000001  role definition
+rbaco:RBACO_0000001 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ;                   #: Prescriptive Information Content Entity
-    dc11:identifier "001-RBO" ;
+    dc11:identifier "001-RBACO" ;
     rdfs:label "role definition"@en ;
     skos:definition "A Prescriptive Information Content Entity held in an access-control system that names a job function or status, and that the roles of the agents assigned to it concretize."@en ;
     skos:example "The Submitter role definition in a code review system; the US Citizen role definition in the ROWLBAC scenario."@en ;
     skos:scopeNote "The NIST role as an administrative object: AddRole creates a role to which, initially, no user or permission is assigned (Ferraiolo et al. 2001, p.251). A BFO role particular exists only because there is some single bearer (BFO 2020 elucidation of role), so a role with no members can only be information. Whenever the definition exists it is concretized by something, as every generically dependent continuant is (BFO 2020 CLIF, generic-dependence [ibk-1] with universal-declaration [iup-1]): by a pattern its database record bears, since only a specifically dependent continuant or a process concretizes ([rog-1]). The record is the carrier (is carrier of, BFO_0000101)."@en ;
     skos:editorialNote "Interpretation, not asserted by any source: that a person's role can concretize an access-control role definition, and that the definition is prescriptive in CCO's sense. CCO's Planned Act already relies on roles concretizing Prescriptive ICEs (EventOntology.ttl ont00000228)."@en .
 
-#: rbo:RBO_0000002  assigned role
-rbo:RBO_0000002 rdf:type owl:Class ;
+#: rbaco:RBACO_0000002  assigned role
+rbaco:RBACO_0000002 rdf:type owl:Class ;
     owl:equivalentClass [ rdf:type owl:Class ;
         owl:intersectionOf ( obo:BFO_0000023            #: role
                              [ rdf:type owl:Restriction ;
                                owl:onProperty obo:BFO_0000059 ;  #: concretizes
-                               owl:someValuesFrom rbo:RBO_0000001 ]  #: role definition
-                             [ rdf:type owl:Class ; owl:complementOf rbo:RBO_0000003 ] ) ] ;  #: active role
-    dc11:identifier "002-RBO" ;
+                               owl:someValuesFrom rbaco:RBACO_0000001 ]  #: role definition
+                             [ rdf:type owl:Class ; owl:complementOf rbaco:RBACO_0000003 ] ) ] ;  #: active role
+    dc11:identifier "002-RBACO" ;
     rdfs:label "assigned role"@en ;
     skos:definition "A Role that concretizes some role definition and is not an active role."@en ;
     skos:scopeNote "One tenure of a NIST user assignment (UA, Def. 1, p.234). Each tenure is its own role particular, output of a role assignment and input of the role deassignment that ends it. Its bearer never changes; that dependents do not migrate between bearers is adopted as a convention from BFO 2.0 (BFO 2.0 Specification and User's Guide, PDF page 29), since the BFO 2020 CLIF does not state it."@en .
 
-#: rbo:RBO_0000003  active role
-rbo:RBO_0000003 rdf:type owl:Class ;
+#: rbaco:RBACO_0000003  active role
+rbaco:RBACO_0000003 rdf:type owl:Class ;
     rdfs:subClassOf obo:BFO_0000023 ,                   #: role
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000059 ;              #: concretizes
-          owl:someValuesFrom rbo:RBO_0000001 ] ,        #: role definition
+          owl:someValuesFrom rbaco:RBACO_0000001 ] ,    #: role definition
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000195 ;              #: specifically depends on
-          owl:someValuesFrom rbo:RBO_0000002 ] ,        #: assigned role
+          owl:someValuesFrom rbaco:RBACO_0000002 ] ,    #: assigned role
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000106 ;              #: is activated in
+          owl:onProperty rbaco:RBACO_0000106 ;          #: is activated in
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000004 ] ;               #: business process
-    dc11:identifier "003-RBO" ;
+          owl:onClass rbaco:RBACO_0000004 ] ;           #: business process
+    dc11:identifier "003-RBACO" ;
     rdfs:label "active role"@en ;
     skos:definition "A Role that concretizes some role definition, specifically depends on an assigned role of the same bearer concretizing that definition or a senior one, and is activated in exactly one business process instance."@en ;
     skos:scopeNote "NIST session_roles (Def. 1, p.234), with the session read as a business process instance. Output of a role activation; input of the role deactivation that ends it, which also happens when the instance ends. An active role can exist unrealized, which is the state NIST's CheckAccess reads before the act it authorizes (p.254); only a process realizes (BFO 2020 CLIF, specific-dependency [oot-1])."@en ;
@@ -625,71 +625,71 @@ rbo:RBO_0000003 rdf:type owl:Class ;
 #    Classes: business processes
 #################################################################
 
-#: rbo:RBO_0000004  business process
-rbo:RBO_0000004 rdf:type owl:Class ;
+#: rbaco:RBACO_0000004  business process
+rbaco:RBACO_0000004 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000228 ,                   #: Planned Act
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001920 ;              #: prescribed by
-          owl:someValuesFrom rbo:RBO_0000005 ] ;        #: business process plan
-    dc11:identifier "004-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000005 ] ;    #: business process plan
+    dc11:identifier "004-RBACO" ;
     rdfs:label "business process"@en ;
     skos:definition "A Planned Act prescribed by a business process plan, in which participating agents activate roles and request operations on objects."@en ;
     skos:example "Hiring an employee; ordering a product; a review of a submitted code change."@en ;
     skos:scopeNote "Plays the part of the NIST session (Def. 1, p.234). Unlike a NIST session, an instance is shared by all its participants, so access is decided per requester and instance."@en .
 
-#: rbo:RBO_0000005  business process plan
-rbo:RBO_0000005 rdf:type owl:Class ;
+#: rbaco:RBACO_0000005  business process plan
+rbaco:RBACO_0000005 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000974 ;                   #: Plan
-    dc11:identifier "005-RBO" ;
+    dc11:identifier "005-RBACO" ;
     rdfs:label "business process plan"@en ;
     skos:definition "A Plan that prescribes a kind of business process, and that dynamic separation of duty constraints can be scoped to."@en .
 
-#: rbo:RBO_0000040  task specification
-rbo:RBO_0000040 rdf:type owl:Class ;
+#: rbaco:RBACO_0000040  task specification
+rbaco:RBACO_0000040 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000974 ,                   #: Plan
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000176 ;              #: continuant part of
-          owl:someValuesFrom rbo:RBO_0000005 ] ,        #: business process plan
+          owl:someValuesFrom rbaco:RBACO_0000005 ] ,    #: business process plan
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000132 ;              #: requires role definition
+          owl:onProperty rbaco:RBACO_0000132 ;          #: requires role definition
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000001 ] ;               #: role definition
-    dc11:identifier "040-RBO" ;
+          owl:onClass rbaco:RBACO_0000001 ] ;           #: role definition
+    dc11:identifier "040-RBACO" ;
     rdfs:label "task specification"@en ;
     skos:definition "A Plan that is a continuant part of a business process plan, prescribes one step of its instances, and requires exactly one role definition of whoever performs that step."@en ;
     skos:scopeNote "Botha and Eloff 2001: a process definition is a set of tasks linked as a directed graph with predicates on the arcs, and a human task is the responsibility of a single user (pp.667-668). The arcs and their predicates are not modeled. Automated tasks also require a role, held by the workflow automation agent, so that its permissions are assigned and limited like anyone else's."@en ;
     skos:editorialNote "A missing required role leaves the ontology consistent under OWL's open world; queries/check-task-specs.rq reports it. Two required roles declared distinct make it inconsistent."@en .
 
-#: rbo:RBO_0000041  task instance
-rbo:RBO_0000041 rdf:type owl:Class ;
+#: rbaco:RBACO_0000041  task instance
+rbaco:RBACO_0000041 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000228 ,                   #: Planned Act
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000132 ;              #: occurrent part of
-          owl:someValuesFrom rbo:RBO_0000004 ] ,        #: business process
+          owl:someValuesFrom rbaco:RBACO_0000004 ] ,    #: business process
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001920 ;              #: prescribed by
-          owl:someValuesFrom rbo:RBO_0000040 ] ,        #: task specification
+          owl:someValuesFrom rbaco:RBACO_0000040 ] ,    #: task specification
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001833 ;              #: has agent
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass cco:ont00001017 ] ;               #: Agent
-    dc11:identifier "041-RBO" ;
+    dc11:identifier "041-RBACO" ;
     rdfs:label "task instance"@en ;
     skos:definition "A Planned Act that is an occurrent part of a business process, is prescribed by a task specification, and has as agent the one agent who accepted it."@en ;
     skos:scopeNote "Botha and Eloff 2001: once a user selects an item from the worklist, the user takes responsibility for the task instance and must complete it, and is recorded as an attribute of it (p.674). Acceptance is therefore the agent relation (CCO has agent, ont00001833), not an act of its own."@en .
 
-#: rbo:RBO_0000048  work item
-rbo:RBO_0000048 rdf:type owl:Class ;
+#: rbaco:RBACO_0000048  work item
+rbaco:RBACO_0000048 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ,                   #: Prescriptive Information Content Entity
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000141 ;              #: is work item for
+          owl:onProperty rbaco:RBACO_0000141 ;          #: is work item for
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000040 ] ,               #: task specification
+          owl:onClass rbaco:RBACO_0000040 ] ,           #: task specification
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000142 ;              #: is work item in
+          owl:onProperty rbaco:RBACO_0000142 ;          #: is work item in
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000004 ] ;               #: business process
-    dc11:identifier "048-RBO" ;
+          owl:onClass rbaco:RBACO_0000004 ] ;           #: business process
+    dc11:identifier "048-RBACO" ;
     rdfs:label "work item"@en ;
     skos:definition "A Prescriptive Information Content Entity, issued when a task becomes ready, that prescribes an instance of a task specification within a business process instance."@en ;
     skos:scopeNote "Botha and Eloff's worklists hold work items (2001, p.680). A task nobody has accepted has no agent and has not begun, so it is not yet a task instance; the task instance that begins on acceptance is prescribed by the work item as well as by its task specification. A work item with no such task instance is unfulfilled (queries/cq-worklist.rq)."@en ;
@@ -699,64 +699,64 @@ rbo:RBO_0000048 rdf:type owl:Class ;
 #    Classes: regulations
 #################################################################
 
-#: rbo:RBO_0000006  access regulation
-rbo:RBO_0000006 rdf:type owl:Class ;
+#: rbaco:RBACO_0000006  access regulation
+rbaco:RBACO_0000006 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001324 ,                   #: Process Regulation
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000101 ;              #: has operation
+          owl:onProperty rbaco:RBACO_0000101 ;          #: has operation
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass obo:IAO_0000104 ] ,               #: plan specification
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000102 ;              #: has access object
+          owl:onProperty rbaco:RBACO_0000102 ;          #: has access object
           owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000103 ;              #: has object description
+          owl:onProperty rbaco:RBACO_0000103 ;          #: has object description
           owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000105 ;              #: is assigned to role definition
+          owl:onProperty rbaco:RBACO_0000105 ;          #: is assigned to role definition
           owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000105 ;              #: is assigned to role definition
-          owl:someValuesFrom rbo:RBO_0000001 ] ,        #: role definition
+          owl:onProperty rbaco:RBACO_0000105 ;          #: is assigned to role definition
+          owl:someValuesFrom rbaco:RBACO_0000001 ] ,    #: role definition
         [ rdf:type owl:Class ; owl:complementOf [ rdf:type owl:Class ; owl:intersectionOf (
-            [ rdf:type owl:Restriction ; owl:onProperty rbo:RBO_0000102 ; owl:someValuesFrom owl:Thing ]  #: has access object
+            [ rdf:type owl:Restriction ; owl:onProperty rbaco:RBACO_0000102 ; owl:someValuesFrom owl:Thing ]  #: has access object
             [ rdf:type owl:Restriction ;
-              owl:onProperty rbo:RBO_0000103 ;          #: has object description
+              owl:onProperty rbaco:RBACO_0000103 ;      #: has object description
               owl:someValuesFrom owl:Thing ] ) ] ] ;
-    dc11:identifier "006-RBO" ;
+    dc11:identifier "006-RBACO" ;
     rdfs:label "access regulation"@en ;
     skos:definition "A Process Regulation about exactly one operation and at most one object or object description, assigned to one role definition."@en ;
     skos:scopeNote "Placed under Process Regulation rather than Action Permission or Process Prohibition: those CCO classes are defined by permits some process and prohibits some process (AgentOntology.ttl ont00000751, ont00000553), so asserting them of an unused regulation would entail that a regulated process exists. A regulation is classified into them once a permits or prohibits link to an actual process is asserted."@en .
 
-#: rbo:RBO_0000007  access permission
-rbo:RBO_0000007 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000006 ;                   #: access regulation
-    owl:disjointWith rbo:RBO_0000008 ;                  #: access prohibition
-    dc11:identifier "007-RBO" ;
+#: rbaco:RBACO_0000007  access permission
+rbaco:RBACO_0000007 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000006 ;               #: access regulation
+    owl:disjointWith rbaco:RBACO_0000008 ;              #: access prohibition
+    dc11:identifier "007-RBACO" ;
     rdfs:label "access permission"@en ;
     skos:definition "An access regulation that prescribes that executions of its operation on its objects by bearers of active roles concretizing its role definition, or a senior one, may occur."@en ;
     skos:scopeNote "The NIST permission, an approval to perform an operation on an object (Def. 1, p.234), held once per role it is assigned to."@en .
 
-#: rbo:RBO_0000008  access prohibition
-rbo:RBO_0000008 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000006 ;                   #: access regulation
-    dc11:identifier "008-RBO" ;
+#: rbaco:RBACO_0000008  access prohibition
+rbaco:RBACO_0000008 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000006 ;               #: access regulation
+    dc11:identifier "008-RBACO" ;
     rdfs:label "access prohibition"@en ;
     skos:definition "An access regulation that prescribes that executions of its operation on its objects by bearers of active roles concretizing its role definition, or a senior one, must not occur."@en ;
     skos:scopeNote "Beyond NIST, which leaves negative permissions out of its model (Ferraiolo et al. 2001, p.233 fn. 2). Kept because ROWLBAC's prohibited (§3.4.3) is in scope. A prohibition overrides any permission for the same request (deny-overrides). Nothing is prohibited merely because it is not permitted: ROWLBAC's covering axiom on Action (§3.2.1) is not carried over."@en .
 
-#: rbo:RBO_0000009  object description
-rbo:RBO_0000009 rdf:type owl:Class ;
+#: rbaco:RBACO_0000009  object description
+rbaco:RBACO_0000009 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000853 ;                   #: Descriptive Information Content Entity
-    dc11:identifier "009-RBO" ;
+    dc11:identifier "009-RBACO" ;
     rdfs:label "object description"@en ;
     skos:definition "A Descriptive Information Content Entity, part of an access regulation, that states criteria an object must meet for the regulation to cover it."@en ;
     skos:scopeNote "Criteria are carried by the annotations has object type criterion and has object location type criterion, read by queries/decide-access.rq; where they are OWL-expressible, has criteria class names an equivalent defined class."@en .
 
-#: rbo:RBO_0000011  requester office condition
-rbo:RBO_0000011 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000009 ;                   #: object description
-    dc11:identifier "011-RBO" ;
+#: rbaco:RBACO_0000011  requester office condition
+rbaco:RBACO_0000011 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000009 ;               #: object description
+    dc11:identifier "011-RBACO" ;
     rdfs:label "requester office condition"@en ;
     skos:definition "An object description that additionally requires the object to be located in the office of the requester."@en ;
     skos:scopeNote "ROWLBAC's second §4.1 example. The equality of the object's location and the subject's office is a role value map in description logic terms, so this condition has no criteria class and is decided by query only."@en .
@@ -765,167 +765,167 @@ rbo:RBO_0000011 rdf:type owl:Class ;
 #    Classes: separation of duty
 #################################################################
 
-#: rbo:RBO_0000012  separation of duty constraint
-rbo:RBO_0000012 rdf:type owl:Class ;
+#: rbaco:RBACO_0000012  separation of duty constraint
+rbaco:RBACO_0000012 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001324 ,                   #: Process Regulation
-        [ rdf:type owl:Restriction ; owl:onProperty rbo:RBO_0000201 ;  #: has cardinality
+        [ rdf:type owl:Restriction ; owl:onProperty rbaco:RBACO_0000201 ;  #: has cardinality
           owl:someValuesFrom [ rdf:type rdfs:Datatype ; owl:onDatatype xsd:integer ;
                                owl:withRestrictions ( [ xsd:minInclusive "2"^^xsd:integer ] ) ] ] ;
-    dc11:identifier "012-RBO" ;
+    dc11:identifier "012-RBACO" ;
     rdfs:label "separation of duty constraint"@en ;
     skos:definition "A Process Regulation that names a set of role definitions, access permissions or task specifications and a cardinality n of at least 2, and prohibits the acts by which one agent would come to hold, exercise or perform n or more members of the set."@en ;
     skos:scopeNote "NIST's (role set, n) form (Defs. 3a and 4, pp.240-241), replacing ROWLBAC's symmetric, transitive ssod and dsod properties (§3.4.2), and extended to Botha and Eloff's conflicting permissions and tasks (2001, pp.671-676). What the set holds is given by the role, permission and task subclasses, which are disjoint; when it is checked, by the static and dynamic subclasses. Violations are recorded as conflict reports by query; the constraint is not an OWL axiom over roles, so a breach leaves the ontology consistent."@en .
 
-#: rbo:RBO_0000042  role separation of duty constraint
-rbo:RBO_0000042 rdf:type owl:Class ;
-    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbo:RBO_0000012  #: separation of duty constraint
+#: rbaco:RBACO_0000042  role separation of duty constraint
+rbaco:RBACO_0000042 rdf:type owl:Class ;
+    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbaco:RBACO_0000012  #: separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000114 ;              #: has constrained role definition
+          owl:onProperty rbaco:RBACO_0000114 ;          #: has constrained role definition
           owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000001 ] ) ] ;           #: role definition
-    dc11:identifier "042-RBO" ;
+          owl:onClass rbaco:RBACO_0000001 ] ) ] ;       #: role definition
+    dc11:identifier "042-RBACO" ;
     rdfs:label "role separation of duty constraint"@en ;
     skos:definition "A separation of duty constraint whose set holds at least two role definitions."@en .
 
-#: rbo:RBO_0000043  permission separation of duty constraint
-rbo:RBO_0000043 rdf:type owl:Class ;
-    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbo:RBO_0000012  #: separation of duty constraint
+#: rbaco:RBACO_0000043  permission separation of duty constraint
+rbaco:RBACO_0000043 rdf:type owl:Class ;
+    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbaco:RBACO_0000012  #: separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000134 ;              #: has constrained permission
+          owl:onProperty rbaco:RBACO_0000134 ;          #: has constrained permission
           owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000007 ] ) ] ;           #: access permission
-    dc11:identifier "043-RBO" ;
+          owl:onClass rbaco:RBACO_0000007 ] ) ] ;       #: access permission
+    dc11:identifier "043-RBACO" ;
     rdfs:label "permission separation of duty constraint"@en ;
     skos:definition "A separation of duty constraint whose set holds at least two access permissions."@en ;
-    skos:scopeNote "Botha and Eloff 2001, Table 1 row 2 (static, p.673) and Table 2 row 2 (dynamic, p.676). Static: no agent authorized, through the role definitions the permissions are assigned to, for n of them. Dynamic: no agent granted, within one instance, requests citing n of them; a decision record stands in for the exercise, since RBO records requests and decisions, not performed acts. Members are compared by content (operation, named object and object description; [rbo-s17]): a permission with a member's content, assigned to another role definition, counts as that member, and members of one content count once."@en .
+    skos:scopeNote "Botha and Eloff 2001, Table 1 row 2 (static, p.673) and Table 2 row 2 (dynamic, p.676). Static: no agent authorized, through the role definitions the permissions are assigned to, for n of them. Dynamic: no agent granted, within one instance, requests citing n of them; a decision record stands in for the exercise, since RBACO records requests and decisions, not performed acts. Members are compared by content (operation, named object and object description; [rbaco-s17]): a permission with a member's content, assigned to another role definition, counts as that member, and members of one content count once."@en .
 
-#: rbo:RBO_0000044  task separation of duty constraint
-rbo:RBO_0000044 rdf:type owl:Class ;
-    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbo:RBO_0000012  #: separation of duty constraint
+#: rbaco:RBACO_0000044  task separation of duty constraint
+rbaco:RBACO_0000044 rdf:type owl:Class ;
+    owl:equivalentClass [ rdf:type owl:Class ; owl:intersectionOf ( rbaco:RBACO_0000012  #: separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000135 ;              #: has constrained task specification
+          owl:onProperty rbaco:RBACO_0000135 ;          #: has constrained task specification
           owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000040 ] ) ] ;           #: task specification
-    dc11:identifier "044-RBO" ;
+          owl:onClass rbaco:RBACO_0000040 ] ) ] ;       #: task specification
+    dc11:identifier "044-RBACO" ;
     rdfs:label "task separation of duty constraint"@en ;
     skos:definition "A separation of duty constraint whose set holds at least two task specifications."@en ;
-    skos:scopeNote "Botha and Eloff 2001, Table 1 row 4 (static, p.673) and Table 2 row 4 (dynamic, p.676). Static: no agent authorized for the required role definitions of n of them. For two specifications that require distinct role definitions, with no conflicting agent designations ([rbo-u1], [rbo-u3]), this is equivalent to a static role constraint over those definitions in force at the same time (Prover9 lemmas p9a and p9b in docs/fol-results.md). Dynamic: no agent the principal of instances of n of them within one instance; repeated instances of one specification count once."@en .
+    skos:scopeNote "Botha and Eloff 2001, Table 1 row 4 (static, p.673) and Table 2 row 4 (dynamic, p.676). Static: no agent authorized for the required role definitions of n of them. For two specifications that require distinct role definitions, with no conflicting agent designations ([rbaco-u1], [rbaco-u3]), this is equivalent to a static role constraint over those definitions in force at the same time (Prover9 lemmas p9a and p9b in docs/fol-results.md). Dynamic: no agent the principal of instances of n of them within one instance; repeated instances of one specification count once."@en .
 
 [ rdf:type owl:AllDisjointClasses ; owl:members (
-    rbo:RBO_0000042                                     #: role separation of duty constraint
-    rbo:RBO_0000043                                     #: permission separation of duty constraint
-    rbo:RBO_0000044 ) ] .                               #: task separation of duty constraint
+    rbaco:RBACO_0000042                                 #: role separation of duty constraint
+    rbaco:RBACO_0000043                                 #: permission separation of duty constraint
+    rbaco:RBACO_0000044 ) ] .                           #: task separation of duty constraint
 
-#: rbo:RBO_0000045  conflicting agent designation
-rbo:RBO_0000045 rdf:type owl:Class ;
+#: rbaco:RBACO_0000045  conflicting agent designation
+rbaco:RBACO_0000045 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ;                   #: Prescriptive Information Content Entity
-    dc11:identifier "045-RBO" ;
+    dc11:identifier "045-RBACO" ;
     rdfs:label "conflicting agent designation"@en ;
     skos:definition "A Prescriptive Information Content Entity naming agents, directly or as the member parts of a group of agents, whom the separation of duty constraints it applies to count as one agent."@en ;
     skos:scopeNote "Botha and Eloff's conflicting users: \"those users who may stand to gain by conspiring. In practice such users may be family members\" (2001, p.671), to be \"considered as the same user\" (Table 1, p.673). Designations do not chain: two designations sharing an agent do not make the others one, which queries/check-designation-chains.rq reports."@en .
 
-#: rbo:RBO_0000046  static conflicting agent designation
-rbo:RBO_0000046 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000045 ;                   #: conflicting agent designation
-    owl:disjointWith rbo:RBO_0000047 ;                  #: dynamic conflicting agent designation
-    dc11:identifier "046-RBO" ;
+#: rbaco:RBACO_0000046  static conflicting agent designation
+rbaco:RBACO_0000046 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000045 ;               #: conflicting agent designation
+    owl:disjointWith rbaco:RBACO_0000047 ;              #: dynamic conflicting agent designation
+    dc11:identifier "046-RBACO" ;
     rdfs:label "static conflicting agent designation"@en ;
     skos:definition "A conflicting agent designation applying to static separation of duty constraints."@en .
 
-#: rbo:RBO_0000047  dynamic conflicting agent designation
-rbo:RBO_0000047 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000045 ,                   #: conflicting agent designation
+#: rbaco:RBACO_0000047  dynamic conflicting agent designation
+rbaco:RBACO_0000047 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000045 ,               #: conflicting agent designation
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000115 ;              #: applies within
+          owl:onProperty rbaco:RBACO_0000115 ;          #: applies within
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000005 ] ;               #: business process plan
-    dc11:identifier "047-RBO" ;
+          owl:onClass rbaco:RBACO_0000005 ] ;           #: business process plan
+    dc11:identifier "047-RBACO" ;
     rdfs:label "dynamic conflicting agent designation"@en ;
     skos:definition "A conflicting agent designation applying to dynamic separation of duty constraints, within the instances of the plan it applies within, or of every plan if none."@en ;
     skos:scopeNote "Botha and Eloff: Tom and Dick \"would thus be considered as one user in the context of each process instance\" (2001, p.676)."@en .
 
-#: rbo:RBO_0000049  human performer requirement
-rbo:RBO_0000049 rdf:type owl:Class ;
+#: rbaco:RBACO_0000049  human performer requirement
+rbaco:RBACO_0000049 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001324 ,                   #: Process Regulation
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000145 ;              #: requires human agent for
+          owl:onProperty rbaco:RBACO_0000145 ;          #: requires human agent for
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000040 ] ,               #: task specification
+          owl:onClass rbaco:RBACO_0000040 ] ,           #: task specification
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000115 ;              #: applies within
+          owl:onProperty rbaco:RBACO_0000115 ;          #: applies within
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000005 ] ;               #: business process plan
-    dc11:identifier "049-RBO" ;
+          owl:onClass rbaco:RBACO_0000005 ] ;           #: business process plan
+    dc11:identifier "049-RBACO" ;
     rdfs:label "human performer requirement"@en ;
     skos:definition "A Process Regulation requiring that the agent of every instance of a task specification be a person."@en ;
-    skos:scopeNote "Not in Botha and Eloff, who mention automated activities only as something administrators may intervene in manually (2001, p.668) and as what a module of their prototype executes (p.679). Separation of duty counts distinct agents, so a workflow automation agent approving what a person created satisfies a task constraint; this requirement closes that gap at activation, and requires prior (RBO_0000144) at completion. It reads the agent of the task instance, not its principal."@en .
+    skos:scopeNote "Not in Botha and Eloff, who mention automated activities only as something administrators may intervene in manually (2001, p.668) and as what a module of their prototype executes (p.679). Separation of duty counts distinct agents, so a workflow automation agent approving what a person created satisfies a task constraint; this requirement closes that gap at activation, and requires prior (RBACO_0000144) at completion. It reads the agent of the task instance, not its principal."@en .
 
-#: rbo:RBO_0000050  task-bound operation requirement
-rbo:RBO_0000050 rdf:type owl:Class ;
+#: rbaco:RBACO_0000050  task-bound operation requirement
+rbaco:RBACO_0000050 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001324 ,                   #: Process Regulation
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000148 ;              #: requires task binding for
+          owl:onProperty rbaco:RBACO_0000148 ;          #: requires task binding for
           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass obo:IAO_0000104 ] ,               #: plan specification
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000115 ;              #: applies within
+          owl:onProperty rbaco:RBACO_0000115 ;          #: applies within
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000005 ] ;               #: business process plan
-    dc11:identifier "050-RBO" ;
+          owl:onClass rbaco:RBACO_0000005 ] ;           #: business process plan
+    dc11:identifier "050-RBACO" ;
     rdfs:label "task-bound operation requirement"@en ;
     skos:definition "A Process Regulation requiring that every request for an operation it names, made within an instance of the business process plan it applies within, be part of a task instance whose specification requires that operation."@en ;
-    skos:scopeNote "Not in Botha and Eloff, who need no such rule: the workflow enactment environment establishes every WSession (2001, p.673), and a WSession exists only while its user is busy with a particular task (p.674). RBO lets a role be activated without a task instance, which non-workflow datasets need, but then a task constraint sees nothing: an activation for the Assistant Purchase Manager role outside any task instance lets one agent both create a requisition and approve the order (data/purchase.ttl, po-7b). This requirement closes that gap for the operations it names and leaves every other operation open ([rbo-g3]). Being part of a task instance alone is not enough: the specification must require the operation (RBO_0000133), so a task cannot carry an operation it does not need. queries/check-sod-hierarchy.rq warns when a dynamic set's operations are only partly named."@en .
+    skos:scopeNote "Not in Botha and Eloff, who need no such rule: the workflow enactment environment establishes every WSession (2001, p.673), and a WSession exists only while its user is busy with a particular task (p.674). RBACO lets a role be activated without a task instance, which non-workflow datasets need, but then a task constraint sees nothing: an activation for the Assistant Purchase Manager role outside any task instance lets one agent both create a requisition and approve the order (data/purchase.ttl, po-7b). This requirement closes that gap for the operations it names and leaves every other operation open ([rbaco-g3]). Being part of a task instance alone is not enough: the specification must require the operation (RBACO_0000133), so a task cannot carry an operation it does not need. queries/check-sod-hierarchy.rq warns when a dynamic set's operations are only partly named."@en .
 
-#: rbo:RBO_0000013  static separation of duty constraint
-rbo:RBO_0000013 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000012 ;                   #: separation of duty constraint
-    owl:disjointWith rbo:RBO_0000014 ;                  #: dynamic separation of duty constraint
-    dc11:identifier "013-RBO" ;
+#: rbaco:RBACO_0000013  static separation of duty constraint
+rbaco:RBACO_0000013 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000012 ;               #: separation of duty constraint
+    owl:disjointWith rbaco:RBACO_0000014 ;              #: dynamic separation of duty constraint
+    dc11:identifier "013-RBACO" ;
     rdfs:label "static separation of duty constraint"@en ;
     skos:definition "A separation of duty constraint that prohibits the role assignments and policy issuing acts by which one agent would come to be authorized, at one time, for n or more members of the set: role definitions, permissions through the role definitions they are assigned to, or task specifications through their required role definitions."@en ;
-    skos:scopeNote "NIST Def. 3b (p.240): authorization counts inherited roles, so holding a senior role counts as holding each of its juniors. Agents a static conflicting agent designation names count as one. NIST enforces static constraints during user assignment and while role hierarchies are created (p.246); RBO reports a breach at the role assignment, or at the issuing of the inheritance statement, constraint or static designation, that completes it."@en .
+    skos:scopeNote "NIST Def. 3b (p.240): authorization counts inherited roles, so holding a senior role counts as holding each of its juniors. Agents a static conflicting agent designation names count as one. NIST enforces static constraints during user assignment and while role hierarchies are created (p.246); RBACO reports a breach at the role assignment, or at the issuing of the inheritance statement, constraint or static designation, that completes it."@en .
 
-#: rbo:RBO_0000014  dynamic separation of duty constraint
-rbo:RBO_0000014 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000012 ,                   #: separation of duty constraint
+#: rbaco:RBACO_0000014  dynamic separation of duty constraint
+rbaco:RBACO_0000014 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000012 ,               #: separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000115 ;              #: applies within
+          owl:onProperty rbaco:RBACO_0000115 ;          #: applies within
           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000005 ] ;               #: business process plan
-    dc11:identifier "014-RBO" ;
+          owl:onClass rbaco:RBACO_0000005 ] ;           #: business process plan
+    dc11:identifier "014-RBACO" ;
     rdfs:label "dynamic separation of duty constraint"@en ;
     skos:definition "A separation of duty constraint that prohibits the role activations and access requests by which one agent would have, within one business process instance, n or more role definitions from the set explicitly activated, permissions from the set exercised, or task specifications from the set performed."@en ;
     skos:scopeNote "NIST Def. 4 (p.241) counts explicitly activated roles only. A role constraint that is neither same-time nor whole-instance is evaluated as same-time; permission and task constraints are whole-instance, being about history (Botha and Eloff 2001, Table 2, p.676). Agents a dynamic conflicting agent designation names count as one, and acts count for their principal."@en .
 
-#: rbo:RBO_0000015  same-time dynamic separation of duty constraint
-rbo:RBO_0000015 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000014 , rbo:RBO_0000042 ;  #: dynamic separation of duty constraint | role separation of duty constraint
-    owl:disjointWith rbo:RBO_0000016 ;                  #: whole-instance dynamic separation of duty constraint
-    dc11:identifier "015-RBO" ;
+#: rbaco:RBACO_0000015  same-time dynamic separation of duty constraint
+rbaco:RBACO_0000015 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000014 , rbaco:RBACO_0000042 ;  #: dynamic separation of duty constraint | role separation of duty constraint
+    owl:disjointWith rbaco:RBACO_0000016 ;              #: whole-instance dynamic separation of duty constraint
+    dc11:identifier "015-RBACO" ;
     rdfs:label "same-time dynamic separation of duty constraint"@en ;
     skos:definition "A dynamic separation of duty constraint that counts only the roles an agent has active in the instance at the time of the activation request."@en ;
     skos:scopeNote "NIST as written: a cashier who wants to act as cashier supervisor must drop the cashier role first (p.240)."@en .
 
-#: rbo:RBO_0000016  whole-instance dynamic separation of duty constraint
-rbo:RBO_0000016 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000014 ;                   #: dynamic separation of duty constraint
-    dc11:identifier "016-RBO" ;
+#: rbaco:RBACO_0000016  whole-instance dynamic separation of duty constraint
+rbaco:RBACO_0000016 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000014 ;               #: dynamic separation of duty constraint
+    dc11:identifier "016-RBACO" ;
     rdfs:label "whole-instance dynamic separation of duty constraint"@en ;
     skos:definition "A dynamic separation of duty constraint that counts every member of its set an agent has had in the instance up to the request being decided, whether or not still held: every role explicitly activated, permission exercised or task performed."@en ;
     skos:scopeNote "Beyond NIST. Blocks a submitter who drops the submitter role from approving the same change."@en .
 
-#: rbo:RBO_0000017  role inheritance statement
-rbo:RBO_0000017 rdf:type owl:Class ;
+#: rbaco:RBACO_0000017  role inheritance statement
+rbaco:RBACO_0000017 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ,                   #: Prescriptive Information Content Entity
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000118 ;              #: has senior role definition
+          owl:onProperty rbaco:RBACO_0000118 ;          #: has senior role definition
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000001 ] ,               #: role definition
+          owl:onClass rbaco:RBACO_0000001 ] ,           #: role definition
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000119 ;              #: has junior role definition
+          owl:onProperty rbaco:RBACO_0000119 ;          #: has junior role definition
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000001 ] ;               #: role definition
-    dc11:identifier "017-RBO" ;
+          owl:onClass rbaco:RBACO_0000001 ] ;           #: role definition
+    dc11:identifier "017-RBACO" ;
     rdfs:label "role inheritance statement"@en ;
     skos:definition "A Prescriptive Information Content Entity stating that one role definition is immediately senior to another: the senior acquires the junior's regulations, and the junior's authorized members include the senior's."@en ;
     skos:scopeNote "One edge of the NIST role hierarchy (Def. 2a, p.235), output of an AddInheritance act and input of the DeleteInheritance act that retires it (NIST p.244). Reified so that a hierarchy edit is a dated act."@en .
@@ -934,81 +934,81 @@ rbo:RBO_0000017 rdf:type owl:Class ;
 #    Classes: reports and decisions
 #################################################################
 
-#: rbo:RBO_0000018  conflict report
-rbo:RBO_0000018 rdf:type owl:Class ;
+#: rbaco:RBACO_0000018  conflict report
+rbaco:RBACO_0000018 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000853 ,                   #: Descriptive Information Content Entity
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000124 ;              #: describes conflict subject
+          owl:onProperty rbaco:RBACO_0000124 ;          #: describes conflict subject
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass cco:ont00001017 ] ,               #: Agent
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000125 ;              #: describes violated constraint
+          owl:onProperty rbaco:RBACO_0000125 ;          #: describes violated constraint
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000012 ] ,               #: separation of duty constraint
+          owl:onClass rbaco:RBACO_0000012 ] ,           #: separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000149 ;              #: describes conflicting member
+          owl:onProperty rbaco:RBACO_0000149 ;          #: describes conflicting member
           owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
           owl:onClass cco:ont00000965 ] ;               #: Prescriptive Information Content Entity
-    dc11:identifier "018-RBO" ;
+    dc11:identifier "018-RBACO" ;
     rdfs:label "conflict report"@en ;
     skos:definition "A Descriptive Information Content Entity that describes one agent's breach of one separation of duty constraint, naming the members of its set involved: role definitions, access permissions or task specifications."@en ;
     skos:scopeNote "ROWLBAC's SSODConflict and ProhibitedRoleActivation (§§3.3.5, 3.4.4), written by CONSTRUCT queries."@en .
 
-#: rbo:RBO_0000019  static separation of duty conflict report
-rbo:RBO_0000019 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000018 ,                   #: conflict report
+#: rbaco:RBACO_0000019  static separation of duty conflict report
+rbaco:RBACO_0000019 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000018 ,               #: conflict report
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000125 ;              #: describes violated constraint
-          owl:allValuesFrom rbo:RBO_0000013 ] ;         #: static separation of duty constraint
-    owl:disjointWith rbo:RBO_0000020 ;                  #: dynamic separation of duty conflict report
-    dc11:identifier "019-RBO" ;
+          owl:onProperty rbaco:RBACO_0000125 ;          #: describes violated constraint
+          owl:allValuesFrom rbaco:RBACO_0000013 ] ;     #: static separation of duty constraint
+    owl:disjointWith rbaco:RBACO_0000020 ;              #: dynamic separation of duty conflict report
+    dc11:identifier "019-RBACO" ;
     rdfs:label "static separation of duty conflict report"@en ;
     skos:definition "A conflict report describing an agent authorized for n or more members of a static separation of duty constraint's set."@en .
 
-#: rbo:RBO_0000020  dynamic separation of duty conflict report
-rbo:RBO_0000020 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000018 ,                   #: conflict report
+#: rbaco:RBACO_0000020  dynamic separation of duty conflict report
+rbaco:RBACO_0000020 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000018 ,               #: conflict report
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000125 ;              #: describes violated constraint
-          owl:allValuesFrom rbo:RBO_0000014 ] ,         #: dynamic separation of duty constraint
+          owl:onProperty rbaco:RBACO_0000125 ;          #: describes violated constraint
+          owl:allValuesFrom rbaco:RBACO_0000014 ] ,     #: dynamic separation of duty constraint
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000127 ;              #: describes conflict instance
+          owl:onProperty rbaco:RBACO_0000127 ;          #: describes conflict instance
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000004 ] ;               #: business process
-    dc11:identifier "020-RBO" ;
+          owl:onClass rbaco:RBACO_0000004 ] ;           #: business process
+    dc11:identifier "020-RBACO" ;
     rdfs:label "dynamic separation of duty conflict report"@en ;
     skos:definition "A conflict report describing an activation or access request that would give an agent, within one instance, n or more members of a dynamic separation of duty constraint's set: role definitions explicitly active, permissions exercised or task specifications performed."@en .
 
-#: rbo:RBO_0000021  access decision
-rbo:RBO_0000021 rdf:type owl:Class ;
+#: rbaco:RBACO_0000021  access decision
+rbaco:RBACO_0000021 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000853 ,                   #: Descriptive Information Content Entity
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000112 ;              #: decides on
+          owl:onProperty rbaco:RBACO_0000112 ;          #: decides on
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000024 ] ,               #: access request
+          owl:onClass rbaco:RBACO_0000024 ] ,           #: access request
         [ rdf:type owl:Class ; owl:unionOf (
-            rbo:RBO_0000022                             #: access grant
-            rbo:RBO_0000023 ) ] ;                       #: access denial
-    dc11:identifier "021-RBO" ;
+            rbaco:RBACO_0000022                         #: access grant
+            rbaco:RBACO_0000023 ) ] ;                   #: access denial
+    dc11:identifier "021-RBACO" ;
     rdfs:label "access decision"@en ;
     skos:definition "A Descriptive Information Content Entity that describes whether one access request is granted or denied under the regulations in force."@en ;
     skos:scopeNote "The result of NIST CheckAccess (p.254). ROWLBAC's disjoint and covering pair PermittedAction / ProhibitedAction (§3.2.1) is kept here, at the decision, where every request does get exactly one answer; at the level of acts it would make everything not granted forbidden."@en .
 
-#: rbo:RBO_0000022  access grant
-rbo:RBO_0000022 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000021 ,                   #: access decision
+#: rbaco:RBACO_0000022  access grant
+rbaco:RBACO_0000022 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000021 ,               #: access decision
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000113 ;              #: cites regulation
-          owl:someValuesFrom rbo:RBO_0000007 ] ;        #: access permission
-    owl:disjointWith rbo:RBO_0000023 ;                  #: access denial
-    dc11:identifier "022-RBO" ;
+          owl:onProperty rbaco:RBACO_0000113 ;          #: cites regulation
+          owl:someValuesFrom rbaco:RBACO_0000007 ] ;    #: access permission
+    owl:disjointWith rbaco:RBACO_0000023 ;              #: access denial
+    dc11:identifier "022-RBACO" ;
     rdfs:label "access grant"@en ;
     skos:definition "An access decision that grants its request, citing a permission that covers it."@en .
 
-#: rbo:RBO_0000023  access denial
-rbo:RBO_0000023 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000021 ;                   #: access decision
-    dc11:identifier "023-RBO" ;
+#: rbaco:RBACO_0000023  access denial
+rbaco:RBACO_0000023 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000021 ;               #: access decision
+    dc11:identifier "023-RBACO" ;
     rdfs:label "access denial"@en ;
     skos:definition "An access decision that denies its request, because no permission covers it or a prohibition covers it."@en .
 
@@ -1016,124 +1016,124 @@ rbo:RBO_0000023 rdf:type owl:Class ;
 #    Classes: acts
 #################################################################
 
-#: rbo:RBO_0000024  access request
-rbo:RBO_0000024 rdf:type owl:Class ;
+#: rbaco:RBACO_0000024  access request
+rbaco:RBACO_0000024 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000769 ,                   #: Act of Requesting
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000107 ;              #: has requester
+          owl:onProperty rbaco:RBACO_0000107 ;          #: has requester
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass cco:ont00001017 ] ,               #: Agent
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000108 ;              #: requests operation
+          owl:onProperty rbaco:RBACO_0000108 ;          #: requests operation
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass obo:IAO_0000104 ] ,               #: plan specification
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000109 ;              #: requests access to
+          owl:onProperty rbaco:RBACO_0000109 ;          #: requests access to
           owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ,
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000132 ;              #: occurrent part of
-          owl:someValuesFrom rbo:RBO_0000004 ] ;        #: business process
-    dc11:identifier "024-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000004 ] ;    #: business process
+    dc11:identifier "024-RBACO" ;
     rdfs:label "access request"@en ;
     skos:definition "An Act of Requesting, part of a business process instance, in which one agent asks to perform one operation on at most one object."@en ;
     skos:scopeNote "ROWLBAC's Action with exactly one subject and at most one object (§3.2.1); NIST's CheckAccess(session, operation, object) (p.254). The act that performs the operation, if any follows, is separate."@en .
 
-#: rbo:RBO_0000025  role activation request
-rbo:RBO_0000025 rdf:type owl:Class ;
+#: rbaco:RBACO_0000025  role activation request
+rbaco:RBACO_0000025 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000769 ,                   #: Act of Requesting
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000107 ;              #: has requester
+          owl:onProperty rbaco:RBACO_0000107 ;          #: has requester
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass cco:ont00001017 ] ,               #: Agent
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000110 ;              #: requests activation of
+          owl:onProperty rbaco:RBACO_0000110 ;          #: requests activation of
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000001 ] ,               #: role definition
+          owl:onClass rbaco:RBACO_0000001 ] ,           #: role definition
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000132 ;              #: occurrent part of
-          owl:someValuesFrom rbo:RBO_0000004 ] ;        #: business process
-    dc11:identifier "025-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000004 ] ;    #: business process
+    dc11:identifier "025-RBACO" ;
     rdfs:label "role activation request"@en ;
     skos:definition "An Act of Requesting, part of a business process instance, in which one agent asks to activate one role definition within that instance."@en ;
     skos:scopeNote "ROWLBAC's ActivateRole (§3.3.5); NIST AddActiveRole (p.254)."@en .
 
-#: rbo:RBO_0000026  role activation
-rbo:RBO_0000026 rdf:type owl:Class ;
+#: rbaco:RBACO_0000026  role activation
+rbaco:RBACO_0000026 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001194 ,                   #: Gain of Role
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001986 ;              #: has output
-          owl:someValuesFrom rbo:RBO_0000003 ] ,        #: active role
+          owl:someValuesFrom rbaco:RBACO_0000003 ] ,    #: active role
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000132 ;              #: occurrent part of
-          owl:someValuesFrom rbo:RBO_0000004 ] ;        #: business process
-    dc11:identifier "026-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000004 ] ;    #: business process
+    dc11:identifier "026-RBACO" ;
     rdfs:label "role activation"@en ;
     skos:definition "A Gain of Role, part of a business process instance, whose output is an active role activated in that instance."@en ;
     skos:scopeNote "Demarcates the start of the active role's existence, as CCO's Gain of Role scope note prescribes (EventOntology.ttl ont00001194)."@en .
 
-#: rbo:RBO_0000027  role deactivation
-rbo:RBO_0000027 rdf:type owl:Class ;
+#: rbaco:RBACO_0000027  role deactivation
+rbaco:RBACO_0000027 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000613 ,                   #: Loss of Role
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001921 ;              #: has input
-          owl:someValuesFrom rbo:RBO_0000003 ] ;        #: active role
-    dc11:identifier "027-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000003 ] ;    #: active role
+    dc11:identifier "027-RBACO" ;
     rdfs:label "role deactivation"@en ;
     skos:definition "A Loss of Role whose input is an active role, which ceases to exist."@en ;
     skos:scopeNote "NIST DropActiveRole (p.254), or the end of the business process instance."@en .
 
-#: rbo:RBO_0000028  role assignment
-rbo:RBO_0000028 rdf:type owl:Class ;
-    rdfs:subClassOf cco:ont00001194 , rbo:RBO_0000030 ,  #: Gain of Role | policy administration act
+#: rbaco:RBACO_0000028  role assignment
+rbaco:RBACO_0000028 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00001194 , rbaco:RBACO_0000030 ,  #: Gain of Role | policy administration act
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001986 ;              #: has output
-          owl:someValuesFrom rbo:RBO_0000002 ] ;        #: assigned role
-    dc11:identifier "028-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000002 ] ;    #: assigned role
+    dc11:identifier "028-RBACO" ;
     rdfs:label "role assignment"@en ;
     skos:definition "A Gain of Role and policy administration act whose output is an assigned role."@en ;
     skos:scopeNote "NIST AssignUser (p.245)."@en ;
     skos:editorialNote "Interpretation, not asserted by any source: that one process is both the officer's declaration and the assignee's Gain of Role, and that it realizes an Authority Role, which CCO defines as realized by processes that create, modify, transfer or eliminate Process Regulations or other Authority Roles (AgentOntology.ttl ont00000187). An assigned role is neither; the reading takes the assignment as a change to the policy that governs access. The alternative is two processes, the declaration and the gain it brings about (design record D4)."@en .
 
-#: rbo:RBO_0000029  role deassignment
-rbo:RBO_0000029 rdf:type owl:Class ;
-    rdfs:subClassOf cco:ont00000613 , rbo:RBO_0000030 ,  #: Loss of Role | policy administration act
+#: rbaco:RBACO_0000029  role deassignment
+rbaco:RBACO_0000029 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000613 , rbaco:RBACO_0000030 ,  #: Loss of Role | policy administration act
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001921 ;              #: has input
-          owl:someValuesFrom rbo:RBO_0000002 ] ;        #: assigned role
-    dc11:identifier "029-RBO" ;
+          owl:someValuesFrom rbaco:RBACO_0000002 ] ;    #: assigned role
+    dc11:identifier "029-RBACO" ;
     rdfs:label "role deassignment"@en ;
     skos:definition "A Loss of Role and policy administration act whose input is an assigned role, which ceases to exist."@en ;
     skos:scopeNote "NIST DeassignUser (p.252)."@en .
 
-#: rbo:RBO_0000030  policy administration act
-rbo:RBO_0000030 rdf:type owl:Class ;
+#: rbaco:RBACO_0000030  policy administration act
+rbaco:RBACO_0000030 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00001374 ,                   #: Act of Declarative Communication
         [ rdf:type owl:Restriction ;
           owl:onProperty obo:BFO_0000055 ;              #: realizes
           owl:someValuesFrom cco:ont00000187 ] ;        #: Authority Role
-    dc11:identifier "030-RBO" ;
+    dc11:identifier "030-RBACO" ;
     rdfs:label "policy administration act"@en ;
     skos:definition "An Act of Declarative Communication, realizing an Authority Role of its agent, that changes an access-control policy."@en ;
     skos:scopeNote "The NIST administrative functions (pp.242-246). CCO's Process Regulation is the output of a process which realizes some Authority Role (AgentOntology.ttl ont00001324)."@en .
 
-#: rbo:RBO_0000031  policy issuing act
-rbo:RBO_0000031 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000030 ,                   #: policy administration act
+#: rbaco:RBACO_0000031  policy issuing act
+rbaco:RBACO_0000031 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000030 ,               #: policy administration act
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001986 ;              #: has output
           owl:someValuesFrom cco:ont00000958 ] ;        #: Information Content Entity
-    dc11:identifier "031-RBO" ;
+    dc11:identifier "031-RBACO" ;
     rdfs:label "policy issuing act"@en ;
     skos:definition "A policy administration act whose output is an information content entity that comes into force with it."@en ;
     skos:example "AddRole (NIST p.251), GrantPermission (p.252), AddInheritance (p.244), CreateSsdSet (p.261); issuing an RT statement."@en .
 
-#: rbo:RBO_0000032  policy retiring act
-rbo:RBO_0000032 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000030 ,                   #: policy administration act
+#: rbaco:RBACO_0000032  policy retiring act
+rbaco:RBACO_0000032 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000030 ,               #: policy administration act
         [ rdf:type owl:Restriction ;
           owl:onProperty cco:ont00001921 ;              #: has input
           owl:someValuesFrom cco:ont00000958 ] ;        #: Information Content Entity
-    dc11:identifier "032-RBO" ;
+    dc11:identifier "032-RBACO" ;
     rdfs:label "policy retiring act"@en ;
     skos:definition "A policy administration act whose input is an information content entity that ceases to be in force with it."@en ;
     skos:example "DeleteRole (NIST p.251), RevokePermission (p.252), DeleteInheritance (p.244); revoking an RT statement."@en ;
@@ -1143,89 +1143,89 @@ rbo:RBO_0000032 rdf:type owl:Class ;
 #    Classes: RT trust management (ROWLBAC section 4.2)
 #################################################################
 
-#: rbo:RBO_0000033  RT role definition
-rbo:RBO_0000033 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000001 ,                   #: role definition
+#: rbaco:RBACO_0000033  RT role definition
+rbaco:RBACO_0000033 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000001 ,               #: role definition
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000121 ;              #: has role issuer
+          owl:onProperty rbaco:RBACO_0000121 ;          #: has role issuer
           owl:someValuesFrom cco:ont00001017 ] ,        #: Agent
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000202 ;              #: has RT role name
+          owl:onProperty rbaco:RBACO_0000202 ;          #: has RT role name
           owl:someValuesFrom xsd:string ] ;
-    dc11:identifier "033-RBO" ;
+    dc11:identifier "033-RBACO" ;
     rdfs:label "RT role definition"@en ;
     skos:definition "A role definition belonging to a principal, the issuer, and named by a role name: the RT role A.r."@en .
 
-#: rbo:RBO_0000034  RT statement
-rbo:RBO_0000034 rdf:type owl:Class ;
+#: rbaco:RBACO_0000034  RT statement
+rbaco:RBACO_0000034 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ,                   #: Prescriptive Information Content Entity
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000116 ;              #: has head role
+          owl:onProperty rbaco:RBACO_0000116 ;          #: has head role
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000033 ] ;               #: RT role definition
-    dc11:identifier "034-RBO" ;
+          owl:onClass rbaco:RBACO_0000033 ] ;           #: RT role definition
+    dc11:identifier "034-RBACO" ;
     rdfs:label "RT statement"@en ;
     skos:definition "A Prescriptive Information Content Entity, issued by the issuer of its head role, that states who is a member of that RT role."@en ;
     skos:scopeNote "That the issuing act's agent is the head role's issuer is checked by queries/check-rt-issuers.rq."@en .
 
-#: rbo:RBO_0000035  RT simple member statement
-rbo:RBO_0000035 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000034 ,                   #: RT statement
+#: rbaco:RBACO_0000035  RT simple member statement
+rbaco:RBACO_0000035 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000034 ,               #: RT statement
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000122 ;              #: names member
+          owl:onProperty rbaco:RBACO_0000122 ;          #: names member
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           owl:onClass obo:BFO_0000040 ] ;               #: material entity
-    dc11:identifier "035-RBO" ;
+    dc11:identifier "035-RBACO" ;
     rdfs:label "RT simple member statement"@en ;
     skos:definition "An RT statement A.r <- D making the principal D a member of A.r."@en ;
     skos:scopeNote "RT type 1 (ROWLBAC Fig. 2). Issuing it plays the part of a role assignment."@en .
 
-#: rbo:RBO_0000036  RT simple inclusion statement
-rbo:RBO_0000036 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000034 , rbo:RBO_0000017 ;  #: RT statement | role inheritance statement
-    dc11:identifier "036-RBO" ;
+#: rbaco:RBACO_0000036  RT simple inclusion statement
+rbaco:RBACO_0000036 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000034 , rbaco:RBACO_0000017 ;  #: RT statement | role inheritance statement
+    dc11:identifier "036-RBACO" ;
     rdfs:label "RT simple inclusion statement"@en ;
     skos:definition "An RT statement A.r <- B.r1 making every member of B.r1 a member of A.r; a role inheritance statement with B.r1 senior and A.r junior."@en ;
     skos:scopeNote "RT type 2. ROWLBAC encodes it as B-r1 rdfs:subClassOf A-r (Fig. 3)."@en .
 
-#: rbo:RBO_0000037  RT linking inclusion statement
-rbo:RBO_0000037 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000034 ,                   #: RT statement
+#: rbaco:RBACO_0000037  RT linking inclusion statement
+rbaco:RBACO_0000037 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000034 ,               #: RT statement
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000123 ;              #: has linking base role
+          owl:onProperty rbaco:RBACO_0000123 ;          #: has linking base role
           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000033 ] ,               #: RT role definition
+          owl:onClass rbaco:RBACO_0000033 ] ,           #: RT role definition
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000203 ;              #: has linked role name
+          owl:onProperty rbaco:RBACO_0000203 ;          #: has linked role name
           owl:someValuesFrom xsd:string ] ;
-    dc11:identifier "037-RBO" ;
+    dc11:identifier "037-RBACO" ;
     rdfs:label "RT linking inclusion statement"@en ;
     skos:definition "An RT statement A.r <- B.r1.r2 making every member of C.r2 a member of A.r, for every member C of B.r1."@en ;
     skos:scopeNote "RT type 3, which ROWLBAC calls problematic in OWL (Fig. 3). Decided by queries/derive-rt-membership.rq, since the role C.r2 varies with C and no OWL 2 property chain ends at it."@en .
 
-#: rbo:RBO_0000038  RT intersection inclusion statement
-rbo:RBO_0000038 rdf:type owl:Class ;
-    rdfs:subClassOf rbo:RBO_0000034 ,                   #: RT statement
+#: rbaco:RBACO_0000038  RT intersection inclusion statement
+rbaco:RBACO_0000038 rdf:type owl:Class ;
+    rdfs:subClassOf rbaco:RBACO_0000034 ,               #: RT statement
         [ rdf:type owl:Restriction ;
-          owl:onProperty rbo:RBO_0000117 ;              #: has body role
+          owl:onProperty rbaco:RBACO_0000117 ;          #: has body role
           owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-          owl:onClass rbo:RBO_0000033 ] ;               #: RT role definition
-    dc11:identifier "038-RBO" ;
+          owl:onClass rbaco:RBACO_0000033 ] ;           #: RT role definition
+    dc11:identifier "038-RBACO" ;
     rdfs:label "RT intersection inclusion statement"@en ;
     skos:definition "An RT statement A.r <- B.r1 AND C.r2 making every principal that is a member of both B.r1 and C.r2 a member of A.r."@en ;
     skos:scopeNote "RT type 4. ROWLBAC encodes it as an intersection class subsumed by A-r (Fig. 3)."@en .
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members (
-      rbo:RBO_0000035                                   #: RT simple member statement
-      rbo:RBO_0000036                                   #: RT simple inclusion statement
-      rbo:RBO_0000037                                   #: RT linking inclusion statement
-      rbo:RBO_0000038 ) ] .                             #: RT intersection inclusion statement
+      rbaco:RBACO_0000035                               #: RT simple member statement
+      rbaco:RBACO_0000036                               #: RT simple inclusion statement
+      rbaco:RBACO_0000037                               #: RT linking inclusion statement
+      rbaco:RBACO_0000038 ) ] .                         #: RT intersection inclusion statement
 
-#: rbo:RBO_0000039  security analysis specification
-rbo:RBO_0000039 rdf:type owl:Class ;
+#: rbaco:RBACO_0000039  security analysis specification
+rbaco:RBACO_0000039 rdf:type owl:Class ;
     rdfs:subClassOf cco:ont00000965 ;                   #: Prescriptive Information Content Entity
-    dc11:identifier "039-RBO" ;
+    dc11:identifier "039-RBACO" ;
     rdfs:label "security analysis specification"@en ;
     skos:definition "A Prescriptive Information Content Entity that prescribes a security analysis of an RT policy, naming the RT roles the analysis treats as growth-restricted and as shrink-restricted."@en ;
     skos:scopeNote "The four security properties of ROWLBAC §4.2 (restriction, access, availability, safety) are queries evaluated against one specification (queries/rt-security-properties.rq). Model checking, which ROWLBAC says the last two need, is out of scope."@en .

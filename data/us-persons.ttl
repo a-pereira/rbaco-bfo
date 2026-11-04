@@ -1,14 +1,14 @@
 @prefix cco: <https://www.commoncoreontologies.org/> .
-@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix ex: <https://example.org/rbaco/data/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:us-persons a owl:Ontology ;
     rdfs:comment "ROWLBAC section 3.1 scenario: the US persons role hierarchy (Figure 1), its permissions and prohibitions, two static and one dynamic separation of duty constraint, and Alice's and Bob's narratives, each hosted in one status eligibility review."@en ;
-    owl:imports rbo:rbo-domain.owl .                    #: RBO domain module: ROWLBAC scenario and attribute examples
+    owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:officer a cco:ont00001262 ;                          #: Person
     rdfs:label "the security officer"@en .
@@ -17,180 +17,180 @@ ex:officer-authority a cco:ont00000187 ;                #: Authority Role
     rdfs:label "authority role of the security officer"@en ;
     obo:BFO_0000197 ex:officer .                        #: inheres in
 
-ex:def-legal-person a rbo:RBO_0000001 ;                 #: role definition
+ex:def-legal-person a rbaco:RBACO_0000001 ;             #: role definition
     rdfs:label "Person role definition"@en .
 
 ex:rec-def-legal-person a cco:ont00000253 ;             #: Information Bearing Entity
     rdfs:label "database record of the Person role definition"@en ;
     obo:BFO_0000101 ex:def-legal-person .               #: is carrier of
 
-ex:def-us-person a rbo:RBO_0000001 ;                    #: role definition
+ex:def-us-person a rbaco:RBACO_0000001 ;                #: role definition
     rdfs:label "US Person role definition"@en .
 
 ex:rec-def-us-person a cco:ont00000253 ;                #: Information Bearing Entity
     rdfs:label "database record of the US Person role definition"@en ;
     obo:BFO_0000101 ex:def-us-person .                  #: is carrier of
 
-ex:def-foreign-person a rbo:RBO_0000001 ;               #: role definition
+ex:def-foreign-person a rbaco:RBACO_0000001 ;           #: role definition
     rdfs:label "Foreign Person role definition"@en .
 
 ex:rec-def-foreign-person a cco:ont00000253 ;           #: Information Bearing Entity
     rdfs:label "database record of the Foreign Person role definition"@en ;
     obo:BFO_0000101 ex:def-foreign-person .             #: is carrier of
 
-ex:def-citizen a rbo:RBO_0000001 ;                      #: role definition
+ex:def-citizen a rbaco:RBACO_0000001 ;                  #: role definition
     rdfs:label "Citizen role definition"@en .
 
 ex:rec-def-citizen a cco:ont00000253 ;                  #: Information Bearing Entity
     rdfs:label "database record of the Citizen role definition"@en ;
     obo:BFO_0000101 ex:def-citizen .                    #: is carrier of
 
-ex:def-resident a rbo:RBO_0000001 ;                     #: role definition
+ex:def-resident a rbaco:RBACO_0000001 ;                 #: role definition
     rdfs:label "Resident role definition"@en .
 
 ex:rec-def-resident a cco:ont00000253 ;                 #: Information Bearing Entity
     rdfs:label "database record of the Resident role definition"@en ;
     obo:BFO_0000101 ex:def-resident .                   #: is carrier of
 
-ex:def-visitor a rbo:RBO_0000001 ;                      #: role definition
+ex:def-visitor a rbaco:RBACO_0000001 ;                  #: role definition
     rdfs:label "Visitor role definition"@en .
 
 ex:rec-def-visitor a cco:ont00000253 ;                  #: Information Bearing Entity
     rdfs:label "database record of the Visitor role definition"@en ;
     obo:BFO_0000101 ex:def-visitor .                    #: is carrier of
 
-ex:def-permanent-resident a rbo:RBO_0000001 ;           #: role definition
+ex:def-permanent-resident a rbaco:RBACO_0000001 ;       #: role definition
     rdfs:label "Permanent Resident role definition"@en .
 
 ex:rec-def-permanent-resident a cco:ont00000253 ;       #: Information Bearing Entity
     rdfs:label "database record of the Permanent Resident role definition"@en ;
     obo:BFO_0000101 ex:def-permanent-resident .         #: is carrier of
 
-ex:def-pr-applicant a rbo:RBO_0000001 ;                 #: role definition
+ex:def-pr-applicant a rbaco:RBACO_0000001 ;             #: role definition
     rdfs:label "Perm Residency Applicant role definition"@en .
 
 ex:rec-def-pr-applicant a cco:ont00000253 ;             #: Information Bearing Entity
     rdfs:label "database record of the Perm Residency Applicant role definition"@en ;
     obo:BFO_0000101 ex:def-pr-applicant .               #: is carrier of
 
-ex:def-temporary-resident a rbo:RBO_0000001 ;           #: role definition
+ex:def-temporary-resident a rbaco:RBACO_0000001 ;       #: role definition
     rdfs:label "Temporary Resident role definition"@en .
 
 ex:rec-def-temporary-resident a cco:ont00000253 ;       #: Information Bearing Entity
     rdfs:label "database record of the Temporary Resident role definition"@en ;
     obo:BFO_0000101 ex:def-temporary-resident .         #: is carrier of
 
-ex:def-work-visa a rbo:RBO_0000001 ;                    #: role definition
+ex:def-work-visa a rbaco:RBACO_0000001 ;                #: role definition
     rdfs:label "Work Visa Holder role definition"@en .
 
 ex:rec-def-work-visa a cco:ont00000253 ;                #: Information Bearing Entity
     rdfs:label "database record of the Work Visa Holder role definition"@en ;
     obo:BFO_0000101 ex:def-work-visa .                  #: is carrier of
 
-ex:def-business-visa a rbo:RBO_0000001 ;                #: role definition
+ex:def-business-visa a rbaco:RBACO_0000001 ;            #: role definition
     rdfs:label "Business Visa Holder role definition"@en .
 
 ex:rec-def-business-visa a cco:ont00000253 ;            #: Information Bearing Entity
     rdfs:label "database record of the Business Visa Holder role definition"@en ;
     obo:BFO_0000101 ex:def-business-visa .              #: is carrier of
 
-ex:def-student-visa a rbo:RBO_0000001 ;                 #: role definition
+ex:def-student-visa a rbaco:RBACO_0000001 ;             #: role definition
     rdfs:label "Student Visa Holder role definition"@en .
 
 ex:rec-def-student-visa a cco:ont00000253 ;             #: Information Bearing Entity
     rdfs:label "database record of the Student Visa Holder role definition"@en ;
     obo:BFO_0000101 ex:def-student-visa .               #: is carrier of
 
-#: rbo:RBO_0001001  legal person role
-rbo:RBO_0001001 rbo:RBO_0000301 ex:def-legal-person .   #: corresponds to role definition
+#: rbaco:RBACO_0001001  legal person role
+rbaco:RBACO_0001001 rbaco:RBACO_0000301 ex:def-legal-person .  #: corresponds to role definition
 
-#: rbo:RBO_0001002  US person role
-rbo:RBO_0001002 rbo:RBO_0000301 ex:def-us-person .      #: corresponds to role definition
+#: rbaco:RBACO_0001002  US person role
+rbaco:RBACO_0001002 rbaco:RBACO_0000301 ex:def-us-person .  #: corresponds to role definition
 
-#: rbo:RBO_0001003  foreign person role
-rbo:RBO_0001003 rbo:RBO_0000301 ex:def-foreign-person .  #: corresponds to role definition
+#: rbaco:RBACO_0001003  foreign person role
+rbaco:RBACO_0001003 rbaco:RBACO_0000301 ex:def-foreign-person .  #: corresponds to role definition
 
-#: rbo:RBO_0001004  US citizen role
-rbo:RBO_0001004 rbo:RBO_0000301 ex:def-citizen .        #: corresponds to role definition
+#: rbaco:RBACO_0001004  US citizen role
+rbaco:RBACO_0001004 rbaco:RBACO_0000301 ex:def-citizen .  #: corresponds to role definition
 
-#: rbo:RBO_0001005  US resident role
-rbo:RBO_0001005 rbo:RBO_0000301 ex:def-resident .       #: corresponds to role definition
+#: rbaco:RBACO_0001005  US resident role
+rbaco:RBACO_0001005 rbaco:RBACO_0000301 ex:def-resident .  #: corresponds to role definition
 
-#: rbo:RBO_0001006  US visitor role
-rbo:RBO_0001006 rbo:RBO_0000301 ex:def-visitor .        #: corresponds to role definition
+#: rbaco:RBACO_0001006  US visitor role
+rbaco:RBACO_0001006 rbaco:RBACO_0000301 ex:def-visitor .  #: corresponds to role definition
 
-#: rbo:RBO_0001007  US permanent resident role
-rbo:RBO_0001007 rbo:RBO_0000301 ex:def-permanent-resident .  #: corresponds to role definition
+#: rbaco:RBACO_0001007  US permanent resident role
+rbaco:RBACO_0001007 rbaco:RBACO_0000301 ex:def-permanent-resident .  #: corresponds to role definition
 
-#: rbo:RBO_0001008  US permanent residency applicant role
-rbo:RBO_0001008 rbo:RBO_0000301 ex:def-pr-applicant .   #: corresponds to role definition
+#: rbaco:RBACO_0001008  US permanent residency applicant role
+rbaco:RBACO_0001008 rbaco:RBACO_0000301 ex:def-pr-applicant .  #: corresponds to role definition
 
-#: rbo:RBO_0001009  US temporary resident role
-rbo:RBO_0001009 rbo:RBO_0000301 ex:def-temporary-resident .  #: corresponds to role definition
+#: rbaco:RBACO_0001009  US temporary resident role
+rbaco:RBACO_0001009 rbaco:RBACO_0000301 ex:def-temporary-resident .  #: corresponds to role definition
 
-#: rbo:RBO_0001010  US work visa holder role
-rbo:RBO_0001010 rbo:RBO_0000301 ex:def-work-visa .      #: corresponds to role definition
+#: rbaco:RBACO_0001010  US work visa holder role
+rbaco:RBACO_0001010 rbaco:RBACO_0000301 ex:def-work-visa .  #: corresponds to role definition
 
-#: rbo:RBO_0001011  US business visa holder role
-rbo:RBO_0001011 rbo:RBO_0000301 ex:def-business-visa .  #: corresponds to role definition
+#: rbaco:RBACO_0001011  US business visa holder role
+rbaco:RBACO_0001011 rbaco:RBACO_0000301 ex:def-business-visa .  #: corresponds to role definition
 
-#: rbo:RBO_0001012  US student visa holder role
-rbo:RBO_0001012 rbo:RBO_0000301 ex:def-student-visa .   #: corresponds to role definition
+#: rbaco:RBACO_0001012  US student visa holder role
+rbaco:RBACO_0001012 rbaco:RBACO_0000301 ex:def-student-visa .  #: corresponds to role definition
 
-ex:inh-us-person-legal-person a rbo:RBO_0000017 ;       #: role inheritance statement
+ex:inh-us-person-legal-person a rbaco:RBACO_0000017 ;   #: role inheritance statement
     rdfs:label "us-person inherits from legal-person"@en ;
-    rbo:RBO_0000118 ex:def-us-person ;                  #: has senior role definition
-    rbo:RBO_0000119 ex:def-legal-person .               #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-us-person ;              #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-legal-person .           #: has junior role definition
 
-ex:inh-foreign-person-legal-person a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-foreign-person-legal-person a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "foreign-person inherits from legal-person"@en ;
-    rbo:RBO_0000118 ex:def-foreign-person ;             #: has senior role definition
-    rbo:RBO_0000119 ex:def-legal-person .               #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-foreign-person ;         #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-legal-person .           #: has junior role definition
 
-ex:inh-citizen-us-person a rbo:RBO_0000017 ;            #: role inheritance statement
+ex:inh-citizen-us-person a rbaco:RBACO_0000017 ;        #: role inheritance statement
     rdfs:label "citizen inherits from us-person"@en ;
-    rbo:RBO_0000118 ex:def-citizen ;                    #: has senior role definition
-    rbo:RBO_0000119 ex:def-us-person .                  #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-citizen ;                #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-us-person .              #: has junior role definition
 
-ex:inh-resident-us-person a rbo:RBO_0000017 ;           #: role inheritance statement
+ex:inh-resident-us-person a rbaco:RBACO_0000017 ;       #: role inheritance statement
     rdfs:label "resident inherits from us-person"@en ;
-    rbo:RBO_0000118 ex:def-resident ;                   #: has senior role definition
-    rbo:RBO_0000119 ex:def-us-person .                  #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-resident ;               #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-us-person .              #: has junior role definition
 
-ex:inh-visitor-us-person a rbo:RBO_0000017 ;            #: role inheritance statement
+ex:inh-visitor-us-person a rbaco:RBACO_0000017 ;        #: role inheritance statement
     rdfs:label "visitor inherits from us-person"@en ;
-    rbo:RBO_0000118 ex:def-visitor ;                    #: has senior role definition
-    rbo:RBO_0000119 ex:def-us-person .                  #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-visitor ;                #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-us-person .              #: has junior role definition
 
-ex:inh-permanent-resident-resident a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-permanent-resident-resident a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "permanent-resident inherits from resident"@en ;
-    rbo:RBO_0000118 ex:def-permanent-resident ;         #: has senior role definition
-    rbo:RBO_0000119 ex:def-resident .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-permanent-resident ;     #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-resident .               #: has junior role definition
 
-ex:inh-pr-applicant-resident a rbo:RBO_0000017 ;        #: role inheritance statement
+ex:inh-pr-applicant-resident a rbaco:RBACO_0000017 ;    #: role inheritance statement
     rdfs:label "pr-applicant inherits from resident"@en ;
-    rbo:RBO_0000118 ex:def-pr-applicant ;               #: has senior role definition
-    rbo:RBO_0000119 ex:def-resident .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-pr-applicant ;           #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-resident .               #: has junior role definition
 
-ex:inh-temporary-resident-resident a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-temporary-resident-resident a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "temporary-resident inherits from resident"@en ;
-    rbo:RBO_0000118 ex:def-temporary-resident ;         #: has senior role definition
-    rbo:RBO_0000119 ex:def-resident .                   #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-temporary-resident ;     #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-resident .               #: has junior role definition
 
-ex:inh-work-visa-temporary-resident a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-work-visa-temporary-resident a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "work-visa inherits from temporary-resident"@en ;
-    rbo:RBO_0000118 ex:def-work-visa ;                  #: has senior role definition
-    rbo:RBO_0000119 ex:def-temporary-resident .         #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-work-visa ;              #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-temporary-resident .     #: has junior role definition
 
-ex:inh-business-visa-temporary-resident a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-business-visa-temporary-resident a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "business-visa inherits from temporary-resident"@en ;
-    rbo:RBO_0000118 ex:def-business-visa ;              #: has senior role definition
-    rbo:RBO_0000119 ex:def-temporary-resident .         #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-business-visa ;          #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-temporary-resident .     #: has junior role definition
 
-ex:inh-student-visa-temporary-resident a rbo:RBO_0000017 ;  #: role inheritance statement
+ex:inh-student-visa-temporary-resident a rbaco:RBACO_0000017 ;  #: role inheritance statement
     rdfs:label "student-visa inherits from temporary-resident"@en ;
-    rbo:RBO_0000118 ex:def-student-visa ;               #: has senior role definition
-    rbo:RBO_0000119 ex:def-temporary-resident .         #: has junior role definition
+    rbaco:RBACO_0000118 ex:def-student-visa ;           #: has senior role definition
+    rbaco:RBACO_0000119 ex:def-temporary-resident .     #: has junior role definition
 
 ex:op-vote a obo:IAO_0000104 ;                          #: plan specification
     rdfs:label "vote-casting procedure"@en .
@@ -201,79 +201,79 @@ ex:op-work a obo:IAO_0000104 ;                          #: plan specification
 ex:op-jury a obo:IAO_0000104 ;                          #: plan specification
     rdfs:label "jury service procedure"@en .
 
-ex:perm-citizen-vote a rbo:RBO_0000007 ;                #: access permission
+ex:perm-citizen-vote a rbaco:RBACO_0000007 ;            #: access permission
     rdfs:label "Citizen: permitted Vote"@en ;
-    rbo:RBO_0000101 ex:op-vote ;                        #: has operation
-    rbo:RBO_0000105 ex:def-citizen .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-vote ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-citizen .                #: is assigned to role definition
 
-ex:perm-citizen-work a rbo:RBO_0000007 ;                #: access permission
+ex:perm-citizen-work a rbaco:RBACO_0000007 ;            #: access permission
     rdfs:label "Citizen: permitted Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-citizen .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-citizen .                #: is assigned to role definition
 
-ex:perm-citizen-jury a rbo:RBO_0000007 ;                #: access permission
+ex:perm-citizen-jury a rbaco:RBACO_0000007 ;            #: access permission
     rdfs:label "Citizen: permitted Jury"@en ;
-    rbo:RBO_0000101 ex:op-jury ;                        #: has operation
-    rbo:RBO_0000105 ex:def-citizen .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-jury ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-citizen .                #: is assigned to role definition
 
-ex:perm-pr-work a rbo:RBO_0000007 ;                     #: access permission
+ex:perm-pr-work a rbaco:RBACO_0000007 ;                 #: access permission
     rdfs:label "Permanent Resident: permitted Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-permanent-resident .         #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-permanent-resident .     #: is assigned to role definition
 
-ex:perm-pra-work a rbo:RBO_0000007 ;                    #: access permission
+ex:perm-pra-work a rbaco:RBACO_0000007 ;                #: access permission
     rdfs:label "Perm Residency Applicant: permitted Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-pr-applicant .               #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-pr-applicant .           #: is assigned to role definition
 
-ex:perm-wvh-work a rbo:RBO_0000007 ;                    #: access permission
+ex:perm-wvh-work a rbaco:RBACO_0000007 ;                #: access permission
     rdfs:label "Work Visa Holder: permitted Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-work-visa .                  #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-work-visa .              #: is assigned to role definition
 
-ex:perm-bvh-work a rbo:RBO_0000007 ;                    #: access permission
+ex:perm-bvh-work a rbaco:RBACO_0000007 ;                #: access permission
     rdfs:label "Business Visa Holder: permitted Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-business-visa .              #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-business-visa .          #: is assigned to role definition
 
-ex:proh-visitor-work a rbo:RBO_0000008 ;                #: access prohibition
+ex:proh-visitor-work a rbaco:RBACO_0000008 ;            #: access prohibition
     rdfs:label "Visitor: prohibited Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-visitor .                    #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-visitor .                #: is assigned to role definition
 
-ex:proh-svh-work a rbo:RBO_0000008 ;                    #: access prohibition
+ex:proh-svh-work a rbaco:RBACO_0000008 ;                #: access prohibition
     rdfs:label "Student Visa Holder: prohibited Work"@en ;
-    rbo:RBO_0000101 ex:op-work ;                        #: has operation
-    rbo:RBO_0000105 ex:def-student-visa .               #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-work ;                    #: has operation
+    rbaco:RBACO_0000105 ex:def-student-visa .           #: is assigned to role definition
 
-ex:ssd-resident-citizen a rbo:RBO_0000013 ;             #: static separation of duty constraint
+ex:ssd-resident-citizen a rbaco:RBACO_0000013 ;         #: static separation of duty constraint
     rdfs:label "SSD {Resident, Citizen}, n = 2"@en ;
-    rbo:RBO_0000114 ex:def-citizen,                     #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-citizen,                 #: has constrained role definition
         ex:def-resident ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:ssd-pr-tr a rbo:RBO_0000013 ;                        #: static separation of duty constraint
+ex:ssd-pr-tr a rbaco:RBACO_0000013 ;                    #: static separation of duty constraint
     rdfs:label "SSD {Permanent Resident, Temporary Resident}, n = 2"@en ;
-    rbo:RBO_0000114 ex:def-permanent-resident,          #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-permanent-resident,      #: has constrained role definition
         ex:def-temporary-resident ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:dsd-visitor-tr a rbo:RBO_0000015 ;                   #: same-time dynamic separation of duty constraint
+ex:dsd-visitor-tr a rbaco:RBACO_0000015 ;               #: same-time dynamic separation of duty constraint
     rdfs:label "DSD {Visitor, Temporary Resident}, n = 2, global"@en ;
-    rbo:RBO_0000114 ex:def-temporary-resident,          #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-temporary-resident,      #: has constrained role definition
         ex:def-visitor ;
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
-ex:plan-status-review a rbo:RBO_0000005 ;               #: business process plan
+ex:plan-status-review a rbaco:RBACO_0000005 ;           #: business process plan
     rdfs:label "status eligibility review plan"@en .
 
 ex:policy-load-start a obo:BFO_0000203 ;                #: temporal instant
-    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:policy-load-interval a obo:BFO_0000202 ;             #: temporal interval
     obo:BFO_0000222 ex:policy-load-start .              #: has first instant
 
-ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
+ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
     rdfs:label "policy issuing act policy-load"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000199 ex:policy-load-interval ;           #: occupies temporal region
@@ -321,18 +321,18 @@ ex:alice a cco:ont00001262 ;                            #: Person
 ex:bob a cco:ont00001262 ;                              #: Person
     rdfs:label "Bob"@en .
 
-ex:alice-citizen-assigned-1 a rbo:RBO_0001004 ;         #: US citizen role
+ex:alice-citizen-assigned-1 a rbaco:RBACO_0001004 ;     #: US citizen role
     rdfs:label "alice's assigned citizen role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-citizen ;                    #: concretizes
     obo:BFO_0000197 ex:alice .                          #: inheres in
 
 ex:alice-assign-citizen-1-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-assign-citizen-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-assign-citizen-1-start .   #: has first instant
 
-ex:alice-assign-citizen-1 a rbo:RBO_0000028 ;           #: role assignment
+ex:alice-assign-citizen-1 a rbaco:RBACO_0000028 ;       #: role assignment
     rdfs:label "assignment of alice to citizen"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:alice ;                          #: has participant
@@ -340,18 +340,18 @@ ex:alice-assign-citizen-1 a rbo:RBO_0000028 ;           #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:alice-citizen-assigned-1 .       #: has output
 
-ex:alice-permanent-resident-assigned-1 a rbo:RBO_0001007 ;  #: US permanent resident role
+ex:alice-permanent-resident-assigned-1 a rbaco:RBACO_0001007 ;  #: US permanent resident role
     rdfs:label "alice's assigned permanent-resident role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-permanent-resident ;         #: concretizes
     obo:BFO_0000197 ex:alice .                          #: inheres in
 
 ex:alice-assign-permanent-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-assign-permanent-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-assign-permanent-resident-1-start .  #: has first instant
 
-ex:alice-assign-permanent-resident-1 a rbo:RBO_0000028 ;  #: role assignment
+ex:alice-assign-permanent-resident-1 a rbaco:RBACO_0000028 ;  #: role assignment
     rdfs:label "assignment of alice to permanent-resident"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:alice ;                          #: has participant
@@ -359,18 +359,18 @@ ex:alice-assign-permanent-resident-1 a rbo:RBO_0000028 ;  #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:alice-permanent-resident-assigned-1 .  #: has output
 
-ex:bob-visitor-assigned-1 a rbo:RBO_0001006 ;           #: US visitor role
+ex:bob-visitor-assigned-1 a rbaco:RBACO_0001006 ;       #: US visitor role
     rdfs:label "bob's assigned visitor role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-visitor ;                    #: concretizes
     obo:BFO_0000197 ex:bob .                            #: inheres in
 
 ex:bob-assign-visitor-1-start a obo:BFO_0000203 ;       #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-assign-visitor-1-interval a obo:BFO_0000202 ;    #: temporal interval
     obo:BFO_0000222 ex:bob-assign-visitor-1-start .     #: has first instant
 
-ex:bob-assign-visitor-1 a rbo:RBO_0000028 ;             #: role assignment
+ex:bob-assign-visitor-1 a rbaco:RBACO_0000028 ;         #: role assignment
     rdfs:label "assignment of bob to visitor"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:bob ;                            #: has participant
@@ -378,18 +378,18 @@ ex:bob-assign-visitor-1 a rbo:RBO_0000028 ;             #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:bob-visitor-assigned-1 .         #: has output
 
-ex:bob-temporary-resident-assigned-1 a rbo:RBO_0001009 ;  #: US temporary resident role
+ex:bob-temporary-resident-assigned-1 a rbaco:RBACO_0001009 ;  #: US temporary resident role
     rdfs:label "bob's assigned temporary-resident role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-temporary-resident ;         #: concretizes
     obo:BFO_0000197 ex:bob .                            #: inheres in
 
 ex:bob-assign-temporary-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-assign-temporary-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-assign-temporary-resident-1-start .  #: has first instant
 
-ex:bob-assign-temporary-resident-1 a rbo:RBO_0000028 ;  #: role assignment
+ex:bob-assign-temporary-resident-1 a rbaco:RBACO_0000028 ;  #: role assignment
     rdfs:label "assignment of bob to temporary-resident"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:bob ;                            #: has participant
@@ -398,100 +398,100 @@ ex:bob-assign-temporary-resident-1 a rbo:RBO_0000028 ;  #: role assignment
     cco:ont00001986 ex:bob-temporary-resident-assigned-1 .  #: has output
 
 ex:alice-review-start a obo:BFO_0000203 ;               #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-review-end a obo:BFO_0000203 ;                 #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-review-interval a obo:BFO_0000202 ;            #: temporal interval
     obo:BFO_0000222 ex:alice-review-start ;             #: has first instant
     obo:BFO_0000224 ex:alice-review-end .               #: has last instant
 
-ex:alice-review a rbo:RBO_0001016 ;                     #: status eligibility review
+ex:alice-review a rbaco:RBACO_0001016 ;                 #: status eligibility review
     rdfs:label "Alice's status eligibility review"@en ;
     obo:BFO_0000199 ex:alice-review-interval ;          #: occupies temporal region
     cco:ont00001920 ex:plan-status-review .             #: prescribed by
 
 ex:alice-request-activate-citizen-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-request-activate-citizen-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-request-activate-citizen-1-start .  #: has first instant
 
 ex:alice-activate-citizen-1-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-activate-citizen-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-activate-citizen-1-start .  #: has first instant
 
-ex:alice-citizen-active-1 a rbo:RBO_0000003 ;           #: active role
+ex:alice-citizen-active-1 a rbaco:RBACO_0000003 ;       #: active role
     rdfs:label "alice's active citizen role in alice-review"@en ;
     obo:BFO_0000059 ex:def-citizen ;                    #: concretizes
     obo:BFO_0000195 ex:alice-citizen-assigned-1 ;       #: specifically depends on
     obo:BFO_0000197 ex:alice ;                          #: inheres in
-    rbo:RBO_0000106 ex:alice-review .                   #: is activated in
+    rbaco:RBACO_0000106 ex:alice-review .               #: is activated in
 
-ex:alice-activate-citizen-1 a rbo:RBO_0000026 ;         #: role activation
+ex:alice-activate-citizen-1 a rbaco:RBACO_0000026 ;     #: role activation
     rdfs:label "activation of citizen by alice"@en ;
     obo:BFO_0000057 ex:alice ;                          #: has participant
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-activate-citizen-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:alice-citizen-active-1 .         #: has output
 
-ex:alice-request-activate-citizen-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:alice-request-activate-citizen-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "alice asks to activate citizen"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-request-activate-citizen-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000110 ex:def-citizen ;                    #: requests activation of
-    rbo:RBO_0000111 ex:alice-activate-citizen-1 .       #: is fulfilled by
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-citizen ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:alice-activate-citizen-1 .   #: is fulfilled by
 
 ex:alice-req-vote-1-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-vote-1-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-vote-1-start .         #: has first instant
 
-ex:alice-req-vote-1 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-vote-1 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-vote"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-vote-1-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-vote .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-vote .                    #: requests operation
 
 ex:alice-req-work-1-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:11:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:11:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-work-1-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-work-1-start .         #: has first instant
 
-ex:alice-req-work-1 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-work-1 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-work"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-work-1-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-work .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-work .                    #: requests operation
 
 ex:alice-req-jury-1-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:12:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:12:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-jury-1-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-jury-1-start .         #: has first instant
 
-ex:alice-req-jury-1 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-jury-1 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-jury"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-jury-1-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-jury .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-jury .                    #: requests operation
 
 ex:alice-deactivate-citizen-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-deactivate-citizen-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-deactivate-citizen-1-start .  #: has first instant
 
-ex:alice-deactivate-citizen-1 a rbo:RBO_0000027 ;       #: role deactivation
+ex:alice-deactivate-citizen-1 a rbaco:RBACO_0000027 ;   #: role deactivation
     rdfs:label "deactivation of citizen by alice"@en ;
     obo:BFO_0000057 ex:alice ;                          #: has participant
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
@@ -499,85 +499,85 @@ ex:alice-deactivate-citizen-1 a rbo:RBO_0000027 ;       #: role deactivation
     cco:ont00001921 ex:alice-citizen-active-1 .         #: has input
 
 ex:alice-request-activate-permanent-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:25:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:25:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-request-activate-permanent-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-request-activate-permanent-resident-1-start .  #: has first instant
 
 ex:alice-activate-permanent-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:25:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:25:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-activate-permanent-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-activate-permanent-resident-1-start .  #: has first instant
 
-ex:alice-permanent-resident-active-1 a rbo:RBO_0000003 ;  #: active role
+ex:alice-permanent-resident-active-1 a rbaco:RBACO_0000003 ;  #: active role
     rdfs:label "alice's active permanent-resident role in alice-review"@en ;
     obo:BFO_0000059 ex:def-permanent-resident ;         #: concretizes
     obo:BFO_0000195 ex:alice-permanent-resident-assigned-1 ;  #: specifically depends on
     obo:BFO_0000197 ex:alice ;                          #: inheres in
-    rbo:RBO_0000106 ex:alice-review .                   #: is activated in
+    rbaco:RBACO_0000106 ex:alice-review .               #: is activated in
 
-ex:alice-activate-permanent-resident-1 a rbo:RBO_0000026 ;  #: role activation
+ex:alice-activate-permanent-resident-1 a rbaco:RBACO_0000026 ;  #: role activation
     rdfs:label "activation of permanent-resident by alice"@en ;
     obo:BFO_0000057 ex:alice ;                          #: has participant
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-activate-permanent-resident-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:alice-permanent-resident-active-1 .  #: has output
 
-ex:alice-request-activate-permanent-resident-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:alice-request-activate-permanent-resident-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "alice asks to activate permanent-resident"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-request-activate-permanent-resident-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000110 ex:def-permanent-resident ;         #: requests activation of
-    rbo:RBO_0000111 ex:alice-activate-permanent-resident-1 .  #: is fulfilled by
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000110 ex:def-permanent-resident ;     #: requests activation of
+    rbaco:RBACO_0000111 ex:alice-activate-permanent-resident-1 .  #: is fulfilled by
 
 ex:alice-req-vote-2-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:30:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-vote-2-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-vote-2-start .         #: has first instant
 
-ex:alice-req-vote-2 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-vote-2 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-vote"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-vote-2-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-vote .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-vote .                    #: requests operation
 
 ex:alice-req-work-2-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:31:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:31:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-work-2-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-work-2-start .         #: has first instant
 
-ex:alice-req-work-2 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-work-2 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-work"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-work-2-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-work .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-work .                    #: requests operation
 
 ex:alice-req-jury-2-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T09:32:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T09:32:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-req-jury-2-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:alice-req-jury-2-start .         #: has first instant
 
-ex:alice-req-jury-2 a rbo:RBO_0000024 ;                 #: access request
+ex:alice-req-jury-2 a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "alice asks to op-jury"@en ;
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
     obo:BFO_0000199 ex:alice-req-jury-2-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:alice ;                          #: has requester
-    rbo:RBO_0000108 ex:op-jury .                        #: requests operation
+    rbaco:RBACO_0000107 ex:alice ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-jury .                    #: requests operation
 
 ex:alice-deactivate-permanent-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:alice-deactivate-permanent-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:alice-deactivate-permanent-resident-1-start .  #: has first instant
 
-ex:alice-deactivate-permanent-resident-1 a rbo:RBO_0000027 ;  #: role deactivation
+ex:alice-deactivate-permanent-resident-1 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of permanent-resident by alice"@en ;
     obo:BFO_0000057 ex:alice ;                          #: has participant
     obo:BFO_0000132 ex:alice-review ;                   #: occurrent part of
@@ -585,100 +585,100 @@ ex:alice-deactivate-permanent-resident-1 a rbo:RBO_0000027 ;  #: role deactivati
     cco:ont00001921 ex:alice-permanent-resident-active-1 .  #: has input
 
 ex:bob-review-start a obo:BFO_0000203 ;                 #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-review-end a obo:BFO_0000203 ;                   #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-review-interval a obo:BFO_0000202 ;              #: temporal interval
     obo:BFO_0000222 ex:bob-review-start ;               #: has first instant
     obo:BFO_0000224 ex:bob-review-end .                 #: has last instant
 
-ex:bob-review a rbo:RBO_0001016 ;                       #: status eligibility review
+ex:bob-review a rbaco:RBACO_0001016 ;                   #: status eligibility review
     rdfs:label "Bob's status eligibility review"@en ;
     obo:BFO_0000199 ex:bob-review-interval ;            #: occupies temporal region
     cco:ont00001920 ex:plan-status-review .             #: prescribed by
 
 ex:bob-request-activate-visitor-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-request-activate-visitor-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-request-activate-visitor-1-start .  #: has first instant
 
 ex:bob-activate-visitor-1-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-activate-visitor-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-activate-visitor-1-start .   #: has first instant
 
-ex:bob-visitor-active-1 a rbo:RBO_0000003 ;             #: active role
+ex:bob-visitor-active-1 a rbaco:RBACO_0000003 ;         #: active role
     rdfs:label "bob's active visitor role in bob-review"@en ;
     obo:BFO_0000059 ex:def-visitor ;                    #: concretizes
     obo:BFO_0000195 ex:bob-visitor-assigned-1 ;         #: specifically depends on
     obo:BFO_0000197 ex:bob ;                            #: inheres in
-    rbo:RBO_0000106 ex:bob-review .                     #: is activated in
+    rbaco:RBACO_0000106 ex:bob-review .                 #: is activated in
 
-ex:bob-activate-visitor-1 a rbo:RBO_0000026 ;           #: role activation
+ex:bob-activate-visitor-1 a rbaco:RBACO_0000026 ;       #: role activation
     rdfs:label "activation of visitor by bob"@en ;
     obo:BFO_0000057 ex:bob ;                            #: has participant
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of
     obo:BFO_0000199 ex:bob-activate-visitor-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:bob-visitor-active-1 .           #: has output
 
-ex:bob-request-activate-visitor-1 a rbo:RBO_0000025 ;   #: role activation request
+ex:bob-request-activate-visitor-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "bob asks to activate visitor"@en ;
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of
     obo:BFO_0000199 ex:bob-request-activate-visitor-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:bob ;                            #: has requester
-    rbo:RBO_0000110 ex:def-visitor ;                    #: requests activation of
-    rbo:RBO_0000111 ex:bob-activate-visitor-1 .         #: is fulfilled by
+    rbaco:RBACO_0000107 ex:bob ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-visitor ;                #: requests activation of
+    rbaco:RBACO_0000111 ex:bob-activate-visitor-1 .     #: is fulfilled by
 
 ex:bob-req-work-1-start a obo:BFO_0000203 ;             #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-req-work-1-interval a obo:BFO_0000202 ;          #: temporal interval
     obo:BFO_0000222 ex:bob-req-work-1-start .           #: has first instant
 
-ex:bob-req-work-1 a rbo:RBO_0000024 ;                   #: access request
+ex:bob-req-work-1 a rbaco:RBACO_0000024 ;               #: access request
     rdfs:label "bob asks to op-work"@en ;
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of
     obo:BFO_0000199 ex:bob-req-work-1-interval ;        #: occupies temporal region
-    rbo:RBO_0000107 ex:bob ;                            #: has requester
-    rbo:RBO_0000108 ex:op-work .                        #: requests operation
+    rbaco:RBACO_0000107 ex:bob ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-work .                    #: requests operation
 
 ex:bob-request-activate-temporary-resident-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:15:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:15:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-request-activate-temporary-resident-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-request-activate-temporary-resident-1-start .  #: has first instant
 
-ex:bob-request-activate-temporary-resident-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:bob-request-activate-temporary-resident-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "bob asks to activate temporary-resident"@en ;
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of
     obo:BFO_0000199 ex:bob-request-activate-temporary-resident-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:bob ;                            #: has requester
-    rbo:RBO_0000110 ex:def-temporary-resident .         #: requests activation of
+    rbaco:RBACO_0000107 ex:bob ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-temporary-resident .     #: requests activation of
 
 ex:bob-request-activate-citizen-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T10:20:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-request-activate-citizen-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-request-activate-citizen-1-start .  #: has first instant
 
-ex:bob-request-activate-citizen-1 a rbo:RBO_0000025 ;   #: role activation request
+ex:bob-request-activate-citizen-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "bob asks to activate citizen"@en ;
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of
     obo:BFO_0000199 ex:bob-request-activate-citizen-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:bob ;                            #: has requester
-    rbo:RBO_0000110 ex:def-citizen .                    #: requests activation of
+    rbaco:RBACO_0000107 ex:bob ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-citizen .                #: requests activation of
 
 ex:bob-deactivate-visitor-1-start a obo:BFO_0000203 ;   #: temporal instant
-    rbo:RBO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-05T17:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:bob-deactivate-visitor-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:bob-deactivate-visitor-1-start .  #: has first instant
 
-ex:bob-deactivate-visitor-1 a rbo:RBO_0000027 ;         #: role deactivation
+ex:bob-deactivate-visitor-1 a rbaco:RBACO_0000027 ;     #: role deactivation
     rdfs:label "deactivation of visitor by bob"@en ;
     obo:BFO_0000057 ex:bob ;                            #: has participant
     obo:BFO_0000132 ex:bob-review ;                     #: occurrent part of

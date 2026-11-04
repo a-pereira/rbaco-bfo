@@ -1,14 +1,14 @@
 @prefix cco: <https://www.commoncoreontologies.org/> .
-@prefix ex: <https://example.org/rbac-bfo/data/> .
+@prefix ex: <https://example.org/rbaco/data/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:code-review a owl:Ontology ;
     rdfs:comment "Code change review CR-42: one business process instance shared by two participants, with a dynamic separation of duty constraint that counts the whole instance. Not in ROWLBAC; it exercises the business-process sessions this design introduces."@en ;
-    owl:imports rbo:rbo-domain.owl .                    #: RBO domain module: ROWLBAC scenario and attribute examples
+    owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:officer a cco:ont00001262 ;                          #: Person
     rdfs:label "the security officer"@en .
@@ -17,14 +17,14 @@ ex:officer-authority a cco:ont00000187 ;                #: Authority Role
     rdfs:label "authority role of the security officer"@en ;
     obo:BFO_0000197 ex:officer .                        #: inheres in
 
-ex:def-submitter a rbo:RBO_0000001 ;                    #: role definition
+ex:def-submitter a rbaco:RBACO_0000001 ;                #: role definition
     rdfs:label "Submitter role definition"@en .
 
 ex:rec-def-submitter a cco:ont00000253 ;                #: Information Bearing Entity
     rdfs:label "database record of the Submitter role definition"@en ;
     obo:BFO_0000101 ex:def-submitter .                  #: is carrier of
 
-ex:def-approver a rbo:RBO_0000001 ;                     #: role definition
+ex:def-approver a rbaco:RBACO_0000001 ;                 #: role definition
     rdfs:label "Approver role definition"@en .
 
 ex:rec-def-approver a cco:ont00000253 ;                 #: Information Bearing Entity
@@ -43,35 +43,35 @@ ex:repo-acme a cco:ont00002006 ;                        #: Database
 ex:change-42 a cco:ont00000958 ;                        #: Information Content Entity
     rdfs:label "change 42"@en .
 
-ex:perm-submitter-push a rbo:RBO_0000007 ;              #: access permission
+ex:perm-submitter-push a rbaco:RBACO_0000007 ;          #: access permission
     rdfs:label "Submitter: push commit to the acme repository"@en ;
-    rbo:RBO_0000101 ex:op-git-push ;                    #: has operation
-    rbo:RBO_0000102 ex:repo-acme ;                      #: has access object
-    rbo:RBO_0000105 ex:def-submitter .                  #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-git-push ;                #: has operation
+    rbaco:RBACO_0000102 ex:repo-acme ;                  #: has access object
+    rbaco:RBACO_0000105 ex:def-submitter .              #: is assigned to role definition
 
-ex:perm-approver-approve a rbo:RBO_0000007 ;            #: access permission
+ex:perm-approver-approve a rbaco:RBACO_0000007 ;        #: access permission
     rdfs:label "Approver: approve merge of change 42"@en ;
-    rbo:RBO_0000101 ex:op-approve-merge ;               #: has operation
-    rbo:RBO_0000102 ex:change-42 ;                      #: has access object
-    rbo:RBO_0000105 ex:def-approver .                   #: is assigned to role definition
+    rbaco:RBACO_0000101 ex:op-approve-merge ;           #: has operation
+    rbaco:RBACO_0000102 ex:change-42 ;                  #: has access object
+    rbaco:RBACO_0000105 ex:def-approver .               #: is assigned to role definition
 
-ex:plan-code-review a rbo:RBO_0000005 ;                 #: business process plan
+ex:plan-code-review a rbaco:RBACO_0000005 ;             #: business process plan
     rdfs:label "code change review plan"@en .
 
-ex:dsd-submitter-approver a rbo:RBO_0000016 ;           #: whole-instance dynamic separation of duty constraint
+ex:dsd-submitter-approver a rbaco:RBACO_0000016 ;       #: whole-instance dynamic separation of duty constraint
     rdfs:label "DSD {Submitter, Approver}, n = 2, code change reviews, whole instance"@en ;
-    rbo:RBO_0000114 ex:def-approver,                    #: has constrained role definition
+    rbaco:RBACO_0000114 ex:def-approver,                #: has constrained role definition
         ex:def-submitter ;
-    rbo:RBO_0000115 ex:plan-code-review ;               #: applies within
-    rbo:RBO_0000201 "2"^^xsd:positiveInteger .          #: has cardinality
+    rbaco:RBACO_0000115 ex:plan-code-review ;           #: applies within
+    rbaco:RBACO_0000201 "2"^^xsd:positiveInteger .      #: has cardinality
 
 ex:policy-load-start a obo:BFO_0000203 ;                #: temporal instant
-    rbo:RBO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:policy-load-interval a obo:BFO_0000202 ;             #: temporal interval
     obo:BFO_0000222 ex:policy-load-start .              #: has first instant
 
-ex:policy-load a rbo:RBO_0000031 ;                      #: policy issuing act
+ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
     rdfs:label "policy issuing act policy-load"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000199 ex:policy-load-interval ;           #: occupies temporal region
@@ -89,18 +89,18 @@ ex:dana a cco:ont00001262 ;                             #: Person
 ex:eve a cco:ont00001262 ;                              #: Person
     rdfs:label "Eve"@en .
 
-ex:dana-submitter-assigned-1 a rbo:RBO_0000002 ;        #: assigned role
+ex:dana-submitter-assigned-1 a rbaco:RBACO_0000002 ;    #: assigned role
     rdfs:label "dana's assigned submitter role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-submitter ;                  #: concretizes
     obo:BFO_0000197 ex:dana .                           #: inheres in
 
 ex:dana-assign-submitter-1-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-assign-submitter-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-assign-submitter-1-start .  #: has first instant
 
-ex:dana-assign-submitter-1 a rbo:RBO_0000028 ;          #: role assignment
+ex:dana-assign-submitter-1 a rbaco:RBACO_0000028 ;      #: role assignment
     rdfs:label "assignment of dana to submitter"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:dana ;                           #: has participant
@@ -108,18 +108,18 @@ ex:dana-assign-submitter-1 a rbo:RBO_0000028 ;          #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:dana-submitter-assigned-1 .      #: has output
 
-ex:dana-approver-assigned-1 a rbo:RBO_0000002 ;         #: assigned role
+ex:dana-approver-assigned-1 a rbaco:RBACO_0000002 ;     #: assigned role
     rdfs:label "dana's assigned approver role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-approver ;                   #: concretizes
     obo:BFO_0000197 ex:dana .                           #: inheres in
 
 ex:dana-assign-approver-1-start a obo:BFO_0000203 ;     #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:01:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-assign-approver-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-assign-approver-1-start .   #: has first instant
 
-ex:dana-assign-approver-1 a rbo:RBO_0000028 ;           #: role assignment
+ex:dana-assign-approver-1 a rbaco:RBACO_0000028 ;       #: role assignment
     rdfs:label "assignment of dana to approver"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:dana ;                           #: has participant
@@ -127,18 +127,18 @@ ex:dana-assign-approver-1 a rbo:RBO_0000028 ;           #: role assignment
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:dana-approver-assigned-1 .       #: has output
 
-ex:eve-approver-assigned-1 a rbo:RBO_0000002 ;          #: assigned role
+ex:eve-approver-assigned-1 a rbaco:RBACO_0000002 ;      #: assigned role
     rdfs:label "eve's assigned approver role, tenure 1"@en ;
     obo:BFO_0000059 ex:def-approver ;                   #: concretizes
     obo:BFO_0000197 ex:eve .                            #: inheres in
 
 ex:eve-assign-approver-1-start a obo:BFO_0000203 ;      #: temporal instant
-    rbo:RBO_0000205 "2026-01-02T09:02:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-02T09:02:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:eve-assign-approver-1-interval a obo:BFO_0000202 ;   #: temporal interval
     obo:BFO_0000222 ex:eve-assign-approver-1-start .    #: has first instant
 
-ex:eve-assign-approver-1 a rbo:RBO_0000028 ;            #: role assignment
+ex:eve-assign-approver-1 a rbaco:RBACO_0000028 ;        #: role assignment
     rdfs:label "assignment of eve to approver"@en ;
     obo:BFO_0000055 ex:officer-authority ;              #: realizes
     obo:BFO_0000057 ex:eve ;                            #: has participant
@@ -147,123 +147,123 @@ ex:eve-assign-approver-1 a rbo:RBO_0000028 ;            #: role assignment
     cco:ont00001986 ex:eve-approver-assigned-1 .        #: has output
 
 ex:cr-42-start a obo:BFO_0000203 ;                      #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:cr-42-end a obo:BFO_0000203 ;                        #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T18:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T18:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:cr-42-interval a obo:BFO_0000202 ;                   #: temporal interval
     obo:BFO_0000222 ex:cr-42-start ;                    #: has first instant
     obo:BFO_0000224 ex:cr-42-end .                      #: has last instant
 
-ex:cr-42 a rbo:RBO_0000004 ;                            #: business process
+ex:cr-42 a rbaco:RBACO_0000004 ;                        #: business process
     rdfs:label "code change review CR-42"@en ;
     obo:BFO_0000199 ex:cr-42-interval ;                 #: occupies temporal region
     cco:ont00001920 ex:plan-code-review .               #: prescribed by
 
 ex:dana-request-activate-submitter-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-request-activate-submitter-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-request-activate-submitter-1-start .  #: has first instant
 
 ex:dana-activate-submitter-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-activate-submitter-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-activate-submitter-1-start .  #: has first instant
 
-ex:dana-submitter-active-1 a rbo:RBO_0000003 ;          #: active role
+ex:dana-submitter-active-1 a rbaco:RBACO_0000003 ;      #: active role
     rdfs:label "dana's active submitter role in cr-42"@en ;
     obo:BFO_0000059 ex:def-submitter ;                  #: concretizes
     obo:BFO_0000195 ex:dana-submitter-assigned-1 ;      #: specifically depends on
     obo:BFO_0000197 ex:dana ;                           #: inheres in
-    rbo:RBO_0000106 ex:cr-42 .                          #: is activated in
+    rbaco:RBACO_0000106 ex:cr-42 .                      #: is activated in
 
-ex:dana-activate-submitter-1 a rbo:RBO_0000026 ;        #: role activation
+ex:dana-activate-submitter-1 a rbaco:RBACO_0000026 ;    #: role activation
     rdfs:label "activation of submitter by dana"@en ;
     obo:BFO_0000057 ex:dana ;                           #: has participant
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dana-activate-submitter-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:dana-submitter-active-1 .        #: has output
 
-ex:dana-request-activate-submitter-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:dana-request-activate-submitter-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "dana asks to activate submitter"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dana-request-activate-submitter-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:dana ;                           #: has requester
-    rbo:RBO_0000110 ex:def-submitter ;                  #: requests activation of
-    rbo:RBO_0000111 ex:dana-activate-submitter-1 .      #: is fulfilled by
+    rbaco:RBACO_0000107 ex:dana ;                       #: has requester
+    rbaco:RBACO_0000110 ex:def-submitter ;              #: requests activation of
+    rbaco:RBACO_0000111 ex:dana-activate-submitter-1 .  #: is fulfilled by
 
 ex:dana-req-push-start a obo:BFO_0000203 ;              #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T09:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-req-push-interval a obo:BFO_0000202 ;           #: temporal interval
     obo:BFO_0000222 ex:dana-req-push-start .            #: has first instant
 
-ex:dana-req-push a rbo:RBO_0000024 ;                    #: access request
+ex:dana-req-push a rbaco:RBACO_0000024 ;                #: access request
     rdfs:label "dana asks to op-git-push on repo-acme"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dana-req-push-interval ;         #: occupies temporal region
-    rbo:RBO_0000107 ex:dana ;                           #: has requester
-    rbo:RBO_0000108 ex:op-git-push ;                    #: requests operation
-    rbo:RBO_0000109 ex:repo-acme .                      #: requests access to
+    rbaco:RBACO_0000107 ex:dana ;                       #: has requester
+    rbaco:RBACO_0000108 ex:op-git-push ;                #: requests operation
+    rbaco:RBACO_0000109 ex:repo-acme .                  #: requests access to
 
 ex:eve-request-activate-approver-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:eve-request-activate-approver-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:eve-request-activate-approver-1-start .  #: has first instant
 
 ex:eve-activate-approver-1-start a obo:BFO_0000203 ;    #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:eve-activate-approver-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:eve-activate-approver-1-start .  #: has first instant
 
-ex:eve-approver-active-1 a rbo:RBO_0000003 ;            #: active role
+ex:eve-approver-active-1 a rbaco:RBACO_0000003 ;        #: active role
     rdfs:label "eve's active approver role in cr-42"@en ;
     obo:BFO_0000059 ex:def-approver ;                   #: concretizes
     obo:BFO_0000195 ex:eve-approver-assigned-1 ;        #: specifically depends on
     obo:BFO_0000197 ex:eve ;                            #: inheres in
-    rbo:RBO_0000106 ex:cr-42 .                          #: is activated in
+    rbaco:RBACO_0000106 ex:cr-42 .                      #: is activated in
 
-ex:eve-activate-approver-1 a rbo:RBO_0000026 ;          #: role activation
+ex:eve-activate-approver-1 a rbaco:RBACO_0000026 ;      #: role activation
     rdfs:label "activation of approver by eve"@en ;
     obo:BFO_0000057 ex:eve ;                            #: has participant
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:eve-activate-approver-1-interval ;  #: occupies temporal region
     cco:ont00001986 ex:eve-approver-active-1 .          #: has output
 
-ex:eve-request-activate-approver-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:eve-request-activate-approver-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "eve asks to activate approver"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:eve-request-activate-approver-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:eve ;                            #: has requester
-    rbo:RBO_0000110 ex:def-approver ;                   #: requests activation of
-    rbo:RBO_0000111 ex:eve-activate-approver-1 .        #: is fulfilled by
+    rbaco:RBACO_0000107 ex:eve ;                        #: has requester
+    rbaco:RBACO_0000110 ex:def-approver ;               #: requests activation of
+    rbaco:RBACO_0000111 ex:eve-activate-approver-1 .    #: is fulfilled by
 
 ex:eve-req-approve-start a obo:BFO_0000203 ;            #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T11:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T11:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:eve-req-approve-interval a obo:BFO_0000202 ;         #: temporal interval
     obo:BFO_0000222 ex:eve-req-approve-start .          #: has first instant
 
-ex:eve-req-approve a rbo:RBO_0000024 ;                  #: access request
+ex:eve-req-approve a rbaco:RBACO_0000024 ;              #: access request
     rdfs:label "eve asks to op-approve-merge on change-42"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:eve-req-approve-interval ;       #: occupies temporal region
-    rbo:RBO_0000107 ex:eve ;                            #: has requester
-    rbo:RBO_0000108 ex:op-approve-merge ;               #: requests operation
-    rbo:RBO_0000109 ex:change-42 .                      #: requests access to
+    rbaco:RBACO_0000107 ex:eve ;                        #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-merge ;           #: requests operation
+    rbaco:RBACO_0000109 ex:change-42 .                  #: requests access to
 
 ex:eve-deactivate-approver-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T11:10:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T11:10:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:eve-deactivate-approver-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:eve-deactivate-approver-1-start .  #: has first instant
 
-ex:eve-deactivate-approver-1 a rbo:RBO_0000027 ;        #: role deactivation
+ex:eve-deactivate-approver-1 a rbaco:RBACO_0000027 ;    #: role deactivation
     rdfs:label "deactivation of approver by eve"@en ;
     obo:BFO_0000057 ex:eve ;                            #: has participant
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
@@ -271,12 +271,12 @@ ex:eve-deactivate-approver-1 a rbo:RBO_0000027 ;        #: role deactivation
     cco:ont00001921 ex:eve-approver-active-1 .          #: has input
 
 ex:dana-deactivate-submitter-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T12:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T12:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-deactivate-submitter-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-deactivate-submitter-1-start .  #: has first instant
 
-ex:dana-deactivate-submitter-1 a rbo:RBO_0000027 ;      #: role deactivation
+ex:dana-deactivate-submitter-1 a rbaco:RBACO_0000027 ;  #: role deactivation
     rdfs:label "deactivation of submitter by dana"@en ;
     obo:BFO_0000057 ex:dana ;                           #: has participant
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
@@ -284,28 +284,28 @@ ex:dana-deactivate-submitter-1 a rbo:RBO_0000027 ;      #: role deactivation
     cco:ont00001921 ex:dana-submitter-active-1 .        #: has input
 
 ex:dana-request-activate-approver-1-start a obo:BFO_0000203 ;  #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T12:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T12:05:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-request-activate-approver-1-interval a obo:BFO_0000202 ;  #: temporal interval
     obo:BFO_0000222 ex:dana-request-activate-approver-1-start .  #: has first instant
 
-ex:dana-request-activate-approver-1 a rbo:RBO_0000025 ;  #: role activation request
+ex:dana-request-activate-approver-1 a rbaco:RBACO_0000025 ;  #: role activation request
     rdfs:label "dana asks to activate approver"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dana-request-activate-approver-1-interval ;  #: occupies temporal region
-    rbo:RBO_0000107 ex:dana ;                           #: has requester
-    rbo:RBO_0000110 ex:def-approver .                   #: requests activation of
+    rbaco:RBACO_0000107 ex:dana ;                       #: has requester
+    rbaco:RBACO_0000110 ex:def-approver .               #: requests activation of
 
 ex:dana-req-approve-start a obo:BFO_0000203 ;           #: temporal instant
-    rbo:RBO_0000205 "2026-01-06T12:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+    rbaco:RBACO_0000205 "2026-01-06T12:06:00+00:00"^^xsd:dateTime .  #: has timestamp
 
 ex:dana-req-approve-interval a obo:BFO_0000202 ;        #: temporal interval
     obo:BFO_0000222 ex:dana-req-approve-start .         #: has first instant
 
-ex:dana-req-approve a rbo:RBO_0000024 ;                 #: access request
+ex:dana-req-approve a rbaco:RBACO_0000024 ;             #: access request
     rdfs:label "dana asks to op-approve-merge on change-42"@en ;
     obo:BFO_0000132 ex:cr-42 ;                          #: occurrent part of
     obo:BFO_0000199 ex:dana-req-approve-interval ;      #: occupies temporal region
-    rbo:RBO_0000107 ex:dana ;                           #: has requester
-    rbo:RBO_0000108 ex:op-approve-merge ;               #: requests operation
-    rbo:RBO_0000109 ex:change-42 .                      #: requests access to
+    rbaco:RBACO_0000107 ex:dana ;                       #: has requester
+    rbaco:RBACO_0000108 ex:op-approve-merge ;           #: requests operation
+    rbaco:RBACO_0000109 ex:change-42 .                  #: requests access to

@@ -1,223 +1,223 @@
-@prefix ex: <https://example.org/rbac-bfo/data/> .
-@prefix rbo: <https://example.org/rbac-bfo/> .
+@prefix ex: <https://example.org/rbaco/data/> .
+@prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-ex:approval-bot-request-activate-manager-po-11-task-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "task DSD conflict: https://example.org/rbac-bfo/data/approval-bot-request-activate-manager-po-11" ;
-    rbo:RBO_0000124 ex:tom ;                            #: describes conflict subject
-    rbo:RBO_0000125 ex:tdsd-internal ;                  #: describes violated constraint
-    rbo:RBO_0000127 ex:po-11 ;                          #: describes conflict instance
-    rbo:RBO_0000128 ex:approval-bot-request-activate-manager-po-11 ;  #: describes conflicting act
-    rbo:RBO_0000147 ex:ts-approve-po,                   #: describes conflicting task specification
+ex:approval-bot-request-activate-manager-po-11-task-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "task DSD conflict: https://example.org/rbaco/data/approval-bot-request-activate-manager-po-11" ;
+    rbaco:RBACO_0000124 ex:tom ;                        #: describes conflict subject
+    rbaco:RBACO_0000125 ex:tdsd-internal ;              #: describes violated constraint
+    rbaco:RBACO_0000127 ex:po-11 ;                      #: describes conflict instance
+    rbaco:RBACO_0000128 ex:approval-bot-request-activate-manager-po-11 ;  #: describes conflicting act
+    rbaco:RBACO_0000147 ex:ts-approve-po,               #: describes conflicting task specification
         ex:ts-complete-form ;
-    rbo:RBO_0000204 "Violates DSD constraint task DSD {complete order form, approve purchase order}, n = 2, internal purchase orders: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
+    rbaco:RBACO_0000204 "Violates DSD constraint task DSD {complete order form, approve purchase order}, n = 2, internal purchase orders: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
 
-ex:dick-assign-auditor-1-ssd-conflict-pssd-approve-audit a rbo:RBO_0000019 ;  #: static separation of duty conflict report
-    rdfs:label "SSD conflict: https://example.org/rbac-bfo/data/dick-assign-auditor-1" ;
-    rbo:RBO_0000124 ex:dick ;                           #: describes conflict subject
-    rbo:RBO_0000125 ex:pssd-approve-audit ;             #: describes violated constraint
-    rbo:RBO_0000128 ex:dick-assign-auditor-1 ;          #: describes conflicting act
-    rbo:RBO_0000146 ex:perm-apm-approve,                #: describes conflicting permission
+ex:dick-assign-auditor-1-ssd-conflict-pssd-approve-audit a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-1" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:pssd-approve-audit ;         #: describes violated constraint
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-1 ;      #: describes conflicting act
+    rbaco:RBACO_0000146 ex:perm-apm-approve,            #: describes conflicting permission
         ex:perm-auditor-audit ;
-    rbo:RBO_0000204 "Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once)" .  #: has justification
+    rbaco:RBACO_0000204 "Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once)" .  #: has justification
 
-ex:dick-assign-auditor-1-ssd-conflict-ssd-auditor-apm a rbo:RBO_0000019 ;  #: static separation of duty conflict report
-    rdfs:label "SSD conflict: https://example.org/rbac-bfo/data/dick-assign-auditor-1" ;
-    rbo:RBO_0000124 ex:dick ;                           #: describes conflict subject
-    rbo:RBO_0000125 ex:ssd-auditor-apm ;                #: describes violated constraint
-    rbo:RBO_0000126 ex:def-apm,                         #: describes conflicting role definition
+ex:dick-assign-auditor-1-ssd-conflict-ssd-auditor-apm a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-1" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:ssd-auditor-apm ;            #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-apm,                     #: describes conflicting role definition
         ex:def-auditor ;
-    rbo:RBO_0000128 ex:dick-assign-auditor-1 ;          #: describes conflicting act
-    rbo:RBO_0000204 "Violates SSD constraint SSD {Auditor, APM}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-1 ;      #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates SSD constraint SSD {Auditor, APM}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
 
-ex:dick-assign-auditor-1-ssd-conflict-tssd-approve-audit a rbo:RBO_0000019 ;  #: static separation of duty conflict report
-    rdfs:label "SSD conflict: https://example.org/rbac-bfo/data/dick-assign-auditor-1" ;
-    rbo:RBO_0000124 ex:dick ;                           #: describes conflict subject
-    rbo:RBO_0000125 ex:tssd-approve-audit ;             #: describes violated constraint
-    rbo:RBO_0000128 ex:dick-assign-auditor-1 ;          #: describes conflicting act
-    rbo:RBO_0000147 ex:ts-approve-audit,                #: describes conflicting task specification
+ex:dick-assign-auditor-1-ssd-conflict-tssd-approve-audit a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-1" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:tssd-approve-audit ;         #: describes violated constraint
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-1 ;      #: describes conflicting act
+    rbaco:RBACO_0000147 ex:ts-approve-audit,            #: describes conflicting task specification
         ex:ts-approve-order ;
-    rbo:RBO_0000204 "Violates SSD constraint task SSD {approve order, approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
+    rbaco:RBACO_0000204 "Violates SSD constraint task SSD {approve order, approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
 
-ex:dick-req-create-requisition-po-5-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/dick-req-create-requisition-po-5" ;
-    rbo:RBO_0000112 ex:dick-req-create-requisition-po-5 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:dick-req-create-requisition-po-5-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/dick-req-create-requisition-po-5" ;
+    rbaco:RBACO_0000112 ex:dick-req-create-requisition-po-5 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:dick-request-activate-manager-po-10-task-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "task DSD conflict: https://example.org/rbac-bfo/data/dick-request-activate-manager-po-10" ;
-    rbo:RBO_0000124 ex:dick ;                           #: describes conflict subject
-    rbo:RBO_0000125 ex:tdsd-internal ;                  #: describes violated constraint
-    rbo:RBO_0000127 ex:po-10 ;                          #: describes conflict instance
-    rbo:RBO_0000128 ex:dick-request-activate-manager-po-10 ;  #: describes conflicting act
-    rbo:RBO_0000147 ex:ts-approve-po,                   #: describes conflicting task specification
+ex:dick-request-activate-manager-po-10-task-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "task DSD conflict: https://example.org/rbaco/data/dick-request-activate-manager-po-10" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:tdsd-internal ;              #: describes violated constraint
+    rbaco:RBACO_0000127 ex:po-10 ;                      #: describes conflict instance
+    rbaco:RBACO_0000128 ex:dick-request-activate-manager-po-10 ;  #: describes conflicting act
+    rbaco:RBACO_0000147 ex:ts-approve-po,               #: describes conflicting task specification
         ex:ts-complete-form ;
-    rbo:RBO_0000204 "Violates DSD constraint task DSD {complete order form, approve purchase order}, n = 2, internal purchase orders: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
+    rbaco:RBACO_0000204 "Violates DSD constraint task DSD {complete order form, approve purchase order}, n = 2, internal purchase orders: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
 
-ex:harry-req-approve-order-po-7-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/harry-req-approve-order-po-7" ;
-    rbo:RBO_0000112 ex:harry-req-approve-order-po-7 ;   #: decides on
-    rbo:RBO_0000113 ex:perm-approver-approve .          #: cites regulation
+ex:harry-req-approve-order-po-7-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/harry-req-approve-order-po-7" ;
+    rbaco:RBACO_0000112 ex:harry-req-approve-order-po-7 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-approver-approve .      #: cites regulation
 
-ex:harry-req-approve-po-po-10-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/harry-req-approve-po-po-10" ;
-    rbo:RBO_0000112 ex:harry-req-approve-po-po-10 ;     #: decides on
-    rbo:RBO_0000113 ex:perm-manager-approve-po .        #: cites regulation
+ex:harry-req-approve-po-po-10-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/harry-req-approve-po-po-10" ;
+    rbaco:RBACO_0000112 ex:harry-req-approve-po-po-10 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-manager-approve-po .    #: cites regulation
 
-ex:harry-req-create-requisition-po-4-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/harry-req-create-requisition-po-4" ;
-    rbo:RBO_0000112 ex:harry-req-create-requisition-po-4 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:harry-req-create-requisition-po-4-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/harry-req-create-requisition-po-4" ;
+    rbaco:RBACO_0000112 ex:harry-req-create-requisition-po-4 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:harry-req-create-requisition-po-6-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/harry-req-create-requisition-po-6" ;
-    rbo:RBO_0000112 ex:harry-req-create-requisition-po-6 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:harry-req-create-requisition-po-6-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/harry-req-create-requisition-po-6" ;
+    rbaco:RBACO_0000112 ex:harry-req-create-requisition-po-6 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:harry-request-activate-apm-po-4-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "DSD conflict: https://example.org/rbac-bfo/data/harry-request-activate-apm-po-4" ;
-    rbo:RBO_0000124 ex:harry ;                          #: describes conflict subject
-    rbo:RBO_0000125 ex:dsd-sc-apm ;                     #: describes violated constraint
-    rbo:RBO_0000126 ex:def-apm,                         #: describes conflicting role definition
+ex:harry-request-activate-apm-po-4-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "DSD conflict: https://example.org/rbaco/data/harry-request-activate-apm-po-4" ;
+    rbaco:RBACO_0000124 ex:harry ;                      #: describes conflict subject
+    rbaco:RBACO_0000125 ex:dsd-sc-apm ;                 #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-apm,                     #: describes conflicting role definition
         ex:def-sc ;
-    rbo:RBO_0000127 ex:po-4 ;                           #: describes conflict instance
-    rbo:RBO_0000128 ex:harry-request-activate-apm-po-4 ;  #: describes conflicting act
-    rbo:RBO_0000204 "Violates DSD constraint DSD {Stock Controller, APM}, n = 2, conflicting roles plan: the activation would give the requester 2 of its roles in one instance" .  #: has justification
+    rbaco:RBACO_0000127 ex:po-4 ;                       #: describes conflict instance
+    rbaco:RBACO_0000128 ex:harry-request-activate-apm-po-4 ;  #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates DSD constraint DSD {Stock Controller, APM}, n = 2, conflicting roles plan: the activation would give the requester 2 of its roles in one instance" .  #: has justification
 
-ex:harry-request-activate-apm-po-6-task-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "task DSD conflict: https://example.org/rbac-bfo/data/harry-request-activate-apm-po-6" ;
-    rbo:RBO_0000124 ex:harry ;                          #: describes conflict subject
-    rbo:RBO_0000125 ex:tdsd-tasks ;                     #: describes violated constraint
-    rbo:RBO_0000127 ex:po-6 ;                           #: describes conflict instance
-    rbo:RBO_0000128 ex:harry-request-activate-apm-po-6 ;  #: describes conflicting act
-    rbo:RBO_0000147 ex:ts-approve-order,                #: describes conflicting task specification
+ex:harry-request-activate-apm-po-6-task-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "task DSD conflict: https://example.org/rbaco/data/harry-request-activate-apm-po-6" ;
+    rbaco:RBACO_0000124 ex:harry ;                      #: describes conflict subject
+    rbaco:RBACO_0000125 ex:tdsd-tasks ;                 #: describes violated constraint
+    rbaco:RBACO_0000127 ex:po-6 ;                       #: describes conflict instance
+    rbaco:RBACO_0000128 ex:harry-request-activate-apm-po-6 ;  #: describes conflicting act
+    rbaco:RBACO_0000147 ex:ts-approve-order,            #: describes conflicting task specification
         ex:ts-prepare-requisition ;
-    rbo:RBO_0000204 "Violates DSD constraint task DSD {prepare requisition, approve order}, n = 2, conflicting tasks plan: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
+    rbaco:RBACO_0000204 "Violates DSD constraint task DSD {prepare requisition, approve order}, n = 2, conflicting tasks plan: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance" .  #: has justification
 
-ex:stores-host-req-issue-items-po-10-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/stores-host-req-issue-items-po-10" ;
-    rbo:RBO_0000112 ex:stores-host-req-issue-items-po-10 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-stores-issue .              #: cites regulation
+ex:stores-host-req-issue-items-po-10-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/stores-host-req-issue-items-po-10" ;
+    rbaco:RBACO_0000112 ex:stores-host-req-issue-items-po-10 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-stores-issue .          #: cites regulation
 
-ex:tom-req-approve-order-po-1-decision a rbo:RBO_0000023 ;  #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/tom-req-approve-order-po-1" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-1 .     #: decides on
+ex:tom-req-approve-order-po-1-decision a rbaco:RBACO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/tom-req-approve-order-po-1" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-1 .  #: decides on
 
-ex:tom-req-approve-order-po-2-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-approve-order-po-2" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-2 ;     #: decides on
-    rbo:RBO_0000113 ex:perm-apm-approve,                #: cites regulation
+ex:tom-req-approve-order-po-2-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-approve-order-po-2" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-2 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-apm-approve,            #: cites regulation
         ex:perm-approver-approve .
 
-ex:tom-req-approve-order-po-3-decision a rbo:RBO_0000023 ;  #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/tom-req-approve-order-po-3" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-3 ;     #: decides on
-    rbo:RBO_0000113 ex:pdsd-perms .                     #: cites regulation
+ex:tom-req-approve-order-po-3-decision a rbaco:RBACO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/tom-req-approve-order-po-3" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-3 ;  #: decides on
+    rbaco:RBACO_0000113 ex:pdsd-perms .                 #: cites regulation
 
-ex:tom-req-approve-order-po-3-permission-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "permission DSD conflict: https://example.org/rbac-bfo/data/tom-req-approve-order-po-3" ;
-    rbo:RBO_0000124 ex:tom ;                            #: describes conflict subject
-    rbo:RBO_0000125 ex:pdsd-perms ;                     #: describes violated constraint
-    rbo:RBO_0000127 ex:po-3 ;                           #: describes conflict instance
-    rbo:RBO_0000128 ex:tom-req-approve-order-po-3 ;     #: describes conflicting act
-    rbo:RBO_0000146 ex:perm-apm-approve,                #: describes conflicting permission
+ex:tom-req-approve-order-po-3-permission-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "permission DSD conflict: https://example.org/rbaco/data/tom-req-approve-order-po-3" ;
+    rbaco:RBACO_0000124 ex:tom ;                        #: describes conflict subject
+    rbaco:RBACO_0000125 ex:pdsd-perms ;                 #: describes violated constraint
+    rbaco:RBACO_0000127 ex:po-3 ;                       #: describes conflict instance
+    rbaco:RBACO_0000128 ex:tom-req-approve-order-po-3 ;  #: describes conflicting act
+    rbaco:RBACO_0000146 ex:perm-apm-approve,            #: describes conflicting permission
         ex:perm-sc-requisition ;
-    rbo:RBO_0000204 "Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting permissions plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once)" .  #: has justification
+    rbaco:RBACO_0000204 "Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting permissions plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once)" .  #: has justification
 
-ex:tom-req-approve-order-po-4-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-approve-order-po-4" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-4 ;     #: decides on
-    rbo:RBO_0000113 ex:perm-apm-approve,                #: cites regulation
+ex:tom-req-approve-order-po-4-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-approve-order-po-4" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-4 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-apm-approve,            #: cites regulation
         ex:perm-approver-approve .
 
-ex:tom-req-approve-order-po-5-decision a rbo:RBO_0000023 ;  #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/tom-req-approve-order-po-5" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-5 ;     #: decides on
-    rbo:RBO_0000113 ex:pdsd-users .                     #: cites regulation
+ex:tom-req-approve-order-po-5-decision a rbaco:RBACO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/tom-req-approve-order-po-5" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-5 ;  #: decides on
+    rbaco:RBACO_0000113 ex:pdsd-users .                 #: cites regulation
 
-ex:tom-req-approve-order-po-5-permission-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "permission DSD conflict: https://example.org/rbac-bfo/data/tom-req-approve-order-po-5" ;
-    rbo:RBO_0000124 ex:tom ;                            #: describes conflict subject
-    rbo:RBO_0000125 ex:pdsd-users ;                     #: describes violated constraint
-    rbo:RBO_0000127 ex:po-5 ;                           #: describes conflict instance
-    rbo:RBO_0000128 ex:tom-req-approve-order-po-5 ;     #: describes conflicting act
-    rbo:RBO_0000146 ex:perm-apm-approve,                #: describes conflicting permission
+ex:tom-req-approve-order-po-5-permission-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "permission DSD conflict: https://example.org/rbaco/data/tom-req-approve-order-po-5" ;
+    rbaco:RBACO_0000124 ex:tom ;                        #: describes conflict subject
+    rbaco:RBACO_0000125 ex:pdsd-users ;                 #: describes violated constraint
+    rbaco:RBACO_0000127 ex:po-5 ;                       #: describes conflict instance
+    rbaco:RBACO_0000128 ex:tom-req-approve-order-po-5 ;  #: describes conflicting act
+    rbaco:RBACO_0000146 ex:perm-apm-approve,            #: describes conflicting permission
         ex:perm-sc-requisition ;
-    rbo:RBO_0000204 "Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting users plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once)" .  #: has justification
+    rbaco:RBACO_0000204 "Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting users plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once)" .  #: has justification
 
-ex:tom-req-approve-order-po-6-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-approve-order-po-6" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-6 ;     #: decides on
-    rbo:RBO_0000113 ex:perm-apm-approve,                #: cites regulation
+ex:tom-req-approve-order-po-6-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-approve-order-po-6" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-6 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-apm-approve,            #: cites regulation
         ex:perm-approver-approve .
 
-ex:tom-req-approve-order-po-7b-decision a rbo:RBO_0000023 ;  #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/tom-req-approve-order-po-7b" ;
-    rbo:RBO_0000112 ex:tom-req-approve-order-po-7b ;    #: decides on
-    rbo:RBO_0000113 ex:tbr-fig6 .                       #: cites regulation
+ex:tom-req-approve-order-po-7b-decision a rbaco:RBACO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/tom-req-approve-order-po-7b" ;
+    rbaco:RBACO_0000112 ex:tom-req-approve-order-po-7b ;  #: decides on
+    rbaco:RBACO_0000113 ex:tbr-fig6 .                   #: cites regulation
 
-ex:tom-req-complete-order-form-po-10-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-complete-order-form-po-10" ;
-    rbo:RBO_0000112 ex:tom-req-complete-order-form-po-10 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-manager-form .              #: cites regulation
+ex:tom-req-complete-order-form-po-10-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-complete-order-form-po-10" ;
+    rbaco:RBACO_0000112 ex:tom-req-complete-order-form-po-10 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-manager-form .          #: cites regulation
 
-ex:tom-req-complete-order-form-po-11-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-complete-order-form-po-11" ;
-    rbo:RBO_0000112 ex:tom-req-complete-order-form-po-11 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-manager-form .              #: cites regulation
+ex:tom-req-complete-order-form-po-11-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-complete-order-form-po-11" ;
+    rbaco:RBACO_0000112 ex:tom-req-complete-order-form-po-11 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-manager-form .          #: cites regulation
 
-ex:tom-req-create-order-po-1-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-create-order-po-1" ;
-    rbo:RBO_0000112 ex:tom-req-create-order-po-1 ;      #: decides on
-    rbo:RBO_0000113 ex:perm-buyer-order .               #: cites regulation
+ex:tom-req-create-order-po-1-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-create-order-po-1" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-order-po-1 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-buyer-order .           #: cites regulation
 
-ex:tom-req-create-requisition-po-1-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-create-requisition-po-1" ;
-    rbo:RBO_0000112 ex:tom-req-create-requisition-po-1 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:tom-req-create-requisition-po-1-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-create-requisition-po-1" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-requisition-po-1 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:tom-req-create-requisition-po-2-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-create-requisition-po-2" ;
-    rbo:RBO_0000112 ex:tom-req-create-requisition-po-2 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:tom-req-create-requisition-po-2-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-create-requisition-po-2" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-requisition-po-2 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:tom-req-create-requisition-po-3-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-create-requisition-po-3" ;
-    rbo:RBO_0000112 ex:tom-req-create-requisition-po-3 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:tom-req-create-requisition-po-3-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-create-requisition-po-3" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-requisition-po-3 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:tom-req-create-requisition-po-7-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-create-requisition-po-7" ;
-    rbo:RBO_0000112 ex:tom-req-create-requisition-po-7 ;  #: decides on
-    rbo:RBO_0000113 ex:perm-sc-requisition .            #: cites regulation
+ex:tom-req-create-requisition-po-7-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-create-requisition-po-7" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-requisition-po-7 ;  #: decides on
+    rbaco:RBACO_0000113 ex:perm-sc-requisition .        #: cites regulation
 
-ex:tom-req-create-requisition-po-7b-decision a rbo:RBO_0000023 ;  #: access denial
-    rdfs:label "denial of https://example.org/rbac-bfo/data/tom-req-create-requisition-po-7b" ;
-    rbo:RBO_0000112 ex:tom-req-create-requisition-po-7b ;  #: decides on
-    rbo:RBO_0000113 ex:tbr-fig6 .                       #: cites regulation
+ex:tom-req-create-requisition-po-7b-decision a rbaco:RBACO_0000023 ;  #: access denial
+    rdfs:label "denial of https://example.org/rbaco/data/tom-req-create-requisition-po-7b" ;
+    rbaco:RBACO_0000112 ex:tom-req-create-requisition-po-7b ;  #: decides on
+    rbaco:RBACO_0000113 ex:tbr-fig6 .                   #: cites regulation
 
-ex:tom-req-send-email-po-1-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-send-email-po-1" ;
-    rbo:RBO_0000112 ex:tom-req-send-email-po-1 ;        #: decides on
-    rbo:RBO_0000113 ex:perm-employee-email .            #: cites regulation
+ex:tom-req-send-email-po-1-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-send-email-po-1" ;
+    rbaco:RBACO_0000112 ex:tom-req-send-email-po-1 ;    #: decides on
+    rbaco:RBACO_0000113 ex:perm-employee-email .        #: cites regulation
 
-ex:tom-req-send-email-po-7b-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-send-email-po-7b" ;
-    rbo:RBO_0000112 ex:tom-req-send-email-po-7b ;       #: decides on
-    rbo:RBO_0000113 ex:perm-employee-email .            #: cites regulation
+ex:tom-req-send-email-po-7b-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-send-email-po-7b" ;
+    rbaco:RBACO_0000112 ex:tom-req-send-email-po-7b ;   #: decides on
+    rbaco:RBACO_0000113 ex:perm-employee-email .        #: cites regulation
 
-ex:tom-req-view-order-po-1-decision a rbo:RBO_0000022 ;  #: access grant
-    rdfs:label "grant of https://example.org/rbac-bfo/data/tom-req-view-order-po-1" ;
-    rbo:RBO_0000112 ex:tom-req-view-order-po-1 ;        #: decides on
-    rbo:RBO_0000113 ex:perm-buyer-view .                #: cites regulation
+ex:tom-req-view-order-po-1-decision a rbaco:RBACO_0000022 ;  #: access grant
+    rdfs:label "grant of https://example.org/rbaco/data/tom-req-view-order-po-1" ;
+    rbaco:RBACO_0000112 ex:tom-req-view-order-po-1 ;    #: decides on
+    rbaco:RBACO_0000113 ex:perm-buyer-view .            #: cites regulation
 
-ex:tom-request-activate-approver-po-7-dsd-conflict a rbo:RBO_0000020 ;  #: dynamic separation of duty conflict report
-    rdfs:label "DSD conflict: https://example.org/rbac-bfo/data/tom-request-activate-approver-po-7" ;
-    rbo:RBO_0000124 ex:tom ;                            #: describes conflict subject
-    rbo:RBO_0000125 ex:dsd-sc-approver ;                #: describes violated constraint
-    rbo:RBO_0000126 ex:def-approver,                    #: describes conflicting role definition
+ex:tom-request-activate-approver-po-7-dsd-conflict a rbaco:RBACO_0000020 ;  #: dynamic separation of duty conflict report
+    rdfs:label "DSD conflict: https://example.org/rbaco/data/tom-request-activate-approver-po-7" ;
+    rbaco:RBACO_0000124 ex:tom ;                        #: describes conflict subject
+    rbaco:RBACO_0000125 ex:dsd-sc-approver ;            #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-approver,                #: describes conflicting role definition
         ex:def-sc ;
-    rbo:RBO_0000127 ex:po-7 ;                           #: describes conflict instance
-    rbo:RBO_0000128 ex:tom-request-activate-approver-po-7 ;  #: describes conflicting act
-    rbo:RBO_0000204 "Violates DSD constraint DSD {Stock Controller, Approver}, n = 2, Figure 6 plan: the activation would give the requester 2 of its roles in one instance" .  #: has justification
+    rbaco:RBACO_0000127 ex:po-7 ;                       #: describes conflict instance
+    rbaco:RBACO_0000128 ex:tom-request-activate-approver-po-7 ;  #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates DSD constraint DSD {Stock Controller, Approver}, n = 2, Figure 6 plan: the activation would give the requester 2 of its roles in one instance" .  #: has justification
 

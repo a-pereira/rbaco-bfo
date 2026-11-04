@@ -1,26 +1,26 @@
-# DERIVATION (intermediate). The prescriptive entities in force at ?evalTime, written as rbow:inForceAt, a
+# DERIVATION (intermediate). The prescriptive entities in force at ?evalTime, written as rbacow:inForceAt, a
 # query-internal predicate outside the ontology. Run first at each evaluation time; every other query that
 # reads a role definition, regulation, constraint, designation, requirement or statement joins on
-# `?x rbow:inForceAt ?evalTime` instead of testing issuing and retiring acts itself (clif rbo-in-force).
+# `?x rbacow:inForceAt ?evalTime` instead of testing issuing and retiring acts itself (clif rbaco-in-force).
 # In force: output of a policy issuing act that starts at or before ?evalTime, and input of no policy
 # retiring act that starts at or before ?evalTime. The object is the evaluation time, so a triple left
 # over from another time never matches.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-CONSTRUCT { ?x rbow:inForceAt ?evalTime }
+CONSTRUCT { ?x rbacow:inForceAt ?evalTime }
 WHERE {
   ?issue cco:ont00001986 ?x ;
-         a rbo:RBO_0000031 ;
-         obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tIssue .
+         a rbaco:RBACO_0000031 ;
+         obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tIssue .
   FILTER (?tIssue <= ?evalTime)
   FILTER NOT EXISTS {
     ?retire cco:ont00001921 ?x ;
-            a rbo:RBO_0000032 ;
-            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tRetire .
+            a rbaco:RBACO_0000032 ;
+            obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tRetire .
     FILTER (?tRetire <= ?evalTime)
   }
 }

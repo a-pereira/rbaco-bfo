@@ -1,33 +1,33 @@
 # DERIVATION, applied to a fixpoint. RT membership (ROWLBAC Fig. 2) from the RT statements in force
-# at ?evalTime (derive-in-force.rq, run first), written as rbo:RBO_0000131 (has authorized member):
+# at ?evalTime (derive-in-force.rq, run first), written as rbaco:RBACO_0000131 (has authorized member):
 #   type 1  A.r <- D            D is a member of A.r
 #   type 2  A.r <- B.r1         members of B.r1 are members of A.r
 #   type 3  A.r <- B.r1.r2      for each member C of B.r1, members of C.r2 are members of A.r
 #   type 4  A.r <- B.r1 & C.r2  principals in both are members of A.r
 # Type 3 matches C.r2 by issuer and role name, which no OWL 2 property chain can do here: the chain
 # would have to end at a role definition individual that varies with C.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-CONSTRUCT { ?head rbo:RBO_0000131 ?member }
+CONSTRUCT { ?head rbaco:RBACO_0000131 ?member }
 WHERE {
-  ?st a rbo:RBO_0000034 ; rbo:RBO_0000116 ?head ; rbow:inForceAt ?evalTime .
+  ?st a rbaco:RBACO_0000034 ; rbaco:RBACO_0000116 ?head ; rbacow:inForceAt ?evalTime .
   {
-    ?st a rbo:RBO_0000035 ; rbo:RBO_0000122 ?member .
+    ?st a rbaco:RBACO_0000035 ; rbaco:RBACO_0000122 ?member .
   } UNION {
-    ?st a rbo:RBO_0000036 ; rbo:RBO_0000118 ?body .
-    ?body rbo:RBO_0000131 ?member .
+    ?st a rbaco:RBACO_0000036 ; rbaco:RBACO_0000118 ?body .
+    ?body rbaco:RBACO_0000131 ?member .
   } UNION {
-    ?st a rbo:RBO_0000037 ; rbo:RBO_0000123 ?base ; rbo:RBO_0000203 ?r2 .
-    ?base rbo:RBO_0000131 ?c .
-    ?linked rbo:RBO_0000121 ?c ; rbo:RBO_0000202 ?r2 ; rbo:RBO_0000131 ?member .
+    ?st a rbaco:RBACO_0000037 ; rbaco:RBACO_0000123 ?base ; rbaco:RBACO_0000203 ?r2 .
+    ?base rbaco:RBACO_0000131 ?c .
+    ?linked rbaco:RBACO_0000121 ?c ; rbaco:RBACO_0000202 ?r2 ; rbaco:RBACO_0000131 ?member .
   } UNION {
-    ?st a rbo:RBO_0000038 ; rbo:RBO_0000117 ?b1 , ?b2 .
+    ?st a rbaco:RBACO_0000038 ; rbaco:RBACO_0000117 ?b1 , ?b2 .
     FILTER (?b1 != ?b2)
-    ?b1 rbo:RBO_0000131 ?member .
-    ?b2 rbo:RBO_0000131 ?member .
+    ?b1 rbaco:RBACO_0000131 ?member .
+    ?b2 rbaco:RBACO_0000131 ?member .
   }
 }

@@ -1,6 +1,6 @@
 """Generate the example datasets in data/ from the compact specifications below.
 
-Usage: build_data.py <rbo-dir>
+Usage: build_data.py <rbaco-bfo-dir>
 
 Writes data/us-persons.ttl (ROWLBAC section 3.1), data/code-review.ttl (CR-42),
 data/abac.ttl (ROWLBAC section 4.1), data/rt-policy.ttl (ROWLBAC Figure 4), data/purchase.ttl
@@ -16,50 +16,50 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import annotate_ttl
 import ttl_ordered
 
-RBO = Namespace("https://example.org/rbac-bfo/")
+RBACO = Namespace("https://w3id.org/rbaco/bfo/")
 OBO = Namespace("http://purl.obolibrary.org/obo/")
 CCO = Namespace("https://www.commoncoreontologies.org/")
-EX = Namespace("https://example.org/rbac-bfo/data/")
+EX = Namespace("https://example.org/rbaco/data/")
 
-# RBO and borrowed terms used below, by readable name
+# RBACO and borrowed terms used below, by readable name
 C = dict(
-    role_def=RBO.RBO_0000001, active_role=RBO.RBO_0000003, bp=RBO.RBO_0000004, bp_plan=RBO.RBO_0000005,
-    permission=RBO.RBO_0000007, prohibition=RBO.RBO_0000008, obj_desc=RBO.RBO_0000009,
-    office_cond=RBO.RBO_0000011, ssd=RBO.RBO_0000013, dsd_same=RBO.RBO_0000015, dsd_whole=RBO.RBO_0000016,
-    inherit=RBO.RBO_0000017, access_req=RBO.RBO_0000024, act_req=RBO.RBO_0000025,
-    activation=RBO.RBO_0000026, deactivation=RBO.RBO_0000027, assignment=RBO.RBO_0000028,
-    deassignment=RBO.RBO_0000029, issuing=RBO.RBO_0000031, retiring=RBO.RBO_0000032, rt_role=RBO.RBO_0000033, rt1=RBO.RBO_0000035, rt2=RBO.RBO_0000036,
-    rt3=RBO.RBO_0000037, rt4=RBO.RBO_0000038, analysis=RBO.RBO_0000039,
-    status_review=RBO.RBO_0001016, office=RBO.RBO_0001018, classroom=RBO.RBO_0001019, lab=RBO.RBO_0001020,
-    device=RBO.RBO_0001021, printer=RBO.RBO_0001022, classroom_printer=RBO.RBO_0001023,
+    role_def=RBACO.RBACO_0000001, active_role=RBACO.RBACO_0000003, bp=RBACO.RBACO_0000004, bp_plan=RBACO.RBACO_0000005,
+    permission=RBACO.RBACO_0000007, prohibition=RBACO.RBACO_0000008, obj_desc=RBACO.RBACO_0000009,
+    office_cond=RBACO.RBACO_0000011, ssd=RBACO.RBACO_0000013, dsd_same=RBACO.RBACO_0000015, dsd_whole=RBACO.RBACO_0000016,
+    inherit=RBACO.RBACO_0000017, access_req=RBACO.RBACO_0000024, act_req=RBACO.RBACO_0000025,
+    activation=RBACO.RBACO_0000026, deactivation=RBACO.RBACO_0000027, assignment=RBACO.RBACO_0000028,
+    deassignment=RBACO.RBACO_0000029, issuing=RBACO.RBACO_0000031, retiring=RBACO.RBACO_0000032, rt_role=RBACO.RBACO_0000033, rt1=RBACO.RBACO_0000035, rt2=RBACO.RBACO_0000036,
+    rt3=RBACO.RBACO_0000037, rt4=RBACO.RBACO_0000038, analysis=RBACO.RBACO_0000039,
+    status_review=RBACO.RBACO_0001016, office=RBACO.RBACO_0001018, classroom=RBACO.RBACO_0001019, lab=RBACO.RBACO_0001020,
+    device=RBACO.RBACO_0001021, printer=RBACO.RBACO_0001022, classroom_printer=RBACO.RBACO_0001023,
     person=CCO.ont00001262, agent=CCO.ont00001017, organization=CCO.ont00001180,
     authority_role=CCO.ont00000187, ibe=CCO.ont00000253, database=CCO.ont00002006, ice=CCO.ont00000958,
     plan_spec=OBO.IAO_0000104, software=OBO.IAO_0000010,
-    task_spec=RBO.RBO_0000040, task_instance=RBO.RBO_0000041, work_item=RBO.RBO_0000048,
-    static_des=RBO.RBO_0000046, dynamic_des=RBO.RBO_0000047, human_req=RBO.RBO_0000049, task_bound_req=RBO.RBO_0000050,
+    task_spec=RBACO.RBACO_0000040, task_instance=RBACO.RBACO_0000041, work_item=RBACO.RBACO_0000048,
+    static_des=RBACO.RBACO_0000046, dynamic_des=RBACO.RBACO_0000047, human_req=RBACO.RBACO_0000049, task_bound_req=RBACO.RBACO_0000050,
     family=CCO.ont00000837, planned_act=CCO.ont00000228,
     interval=OBO.BFO_0000202, instant=OBO.BFO_0000203,
 )
 P = dict(
-    has_operation=RBO.RBO_0000101, has_object=RBO.RBO_0000102, has_obj_desc=RBO.RBO_0000103,
-    assigned_to=RBO.RBO_0000105, activated_in=RBO.RBO_0000106, requester=RBO.RBO_0000107,
-    req_op=RBO.RBO_0000108, req_obj=RBO.RBO_0000109, req_act=RBO.RBO_0000110, fulfilled_by=RBO.RBO_0000111,
-    constrained=RBO.RBO_0000114, applies_within=RBO.RBO_0000115, head=RBO.RBO_0000116, body=RBO.RBO_0000117,
-    senior=RBO.RBO_0000118, junior=RBO.RBO_0000119, issuer=RBO.RBO_0000121, names_member=RBO.RBO_0000122,
-    link_base=RBO.RBO_0000123, growth=RBO.RBO_0000129, shrink=RBO.RBO_0000130,
-    cardinality=RBO.RBO_0000201, rt_name=RBO.RBO_0000202, linked_name=RBO.RBO_0000203,
-    timestamp=RBO.RBO_0000205, mirrors=RBO.RBO_0000301, obj_type=RBO.RBO_0000302,
-    loc_type=RBO.RBO_0000303, criteria_class=RBO.RBO_0000305, has_office=RBO.RBO_0001101,
+    has_operation=RBACO.RBACO_0000101, has_object=RBACO.RBACO_0000102, has_obj_desc=RBACO.RBACO_0000103,
+    assigned_to=RBACO.RBACO_0000105, activated_in=RBACO.RBACO_0000106, requester=RBACO.RBACO_0000107,
+    req_op=RBACO.RBACO_0000108, req_obj=RBACO.RBACO_0000109, req_act=RBACO.RBACO_0000110, fulfilled_by=RBACO.RBACO_0000111,
+    constrained=RBACO.RBACO_0000114, applies_within=RBACO.RBACO_0000115, head=RBACO.RBACO_0000116, body=RBACO.RBACO_0000117,
+    senior=RBACO.RBACO_0000118, junior=RBACO.RBACO_0000119, issuer=RBACO.RBACO_0000121, names_member=RBACO.RBACO_0000122,
+    link_base=RBACO.RBACO_0000123, growth=RBACO.RBACO_0000129, shrink=RBACO.RBACO_0000130,
+    cardinality=RBACO.RBACO_0000201, rt_name=RBACO.RBACO_0000202, linked_name=RBACO.RBACO_0000203,
+    timestamp=RBACO.RBACO_0000205, mirrors=RBACO.RBACO_0000301, obj_type=RBACO.RBACO_0000302,
+    loc_type=RBACO.RBACO_0000303, criteria_class=RBACO.RBACO_0000305, has_office=RBACO.RBACO_0001101,
     has_agent=CCO.ont00001833, has_output=CCO.ont00001986, has_input=CCO.ont00001921,
     prescribed_by=CCO.ont00001920, has_participant=OBO.BFO_0000057, realizes=OBO.BFO_0000055,
     concretizes=OBO.BFO_0000059, inheres_in=OBO.BFO_0000197, sdep=OBO.BFO_0000195,
     occurrent_part_of=OBO.BFO_0000132, occupies=OBO.BFO_0000199, first_instant=OBO.BFO_0000222,
     last_instant=OBO.BFO_0000224, located_in=OBO.BFO_0000171, carrier_of=OBO.BFO_0000101,
-    requires_role=RBO.RBO_0000132, requires_op=RBO.RBO_0000133, constrained_perm=RBO.RBO_0000134,
-    constrained_task=RBO.RBO_0000135, activated_for=RBO.RBO_0000136, req_act_for=RBO.RBO_0000137,
-    designates_agent=RBO.RBO_0000138, designates_group=RBO.RBO_0000139, applies_to=RBO.RBO_0000140,
-    wi_for=RBO.RBO_0000141, wi_in=RBO.RBO_0000142, on_behalf=RBO.RBO_0000143,
-    requires_prior=RBO.RBO_0000144, requires_human=RBO.RBO_0000145, requires_binding=RBO.RBO_0000148,
+    requires_role=RBACO.RBACO_0000132, requires_op=RBACO.RBACO_0000133, constrained_perm=RBACO.RBACO_0000134,
+    constrained_task=RBACO.RBACO_0000135, activated_for=RBACO.RBACO_0000136, req_act_for=RBACO.RBACO_0000137,
+    designates_agent=RBACO.RBACO_0000138, designates_group=RBACO.RBACO_0000139, applies_to=RBACO.RBACO_0000140,
+    wi_for=RBACO.RBACO_0000141, wi_in=RBACO.RBACO_0000142, on_behalf=RBACO.RBACO_0000143,
+    requires_prior=RBACO.RBACO_0000144, requires_human=RBACO.RBACO_0000145, requires_binding=RBACO.RBACO_0000148,
     member_part_of=OBO.BFO_0000129, continuant_part_of=OBO.BFO_0000176,
 )
 
@@ -67,11 +67,11 @@ P = dict(
 class Data:
     def __init__(self, title, comment):
         self.g = ttl_ordered.OrderedGraph()
-        for p, ns in (("rbo", RBO), ("obo", OBO), ("cco", CCO), ("ex", EX)):
+        for p, ns in (("rbaco", RBACO), ("obo", OBO), ("cco", CCO), ("ex", EX)):
             self.g.bind(p, ns)
         onto = URIRef(str(EX) + title)
         self.g.add((onto, RDF.type, OWL.Ontology))
-        self.g.add((onto, OWL.imports, URIRef("https://example.org/rbac-bfo/rbo-domain.owl")))
+        self.g.add((onto, OWL.imports, URIRef("https://w3id.org/rbaco/bfo/rbaco-bfo-domain.owl")))
         self.g.add((onto, RDFS.comment, Literal(comment, lang="en")))
 
     def ind(self, name, cls, label, **props):
@@ -189,12 +189,12 @@ def us_persons(out):
             "temporary-resident": "Temporary Resident", "work-visa": "Work Visa Holder",
             "business-visa": "Business Visa Holder", "student-visa": "Student Visa Holder"}
     role_definitions(d, defs)
-    universal = {"legal-person": RBO.RBO_0001001, "us-person": RBO.RBO_0001002,
-                 "foreign-person": RBO.RBO_0001003, "citizen": RBO.RBO_0001004, "resident": RBO.RBO_0001005,
-                 "visitor": RBO.RBO_0001006, "permanent-resident": RBO.RBO_0001007,
-                 "pr-applicant": RBO.RBO_0001008, "temporary-resident": RBO.RBO_0001009,
-                 "work-visa": RBO.RBO_0001010, "business-visa": RBO.RBO_0001011,
-                 "student-visa": RBO.RBO_0001012}
+    universal = {"legal-person": RBACO.RBACO_0001001, "us-person": RBACO.RBACO_0001002,
+                 "foreign-person": RBACO.RBACO_0001003, "citizen": RBACO.RBACO_0001004, "resident": RBACO.RBACO_0001005,
+                 "visitor": RBACO.RBACO_0001006, "permanent-resident": RBACO.RBACO_0001007,
+                 "pr-applicant": RBACO.RBACO_0001008, "temporary-resident": RBACO.RBACO_0001009,
+                 "work-visa": RBACO.RBACO_0001010, "business-visa": RBACO.RBACO_0001011,
+                 "student-visa": RBACO.RBACO_0001012}
     for k, cls in universal.items():
         d.g.add((cls, P["mirrors"], EX[f"def-{k}"]))
     # Figure 1 edges: senior (lower in the drawing) -> junior
@@ -234,10 +234,10 @@ def us_persons(out):
 
     for p in ("alice", "bob"):
         d.ind(p, C["person"], p.capitalize())
-    a_cit = assign(d, "alice", "citizen", RBO.RBO_0001004, t("102", "09:00"))
-    a_pr = assign(d, "alice", "permanent-resident", RBO.RBO_0001007, t("102", "10:00"))
-    b_vis = assign(d, "bob", "visitor", RBO.RBO_0001006, t("102", "09:00"))
-    b_tr = assign(d, "bob", "temporary-resident", RBO.RBO_0001009, t("102", "10:00"))
+    a_cit = assign(d, "alice", "citizen", RBACO.RBACO_0001004, t("102", "09:00"))
+    a_pr = assign(d, "alice", "permanent-resident", RBACO.RBACO_0001007, t("102", "10:00"))
+    b_vis = assign(d, "bob", "visitor", RBACO.RBACO_0001006, t("102", "09:00"))
+    b_tr = assign(d, "bob", "temporary-resident", RBACO.RBACO_0001009, t("102", "10:00"))
 
     d.ind("alice-review", C["status_review"], "Alice's status eligibility review", prescribed_by="plan-status-review")
     d.when("alice-review", t("105", "09:00"), t("105", "17:00"))
@@ -285,9 +285,9 @@ def code_review(out):
     issue(d, "policy-load", t("101", "08:00"), [EX["def-submitter"], EX["def-approver"], plan, dsd] + regs)
     for p in ("dana", "eve"):
         d.ind(p, C["person"], p.capitalize())
-    dana_sub = assign(d, "dana", "submitter", RBO.RBO_0000002, t("102", "09:00"))
-    dana_app = assign(d, "dana", "approver", RBO.RBO_0000002, t("102", "09:01"))
-    eve_app = assign(d, "eve", "approver", RBO.RBO_0000002, t("102", "09:02"))
+    dana_sub = assign(d, "dana", "submitter", RBACO.RBACO_0000002, t("102", "09:00"))
+    dana_app = assign(d, "dana", "approver", RBACO.RBACO_0000002, t("102", "09:01"))
+    eve_app = assign(d, "eve", "approver", RBACO.RBACO_0000002, t("102", "09:02"))
     d.ind("cr-42", C["bp"], "code change review CR-42", prescribed_by="plan-code-review")
     d.when("cr-42", t("106", "09:00"), t("106", "18:00"))
     activate(d, "dana", "submitter", "cr-42", t("106", "09:05"), dana_sub)
@@ -308,8 +308,8 @@ def abac(out):
              "(a role value map, decided by query only). Marie holds both roles.")
     admin(d)
     role_definitions(d, {"faculty": "Faculty", "university-member": "University Member"})
-    d.g.add((RBO.RBO_0001025, P["mirrors"], EX["def-faculty"]))
-    d.g.add((RBO.RBO_0001024, P["mirrors"], EX["def-university-member"]))
+    d.g.add((RBACO.RBACO_0001025, P["mirrors"], EX["def-faculty"]))
+    d.g.add((RBACO.RBACO_0001024, P["mirrors"], EX["def-university-member"]))
     for k, cls, lab in (("classroom-c101", C["classroom"], "classroom C101"), ("lab-l1", C["lab"], "laboratory L1"),
                         ("office-o12", C["office"], "office O12"), ("office-o13", C["office"], "office O13")):
         d.ind(k, cls, lab)
@@ -332,8 +332,8 @@ def abac(out):
     plan = d.ind("plan-teaching-day", C["bp_plan"], "teaching day plan")
     issue(d, "policy-load", t("101", "08:00"), [EX["def-faculty"], EX["def-university-member"], plan] + regs)
     d.ind("marie", C["person"], "Marie", has_office="office-o12")
-    m_fac = assign(d, "marie", "faculty", RBO.RBO_0001025, t("102", "09:00"))
-    m_mem = assign(d, "marie", "university-member", RBO.RBO_0001024, t("102", "09:01"))
+    m_fac = assign(d, "marie", "faculty", RBACO.RBACO_0001025, t("102", "09:00"))
+    m_mem = assign(d, "marie", "university-member", RBACO.RBACO_0001024, t("102", "09:01"))
     d.ind("marie-day", C["bp"], "Marie's teaching day", prescribed_by="plan-teaching-day")
     d.when("marie-day", t("107", "08:00"), t("107", "18:00"))
     activate(d, "marie", "faculty", "marie-day", t("107", "08:05"), m_fac)
@@ -517,7 +517,7 @@ def purchase(out):
     issue(d, "policy-load", t("101", "08:00"),
           [EX[f"def-{k}"] for k in defs] + inh + regs + specs + sod + [EX[f"plan-{k}"] for k in plans])
     # OWL has no unique-name assumption: without this, HermiT cannot count two members of a set, so it
-    # can neither classify a constraint under its kind (RBO_0000042-44) nor reject a mixed set
+    # can neither classify a constraint under its kind (RBACO_0000042-44) nor reject a mixed set
     distinct = BNode()
     d.g.add((distinct, RDF.type, OWL.AllDifferent))
     d.g.add((distinct, OWL.distinctMembers, Collection(d.g, BNode(),
@@ -526,7 +526,7 @@ def purchase(out):
     held = {}
     for who, k in (("tom", "apm"), ("tom", "manager"), ("dick", "sc"), ("dick", "manager"), ("harry", "apm"),
                    ("harry", "manager"), ("stores-host", "stores"), ("approval-bot", "manager")):
-        held[(who, k)] = assign(d, who, k, RBO.RBO_0000002, t("102", "09:00"))
+        held[(who, k)] = assign(d, who, k, RBACO.RBACO_0000002, t("102", "09:00"))
 
     def instance(n, plan, day, start, end):
         d.ind(n, C["bp"], f"purchase order {n}", prescribed_by=f"plan-{plan}")
@@ -637,7 +637,7 @@ def purchase(out):
     take("approval-bot", "manager", "po-11", "112", "09:30", None, wi=wa, granted=False, behalf="tom")
     take("stores-host", "stores", "po-11", "112", "09:35", None, wi=wx, granted=False)
     # Table 1 row 3 and Table 3 row 1: Dick, of Tom's family, becomes an auditor while Tom holds APM
-    assign(d, "dick", "auditor", RBO.RBO_0000002, t("120", "09:00"))
+    assign(d, "dick", "auditor", RBACO.RBACO_0000002, t("120", "09:00"))
     d.save(os.path.join(out, "purchase.ttl"))
 
 

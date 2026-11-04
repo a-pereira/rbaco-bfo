@@ -2,85 +2,85 @@
 # in force at ?evalTime (derive-in-force.rq, run first). Sound but not complete: a derived triple
 # holds in every policy state reachable under the analysis's restrictions; an underived one may hold
 # or not.
-#   rbow:alwaysWithin (B, A)    members(B) is a subset of members(A) in every reachable state
-#   rbow:alwaysMemberOf (D, A)  D is a member of A in every reachable state
-#   rbow:closed (B)             B can gain no member outside its rbow:possibleMember values
-#   rbow:possibleMember (B, D)  D is a member of B in the current state or a state reachable by
+#   rbacow:alwaysWithin (B, A)    members(B) is a subset of members(A) in every reachable state
+#   rbacow:alwaysMemberOf (D, A)  D is a member of A in every reachable state
+#   rbacow:closed (B)             B can gain no member outside its rbacow:possibleMember values
+#   rbacow:possibleMember (B, D)  D is a member of B in the current state or a state reachable by
 #                               removing statements only
 # Rules: a shrink-restricted role keeps its statements, so what they include stays included; a
 # growth-restricted role gains no statements, so it stays within anything all its statements stay
 # within. A type 3 statement is never assumed to stay within anything, since any member C of its
 # base role may add members to C.r2. These rules are this consult's construction, not ROWLBAC's.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 CONSTRUCT {
-  ?x rbow:alwaysWithin ?y .
-  ?d rbow:alwaysMemberOf ?a .
-  ?b rbow:closed true .
-  ?pb rbow:possibleMember ?pd .
+  ?x rbacow:alwaysWithin ?y .
+  ?d rbacow:alwaysMemberOf ?a .
+  ?b rbacow:closed true .
+  ?pb rbacow:possibleMember ?pd .
 }
 WHERE {
-  ?analysis a rbo:RBO_0000039 .
+  ?analysis a rbaco:RBACO_0000039 .
   {
     # reflexive
-    ?x a rbo:RBO_0000033 . BIND (?x AS ?y)
+    ?x a rbaco:RBACO_0000033 . BIND (?x AS ?y)
   } UNION {
     # transitive
-    ?x rbow:alwaysWithin ?m . ?m rbow:alwaysWithin ?y .
+    ?x rbacow:alwaysWithin ?m . ?m rbacow:alwaysWithin ?y .
   } UNION {
     # a kept simple inclusion y <- c: whatever stays within c stays within y
-    ?analysis rbo:RBO_0000130 ?y .
-    ?st a rbo:RBO_0000036 ; rbo:RBO_0000119 ?y ; rbo:RBO_0000118 ?c ; rbow:inForceAt ?evalTime .
-    ?x rbow:alwaysWithin ?c .
+    ?analysis rbaco:RBACO_0000130 ?y .
+    ?st a rbaco:RBACO_0000036 ; rbaco:RBACO_0000119 ?y ; rbaco:RBACO_0000118 ?c ; rbacow:inForceAt ?evalTime .
+    ?x rbacow:alwaysWithin ?c .
   } UNION {
     # a kept intersection y <- c1 & c2
-    ?analysis rbo:RBO_0000130 ?y .
-    ?st a rbo:RBO_0000038 ; rbo:RBO_0000116 ?y ; rbo:RBO_0000117 ?c1 , ?c2 ;
-        rbow:inForceAt ?evalTime .
+    ?analysis rbaco:RBACO_0000130 ?y .
+    ?st a rbaco:RBACO_0000038 ; rbaco:RBACO_0000116 ?y ; rbaco:RBACO_0000117 ?c1 , ?c2 ;
+        rbacow:inForceAt ?evalTime .
     FILTER (?c1 != ?c2)
-    ?x rbow:alwaysWithin ?c1 , ?c2 .
+    ?x rbacow:alwaysWithin ?c1 , ?c2 .
   } UNION {
     # a growth-restricted x all of whose statements in force stay within y
-    ?analysis rbo:RBO_0000129 ?x .
-    ?y a rbo:RBO_0000033 .
+    ?analysis rbaco:RBACO_0000129 ?x .
+    ?y a rbaco:RBACO_0000033 .
     FILTER (?x != ?y)
     FILTER NOT EXISTS {
-      ?s rbo:RBO_0000116 ?x ; a rbo:RBO_0000034 ; rbow:inForceAt ?evalTime .
-      FILTER NOT EXISTS { ?s a rbo:RBO_0000035 ; rbo:RBO_0000122 ?d1 . ?d1 rbow:alwaysMemberOf ?y }
-      FILTER NOT EXISTS { ?s a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c3 . ?c3 rbow:alwaysWithin ?y }
-      FILTER NOT EXISTS { ?s a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c4 . ?c4 rbow:alwaysWithin ?y }
+      ?s rbaco:RBACO_0000116 ?x ; a rbaco:RBACO_0000034 ; rbacow:inForceAt ?evalTime .
+      FILTER NOT EXISTS { ?s a rbaco:RBACO_0000035 ; rbaco:RBACO_0000122 ?d1 . ?d1 rbacow:alwaysMemberOf ?y }
+      FILTER NOT EXISTS { ?s a rbaco:RBACO_0000036 ; rbaco:RBACO_0000118 ?c3 . ?c3 rbacow:alwaysWithin ?y }
+      FILTER NOT EXISTS { ?s a rbaco:RBACO_0000038 ; rbaco:RBACO_0000117 ?c4 . ?c4 rbacow:alwaysWithin ?y }
     }
   } UNION {
     # permanent membership through the kept statements of shrink-restricted roles
-    ?analysis rbo:RBO_0000130 ?a .
-    ?st rbo:RBO_0000116 ?a ; rbow:inForceAt ?evalTime .
-    { ?st a rbo:RBO_0000035 ; rbo:RBO_0000122 ?d . }
+    ?analysis rbaco:RBACO_0000130 ?a .
+    ?st rbaco:RBACO_0000116 ?a ; rbacow:inForceAt ?evalTime .
+    { ?st a rbaco:RBACO_0000035 ; rbaco:RBACO_0000122 ?d . }
     UNION
-    { ?st a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c5 . ?d rbow:alwaysMemberOf ?c5 . }
+    { ?st a rbaco:RBACO_0000036 ; rbaco:RBACO_0000118 ?c5 . ?d rbacow:alwaysMemberOf ?c5 . }
     UNION
-    { ?st a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c6 , ?c7 . FILTER (?c6 != ?c7)
-      ?d rbow:alwaysMemberOf ?c6 , ?c7 . }
+    { ?st a rbaco:RBACO_0000038 ; rbaco:RBACO_0000117 ?c6 , ?c7 . FILTER (?c6 != ?c7)
+      ?d rbacow:alwaysMemberOf ?c6 , ?c7 . }
   } UNION {
     # closed: growth-restricted, and every statement in force adds only members of closed roles or named
     # principals (a retired statement cannot return: reissuing it would be growth)
-    ?analysis rbo:RBO_0000129 ?b .
+    ?analysis rbaco:RBACO_0000129 ?b .
     FILTER NOT EXISTS {
-      ?s2 rbo:RBO_0000116 ?b ; a rbo:RBO_0000034 ; rbow:inForceAt ?evalTime .
-      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000035 }
-      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c8 . ?c8 rbow:closed true }
-      FILTER NOT EXISTS { ?s2 a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c9 . ?c9 rbow:closed true }
+      ?s2 rbaco:RBACO_0000116 ?b ; a rbaco:RBACO_0000034 ; rbacow:inForceAt ?evalTime .
+      FILTER NOT EXISTS { ?s2 a rbaco:RBACO_0000035 }
+      FILTER NOT EXISTS { ?s2 a rbaco:RBACO_0000036 ; rbaco:RBACO_0000118 ?c8 . ?c8 rbacow:closed true }
+      FILTER NOT EXISTS { ?s2 a rbaco:RBACO_0000038 ; rbaco:RBACO_0000117 ?c9 . ?c9 rbacow:closed true }
     }
   } UNION {
     # possible members: what the statements in force can supply
-    ?st rbo:RBO_0000116 ?pb ; rbow:inForceAt ?evalTime .
-    { ?st a rbo:RBO_0000035 ; rbo:RBO_0000122 ?pd . }
+    ?st rbaco:RBACO_0000116 ?pb ; rbacow:inForceAt ?evalTime .
+    { ?st a rbaco:RBACO_0000035 ; rbaco:RBACO_0000122 ?pd . }
     UNION
-    { ?st a rbo:RBO_0000036 ; rbo:RBO_0000118 ?c10 . ?c10 rbow:possibleMember ?pd . }
+    { ?st a rbaco:RBACO_0000036 ; rbaco:RBACO_0000118 ?c10 . ?c10 rbacow:possibleMember ?pd . }
     UNION
-    { ?st a rbo:RBO_0000038 ; rbo:RBO_0000117 ?c11 . ?c11 rbow:possibleMember ?pd . }
+    { ?st a rbaco:RBACO_0000038 ; rbaco:RBACO_0000117 ?c11 . ?c11 rbacow:possibleMember ?pd . }
   }
 }

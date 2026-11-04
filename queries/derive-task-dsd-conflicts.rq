@@ -1,6 +1,6 @@
 # DERIVATION. A dynamic separation of duty conflict report for each task-bound role activation
 # request made at ?evalTime that a dynamic task constraint refuses (Botha and Eloff 2001, Table 2
-# row 4, p.676; clif [rbo-s13], [rbo-s14]). Run over the in-force facts for the same time, before
+# row 4, p.676; clif [rbaco-s13], [rbaco-s14]). Run over the in-force facts for the same time, before
 # decide-activation.rq, which refuses a request such a report describes.
 # The request names a work item (requests activation for) whose task specification is in the set;
 # counting it and every specification of the set of which a task instance begun earlier in the same
@@ -11,51 +11,51 @@
 # Repeated instances of one specification count once. The constraint and the designations must be in
 # force at ?evalTime and fit the instance's plan. The report names the specifications counted, read
 # from the count itself.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 CONSTRUCT {
-  ?report a rbo:RBO_0000020 ;
+  ?report a rbaco:RBACO_0000020 ;
           rdfs:label ?label ;
-          rbo:RBO_0000124 ?x ;
-          rbo:RBO_0000125 ?c ;
-          rbo:RBO_0000147 ?counted ;
-          rbo:RBO_0000127 ?instance ;
-          rbo:RBO_0000128 ?areq ;
-          rbo:RBO_0000204 ?why .
+          rbaco:RBACO_0000124 ?x ;
+          rbaco:RBACO_0000125 ?c ;
+          rbaco:RBACO_0000147 ?counted ;
+          rbaco:RBACO_0000127 ?instance ;
+          rbaco:RBACO_0000128 ?areq ;
+          rbaco:RBACO_0000204 ?why .
 }
 WHERE {
   {
     SELECT ?areq ?x ?instance ?c ?n (COUNT(DISTINCT ?m) AS ?k)
            (CONCAT(" ", GROUP_CONCAT(DISTINCT STR(?m); separator=" "), " ") AS ?members) WHERE {
-      ?areq a rbo:RBO_0000025 ; rbo:RBO_0000137 ?wi ; obo:BFO_0000132 ?instance ;
-            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+      ?areq a rbaco:RBACO_0000025 ; rbaco:RBACO_0000137 ?wi ; obo:BFO_0000132 ?instance ;
+            obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t .
       FILTER (?t = ?evalTime)
-      ?wi rbo:RBO_0000141 ?spec .
-      { ?areq rbo:RBO_0000143 ?x } UNION { ?areq rbo:RBO_0000107 ?x FILTER NOT EXISTS { ?areq rbo:RBO_0000143 ?obo } }
-      ?c a rbo:RBO_0000014 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000135 ?spec ;
-         rbo:RBO_0000135 ?m ; rbo:RBO_0000201 ?n .
-      FILTER (NOT EXISTS { ?c rbo:RBO_0000115 ?anyPlan }
-              || EXISTS { ?c rbo:RBO_0000115 ?plan . ?instance cco:ont00001920 ?plan })
+      ?wi rbaco:RBACO_0000141 ?spec .
+      { ?areq rbaco:RBACO_0000143 ?x } UNION { ?areq rbaco:RBACO_0000107 ?x FILTER NOT EXISTS { ?areq rbaco:RBACO_0000143 ?obo } }
+      ?c a rbaco:RBACO_0000014 ; rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000135 ?spec ;
+         rbaco:RBACO_0000135 ?m ; rbaco:RBACO_0000201 ?n .
+      FILTER (NOT EXISTS { ?c rbaco:RBACO_0000115 ?anyPlan }
+              || EXISTS { ?c rbaco:RBACO_0000115 ?plan . ?instance cco:ont00001920 ?plan })
       FILTER (?m = ?spec || EXISTS {
-        ?k1 a rbo:RBO_0000041 ; cco:ont00001920 ?m ; obo:BFO_0000132 ?instance ;
-            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t1 .
+        ?k1 a rbaco:RBACO_0000041 ; cco:ont00001920 ?m ; obo:BFO_0000132 ?instance ;
+            obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t1 .
         FILTER NOT EXISTS { ?k1 cco:ont00001920 ?wi }
         FILTER (?t1 < ?t || (?t1 = ?t && EXISTS {
-          ?a1 rbo:RBO_0000137 ?wi1 ; obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?ta1 .
+          ?a1 rbaco:RBACO_0000137 ?wi1 ; obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?ta1 .
           ?k1 cco:ont00001920 ?wi1 .
           FILTER (?ta1 = ?t && STR(?a1) < STR(?areq)) }))
-        { ?k1 rbo:RBO_0000143 ?y } UNION { ?k1 cco:ont00001833 ?y FILTER NOT EXISTS { ?k1 rbo:RBO_0000143 ?obo1 } }
-        FILTER (?y = ?x || EXISTS { ?g a rbo:RBO_0000047 ; rbow:inForceAt ?evalTime ; rbow:joins ?x , ?y ;
-                                    rbow:appliesTo ?c ; rbow:appliesIn ?instance })
+        { ?k1 rbaco:RBACO_0000143 ?y } UNION { ?k1 cco:ont00001833 ?y FILTER NOT EXISTS { ?k1 rbaco:RBACO_0000143 ?obo1 } }
+        FILTER (?y = ?x || EXISTS { ?g a rbaco:RBACO_0000047 ; rbacow:inForceAt ?evalTime ; rbacow:joins ?x , ?y ;
+                                    rbacow:appliesTo ?c ; rbacow:appliesIn ?instance })
       })
     } GROUP BY ?areq ?x ?instance ?c ?n
     HAVING (COUNT(DISTINCT ?m) >= ?n)
   }
-  ?c rbo:RBO_0000135 ?counted .
+  ?c rbaco:RBACO_0000135 ?counted .
   FILTER (CONTAINS(?members, CONCAT(" ", STR(?counted), " ")))
   OPTIONAL { ?c rdfs:label ?cLabel }
   BIND (IRI(CONCAT(STR(?areq), "-task-dsd-conflict")) AS ?report)

@@ -25,7 +25,7 @@ py() { "$PY" -I -X utf8 "$@"; }
 step parse         py "$R/tools/measure.py" "$R"
 step order         py "$R/tools/ttl_ordered.py" "$R"/data/*.ttl
 step labels        py "$R/tools/annotate_ttl.py" "$R" --check
-step clif          py "$R/tools/check_clif.py" "$R/clif/rbo-access.cl"
+step clif          py "$R/tools/check_clif.py" "$R/clif/rbaco-bfo-access.cl"
 step queries       py "$R/tools/run_queries.py" "$R"
 step rowlbac       py "$R/tools/rowlbac_checks.py" "$R"
 step rl            py "$R/tools/rl_check.py" "$R"
@@ -34,6 +34,6 @@ step dl-diff       py "$R/tools/dl_diff.py" "$W/dl"
 step controls-make py "$R/tools/make_dl_controls.py" "$W/controls"
 step controls      sh "$R/tools/run_dl_controls.sh" "$R" "$JAR" "$W/controls"
 step inferences    sh "$R/tools/make_inferences.sh" "$PY" "$R" "$JAR" "$W/dl" "$W/controls" "$R/docs/dl/inferences.txt"
-step fol          py "$R/tools/run_fol.py" "$R" "$BIN" "$W/fol" "$W/dl/rbo-domain-reasoned.owl" $FULL
+step fol          py "$R/tools/run_fol.py" "$R" "$BIN" "$W/fol" "$W/dl/rbaco-bfo-domain-reasoned.owl" $FULL
 echo "### $fails step(s) exited non-zero"
 [ $fails -eq 0 ]

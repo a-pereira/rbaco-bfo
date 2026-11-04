@@ -1,23 +1,23 @@
 # CHECK (warnings). Conflicting agent designations of one kind that share an agent. Designations do
-# not chain (clif [rbo-u3], [rbo-u4]): if one joins A and B and another joins B and C, A and C are not
+# not chain (clif [rbaco-u3], [rbaco-u4]): if one joins A and B and another joins B and C, A and C are not
 # one subject, because neither designation is a judgment about them. Each row names such a pair and
 # the agent the two designations share, so that a modeler who means A and C to be joined says so.
 # Group designations are read through current member parts (BFO_0000129, untimed in OWL).
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?agentA ?shared ?agentC ?designationA ?designationC
 WHERE {
-  VALUES ?kind { rbo:RBO_0000046 rbo:RBO_0000047 }
+  VALUES ?kind { rbaco:RBACO_0000046 rbaco:RBACO_0000047 }
   ?designationA a ?kind ;
-                rbo:RBO_0000138|rbo:RBO_0000139/^obo:BFO_0000129 ?agentA , ?shared .
+                rbaco:RBACO_0000138|rbaco:RBACO_0000139/^obo:BFO_0000129 ?agentA , ?shared .
   ?designationC a ?kind ;
-                rbo:RBO_0000138|rbo:RBO_0000139/^obo:BFO_0000129 ?shared , ?agentC .
+                rbaco:RBACO_0000138|rbaco:RBACO_0000139/^obo:BFO_0000129 ?shared , ?agentC .
   FILTER (?designationA != ?designationC && ?agentA != ?shared && ?agentC != ?shared && ?agentA != ?agentC)
   FILTER NOT EXISTS { ?g a ?kind ;
-                         rbo:RBO_0000138|rbo:RBO_0000139/^obo:BFO_0000129 ?agentA , ?agentC }
+                         rbaco:RBACO_0000138|rbaco:RBACO_0000139/^obo:BFO_0000129 ?agentA , ?agentC }
   FILTER (STR(?agentA) < STR(?agentC))
 }

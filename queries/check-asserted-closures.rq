@@ -13,20 +13,20 @@
 # Types are read the same way: asserted types closed under rdfs:subClassOf, which run_queries.py adds before
 # any query runs, so a type that only a reasoner would infer (from a domain, a range or an equivalent class)
 # is not seen. No query can check that.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?subject ?problem ?detail
 WHERE {
   {
     ?subject obo:BFO_0000132 ?task .
-    ?task a rbo:RBO_0000041 ; obo:BFO_0000132 ?detail .
-    ?detail a rbo:RBO_0000004 .
+    ?task a rbaco:RBACO_0000041 ; obo:BFO_0000132 ?detail .
+    ?detail a rbaco:RBACO_0000004 .
     FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?detail }
     BIND ("not asserted part of the process" AS ?problem)
   } UNION {
-    ?subject a rbo:RBO_0000041 .
-    FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?i . ?i a rbo:RBO_0000004 }
+    ?subject a rbaco:RBACO_0000041 .
+    FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?i . ?i a rbaco:RBACO_0000004 }
     BIND ("task instance outside a process" AS ?problem) BIND ("" AS ?detail)
   } UNION {
     ?subject obo:BFO_0000171 ?mid . ?mid obo:BFO_0000171 ?detail .

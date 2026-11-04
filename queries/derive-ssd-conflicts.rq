@@ -10,119 +10,119 @@
 #     assigned role, and the report IRI ends in the subject's name
 # Both are reported, not refused. Members are role definitions, permissions (authorized through a permission
 # in force with the member's content, assigned to the role definition: derive-permission-content.rq) or task
-# specifications (through their required role definition): clif [rbo-s1], [rbo-s8], [rbo-s12]. Permissions
+# specifications (through their required role definition): clif [rbaco-s1], [rbaco-s8], [rbaco-s12]. Permissions
 # with one content count once. A holder is the subject or an agent a static conflicting agent designation in
-# force counts as one with the subject (Botha and Eloff 2001, Table 1 row 3; clif [rbo-u3]); an assigned role
+# force counts as one with the subject (Botha and Eloff 2001, Table 1 row 3; clif [rbaco-u3]); an assigned role
 # counts while it exists and its definition is in force. The report names each counted member with the
 # property for its kind, read from the count itself.
-PREFIX rbo:  <https://example.org/rbac-bfo/>
-PREFIX rbow: <https://example.org/rbac-bfo/work#>
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX cco:  <https://www.commoncoreontologies.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 CONSTRUCT {
-  ?report a rbo:RBO_0000019 ;
+  ?report a rbaco:RBACO_0000019 ;
           rdfs:label ?label ;
-          rbo:RBO_0000124 ?person ;
-          rbo:RBO_0000125 ?c ;
+          rbaco:RBACO_0000124 ?person ;
+          rbaco:RBACO_0000125 ?c ;
           ?describes ?counted ;
-          rbo:RBO_0000128 ?act ;
-          rbo:RBO_0000204 ?why .
+          rbaco:RBACO_0000128 ?act ;
+          rbaco:RBACO_0000204 ?why .
 }
 WHERE {
   {
     SELECT ?act ?person ?c ?n (COUNT(DISTINCT ?key) AS ?k)
            (CONCAT(" ", GROUP_CONCAT(DISTINCT STR(?m); separator=" "), " ") AS ?members) WHERE {
       {
-        ?act a rbo:RBO_0000028 ; cco:ont00001986 ?newRole ;
-             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+        ?act a rbaco:RBACO_0000028 ; cco:ont00001986 ?newRole ;
+             obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t .
         FILTER (?t = ?evalTime)
         ?newRole obo:BFO_0000197 ?person .
       } UNION {
-        ?act a rbo:RBO_0000031 ; cco:ont00001986 ?out ;
-             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?t .
+        ?act a rbaco:RBACO_0000031 ; cco:ont00001986 ?out ;
+             obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?t .
         FILTER (?t = ?evalTime)
         ?out a ?outClass .
-        VALUES ?outClass { rbo:RBO_0000013 rbo:RBO_0000017 rbo:RBO_0000046 }
-        ?anyGain cco:ont00001986 ?anyHeld ; a rbo:RBO_0000028 ;
-                 obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tAny . FILTER (?tAny <= ?t)
+        VALUES ?outClass { rbaco:RBACO_0000013 rbaco:RBACO_0000017 rbaco:RBACO_0000046 }
+        ?anyGain cco:ont00001986 ?anyHeld ; a rbaco:RBACO_0000028 ;
+                 obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tAny . FILTER (?tAny <= ?t)
         FILTER NOT EXISTS { ?anyLoss cco:ont00001921 ?anyHeld ; a cco:ont00000613 ;
-                            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tAnyLoss . FILTER (?tAnyLoss <= ?t) }
+                            obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tAnyLoss . FILTER (?tAnyLoss <= ?t) }
         ?anyHeld obo:BFO_0000197 ?person .
       }
-      ?c a rbo:RBO_0000013 ; rbow:inForceAt ?evalTime ; rbo:RBO_0000201 ?n .
-      { ?c rbo:RBO_0000114 ?m . BIND (STR(?m) AS ?key) }
-      UNION { ?c rbo:RBO_0000135 ?m . BIND (STR(?m) AS ?key) }
-      UNION { ?c rbo:RBO_0000134 ?m . ?m rbow:contentKey ?key }
+      ?c a rbaco:RBACO_0000013 ; rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000201 ?n .
+      { ?c rbaco:RBACO_0000114 ?m . BIND (STR(?m) AS ?key) }
+      UNION { ?c rbaco:RBACO_0000135 ?m . BIND (STR(?m) AS ?key) }
+      UNION { ?c rbaco:RBACO_0000134 ?m . ?m rbacow:contentKey ?key }
       # some holder counted with the subject is authorized for member ?m
       FILTER EXISTS {
-        ?gain cco:ont00001986 ?held ; a rbo:RBO_0000028 ;
-              obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGain . FILTER (?tGain <= ?evalTime)
+        ?gain cco:ont00001986 ?held ; a rbaco:RBACO_0000028 ;
+              obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tGain . FILTER (?tGain <= ?evalTime)
         FILTER NOT EXISTS { ?loss cco:ont00001921 ?held ; a cco:ont00000613 ;
-                            obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLoss . FILTER (?tLoss <= ?evalTime) }
+                            obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tLoss . FILTER (?tLoss <= ?evalTime) }
         ?held obo:BFO_0000197 ?y ; obo:BFO_0000059 ?heldDef .
-        ?heldDef rbow:inForceAt ?evalTime .
-        FILTER (?y = ?person || EXISTS { ?g a rbo:RBO_0000046 ; rbow:inForceAt ?evalTime ;
-                                         rbow:joins ?person , ?y ; rbow:appliesTo ?c })
-        { ?c rbo:RBO_0000114 ?m . ?heldDef rbo:RBO_0000120* ?m }
-        UNION { ?c rbo:RBO_0000135 ?m . ?m rbo:RBO_0000132 ?d . ?heldDef rbo:RBO_0000120* ?d }
-        UNION { ?c rbo:RBO_0000134 ?m . ?m rbow:contentKey ?mKey .
-                ?p a rbo:RBO_0000007 ; rbow:contentKey ?mKey ; rbow:inForceAt ?evalTime ;
-                   rbo:RBO_0000105 ?d .
-                ?heldDef rbo:RBO_0000120* ?d }
+        ?heldDef rbacow:inForceAt ?evalTime .
+        FILTER (?y = ?person || EXISTS { ?g a rbaco:RBACO_0000046 ; rbacow:inForceAt ?evalTime ;
+                                         rbacow:joins ?person , ?y ; rbacow:appliesTo ?c })
+        { ?c rbaco:RBACO_0000114 ?m . ?heldDef rbaco:RBACO_0000120* ?m }
+        UNION { ?c rbaco:RBACO_0000135 ?m . ?m rbaco:RBACO_0000132 ?d . ?heldDef rbaco:RBACO_0000120* ?d }
+        UNION { ?c rbaco:RBACO_0000134 ?m . ?m rbacow:contentKey ?mKey .
+                ?p a rbaco:RBACO_0000007 ; rbacow:contentKey ?mKey ; rbacow:inForceAt ?evalTime ;
+                   rbaco:RBACO_0000105 ?d .
+                ?heldDef rbaco:RBACO_0000120* ?d }
       }
     } GROUP BY ?act ?person ?c ?n
     HAVING (COUNT(DISTINCT ?key) >= ?n)
   }
   # the act contributes: it issued the constraint, or it supplies a link ?from, a role definition in force
   # from which a member of the set is authorized
-  FILTER (EXISTS { ?act a rbo:RBO_0000031 ; cco:ont00001986 ?c }
+  FILTER (EXISTS { ?act a rbaco:RBACO_0000031 ; cco:ont00001986 ?c }
           || EXISTS {
     {
-      ?act a rbo:RBO_0000028 ; cco:ont00001986 ?newRole2 .
+      ?act a rbaco:RBACO_0000028 ; cco:ont00001986 ?newRole2 .
       ?newRole2 obo:BFO_0000059 ?from .
     } UNION {
-      ?act a rbo:RBO_0000031 ; cco:ont00001986 ?st .
-      ?st a rbo:RBO_0000017 ; rbo:RBO_0000118 ?s ; rbo:RBO_0000119 ?from .
-      ?s rbo:RBO_0000120 ?from .
-      ?gainS cco:ont00001986 ?heldS ; a rbo:RBO_0000028 ;
-             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGainS . FILTER (?tGainS <= ?evalTime)
+      ?act a rbaco:RBACO_0000031 ; cco:ont00001986 ?st .
+      ?st a rbaco:RBACO_0000017 ; rbaco:RBACO_0000118 ?s ; rbaco:RBACO_0000119 ?from .
+      ?s rbaco:RBACO_0000120 ?from .
+      ?gainS cco:ont00001986 ?heldS ; a rbaco:RBACO_0000028 ;
+             obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tGainS . FILTER (?tGainS <= ?evalTime)
       FILTER NOT EXISTS { ?lossS cco:ont00001921 ?heldS ; a cco:ont00000613 ;
-                          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLossS . FILTER (?tLossS <= ?evalTime) }
+                          obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tLossS . FILTER (?tLossS <= ?evalTime) }
       ?heldS obo:BFO_0000197 ?yS ; obo:BFO_0000059 ?defS .
-      ?defS rbow:inForceAt ?evalTime ; rbo:RBO_0000120* ?s .
-      FILTER (?yS = ?person || EXISTS { ?gS a rbo:RBO_0000046 ; rbow:inForceAt ?evalTime ;
-                                        rbow:joins ?person , ?yS ; rbow:appliesTo ?c })
+      ?defS rbacow:inForceAt ?evalTime ; rbaco:RBACO_0000120* ?s .
+      FILTER (?yS = ?person || EXISTS { ?gS a rbaco:RBACO_0000046 ; rbacow:inForceAt ?evalTime ;
+                                        rbacow:joins ?person , ?yS ; rbacow:appliesTo ?c })
     } UNION {
-      ?act a rbo:RBO_0000031 ; cco:ont00001986 ?gNew .
-      ?gNew a rbo:RBO_0000046 ; rbow:inForceAt ?evalTime ; rbow:joins ?person , ?z ; rbow:appliesTo ?c .
+      ?act a rbaco:RBACO_0000031 ; cco:ont00001986 ?gNew .
+      ?gNew a rbaco:RBACO_0000046 ; rbacow:inForceAt ?evalTime ; rbacow:joins ?person , ?z ; rbacow:appliesTo ?c .
       FILTER (?z != ?person)
-      ?gainZ cco:ont00001986 ?heldZ ; a rbo:RBO_0000028 ;
-             obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tGainZ . FILTER (?tGainZ <= ?evalTime)
+      ?gainZ cco:ont00001986 ?heldZ ; a rbaco:RBACO_0000028 ;
+             obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tGainZ . FILTER (?tGainZ <= ?evalTime)
       FILTER NOT EXISTS { ?lossZ cco:ont00001921 ?heldZ ; a cco:ont00000613 ;
-                          obo:BFO_0000199/obo:BFO_0000222/rbo:RBO_0000205 ?tLossZ . FILTER (?tLossZ <= ?evalTime) }
+                          obo:BFO_0000199/obo:BFO_0000222/rbaco:RBACO_0000205 ?tLossZ . FILTER (?tLossZ <= ?evalTime) }
       ?heldZ obo:BFO_0000197 ?z ; obo:BFO_0000059 ?from .
     }
-    ?from rbow:inForceAt ?evalTime .
-    { ?c rbo:RBO_0000114 ?m0 . ?from rbo:RBO_0000120* ?m0 }
-    UNION { ?c rbo:RBO_0000135 ?m0 . ?m0 rbo:RBO_0000132 ?d0 . ?from rbo:RBO_0000120* ?d0 }
-    UNION { ?c rbo:RBO_0000134 ?m0 . ?m0 rbow:contentKey ?k0 .
-            ?p0 a rbo:RBO_0000007 ; rbow:contentKey ?k0 ; rbow:inForceAt ?evalTime ;
-                rbo:RBO_0000105 ?d0 .
-            ?from rbo:RBO_0000120* ?d0 }
+    ?from rbacow:inForceAt ?evalTime .
+    { ?c rbaco:RBACO_0000114 ?m0 . ?from rbaco:RBACO_0000120* ?m0 }
+    UNION { ?c rbaco:RBACO_0000135 ?m0 . ?m0 rbaco:RBACO_0000132 ?d0 . ?from rbaco:RBACO_0000120* ?d0 }
+    UNION { ?c rbaco:RBACO_0000134 ?m0 . ?m0 rbacow:contentKey ?k0 .
+            ?p0 a rbaco:RBACO_0000007 ; rbacow:contentKey ?k0 ; rbacow:inForceAt ?evalTime ;
+                rbaco:RBACO_0000105 ?d0 .
+            ?from rbaco:RBACO_0000120* ?d0 }
   })
-  ?c ?kind ?counted . VALUES (?kind ?describes) { (rbo:RBO_0000114 rbo:RBO_0000126) (rbo:RBO_0000134 rbo:RBO_0000146)
-                                                  (rbo:RBO_0000135 rbo:RBO_0000147) }
+  ?c ?kind ?counted . VALUES (?kind ?describes) { (rbaco:RBACO_0000114 rbaco:RBACO_0000126) (rbaco:RBACO_0000134 rbaco:RBACO_0000146)
+                                                  (rbaco:RBACO_0000135 rbaco:RBACO_0000147) }
   FILTER (CONTAINS(?members, CONCAT(" ", STR(?counted), " ")))
   OPTIONAL { ?c rdfs:label ?cLabel }
-  BIND (EXISTS { ?act a rbo:RBO_0000028 } AS ?byAssignment)
+  BIND (EXISTS { ?act a rbaco:RBACO_0000028 } AS ?byAssignment)
   BIND (IRI(CONCAT(STR(?act), "-ssd-conflict-", STRAFTER(STR(?c), "/data/"),
                    IF(?byAssignment, "", CONCAT("-", STRAFTER(STR(?person), "/data/"))))) AS ?report)
   BIND (CONCAT("SSD conflict: ", STR(?act), IF(?byAssignment, "", CONCAT(" for ", STR(?person)))) AS ?label)
   BIND (CONCAT("Violates SSD constraint ", COALESCE(STR(?cLabel), STR(?c)),
                ": the ", IF(?byAssignment, "assignee", "subject"),
                ", with any agent counted as one with them, is authorized for ", STR(?k), " of its members",
-               IF(EXISTS { ?c rbo:RBO_0000134 ?anyPerm }, " (permissions with one operation and object scope count once)", ""))
+               IF(EXISTS { ?c rbaco:RBACO_0000134 ?anyPerm }, " (permissions with one operation and object scope count once)", ""))
         AS ?why)
 }

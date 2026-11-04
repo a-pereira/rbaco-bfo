@@ -1,7 +1,7 @@
 """Serialize Turtle ontology files to RDF/XML beside them. Usage: to_rdfxml.py <in.ttl> <out.owl> [...pairs]
 
 rdflib's pretty-xml writer sometimes mangles RDF lists, depending on blank node order (seen on 2026-10-30:
-rbo-domain.owl, 169 triples in, 173 out). Each file is therefore checked by parsing it back; a failed round
+rbaco-bfo-domain.owl, 169 triples in, 173 out). Each file is therefore checked by parsing it back; a failed round
 trip is retried, and after three failures the plain xml writer, which does not nest lists, is used instead."""
 import sys
 from rdflib import Graph
