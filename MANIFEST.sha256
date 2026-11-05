@@ -5,7 +5,7 @@ f0b86e8db82f35a2418766263aa724582ddfbd0ad1e2738e5cf7b9676a29b3f7 *./.claude/hook
 dc3c2a9c21644331dc66df75d818009fdc75aa3683b5dc880e98712425fd17e0 *./.gitattributes
 847c94761fc47a1d783ada2c058580f5d108a47a49eae3205fcb39c874aa2066 *./.gitignore
 e0e7b1d3a5a3e6b34291912c363c6f37401ab374bc8c4ab019570e10ea26c521 *./CITATION.cff
-b806ea0dcc1a4f3380fd99b3794100f3b3cac433176bb6e1fada393807d4a6cd *./CLAUDE.md
+0325e675284800e4db27ed43e7d6c6396692d7c4fa793050a9eea4783da31eb6 *./CLAUDE.md
 78a09f1d74d3fca7ad13c7ccc34793cf464869ec571f61f1e67837d515400c01 *./LICENSE.md
 a6dc6879e0034c13335912ed26032dda387b6f476473d93d42dbc369d6826f30 *./LICENSES/BSD-3-Clause.txt
 9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411 *./LICENSES/CC-BY-4.0.txt
@@ -26,9 +26,9 @@ ef450f90f425a9a175db31ad222b05e822307e79a21f5b1b4bcf9751c55c71b1 *./data/rt-poli
 0f70c668cafb92a82e1102f647578311554f85b4c531e13823d193fa9d125a65 *./data/us-persons.ttl
 2ec7f75739cae9fdee887d1965dac72a7a124054afa57ae5805ea33a8b854d16 *./docs/botha-review.md
 bf783756206a28d917e67e5517734394d20171ad5d8a2d6d11e72a03ee48b57e *./docs/critique.md
-b19ea2cccf9f7a21e9f6e53f751776a233d2246ef7643bb163a49d5be0e0a212 *./docs/design-record.md
+6e578297fe6f6e82605c8cd47d249527631fffc472c79b2f12a0e2867b1c6f57 *./docs/design-record.md
 35eabc44a21b694062bbbf5f745a6f852607b7d708b440283c161b17585fc0d1 *./docs/dl/inferences.txt
-fe066a745620a3165a856da367ac78082b0f64a9f0fb341267d6a90414049f2b *./docs/expected-results.md
+b5e048a407f0a3ab6ecc1d80eea19a0cddc0b60e8e4ba48ab39fc5e2d221a474 *./docs/expected-results.md
 a219d224f4fb06a9f82bed2b7abe118e9eb83a8fe6ba962e3c2cf8621f7e9955 *./docs/fol-results.md
 93c8f402b47ddae7730e13c8284e5998d38e74344a3af288c07af723cf3f7ab3 *./docs/fol/hand-pdsd-same-content.py
 230cb3714aaf090bdc74c371d58d9b222abe13ae21c06988db4a32cea444af6b *./docs/fol/hand-pdsd-same-instant.py
@@ -37,7 +37,7 @@ c4d28678800575771f73dbb625d3b86f4a04f017d0e5eba660bd9ad4f538d522 *./docs/fol/m-t
 a0c95eda6a839b46db8b77ed7461e6a5282387509c861f39e1ecdd7d0eb48dab *./docs/fol/model-results.txt
 f469aa84cd7db4a73378d8c3e0bf375b02704b375af14f312f5d2bf1e64ab995 *./docs/mapping.md
 b00cc0b267aef0af0812e572f0524cfaa111e25141c4fc1fb833c02e97767c89 *./docs/query-results.md
-8aa3622a95f2d14fbcf8fc41466edee7c02c8541e9558ea3e8e4e4b681737cb3 *./docs/verification.md
+9fcb8477a0643ada110fe36eeffc010c07ff4205597f9ae1ce7beba52e7b9ef1 *./docs/verification.md
 ab25164d15ef1b89922b87e40f521df32e2a13a8c8121fb84f788d41d2b6e0ec *./imports/AgentOntology.ttl
 5819319a6a8fee4c219a9f35a9ec03f36fdf68f6d400accfc3cba67a7661d3f9 *./imports/ArtifactOntology.ttl
 fa0063e0d0e2a95bcd32a5ddfe6c9661b540e91f2e4e45fd73c779cc282afed9 *./imports/EventOntology.ttl
