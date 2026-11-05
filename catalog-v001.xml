@@ -2,7 +2,7 @@
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <!-- RBACO and its domain module -->
     <uri name="https://w3id.org/rbaco/bfo/rbaco-bfo.owl" uri="rbaco-bfo.ttl"/>
-    <uri name="https://w3id.org/rbaco/bfo/2026-11-01/rbaco-bfo.owl" uri="rbaco-bfo.ttl"/>
+    <uri name="https://w3id.org/rbaco/bfo/2026-11-05/rbaco-bfo.owl" uri="rbaco-bfo.ttl"/>
     <uri name="https://w3id.org/rbaco/bfo/rbaco-bfo-domain.owl" uri="rbaco-bfo-domain.ttl"/>
     <uri name="https://w3id.org/rbaco/bfo/imports/iao-extract.owl" uri="imports/iao-extract.ttl"/>
     <!-- BFO 2020 core, by the IRI CCO imports it under (its owl:versionIRI) and by its ontology IRI -->

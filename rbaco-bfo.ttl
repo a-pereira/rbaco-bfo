@@ -15,7 +15,7 @@
 
 #: <https://w3id.org/rbaco/bfo/rbaco-bfo.owl>  Role-Based Access Control Ontology, BFO edition (RBACO-BFO)
 <https://w3id.org/rbaco/bfo/rbaco-bfo.owl> rdf:type owl:Ontology ;
-    owl:versionIRI <https://w3id.org/rbaco/bfo/2026-11-01/rbaco-bfo.owl> ;
+    owl:versionIRI <https://w3id.org/rbaco/bfo/2026-11-05/rbaco-bfo.owl> ;
     owl:imports <http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl> ,
                 <https://www.commoncoreontologies.org/AgentOntology> ,  #: Agent Ontology
                 <https://www.commoncoreontologies.org/EventOntology> ,  #: Event Ontology
@@ -27,8 +27,8 @@
     dcterms:title "Role-Based Access Control Ontology, BFO edition (RBACO-BFO)"@en ;
     dcterms:description "A BFO 2020 and CCO conformant ontology covering the patterns of ROWLBAC (Finin et al., SACMAT 2008) to the semantics of the proposed NIST RBAC standard (Ferraiolo et al., ACM TISSEC 4(3), 2001). Sessions are business process instances, and tasks within them carry the separation of duty patterns of Botha and Eloff (IBM Systems Journal 40(3), 2001). An RBAC role is a role definition (an information content entity) concretized by a BFO role of each assigned person. Constraints are regulations whose violations are found by SPARQL queries and recorded as conflict reports."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    rdfs:comment "The w3id.org redirect for https://w3id.org/rbaco/bfo/ is not registered yet, so these IRIs do not resolve."@en ;
-    owl:versionInfo "2026-11-01 draft for review, with tasks and conflicting entities after Botha and Eloff 2001, task-bound operations, and conflict reports over role, permission and task members"@en .
+    rdfs:comment "Source, releases and documentation: https://github.com/a-pereira/rbaco-bfo"@en ;
+    owl:versionInfo "0.1.0 of 2026-11-05, the first release, with tasks and conflicting entities after Botha and Eloff 2001, task-bound operations, and conflict reports over role, permission and task members"@en .
 
 #################################################################
 #    Annotation properties

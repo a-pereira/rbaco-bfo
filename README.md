@@ -4,7 +4,7 @@ RBACO, the Role-Based Access Control Ontology, re-expresses the ROWLBAC patterns
 
 This repository holds the BFO edition, RBACO-BFO; in its documents, RBACO means this edition. An edition on UFO may follow in a repository of its own. The last letter of the name is O, for ontology: RBACO is not RBAC0, the base model of the RBAC96 family (Sandhu et al., "Role-Based Access Control Models", IEEE Computer 29(2), 1996, pp.38–47). It also covers role hierarchies and separation of duty constraints (design-record D8, D9), which RBAC96 adds to RBAC0 in RBAC1 and RBAC2.
 
-**Status.** A draft for review, not yet released: ontology version 2026-11-01, with the correction of design-record D19 (2026-11-03) and the rename of D20. Term IRIs are under `https://w3id.org/rbaco/bfo/`, whose w3id.org redirect is not registered yet, so they do not resolve. The example data's IRIs are under `https://example.org/rbaco/data/`.
+**Status.** Release 0.1.0 of 2026-11-05, the first, tagged `v0.1.0`. Its version IRIs are `https://w3id.org/rbaco/bfo/2026-11-05/rbaco-bfo.owl` and `https://w3id.org/rbaco/bfo/2026-11-05/rbaco-bfo-domain.owl` (design-record D22). Term IRIs are under `https://w3id.org/rbaco/bfo/`, whose w3id.org redirect is not registered yet, so they do not resolve. The example data's IRIs are under `https://example.org/rbaco/data/`.
 
 **License.** CC BY 4.0 for the ontology, the data and the documents; BSD 3-Clause for the scripts, the queries and the model specifications. The imported ontologies in `imports/` keep their own licenses. `LICENSE.md` says which file is under which, `NOTICE.md` covers the imports, and `CITATION.cff` gives the citation.
 

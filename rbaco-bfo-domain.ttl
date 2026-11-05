@@ -15,12 +15,12 @@
 
 #: <https://w3id.org/rbaco/bfo/rbaco-bfo-domain.owl>  RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 <https://w3id.org/rbaco/bfo/rbaco-bfo-domain.owl> rdf:type owl:Ontology ;
-    owl:versionIRI <https://w3id.org/rbaco/bfo/2026-11-01/rbaco-bfo-domain.owl> ;
+    owl:versionIRI <https://w3id.org/rbaco/bfo/2026-11-05/rbaco-bfo-domain.owl> ;
     owl:imports <https://w3id.org/rbaco/bfo/rbaco-bfo.owl> ;  #: Role-Based Access Control Ontology, BFO edition (RBACO-BFO)
     rdfs:label "RBACO-BFO domain module: ROWLBAC scenario and attribute examples"@en ;
     dcterms:description "The domain terms ROWLBAC's patterns need: the US persons role hierarchy of ROWLBAC Figure 1 as role universals, the business process type hosting its narratives, and the places, devices and university roles of its section 4.1 examples. ROWLBAC likewise pairs each base ontology with a domain ontology (section 3)."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    owl:versionInfo "2026-11-01 draft for review"@en .
+    owl:versionInfo "0.1.0 of 2026-11-05, the first release"@en .
 
 #################################################################
 #    Object properties
