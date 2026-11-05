@@ -22,7 +22,7 @@ This repository is RBACO-BFO, the BFO edition of RBACO, an ontology of role-base
 
 `/reverify` (`.claude/commands/reverify.md`) runs these steps. In a Claude Code cloud session, the SessionStart hook `.claude/hooks/session-start.sh` installs the tools outside the repository, checks their SHA-256, and exports `RBACO_PY`, `RBACO_ROBOT` and `RBACO_LADR`, the first three arguments of step 2.
 
-The checks run on Windows in Git Bash and on Linux, where `tools/ladr/build_ladr_linux.sh` builds the LADR binaries (design-record D21). Every text file they write has LF line endings on both, and no report holds a run time, so a run on the same inputs reproduces every file it writes, byte for byte. Known gap: the port of D21 has been run on Linux only; it has not been rerun on Windows yet.
+The checks run on Windows in Git Bash and on Linux, where `tools/ladr/build_ladr_linux.sh` builds the LADR binaries (design-record D21). Every text file they write has LF line endings on both, and no report holds a run time, so a run on the same inputs reproduces every file it writes, byte for byte.
 
 ## Demonstrating
 

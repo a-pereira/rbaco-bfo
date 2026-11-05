@@ -1,6 +1,6 @@
 # Expected results
 
-What the checks must give when they are run again. Counts must match exactly; run times will not. The baseline was measured on Windows 11 in Git Bash, last on 2026-11-03 after the rename of design-record D20. On 2026-11-04, after the port of design-record D21, the checks were run on Linux and gave every count below (section Linux).
+What the checks must give when they are run again. Counts must match exactly; run times will not. The baseline was measured on Windows 11 in Git Bash, last on 2026-11-03 after the rename of design-record D20, and on Linux on 2026-11-04 after the port of design-record D21 (section Linux). A rerun of the port on Windows, reported on 2026-11-05, gave every result again, so the baseline holds on both.
 
 ## Tools
 
@@ -48,6 +48,6 @@ Not part of `run_all.sh`. The README's two `check_hand_model.py` commands: 137 o
 
 ## What a run may change
 
-`run_all.sh` rewrites `docs/query-results.md`, `docs/fol-results.md`, `docs/dl/inferences.txt` and `data/derived/`, and `run_fol.py` writes the two theories that `docs/fol/` keeps to `<work-dir>/fol/`. Since design-record D21 the reports hold no run time or run date, and the checks write every text file with LF line endings on every platform. On the same inputs a run therefore reproduces all of them byte for byte, and `sha256sum -c MANIFEST.sha256` afterwards reports no file as changed. The times are in the work directory: the query run's in `queries.log`, the first-order run's date and each run's seconds in `fol.log` and `fol/fol-results.md`. This held on Linux on 2026-11-04; the port has not been rerun on Windows yet.
+`run_all.sh` rewrites `docs/query-results.md`, `docs/fol-results.md`, `docs/dl/inferences.txt` and `data/derived/`, and `run_fol.py` writes the two theories that `docs/fol/` keeps to `<work-dir>/fol/`. Since design-record D21 the reports hold no run time or run date, and the checks write every text file with LF line endings on every platform. On the same inputs a run therefore reproduces all of them byte for byte, and `sha256sum -c MANIFEST.sha256` afterwards reports no file as changed. The times are in the work directory: the query run's in `queries.log`, the first-order run's date and each run's seconds in `fol.log` and `fol/fol-results.md`. This held on Linux on 2026-11-04, in two runs, and on Windows in the rerun reported on 2026-11-05.
 
 The generators of the other committed files reproduce them byte for byte: `tools/build_data.py`, `tools/annotate_ttl.py`, `tools/build_terms_csv.py` and `tools/build_iao_extract.py`. `rbaco-bfo-terms.csv` has CRLF line endings, which Python's csv module writes on every platform. On Linux on 2026-11-04 the first three were rerun with that result; `build_iao_extract.py` was not, since the IAO release it reads is served from purl.obolibrary.org, which the container could not reach. `tools/to_rdfxml.py` writes RDF/XML that is isomorphic to the committed files but not byte-identical, because rdflib's writer names and orders blank nodes differently from run to run; `parse` checks the isomorphism.
