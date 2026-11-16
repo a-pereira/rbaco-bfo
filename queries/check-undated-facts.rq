@@ -1,0 +1,29 @@
+# CHECK (warnings). Location, office and membership triples that no record repeats. The queries decide
+# from location, office assignment and membership records in force at a time (derive-dated-facts.rq), and
+# do not read located in (BFO_0000171), has office (RBACO_0001101) or member part of (BFO_0000129), which
+# carry no time. Each row is such a triple with no record of any date naming the same pair, so nothing
+# the triple says is counted at any time. A triple whose record was retired is not reported: the triple
+# is then the record's past, which is all an untimed triple can say.
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+SELECT ?subject ?property ?object
+WHERE {
+  {
+    ?subject obo:BFO_0000171 ?object .
+    FILTER NOT EXISTS { ?rec a rbaco:RBACO_0000051 ; rbaco:RBACO_0000150 ?subject ; rbaco:RBACO_0000151 ?object }
+    BIND ("located in" AS ?property)
+  } UNION {
+    ?subject rbaco:RBACO_0001101 ?object .
+    FILTER NOT EXISTS { ?rec a rbaco:RBACO_0001026 ; rbaco:RBACO_0001102 ?subject ; rbaco:RBACO_0001103 ?object }
+    BIND ("has office" AS ?property)
+  } UNION {
+    ?subject obo:BFO_0000129 ?object .
+    FILTER NOT EXISTS { ?rec a rbaco:RBACO_0000052 ; rbaco:RBACO_0000152 ?subject ; rbaco:RBACO_0000153 ?object }
+    BIND ("member part of" AS ?property)
+  }
+}
+ORDER BY ?property ?subject ?object

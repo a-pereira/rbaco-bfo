@@ -1,11 +1,13 @@
 # DERIVATION (intermediate, independent of time). For each conflicting agent designation, written with
-# query-internal predicates outside the ontology: the agents it counts as one (rbacow:joins), the constraints
-# it applies to (rbacow:appliesTo) and, for a dynamic one, the instances it applies in (rbacow:appliesIn). The
+# query-internal predicates outside the ontology: the agents it names and counts as one (rbacow:joins), the
+# constraints it applies to (rbacow:appliesTo) and, for a dynamic one, the instances it applies in
+# (rbacow:appliesIn). The members of a group it designates depend on time, and derive-dated-facts.rq writes
+# them as rbacow:joins at each evaluation time. The
 # conflict derivations and the worklist then read "an agent a designation in force counts as one with the
 # principal" (Botha and Eloff 2001, Table 1 row 3 and Table 2; clif [rbaco-u3], [rbaco-u4]) as one pattern:
 # ?g a <kind> ; rbacow:inForceAt ?evalTime ; rbacow:joins ?x , ?y ; rbacow:appliesTo ?c [; rbacow:appliesIn ?instance].
-#   joins     - the agent it designates (RBACO_0000138), or each member (BFO_0000129) of the group it
-#               designates (RBACO_0000139)
+#   joins     - the agent it designates (RBACO_0000138); for a group it designates (RBACO_0000139), see
+#               derive-dated-facts.rq
 #   appliesTo - each constraint in its constraint scope (RBACO_0000140); with none, every constraint with a
 #               cardinality (RBACO_0000201), as every constraint a query counts has
 #   appliesIn - each instance prescribed by a plan in its plan scope (RBACO_0000115); with none, every
@@ -22,7 +24,7 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 CONSTRUCT { ?g rbacow:joins ?agent ; rbacow:appliesTo ?c ; rbacow:appliesIn ?instance }
 WHERE {
   {
-    ?g a rbaco:RBACO_0000045 ; rbaco:RBACO_0000138|rbaco:RBACO_0000139/^obo:BFO_0000129 ?agent .
+    ?g a rbaco:RBACO_0000045 ; rbaco:RBACO_0000138 ?agent .
   } UNION {
     ?g a rbaco:RBACO_0000045 ; rbaco:RBACO_0000140 ?c .
   } UNION {

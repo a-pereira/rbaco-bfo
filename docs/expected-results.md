@@ -1,6 +1,6 @@
 # Expected results
 
-What the checks must give when they are run again. Counts must match exactly; run times will not. The baseline was measured on Windows 11 in Git Bash, last on 2026-11-03 after the rename of design-record D20, and on Linux on 2026-11-04 after the port of design-record D21 (section Linux). A rerun of the port on Windows, reported on 2026-11-05, gave every result again, so the baseline holds on both.
+What the checks must give when they are run again. Counts must match exactly; run times will not. The baseline was measured on Windows 11 in Git Bash, last on 2026-11-03 after the rename of design-record D20, and on Linux on 2026-11-04 after the port of design-record D21 (section Linux). A rerun of the port on Windows, reported on 2026-11-05, gave every result again, so the baseline held on both. The dated records of design-record D23 changed the model, the queries and the data, and with them the counts marked D23 below, measured on Windows on 2026-11-15; they have not been measured on Linux.
 
 ## Tools
 
@@ -29,14 +29,14 @@ The Linux binaries have no stack size of their own: `run_fol.py` and `check_hand
 
 | Step | Expected |
 |---|---|
-| parse | every file parses; `rbaco-bfo.owl` and `rbaco-bfo-domain.owl` isomorphic to the Turtle; 38 and 8 borrowed IRIs, none missing from `imports/` |
+| parse | every file parses; `rbaco-bfo.owl` and `rbaco-bfo-domain.owl` isomorphic to the Turtle; 39 and 10 borrowed IRIs (D23), none missing from `imports/` |
 | order | 0 forward references in each of the six data files |
 | labels | no file stale |
-| clif | 48 axioms, 48 distinct IDs, 82 predicates |
-| queries | 32 of 32 run without error; probe expectations 15 of 15; `docs/query-results.md` and `data/derived/` as committed, byte for byte |
+| clif | 48 axioms, 48 distinct IDs, 83 predicates (D23) |
+| queries | 34 of 34 run without error; probe expectations 17 of 17 (D23); `docs/query-results.md` and `data/derived/` as committed, byte for byte |
 | rowlbac | as in `docs/verification.md` § 4 |
 | rl | 0 clashes in all six datasets; 4 of 4 negative controls detected |
-| dl | 8 of 8 inputs consistent, no unsatisfiable classes; purchase: 653 individuals, 4,439 inferred type assertions; probes: 820 and 5,439 |
+| dl | 8 of 8 inputs consistent, no unsatisfiable classes; purchase: 655 individuals, 4,453 inferred type assertions; probes: 836 and 5,556 (D23) |
 | dl-diff | 0 candidate merges |
 | controls | 8 of 8 rejected |
 | inferences | `docs/dl/inferences.txt` rewritten: 111 lines, a verdict for each of the 8 controls |

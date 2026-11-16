@@ -2,6 +2,33 @@
 @prefix rbaco: <https://w3id.org/rbaco/bfo/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
+ex:dick-assign-auditor-2-ssd-conflict-pssd-approve-audit a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-2" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:pssd-approve-audit ;         #: describes violated constraint
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-2 ;      #: describes conflicting act
+    rbaco:RBACO_0000146 ex:perm-apm-approve,            #: describes conflicting permission
+        ex:perm-auditor-audit ;
+    rbaco:RBACO_0000204 "Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once)" .  #: has justification
+
+ex:dick-assign-auditor-2-ssd-conflict-ssd-auditor-apm a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-2" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:ssd-auditor-apm ;            #: describes violated constraint
+    rbaco:RBACO_0000126 ex:def-apm,                     #: describes conflicting role definition
+        ex:def-auditor ;
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-2 ;      #: describes conflicting act
+    rbaco:RBACO_0000204 "Violates SSD constraint SSD {Auditor, APM}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
+
+ex:dick-assign-auditor-2-ssd-conflict-tssd-approve-audit a rbaco:RBACO_0000019 ;  #: static separation of duty conflict report
+    rdfs:label "SSD conflict: https://example.org/rbaco/data/dick-assign-auditor-2" ;
+    rbaco:RBACO_0000124 ex:dick ;                       #: describes conflict subject
+    rbaco:RBACO_0000125 ex:tssd-approve-audit ;         #: describes violated constraint
+    rbaco:RBACO_0000128 ex:dick-assign-auditor-2 ;      #: describes conflicting act
+    rbaco:RBACO_0000147 ex:ts-approve-audit,            #: describes conflicting task specification
+        ex:ts-approve-order ;
+    rbaco:RBACO_0000204 "Violates SSD constraint task SSD {approve order, approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members" .  #: has justification
+
 ex:dick-req-create-requisition-probe-6-decision a rbaco:RBACO_0000022 ;  #: access grant
     rdfs:label "grant of https://example.org/rbaco/data/dick-req-create-requisition-probe-6" ;
     rbaco:RBACO_0000112 ex:dick-req-create-requisition-probe-6 ;  #: decides on

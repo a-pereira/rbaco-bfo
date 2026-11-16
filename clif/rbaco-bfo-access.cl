@@ -1,5 +1,5 @@
 (cl:comment '
-RBACO-BFO access module, draft of 2026-11-03
+RBACO-BFO access module, draft of 2026-11-15
 Companion to rbaco-bfo.owl. It states, in first-order logic, the parts of the RBACO account that OWL 2 DL cannot:
 time-indexed seniority, the counting in separation-of-duty constraints over roles, permissions and tasks,
 agents counted as one, task-bound activation and operations, deny-overrides, and RT role linking.
@@ -30,6 +30,7 @@ Name mapping. BFO 2020 names are used as in the BFO CLIF. Other names map to OWL
   rbaco-on-behalf-of               RBACO_0000143   rbaco-requires-prior        RBACO_0000144
   rbaco-requires-human             RBACO_0000145   rbaco-requires-operation    RBACO_0000133
   rbaco-task-binding-requirement   RBACO_0000050   rbaco-requires-task-binding RBACO_0000148
+  rbaco-records-member             RBACO_0000152   rbaco-records-group         RBACO_0000153
   cco-prescribed-by              cco:ont00001920   cco-has-output        cco:ont00001986
   cco-has-agent                  cco:ont00001833   cco-person            cco:ont00001262
   rbaco-has-head                   RBACO_0000116   rbaco-has-body              RBACO_0000117
@@ -46,10 +47,12 @@ Name mapping. BFO 2020 names are used as in the BFO CLIF. Other names map to OWL
                                  at the same time with a smaller IRI; the queries compute it
   rbaco-meets-description          no OWL counterpart: rbaco-meets-description b e q holds when, at the time of
                                  q, object b is an instance of every object type criterion (RBACO_0000302) of
-                                 description e, is located in an instance of every object location type
-                                 criterion (RBACO_0000303), and, if e is a requester office condition
-                                 (RBACO_0000011), is located in an office (RBACO_0001101, rbaco-bfo-domain.ttl) of the
-                                 requester of q; derive-regulation-coverage.rq tests it
+                                 description e, a location record (RBACO_0000051) in force locates it in an
+                                 instance of every object location type criterion (RBACO_0000303), and, if e
+                                 is a requester office condition (RBACO_0000011), a location record in force
+                                 locates it in an office that an office assignment record in force
+                                 (RBACO_0001026, rbaco-bfo-domain.ttl) assigns to the requester of q;
+                                 derive-regulation-coverage.rq tests it
   rbaco-senior-or-same, rbaco-authorized-for, rbaco-scope-fits, rbaco-explicitly-active, rbaco-request-time,
   rbaco-active-for, rbaco-active-for-request, rbaco-covers, rbaco-warrants-grant, rbaco-principal, rbaco-designates,
   rbaco-designation-applies, rbaco-same-static-subject, rbaco-same-dynamic-subject, rbaco-authorized-for-permission,
@@ -85,7 +88,7 @@ for access control enforcement in workflow environments", IBM Systems Journal 40
    rbaco-has-cardinality rbaco-active-for rbaco-covers rbaco-warrants-grant rbaco-request-time cco-prescribed-by
    rbaco-violates-ssd rbaco-violates-dsd rbaco-scope-fits rbaco-explicitly-active rbaco-member-of rbaco-has-head rbaco-names-member
    rbaco-has-body rbaco-has-linking-base rbaco-linked-role rbaco-role-of-name
-   member-part-of precedes cco-has-agent rbaco-principal rbaco-on-behalf-of rbaco-designates rbaco-designates-agent
+   rbaco-records-member rbaco-records-group precedes cco-has-agent rbaco-principal rbaco-on-behalf-of rbaco-designates rbaco-designates-agent
    rbaco-designates-group rbaco-designation-applies rbaco-applies-to-constraint rbaco-same-static-subject
    rbaco-same-dynamic-subject rbaco-requires-role rbaco-activated-for rbaco-active-for-request
    rbaco-constrains-permission rbaco-constrains-task rbaco-authorized-for-permission rbaco-exercised rbaco-decides-on
@@ -261,11 +264,12 @@ for access control enforcement in workflow environments", IBM Systems Journal 40
             (and (exists (t) (instance-of g rbaco-dynamic-designation t)) (exists (t) (instance-of c rbaco-dsd-constraint t))))
        (or (not (exists (c2) (rbaco-applies-to-constraint g c2))) (rbaco-applies-to-constraint g c))))))
 
-  (cl:comment 'Designation g designates x at t when it names x, or names a group of agents x is a member part of at t [rbaco-u2]'
+  (cl:comment 'Designation g designates x at t when it names x, or names a group of agents of which a membership record in force at t records x as a member. The record, not member-part-of at t, is what the decision reads: the OWL data state member part of without a time [rbaco-u2]'
     (forall (g x t)
      (iff (rbaco-designates g x t)
       (or (rbaco-designates-agent g x)
-       (exists (m) (and (rbaco-designates-group g m) (member-part-of x m t)))))))
+       (exists (m r) (and (rbaco-designates-group g m) (rbaco-records-member r x) (rbaco-records-group r m)
+                      (rbaco-in-force r t)))))))
 
   (cl:comment 'x and y are one subject for static constraint c at t when they are identical or one applicable designation in force at t designates both. Not transitive: two designations sharing an agent do not join the others [rbaco-u3]'
     (forall (x y c t)

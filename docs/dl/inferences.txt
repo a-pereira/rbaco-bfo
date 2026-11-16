@@ -1,4 +1,4 @@
-== rbaco-bfo: merged 12327 triples, reasoned 12346
+== rbaco-bfo: merged 12387 triples, reasoned 12406
   new subClassOf between named classes: 26; touching RBACO: 4
     assigned role (RBACO_0000002)  ->  role (BFO_0000023)
     role separation of duty constraint (RBACO_0000042)  ->  separation of duty constraint (RBACO_0000012)
@@ -6,7 +6,7 @@
     task separation of duty constraint (RBACO_0000044)  ->  separation of duty constraint (RBACO_0000012)
   new equivalentClass between named classes: 1; touching RBACO: 0
     information content entity (IAO_0000030)  ->  Information Content Entity (ont00000958)
-== rbaco-bfo-domain: merged 12469 triples, reasoned 12489
+== rbaco-bfo-domain: merged 12559 triples, reasoned 12579
   new subClassOf between named classes: 27; touching RBACO: 5
     assigned role (RBACO_0000002)  ->  role (BFO_0000023)
     role separation of duty constraint (RBACO_0000042)  ->  separation of duty constraint (RBACO_0000012)
@@ -36,13 +36,13 @@
     policy administration act (RBACO_0000030): 4  e.g. https://example.org/rbaco/data/dana-assign-approver-1, https://example.org/rbaco/data/dana-assign-submitter-1, https://example.org/rbaco/data/eve-assign-approver-1, https://example.org/rbaco/data/policy-load
     separation of duty constraint (RBACO_0000012): 1  e.g. https://example.org/rbaco/data/dsd-submitter-approver
     candidate merges (an individual with 2+ values for a single-valued property): 0
-== abac: 147 individuals, 1189 inferred type assertions, 17 to RBACO classes
-    access decision (RBACO_0000021): 4  e.g. https://example.org/rbaco/data/marie-req-use-display-d7-decision, https://example.org/rbaco/data/marie-req-use-display-d8-decision, https://example.org/rbaco/data/marie-req-use-printer-p43-decision, https://example.org/rbaco/data/marie-req-use-printer-p44-decision
+== abac: 183 individuals, 1430 inferred type assertions, 26 to RBACO classes
+    access decision (RBACO_0000021): 8  e.g. https://example.org/rbaco/data/marie-req-use-display-d7-2-decision, https://example.org/rbaco/data/marie-req-use-display-d7-decision, https://example.org/rbaco/data/marie-req-use-display-d8-2-decision, https://example.org/rbaco/data/marie-req-use-display-d8-decision
     access regulation (RBACO_0000006): 2  e.g. https://example.org/rbaco/data/perm-faculty-classroom-printers, https://example.org/rbaco/data/perm-member-office-devices
-    classroom printer (RBACO_0001023): 1  e.g. https://example.org/rbaco/data/printer-p43
+    classroom printer (RBACO_0001023): 2  e.g. https://example.org/rbaco/data/printer-p43, https://example.org/rbaco/data/printer-p44
     device (RBACO_0001021): 2  e.g. https://example.org/rbaco/data/printer-p43, https://example.org/rbaco/data/printer-p44
     object description (RBACO_0000009): 1  e.g. https://example.org/rbaco/data/desc-own-office-device
-    policy administration act (RBACO_0000030): 3  e.g. https://example.org/rbaco/data/marie-assign-faculty-1, https://example.org/rbaco/data/marie-assign-university-member-1, https://example.org/rbaco/data/policy-load
+    policy administration act (RBACO_0000030): 7  e.g. https://example.org/rbaco/data/marie-assign-faculty-1, https://example.org/rbaco/data/marie-assign-university-member-1, https://example.org/rbaco/data/policy-load, https://example.org/rbaco/data/record-marie-office
     room (RBACO_0001017): 4  e.g. https://example.org/rbaco/data/classroom-c101, https://example.org/rbaco/data/lab-l1, https://example.org/rbaco/data/office-o12, https://example.org/rbaco/data/office-o13
     candidate merges (an individual with 2+ values for a single-valued property): 0
 == rt-policy: 119 individuals, 1028 inferred type assertions, 37 to RBACO classes
@@ -51,7 +51,7 @@
     role definition (RBACO_0000001): 10  e.g. https://example.org/rbaco/data/rt-HQ.marketing, https://example.org/rbaco/data/rt-HQ.marketingDelg, https://example.org/rbaco/data/rt-HQ.ops, https://example.org/rbaco/data/rt-HQ.specialPanel
     role inheritance statement (RBACO_0000017): 10  e.g. https://example.org/rbaco/data/rt-stmt-01, https://example.org/rbaco/data/rt-stmt-02, https://example.org/rbaco/data/rt-stmt-03, https://example.org/rbaco/data/rt-stmt-05
     candidate merges (an individual with 2+ values for a single-valued property): 0
-== purchase: 653 individuals, 4439 inferred type assertions, 88 to RBACO classes
+== purchase: 655 individuals, 4453 inferred type assertions, 88 to RBACO classes
     access decision (RBACO_0000021): 24  e.g. https://example.org/rbaco/data/dick-req-create-requisition-po-5-decision, https://example.org/rbaco/data/harry-req-approve-order-po-7-decision, https://example.org/rbaco/data/harry-req-approve-po-po-10-decision, https://example.org/rbaco/data/harry-req-create-requisition-po-4-decision
     access regulation (RBACO_0000006): 12  e.g. https://example.org/rbaco/data/perm-accountant-funds, https://example.org/rbaco/data/perm-apm-approve, https://example.org/rbaco/data/perm-apm-reject, https://example.org/rbaco/data/perm-approver-approve
     conflict report (RBACO_0000018): 10  e.g. https://example.org/rbaco/data/approval-bot-request-activate-manager-po-11-task-dsd-conflict, https://example.org/rbaco/data/dick-assign-auditor-1-ssd-conflict-pssd-approve-audit, https://example.org/rbaco/data/dick-assign-auditor-1-ssd-conflict-ssd-auditor-apm, https://example.org/rbaco/data/dick-assign-auditor-1-ssd-conflict-tssd-approve-audit
@@ -63,14 +63,14 @@
     separation of duty constraint (RBACO_0000012): 11  e.g. https://example.org/rbaco/data/dsd-sc-apm, https://example.org/rbaco/data/dsd-sc-approver, https://example.org/rbaco/data/pdsd-perms, https://example.org/rbaco/data/pdsd-users
     task separation of duty constraint (RBACO_0000044): 4  e.g. https://example.org/rbaco/data/tdsd-internal, https://example.org/rbaco/data/tdsd-tasks, https://example.org/rbaco/data/tssd-approve-audit, https://example.org/rbaco/data/tssd-issue-approve-po
     candidate merges (an individual with 2+ values for a single-valued property): 0
-== probes: 820 individuals, 5439 inferred type assertions, 80 to RBACO classes
+== probes: 836 individuals, 5556 inferred type assertions, 86 to RBACO classes
     access decision (RBACO_0000021): 8  e.g. https://example.org/rbaco/data/dick-req-create-requisition-probe-6-decision, https://example.org/rbaco/data/harry-req-complete-order-form-probe-4-decision, https://example.org/rbaco/data/tom-req-approve-order-probe-1-decision, https://example.org/rbaco/data/tom-req-approve-order-probe-2-decision
     access regulation (RBACO_0000006): 12  e.g. https://example.org/rbaco/data/perm-accountant-funds, https://example.org/rbaco/data/perm-apm-approve, https://example.org/rbaco/data/perm-apm-reject, https://example.org/rbaco/data/perm-approver-approve
-    conflict report (RBACO_0000018): 9  e.g. https://example.org/rbaco/data/harry-request-activate-sc-probe-8-task-dsd-conflict, https://example.org/rbaco/data/probe-issue-inh-ssd-conflict-pssd-approve-audit-dick, https://example.org/rbaco/data/probe-issue-inh-ssd-conflict-pssd-approve-audit-tom, https://example.org/rbaco/data/probe-issue-inh-ssd-conflict-ssd-auditor-apm-dick
+    conflict report (RBACO_0000018): 12  e.g. https://example.org/rbaco/data/dick-assign-auditor-2-ssd-conflict-pssd-approve-audit, https://example.org/rbaco/data/dick-assign-auditor-2-ssd-conflict-ssd-auditor-apm, https://example.org/rbaco/data/dick-assign-auditor-2-ssd-conflict-tssd-approve-audit, https://example.org/rbaco/data/harry-request-activate-sc-probe-8-task-dsd-conflict
     conflicting agent designation (RBACO_0000045): 5  e.g. https://example.org/rbaco/data/ddes-audit, https://example.org/rbaco/data/ddes-internal, https://example.org/rbaco/data/ddes-users, https://example.org/rbaco/data/probe-ddes-roles
     dynamic separation of duty constraint (RBACO_0000014): 7  e.g. https://example.org/rbaco/data/dsd-sc-apm, https://example.org/rbaco/data/dsd-sc-approver, https://example.org/rbaco/data/pdsd-perms, https://example.org/rbaco/data/pdsd-users
     permission separation of duty constraint (RBACO_0000043): 5  e.g. https://example.org/rbaco/data/pdsd-perms, https://example.org/rbaco/data/pdsd-users, https://example.org/rbaco/data/probe-pdsd-2, https://example.org/rbaco/data/pssd-approve-audit
-    policy administration act (RBACO_0000030): 15  e.g. https://example.org/rbaco/data/approval-bot-assign-manager-1, https://example.org/rbaco/data/dick-assign-auditor-1, https://example.org/rbaco/data/dick-assign-manager-1, https://example.org/rbaco/data/dick-assign-sc-1
+    policy administration act (RBACO_0000030): 18  e.g. https://example.org/rbaco/data/approval-bot-assign-manager-1, https://example.org/rbaco/data/dick-assign-auditor-1, https://example.org/rbaco/data/dick-assign-auditor-2, https://example.org/rbaco/data/dick-assign-auditor-3
     role separation of duty constraint (RBACO_0000042): 3  e.g. https://example.org/rbaco/data/dsd-sc-apm, https://example.org/rbaco/data/dsd-sc-approver, https://example.org/rbaco/data/ssd-auditor-apm
     separation of duty constraint (RBACO_0000012): 12  e.g. https://example.org/rbaco/data/dsd-sc-apm, https://example.org/rbaco/data/dsd-sc-approver, https://example.org/rbaco/data/pdsd-perms, https://example.org/rbaco/data/pdsd-users
     task separation of duty constraint (RBACO_0000044): 4  e.g. https://example.org/rbaco/data/tdsd-internal, https://example.org/rbaco/data/tdsd-tasks, https://example.org/rbaco/data/tssd-approve-audit, https://example.org/rbaco/data/tssd-issue-approve-po

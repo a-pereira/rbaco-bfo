@@ -7,7 +7,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:probes a owl:Ontology ;
-    rdfs:comment "Regression probes for the remediations of 2026-10-31, read together with purchase.ttl: permissions identified by content (probes 1 and 2), access requests at one instant (3), an active role ending with the assigned role it depends on (4), designations counted only while in force (5 and 6), static separation of duty at an issuing act (7), and activation requests at one instant (8). Each probe has an instance or act of its own; tools/run_queries.py checks the results each must give."@en ;
+    rdfs:comment "Regression probes for the remediations of 2026-10-31, read together with purchase.ttl: permissions identified by content (probes 1 and 2), access requests at one instant (3), an active role ending with the assigned role it depends on (4), designations counted only while in force (5 and 6), static separation of duty at an issuing act (7), activation requests at one instant (8), and, for the dated records of 2026-11-15, group members counted only while their membership record is in force (9). Each probe has an instance or act of its own; tools/run_queries.py checks the results each must give."@en ;
     owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:probe-plan-2 a rbaco:RBACO_0000005 ;                 #: business process plan
@@ -836,3 +836,54 @@ ex:probe-issue-inh a rbaco:RBACO_0000031 ;              #: policy issuing act
     obo:BFO_0000199 ex:probe-issue-inh-interval ;       #: occupies temporal region
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:inh-manager-auditor .            #: has output
+
+ex:dick-auditor-assigned-2 a rbaco:RBACO_0000002 ;      #: assigned role
+    rdfs:label "dick's assigned auditor role, tenure 2"@en ;
+    obo:BFO_0000059 ex:def-auditor ;                    #: concretizes
+    obo:BFO_0000197 ex:dick .                           #: inheres in
+
+ex:dick-assign-auditor-2-start a obo:BFO_0000203 ;      #: temporal instant
+    rbaco:RBACO_0000205 "2026-02-10T07:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:dick-assign-auditor-2-interval a obo:BFO_0000202 ;   #: temporal interval
+    obo:BFO_0000222 ex:dick-assign-auditor-2-start .    #: has first instant
+
+ex:dick-assign-auditor-2 a rbaco:RBACO_0000028 ;        #: role assignment
+    rdfs:label "assignment of dick to auditor"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000057 ex:dick ;                           #: has participant
+    obo:BFO_0000199 ex:dick-assign-auditor-2-interval ;  #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001986 ex:dick-auditor-assigned-2 .        #: has output
+
+ex:probe-retire-dick-membership-start a obo:BFO_0000203 ;  #: temporal instant
+    rbaco:RBACO_0000205 "2026-02-10T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:probe-retire-dick-membership-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:probe-retire-dick-membership-start .  #: has first instant
+
+ex:probe-retire-dick-membership a rbaco:RBACO_0000032 ;  #: policy retiring act
+    rdfs:label "policy retiring act probe-retire-dick-membership"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000199 ex:probe-retire-dick-membership-interval ;  #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001921 ex:mem-dick-1 .                     #: has input
+
+ex:dick-auditor-assigned-3 a rbaco:RBACO_0000002 ;      #: assigned role
+    rdfs:label "dick's assigned auditor role, tenure 3"@en ;
+    obo:BFO_0000059 ex:def-auditor ;                    #: concretizes
+    obo:BFO_0000197 ex:dick .                           #: inheres in
+
+ex:dick-assign-auditor-3-start a obo:BFO_0000203 ;      #: temporal instant
+    rbaco:RBACO_0000205 "2026-02-10T09:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:dick-assign-auditor-3-interval a obo:BFO_0000202 ;   #: temporal interval
+    obo:BFO_0000222 ex:dick-assign-auditor-3-start .    #: has first instant
+
+ex:dick-assign-auditor-3 a rbaco:RBACO_0000028 ;        #: role assignment
+    rdfs:label "assignment of dick to auditor"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000057 ex:dick ;                           #: has participant
+    obo:BFO_0000199 ex:dick-assign-auditor-3-interval ;  #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001986 ex:dick-auditor-assigned-3 .        #: has output

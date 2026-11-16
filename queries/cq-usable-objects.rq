@@ -6,8 +6,8 @@
 # depend on. Permissions are those with an object description, reached through an active role. A
 # prohibition covers a combination when it reaches the person through any of their active roles in the
 # instance, and it names the object or its object description's criteria hold of it. One
-# naming neither covers only requests that name no object, so none here. Run over the in-force facts and
-# hierarchy snapshot for that time.
+# naming neither covers only requests that name no object, so none here. Run over the in-force facts,
+# dated facts (derive-dated-facts.rq) and hierarchy snapshot for that time.
 PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
 PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
@@ -32,9 +32,9 @@ WHERE {
   FILTER NOT EXISTS { ?desc rbaco:RBACO_0000302 ?objType .
                       FILTER NOT EXISTS { ?obj a ?objType } }
   FILTER NOT EXISTS { ?desc rbaco:RBACO_0000303 ?locType .
-                      FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?loc . ?loc a ?locType } }
+                      FILTER NOT EXISTS { ?obj rbacow:locatedIn ?loc . ?loc a ?locType } }
   FILTER NOT EXISTS { ?desc a rbaco:RBACO_0000011 .
-                      FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?office . ?person rbaco:RBACO_0001101 ?office } }
+                      FILTER NOT EXISTS { ?obj rbacow:locatedIn ?office . ?person rbacow:hasOffice ?office } }
   # deny-overrides: drop combinations a prohibition in force covers
   FILTER NOT EXISTS {
     ?proh a rbaco:RBACO_0000008 ; rbaco:RBACO_0000101 ?operation ; rbacow:inForceAt ?evalTime .
@@ -56,9 +56,9 @@ WHERE {
               FILTER NOT EXISTS { ?pDesc rbaco:RBACO_0000302 ?pType .
                                   FILTER NOT EXISTS { ?obj a ?pType } }
               FILTER NOT EXISTS { ?pDesc rbaco:RBACO_0000303 ?pLocType .
-                                  FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?pLoc . ?pLoc a ?pLocType } }
+                                  FILTER NOT EXISTS { ?obj rbacow:locatedIn ?pLoc . ?pLoc a ?pLocType } }
               FILTER NOT EXISTS { ?pDesc a rbaco:RBACO_0000011 .
-                                  FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?pOffice . ?person rbaco:RBACO_0001101 ?pOffice } }
+                                  FILTER NOT EXISTS { ?obj rbacow:locatedIn ?pOffice . ?person rbacow:hasOffice ?pOffice } }
             })
   }
 }
