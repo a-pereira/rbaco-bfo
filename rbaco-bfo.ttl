@@ -58,7 +58,7 @@ rbaco:RBACO_0000302 rdf:type owl:AnnotationProperty ;
 rbaco:RBACO_0000303 rdf:type owl:AnnotationProperty ;
     dc11:identifier "303-RBACO" ;
     rdfs:label "has object location type criterion"@en ;
-    skos:definition "Relates an object description to a class whose instances the described objects must be located in."@en .
+    skos:definition "Relates an object description to a class whose instances the described objects must be located in, by a location record in force at the time of the request."@en .
 
 #: rbaco:RBACO_0000305  has criteria class
 rbaco:RBACO_0000305 rdf:type owl:AnnotationProperty ;
@@ -431,8 +431,8 @@ rbaco:RBACO_0000139 rdf:type owl:ObjectProperty ;
     rdfs:range cco:ont00000300 ;                        #: Group of Agents
     dc11:identifier "139-RBACO" ;
     rdfs:label "designates conflicting group"@en ;
-    skos:definition "Relates a conflicting agent designation to a group of agents whose member parts at a time count as one agent at that time."@en ;
-    skos:scopeNote "Member part of (BFO_0000129) is time-indexed in BFO 2020, so a group such as a CCO Family (ont00000837) gains and loses members without the designation changing ([rbaco-u3]). The SPARQL queries read member part of without its time, as OWL states it."@en .
+    skos:definition "Relates a conflicting agent designation to a group of agents whose members at a time, by the membership records in force then, count as one agent at that time."@en ;
+    skos:scopeNote "A group such as a CCO Family (ont00000837) gains and loses members without the designation changing ([rbaco-u2], [rbaco-u3]). Its members at a time are the agents of the membership records (RBACO_0000052) in force then; the OWL property member part of (BFO_0000129) carries no time, and the queries do not read it."@en .
 
 #: rbaco:RBACO_0000140  applies to constraint
 rbaco:RBACO_0000140 rdf:type owl:ObjectProperty ;
@@ -527,6 +527,42 @@ rbaco:RBACO_0000149 rdf:type owl:ObjectProperty ;
     rdfs:label "describes conflicting member"@en ;
     skos:definition "Relates a conflict report to a member of the violated constraint's set that the breach counts: a role definition, access permission or task specification."@en ;
     skos:scopeNote "The parent of RBACO_0000126, RBACO_0000146 and RBACO_0000147, so that a conflict report's minimum of two members holds whatever kind of set it describes. A permission report names every member whose content was counted, so members of one content are named together and count once."@en .
+
+#: rbaco:RBACO_0000150  records located entity
+rbaco:RBACO_0000150 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0000051 ;                   #: location record
+    rdfs:range obo:BFO_0000004 ;                        #: independent continuant
+    dc11:identifier "150-RBACO" ;
+    rdfs:label "records located entity"@en ;
+    skos:definition "Relates a location record to the independent continuant it records as located in a place."@en .
+
+#: rbaco:RBACO_0000151  records location
+rbaco:RBACO_0000151 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0000051 ;                   #: location record
+    rdfs:range obo:BFO_0000004 ;                        #: independent continuant
+    dc11:identifier "151-RBACO" ;
+    rdfs:label "records location"@en ;
+    skos:definition "Relates a location record to the independent continuant it records its located entity as located in."@en .
+
+#: rbaco:RBACO_0000152  records member
+rbaco:RBACO_0000152 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0000052 ;                   #: membership record
+    rdfs:range cco:ont00001017 ;                        #: Agent
+    dc11:identifier "152-RBACO" ;
+    rdfs:label "records member"@en ;
+    skos:definition "Relates a membership record to the agent it records as a member part of a group of agents."@en .
+
+#: rbaco:RBACO_0000153  records group
+rbaco:RBACO_0000153 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0000052 ;                   #: membership record
+    rdfs:range cco:ont00000300 ;                        #: Group of Agents
+    dc11:identifier "153-RBACO" ;
+    rdfs:label "records group"@en ;
+    skos:definition "Relates a membership record to the group of agents it records its member as a member part of."@en .
 
 #################################################################
 #    Data properties
@@ -758,7 +794,7 @@ rbaco:RBACO_0000011 rdf:type owl:Class ;
     rdfs:subClassOf rbaco:RBACO_0000009 ;               #: object description
     dc11:identifier "011-RBACO" ;
     rdfs:label "requester office condition"@en ;
-    skos:definition "An object description that additionally requires the object to be located in the office of the requester."@en ;
+    skos:definition "An object description that additionally requires the object to be located, by a location record in force at the time of the request, in an office then assigned to the requester."@en ;
     skos:scopeNote "ROWLBAC's second §4.1 example. The equality of the object's location and the subject's office is a role value map in description logic terms, so this condition has no criteria class and is decided by query only."@en .
 
 #################################################################
@@ -875,6 +911,38 @@ rbaco:RBACO_0000050 rdf:type owl:Class ;
     rdfs:label "task-bound operation requirement"@en ;
     skos:definition "A Process Regulation requiring that every request for an operation it names, made within an instance of the business process plan it applies within, be part of a task instance whose specification requires that operation."@en ;
     skos:scopeNote "Not in Botha and Eloff, who need no such rule: the workflow enactment environment establishes every WSession (2001, p.673), and a WSession exists only while its user is busy with a particular task (p.674). RBACO lets a role be activated without a task instance, which non-workflow datasets need, but then a task constraint sees nothing: an activation for the Assistant Purchase Manager role outside any task instance lets one agent both create a requisition and approve the order (data/purchase.ttl, po-7b). This requirement closes that gap for the operations it names and leaves every other operation open ([rbaco-g3]). Being part of a task instance alone is not enough: the specification must require the operation (RBACO_0000133), so a task cannot carry an operation it does not need. queries/check-sod-hierarchy.rq warns when a dynamic set's operations are only partly named."@en .
+
+#: rbaco:RBACO_0000051  location record
+rbaco:RBACO_0000051 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,                   #: Descriptive Information Content Entity
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0000150 ;          #: records located entity
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass obo:BFO_0000004 ] ,               #: independent continuant
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0000151 ;          #: records location
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass obo:BFO_0000004 ] ;               #: independent continuant
+    dc11:identifier "051-RBACO" ;
+    rdfs:label "location record"@en ;
+    skos:definition "A Descriptive Information Content Entity stating that one independent continuant is located in another while the record is in force."@en ;
+    skos:scopeNote "Output of the policy issuing act that brings it into force and input of the policy retiring act that ends it, so a move is two dated acts: the old record is retired and a new one issued. The queries decide location criteria (RBACO_0000303) and the requester office condition (RBACO_0000011) from the records in force at the time of the request. They do not read located in (BFO_0000171), which as an OWL property is BFO 2020's located in at some time: the BFO 2020 CLIF release of 2026-08-06 defines that form as holding when some time has both relata existing and the one located in the other (temporalized-relations [asd-1]), so the triple stays true after a move. queries/check-undated-facts.rq reports a located in triple that no record repeats."@en .
+
+#: rbaco:RBACO_0000052  membership record
+rbaco:RBACO_0000052 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,                   #: Descriptive Information Content Entity
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0000152 ;          #: records member
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass cco:ont00001017 ] ,               #: Agent
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0000153 ;          #: records group
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass cco:ont00000300 ] ;               #: Group of Agents
+    dc11:identifier "052-RBACO" ;
+    rdfs:label "membership record"@en ;
+    skos:definition "A Descriptive Information Content Entity stating that an agent is a member part of a group of agents while the record is in force."@en ;
+    skos:scopeNote "Output of a policy issuing act and input of the policy retiring act that ends it, as a location record is (RBACO_0000051). A conflicting agent designation that names a group (RBACO_0000139) counts the agents whose membership records are in force at the time ([rbaco-u2]). The queries do not read member part of (BFO_0000129), which as an OWL property is BFO 2020's member part of at some time (BFO 2020 CLIF release of 2026-08-06, temporalized-relations [kax-1]), so the triple stays true after a member leaves. queries/check-undated-facts.rq reports a member part of triple that no record repeats."@en .
 
 #: rbaco:RBACO_0000013  static separation of duty constraint
 rbaco:RBACO_0000013 rdf:type owl:Class ;

@@ -6,14 +6,16 @@
 #                                 asserted part of, so such a request would be denied
 #   task instance outside a process - a task instance is not asserted part of any business process
 #                                 instance
-#   location not asserted         - an entity is located in something located in a third entity, and is
-#                                 not asserted located in that third entity. Located in (BFO_0000171) is
-#                                 transitive at a time in the BFO 2020 CLIF (spatial.cl [ets-1]), not in
-#                                 its OWL; the object-description criteria read it one step
+#   location not recorded         - by the location records in force at ?evalTime (rbacow:locatedIn,
+#                                 derive-dated-facts.rq), an entity is located in something located in a
+#                                 third entity, and no record in force locates it in that third entity.
+#                                 Located in is transitive at a time in the BFO 2020 CLIF (spatial.cl
+#                                 [ets-1]); the object-description criteria read the records one step
 # Types are read the same way: asserted types closed under rdfs:subClassOf, which run_queries.py adds before
 # any query runs, so a type that only a reasoner would infer (from a domain, a range or an equivalent class)
 # is not seen. No query can check that.
 PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?subject ?problem ?detail
@@ -29,9 +31,9 @@ WHERE {
     FILTER NOT EXISTS { ?subject obo:BFO_0000132 ?i . ?i a rbaco:RBACO_0000004 }
     BIND ("task instance outside a process" AS ?problem) BIND ("" AS ?detail)
   } UNION {
-    ?subject obo:BFO_0000171 ?mid . ?mid obo:BFO_0000171 ?detail .
+    ?subject rbacow:locatedIn ?mid . ?mid rbacow:locatedIn ?detail .
     FILTER (?detail != ?subject)
-    FILTER NOT EXISTS { ?subject obo:BFO_0000171 ?detail }
-    BIND ("location not asserted" AS ?problem)
+    FILTER NOT EXISTS { ?subject rbacow:locatedIn ?detail }
+    BIND ("location not recorded" AS ?problem)
   }
 }

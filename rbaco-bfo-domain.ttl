@@ -33,7 +33,25 @@ rbaco:RBACO_0001101 rdf:type owl:ObjectProperty ;
     dc11:identifier "1101-RBACO" ;
     rdfs:label "has office"@en ;
     skos:definition "Relates an agent to an office assigned to that agent for their work."@en ;
-    skos:scopeNote "ROWLBAC's office (§4.1, second example)."@en .
+    skos:scopeNote "ROWLBAC's office (§4.1, second example). The property carries no time, so it says that the office was assigned to the agent at some time. The queries read office assignment records (RBACO_0001026) in force at the time of a request, and queries/check-undated-facts.rq reports a has office triple that no record repeats."@en .
+
+#: rbaco:RBACO_0001102  records office holder
+rbaco:RBACO_0001102 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0001026 ;                   #: office assignment record
+    rdfs:range cco:ont00001017 ;                        #: Agent
+    dc11:identifier "1102-RBACO" ;
+    rdfs:label "records office holder"@en ;
+    skos:definition "Relates an office assignment record to the agent it records an office as assigned to."@en .
+
+#: rbaco:RBACO_0001103  records assigned office
+rbaco:RBACO_0001103 rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf cco:ont00001808 ;                #: is about
+    rdfs:domain rbaco:RBACO_0001026 ;                   #: office assignment record
+    rdfs:range rbaco:RBACO_0001018 ;                    #: office
+    dc11:identifier "1103-RBACO" ;
+    rdfs:label "records assigned office"@en ;
+    skos:definition "Relates an office assignment record to the office it records as assigned to its office holder."@en .
 
 #################################################################
 #    Role universals: ROWLBAC Figure 1
@@ -201,8 +219,24 @@ rbaco:RBACO_0001023 rdf:type owl:Class ;
                                owl:someValuesFrom rbaco:RBACO_0001019 ] ) ] ;  #: classroom
     dc11:identifier "1023-RBACO" ;
     rdfs:label "classroom printer"@en ;
-    skos:definition "A printer located in some classroom."@en ;
-    skos:scopeNote "The OWL defined class for ROWLBAC's first §4.1 example, faculty can use any printer located in a classroom, which ROWLBAC says can be encoded in description logic. Named by has criteria class on the example's object description."@en .
+    skos:definition "A printer located in some classroom at some time."@en ;
+    skos:scopeNote "The OWL defined class for ROWLBAC's first §4.1 example, faculty can use any printer located in a classroom, which ROWLBAC says can be encoded in description logic. Named by has criteria class on the example's object description. Located in (BFO_0000171) is BFO 2020's located in at some time (RBACO_0000051, scope note), so the class holds every printer that was ever in a classroom, and a printer moved out stays in it. The queries decide the example from the location records in force at the time of the request, not from this class."@en .
+
+#: rbaco:RBACO_0001026  office assignment record
+rbaco:RBACO_0001026 rdf:type owl:Class ;
+    rdfs:subClassOf cco:ont00000853 ,                   #: Descriptive Information Content Entity
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0001102 ;          #: records office holder
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass cco:ont00001017 ] ,               #: Agent
+        [ rdf:type owl:Restriction ;
+          owl:onProperty rbaco:RBACO_0001103 ;          #: records assigned office
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass rbaco:RBACO_0001018 ] ;           #: office
+    dc11:identifier "1026-RBACO" ;
+    rdfs:label "office assignment record"@en ;
+    skos:definition "A Descriptive Information Content Entity stating that an office is assigned to an agent for their work while the record is in force."@en ;
+    skos:scopeNote "Output of a policy issuing act and input of the policy retiring act that ends it, as a location record is (RBACO_0000051). The requester office condition (RBACO_0000011) is decided from the office assignment records in force at the time of the request, not from has office (RBACO_0001101)."@en .
 
 #: rbaco:RBACO_0001024  university member role
 rbaco:RBACO_0001024 rdf:type owl:Class ;

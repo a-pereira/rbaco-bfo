@@ -8,6 +8,8 @@ data/abac.ttl (ROWLBAC section 4.1), data/rt-policy.ttl (ROWLBAC Figure 4), data
 data/probes.ttl (regression probes, read together with purchase.ttl).
 Every act occupies a temporal interval whose first instant carries a timestamp. Files are written in
 dependency order by ttl_ordered.py: a block comes after every block it refers to.
+A location, an office or a group membership is written twice: as a dated record, which the queries
+read while it is in force, and as the untimed BFO or RBACO triple, which says only that it held at some time.
 """
 import os, sys
 from rdflib import Graph, Namespace, URIRef, Literal, BNode, RDF, RDFS, OWL, XSD
@@ -38,6 +40,7 @@ C = dict(
     task_spec=RBACO.RBACO_0000040, task_instance=RBACO.RBACO_0000041, work_item=RBACO.RBACO_0000048,
     static_des=RBACO.RBACO_0000046, dynamic_des=RBACO.RBACO_0000047, human_req=RBACO.RBACO_0000049, task_bound_req=RBACO.RBACO_0000050,
     family=CCO.ont00000837, planned_act=CCO.ont00000228,
+    loc_record=RBACO.RBACO_0000051, mem_record=RBACO.RBACO_0000052, office_record=RBACO.RBACO_0001026,
     interval=OBO.BFO_0000202, instant=OBO.BFO_0000203,
 )
 P = dict(
@@ -61,6 +64,8 @@ P = dict(
     wi_for=RBACO.RBACO_0000141, wi_in=RBACO.RBACO_0000142, on_behalf=RBACO.RBACO_0000143,
     requires_prior=RBACO.RBACO_0000144, requires_human=RBACO.RBACO_0000145, requires_binding=RBACO.RBACO_0000148,
     member_part_of=OBO.BFO_0000129, continuant_part_of=OBO.BFO_0000176,
+    rec_entity=RBACO.RBACO_0000150, rec_place=RBACO.RBACO_0000151, rec_member=RBACO.RBACO_0000152,
+    rec_group=RBACO.RBACO_0000153, rec_holder=RBACO.RBACO_0001102, rec_office=RBACO.RBACO_0001103,
 )
 
 
@@ -117,6 +122,24 @@ def issue(d, name, when, outputs, agent="officer"):
     d.ind(name, C["issuing"], f"policy issuing act {name}", has_agent=agent, has_output=outputs,
           realizes=f"{agent}-authority")
     d.when(name, when)
+
+
+def retire(d, name, when, inputs, agent="officer"):
+    d.ind(name, C["retiring"], f"policy retiring act {name}", has_agent=agent, has_input=inputs,
+          realizes=f"{agent}-authority")
+    d.when(name, when)
+
+
+def record(d, kind, subject, obj, n=1):
+    """A dated record that subject is located in obj ("loc"), has office obj ("office") or is a member
+    part of obj ("mem"), and the untimed triple saying it held at some time. Returns the record, which
+    is in force once an issuing act outputs it and until a retiring act takes it as input."""
+    cls, sp, op, bare, text = {
+        "loc": ("loc_record", "rec_entity", "rec_place", "located_in", "is located in"),
+        "office": ("office_record", "rec_holder", "rec_office", "has_office", "has office"),
+        "mem": ("mem_record", "rec_member", "rec_group", "member_part_of", "is a member of")}[kind]
+    d.g.add((EX[subject], P[bare], EX[obj]))
+    return d.ind(f"{kind}-{subject}-{n}", C[cls], f"record {n}: {subject} {text} {obj}", **{sp: subject, op: obj})
 
 
 def role_definitions(d, defs):
@@ -305,7 +328,9 @@ def code_review(out):
 def abac(out):
     d = Data("abac", "ROWLBAC section 4.1: faculty can use any printer located in a classroom (an OWL "
              "defined class), and a university member can use any device located in her office "
-             "(a role value map, decided by query only). Marie holds both roles.")
+             "(a role value map, decided by query only). Marie holds both roles. Locations and offices "
+             "are dated records: later in the day the two printers swap rooms and Marie moves office, and "
+             "the same requests are decided the other way.")
     admin(d)
     role_definitions(d, {"faculty": "Faculty", "university-member": "University Member"})
     d.g.add((RBACO.RBACO_0001025, P["mirrors"], EX["def-faculty"]))
@@ -313,11 +338,13 @@ def abac(out):
     for k, cls, lab in (("classroom-c101", C["classroom"], "classroom C101"), ("lab-l1", C["lab"], "laboratory L1"),
                         ("office-o12", C["office"], "office O12"), ("office-o13", C["office"], "office O13")):
         d.ind(k, cls, lab)
+    recs = []
     for k, cls, lab, room in (("printer-p43", C["printer"], "printer p43", "classroom-c101"),
                               ("printer-p44", C["printer"], "printer p44", "lab-l1"),
                               ("display-d7", C["device"], "display d7", "office-o12"),
                               ("display-d8", C["device"], "display d8", "office-o13")):
-        d.ind(k, cls, lab, located_in=room)
+        d.ind(k, cls, lab)
+        recs.append(record(d, "loc", k, room))
     d.ind("op-use-device", C["plan_spec"], "device use procedure")
     desc1 = d.ind("desc-classroom-printer", C["obj_desc"], "any printer located in a classroom")
     d.g.add((desc1, P["obj_type"], C["printer"])); d.g.add((desc1, P["loc_type"], C["classroom"]))
@@ -330,8 +357,10 @@ def abac(out):
                        "University member: use any device located in her office",
                        has_obj_desc="desc-own-office-device")]
     plan = d.ind("plan-teaching-day", C["bp_plan"], "teaching day plan")
-    issue(d, "policy-load", t("101", "08:00"), [EX["def-faculty"], EX["def-university-member"], plan] + regs)
-    d.ind("marie", C["person"], "Marie", has_office="office-o12")
+    d.ind("marie", C["person"], "Marie")
+    recs.append(record(d, "office", "marie", "office-o12"))
+    issue(d, "policy-load", t("101", "08:00"),
+          [EX["def-faculty"], EX["def-university-member"], plan] + regs + recs)
     m_fac = assign(d, "marie", "faculty", RBACO.RBACO_0001025, t("102", "09:00"))
     m_mem = assign(d, "marie", "university-member", RBACO.RBACO_0001024, t("102", "09:01"))
     d.ind("marie-day", C["bp"], "Marie's teaching day", prescribed_by="plan-teaching-day")
@@ -340,6 +369,17 @@ def abac(out):
     activate(d, "marie", "university-member", "marie-day", t("107", "08:06"), m_mem)
     for i, obj in enumerate(("printer-p43", "printer-p44", "display-d7", "display-d8"), 1):
         access(d, f"marie-req-use-{obj}", "marie", "op-use-device", "marie-day", t("107", f"09:0{i}"), obj=obj)
+    # 10:00, the printers swap rooms: p43 leaves the classroom for the lab and p44 takes its place, so the
+    # classroom-printer permission now covers p44 and no longer p43
+    retire(d, "retire-printer-locations", t("107", "10:00"), ["loc-printer-p43-1", "loc-printer-p44-1"])
+    issue(d, "record-printer-locations", t("107", "10:00"),
+          [record(d, "loc", "printer-p43", "lab-l1", n=2), record(d, "loc", "printer-p44", "classroom-c101", n=2)])
+    # 11:00, Marie moves from office O12 to O13: the office-device permission now covers d8 and no longer d7
+    retire(d, "retire-marie-office", t("107", "11:00"), "office-marie-1")
+    issue(d, "record-marie-office", t("107", "11:00"), [record(d, "office", "marie", "office-o13", n=2)])
+    for hhmm, obj in (("10:05", "printer-p43"), ("10:06", "printer-p44"), ("11:05", "display-d7"),
+                      ("11:06", "display-d8")):
+        access(d, f"marie-req-use-{obj}-2", "marie", "op-use-device", "marie-day", t("107", hhmm), obj=obj)
     d.save(os.path.join(out, "abac.ttl"))
 
 
@@ -458,8 +498,7 @@ def purchase(out):
         d.ind(who, C["agent"], lab)
     for p in ("tom", "dick", "harry"):
         d.ind(p, C["person"], p.capitalize())
-    for p in ("tom", "dick"):
-        d.g.add((EX[p], P["member_part_of"], EX["tom-dick-family"]))
+    members = [record(d, "mem", p, "tom-dick-family") for p in ("tom", "dick")]
     sod = [
         # static (Table 1): conflicting roles, permissions, tasks, and users
         d.ind("ssd-auditor-apm", C["ssd"], "SSD {Auditor, APM}, n = 2",
@@ -515,7 +554,7 @@ def purchase(out):
               requires_binding="op-approve-po", applies_within="plan-internal-po"),
     ]
     issue(d, "policy-load", t("101", "08:00"),
-          [EX[f"def-{k}"] for k in defs] + inh + regs + specs + sod + [EX[f"plan-{k}"] for k in plans])
+          [EX[f"def-{k}"] for k in defs] + inh + regs + specs + sod + [EX[f"plan-{k}"] for k in plans] + members)
     # OWL has no unique-name assumption: without this, HermiT cannot count two members of a set, so it
     # can neither classify a constraint under its kind (RBACO_0000042-44) nor reject a mixed set
     distinct = BNode()
@@ -646,8 +685,9 @@ def probes(out):
     d = Data("probes", "Regression probes for the remediations of 2026-10-31, read together with purchase.ttl: "
              "permissions identified by content (probes 1 and 2), access requests at one instant (3), an active "
              "role ending with the assigned role it depends on (4), designations counted only while in force "
-             "(5 and 6), static separation of duty at an issuing act (7), and activation requests at one "
-             "instant (8). Each probe has an instance or act of its own; tools/run_queries.py checks the "
+             "(5 and 6), static separation of duty at an issuing act (7), activation requests at one "
+             "instant (8), and, for the dated records of 2026-11-15, group members counted only while their "
+             "membership record is in force (9). Each probe has an instance or act of its own; tools/run_queries.py checks the "
              "results each must give.")
     two = Literal(2, datatype=XSD.positiveInteger)
     for k in ("2", "4"):
@@ -734,6 +774,11 @@ def probes(out):
     # 7: Manager comes to inherit from Auditor, so Tom, and Dick through their family, are authorized for
     #    APM and Auditor together; Harry lost Manager in probe 4
     issue(d, "probe-issue-inh", t("209", "08:00"), [inheritance(d, "manager", "auditor")])
+    # 9: Dick is assigned Auditor again while his membership record is in force, and Tom's APM counts with it
+    #    through the family designation; once the record is retired, a third assignment is reported for no one
+    assign(d, "dick", "auditor", RBACO.RBACO_0000002, t("210", "07:00"), n=2)
+    retire(d, "probe-retire-dick-membership", t("210", "08:00"), "mem-dick-1")
+    assign(d, "dick", "auditor", RBACO.RBACO_0000002, t("210", "09:00"), n=3)
     d.save(os.path.join(out, "probes.ttl"))
 
 

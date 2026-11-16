@@ -5,9 +5,10 @@ Usage: run_queries.py <rbaco-bfo-dir>
 For each dataset, first close its rdf:type triples under rdfs:subClassOf, as the path a/rdfs:subClassOf*
 reads them, so that the queries match types with plain rdf:type; the reports and decisions written later
 get the same closure. Then give each permission its content (operation, object, object description), and
-each conflicting agent designation the agents it counts as one and the constraints and instances it
+each conflicting agent designation the agents it names and the constraints and instances it
 applies to. Then, at each time at which an assignment, policy issuing act, activation request or access
-request occurs: mark what is in force at that time and build the hierarchy snapshot, write SSD conflict
+request occurs: mark what is in force at that time, write the locations, offices and group members the
+records in force give, and build the hierarchy snapshot, write SSD conflict
 reports, decide the access requests one at a time in IRI order (each after its permission DSD conflict
 reports), write task and role DSD conflict reports, and check activation verdicts. Then run the checks and
 competency questions, the worklists at the times a dataset names, the regression probes (data/probes.ttl
@@ -374,13 +375,17 @@ SELECT DISTINCT ?t WHERE { VALUES ?c { rbaco:RBACO_0000024 rbaco:RBACO_0000025 r
 
 
 def snapshot(g, at, prev):
-    """Replace the previous time's in-force facts and hierarchy snapshot (prev) with those at time at.
-    Returns the triples added and the number of hierarchy edges."""
+    """Replace the previous time's in-force facts, dated facts and hierarchy snapshot (prev) with those at
+    time at. Returns the triples added and the number of hierarchy edges."""
     for tr in prev:
         g.remove(tr)
     force = list(q("derive-in-force", g, at))
     for tr in force:
         g.add(tr)
+    dated = list(q("derive-dated-facts", g, at))
+    for tr in dated:
+        g.add(tr)
+    force += dated
     edges = list(q("derive-hierarchy-snapshot", g, at))
     for tr in edges:
         g.add(tr)
@@ -486,7 +491,7 @@ def run_rbac(name, title, retype=None, brief=False, worklists=(), extra=None, si
     for check in ("check-hierarchy-cycles", "check-limited-hierarchy", "check-constraint-shape",
                   "check-hierarchy-drift", "check-active-roles", "check-task-specs", "check-task-bound-roles",
                   "check-sod-hierarchy", "check-conflict-coverage", "check-designation-chains",
-                  "check-asserted-closures"):
+                  "check-asserted-closures", "check-undated-facts"):
         res = q(check, g, last)
         out(f"**{check}.rq**")
         out()
@@ -539,6 +544,13 @@ PROBE_VERDICTS = {  # activation request: verdict, which must also agree with th
 }
 PROBE_SSD = sorted(f"probe-issue-inh-ssd-conflict-{c}-{who}" for who in ("tom", "dick")
                    for c in ("ssd-auditor-apm", "pssd-approve-audit", "tssd-approve-audit"))
+# probe 9: Dick's second Auditor assignment counts Tom's APM through the family while Dick's membership
+# record is in force; the third, after the record is retired, is reported for no one
+PROBE_MEMBERSHIP = [
+    ("dick-assign-auditor-2", sorted(f"dick-assign-auditor-2-ssd-conflict-{c}"
+                                     for c in ("ssd-auditor-apm", "pssd-approve-audit", "tssd-approve-audit"))),
+    ("dick-assign-auditor-3", []),
+]
 PROBE_ACTIVE = [("harry-manager-active-probe-4", "outlives the assigned role it depends on")]
 
 
@@ -562,6 +574,9 @@ def run_probes():
     act = EX["probe-issue-inh"]
     got_ssd = sorted(local(r) for r in g.subjects(RBACO.RBACO_0000128, act))
     rows.append(("SSD reports at probe-issue-inh", " ".join(PROBE_SSD), " ".join(got_ssd)))
+    for act, want_ssd in PROBE_MEMBERSHIP:
+        got_ssd = sorted(local(r) for r in g.subjects(RBACO.RBACO_0000128, EX[act]))
+        rows.append((f"SSD reports at {act}", " ".join(want_ssd) or "(none)", " ".join(got_ssd) or "(none)"))
     got_dsd = sorted(local(r) for r in g.subjects(RBACO.RBACO_0000128, EX["tom-request-activate-apm-probe-5"]))
     rows.append(("DSD reports on tom-request-activate-apm-probe-5", "(none)", " ".join(got_dsd) or "(none)"))
     res = q("check-active-roles", g)

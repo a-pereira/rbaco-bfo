@@ -15,7 +15,8 @@
 #   object:  the regulation names the requested object; or it names neither object nor object
 #            description and the request names no object; or its object description's criteria
 #            hold of the requested object (type, location type, and for a requester office
-#            condition, location in the requester's office: ROWLBAC's role value map).
+#            condition, location in the requester's office: ROWLBAC's role value map). Location and
+#            office are those of the records in force at the request's time (derive-dated-facts.rq).
 PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
 PREFIX rbacow: <https://example.org/rbaco/work#>
 PREFIX obo:  <http://purl.obolibrary.org/obo/>
@@ -65,9 +66,9 @@ WHERE {
       FILTER NOT EXISTS { ?desc rbaco:RBACO_0000302 ?objType .
                           FILTER NOT EXISTS { ?obj a ?objType } }
       FILTER NOT EXISTS { ?desc rbaco:RBACO_0000303 ?locType .
-                          FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?loc . ?loc a ?locType } }
+                          FILTER NOT EXISTS { ?obj rbacow:locatedIn ?loc . ?loc a ?locType } }
       FILTER NOT EXISTS { ?desc a rbaco:RBACO_0000011 .
-                          FILTER NOT EXISTS { ?obj obo:BFO_0000171 ?office . ?person rbaco:RBACO_0001101 ?office } }
+                          FILTER NOT EXISTS { ?obj rbacow:locatedIn ?office . ?person rbacow:hasOffice ?office } }
     }
   )
 }

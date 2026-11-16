@@ -339,6 +339,16 @@ ex:dick a cco:ont00001262 ;                             #: Person
 ex:harry a cco:ont00001262 ;                            #: Person
     rdfs:label "Harry"@en .
 
+ex:mem-tom-1 a rbaco:RBACO_0000052 ;                    #: membership record
+    rdfs:label "record 1: tom is a member of tom-dick-family"@en ;
+    rbaco:RBACO_0000152 ex:tom ;                        #: records member
+    rbaco:RBACO_0000153 ex:tom-dick-family .            #: records group
+
+ex:mem-dick-1 a rbaco:RBACO_0000052 ;                   #: membership record
+    rdfs:label "record 1: dick is a member of tom-dick-family"@en ;
+    rbaco:RBACO_0000152 ex:dick ;                       #: records member
+    rbaco:RBACO_0000153 ex:tom-dick-family .            #: records group
+
 ex:ssd-auditor-apm a rbaco:RBACO_0000013 ;              #: static separation of duty constraint
     rdfs:label "SSD {Auditor, APM}, n = 2"@en ;
     rbaco:RBACO_0000114 ex:def-apm,                     #: has constrained role definition
@@ -483,6 +493,8 @@ ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
         ex:inh-buyer-sc,
         ex:inh-clerk-employee,
         ex:inh-sc-employee,
+        ex:mem-dick-1,
+        ex:mem-tom-1,
         ex:pdsd-perms,
         ex:pdsd-users,
         ex:perm-accountant-funds,

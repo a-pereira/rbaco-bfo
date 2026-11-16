@@ -1,4 +1,4 @@
-Ontology closure loaded: 12589 triples (rbaco-bfo, rbaco-bfo-domain, BFO 2020 core, 7 CCO modules, IAO extract).
+Ontology closure loaded: 12679 triples (rbaco-bfo, rbaco-bfo-domain, BFO 2020 core, 7 CCO modules, IAO extract).
 
 # Query results
 
@@ -117,6 +117,12 @@ Evaluation times: 15; hierarchy snapshot edges at the last: 11.
 **check-asserted-closures.rq**
 
 | subject | problem | detail |
+|---|---|---|
+| (no rows) | | |
+
+**check-undated-facts.rq**
+
+| subject | property | object |
 |---|---|---|
 | (no rows) | | |
 
@@ -246,6 +252,12 @@ Evaluation times: 10; hierarchy snapshot edges at the last: 0.
 |---|---|---|
 | (no rows) | | |
 
+**check-undated-facts.rq**
+
+| subject | property | object |
+|---|---|---|
+| (no rows) | | |
+
 ### Competency questions
 
 **cq-role-history.rq**
@@ -287,7 +299,7 @@ Evaluation times: 10; hierarchy snapshot edges at the last: 0.
 
 ## ROWLBAC section 4.1 attribute examples (data/abac.ttl)
 
-Evaluation times: 9; hierarchy snapshot edges at the last: 0.
+Evaluation times: 15; hierarchy snapshot edges at the last: 0.
 
 ### Role activation requests (decide-activation.rq)
 
@@ -304,6 +316,10 @@ Evaluation times: 9; hierarchy snapshot edges at the last: 0.
 | ex:marie-req-use-printer-p44 | ex:op-use-device | ex:printer-p44 | denial |  |
 | ex:marie-req-use-display-d7 | ex:op-use-device | ex:display-d7 | grant | ex:perm-member-office-devices |
 | ex:marie-req-use-display-d8 | ex:op-use-device | ex:display-d8 | denial |  |
+| ex:marie-req-use-printer-p43-2 | ex:op-use-device | ex:printer-p43 | denial |  |
+| ex:marie-req-use-printer-p44-2 | ex:op-use-device | ex:printer-p44 | grant | ex:perm-faculty-classroom-printers |
+| ex:marie-req-use-display-d7-2 | ex:op-use-device | ex:display-d7 | denial |  |
+| ex:marie-req-use-display-d8-2 | ex:op-use-device | ex:display-d8 | grant | ex:perm-member-office-devices |
 
 ### Conflict reports (derive-ssd-conflicts.rq, derive-permission-dsd-conflicts.rq, derive-task-dsd-conflicts.rq, derive-dsd-conflicts.rq)
 
@@ -311,14 +327,14 @@ Evaluation times: 9; hierarchy snapshot edges at the last: 0.
 |---|---|---|---|---|---|---|
 | (no rows) | | | | | | |
 
-### Authorized members at 2026-01-07T09:04:00+00:00 (derive-authorized-members.rq)
+### Authorized members at 2026-01-07T11:06:00+00:00 (derive-authorized-members.rq)
 
 | role definition | authorized member |
 |---|---|
 | ex:def-faculty | ex:marie |
 | ex:def-university-member | ex:marie |
 
-### Checks at 2026-01-07T09:04:00+00:00
+### Checks at 2026-01-07T11:06:00+00:00
 
 **check-hierarchy-cycles.rq**
 
@@ -386,6 +402,12 @@ Evaluation times: 9; hierarchy snapshot edges at the last: 0.
 |---|---|---|
 | (no rows) | | |
 
+**check-undated-facts.rq**
+
+| subject | property | object |
+|---|---|---|
+| (no rows) | | |
+
 ### Competency questions
 
 **cq-role-history.rq**
@@ -406,10 +428,10 @@ Evaluation times: 9; hierarchy snapshot edges at the last: 0.
 
 | person | instance | operation | obj | permission |
 |---|---|---|---|---|
-| ex:marie | ex:marie-day | ex:op-use-device | ex:display-d7 | ex:perm-member-office-devices |
-| ex:marie | ex:marie-day | ex:op-use-device | ex:printer-p43 | ex:perm-faculty-classroom-printers |
+| ex:marie | ex:marie-day | ex:op-use-device | ex:display-d8 | ex:perm-member-office-devices |
+| ex:marie | ex:marie-day | ex:op-use-device | ex:printer-p44 | ex:perm-faculty-classroom-printers |
 
-Derived triples written to data/derived/abac-derived.ttl: 14.
+Derived triples written to data/derived/abac-derived.ttl: 28.
 
 ## Botha and Eloff 2001 purchase order workflow (data/purchase.ttl)
 
@@ -587,6 +609,12 @@ Evaluation times: 50; hierarchy snapshot edges at the last: 7.
 |---|---|---|
 | (no rows) | | |
 
+**check-undated-facts.rq**
+
+| subject | property | object |
+|---|---|---|
+| (no rows) | | |
+
 ### Competency questions
 
 **cq-role-history.rq**
@@ -644,7 +672,7 @@ Derived triples written to data/derived/purchase-derived.ttl: 185.
 
 ## Regression probes (data/probes.ttl over data/purchase.ttl)
 
-Evaluation times: 70; hierarchy snapshot edges at the last: 8. Results from 2026-02-01 on.
+Evaluation times: 72; hierarchy snapshot edges at the last: 8. Results from 2026-02-01 on.
 
 ### Role activation requests (decide-activation.rq)
 
@@ -679,6 +707,9 @@ Evaluation times: 70; hierarchy snapshot edges at the last: 8. Results from 2026
 
 | report | kind | subject | constraint | act | members counted | justification |
 |---|---|---|---|---|---|---|
+| ex:dick-assign-auditor-2-ssd-conflict-pssd-approve-audit | SSD | ex:dick | ex:pssd-approve-audit | ex:dick-assign-auditor-2 | ex:perm-apm-approve ex:perm-auditor-audit | Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once) |
+| ex:dick-assign-auditor-2-ssd-conflict-ssd-auditor-apm | SSD | ex:dick | ex:ssd-auditor-apm | ex:dick-assign-auditor-2 | ex:def-apm ex:def-auditor | Violates SSD constraint SSD {Auditor, APM}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members |
+| ex:dick-assign-auditor-2-ssd-conflict-tssd-approve-audit | SSD | ex:dick | ex:tssd-approve-audit | ex:dick-assign-auditor-2 | ex:ts-approve-audit ex:ts-approve-order | Violates SSD constraint task SSD {approve order, approve audit}, n = 2: the assignee, with any agent counted as one with them, is authorized for 2 of its members |
 | ex:harry-request-activate-sc-probe-8-task-dsd-conflict | DSD | ex:harry | ex:tdsd-tasks | ex:harry-request-activate-sc-probe-8 | ex:ts-approve-order ex:ts-prepare-requisition | Violates DSD constraint task DSD {prepare requisition, approve order}, n = 2, conflicting tasks plan: performing the task would give its principal, with any agent counted as one with them, 2 of its tasks in one instance |
 | ex:probe-issue-inh-ssd-conflict-pssd-approve-audit-dick | SSD | ex:dick | ex:pssd-approve-audit | ex:probe-issue-inh | ex:perm-apm-approve ex:perm-auditor-audit | Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the subject, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once) |
 | ex:probe-issue-inh-ssd-conflict-pssd-approve-audit-tom | SSD | ex:tom | ex:pssd-approve-audit | ex:probe-issue-inh | ex:perm-apm-approve ex:perm-auditor-audit | Violates SSD constraint permission SSD {APM: approve order, Auditor: approve audit}, n = 2: the subject, with any agent counted as one with them, is authorized for 2 of its members (permissions with one operation and object scope count once) |
@@ -689,7 +720,7 @@ Evaluation times: 70; hierarchy snapshot edges at the last: 8. Results from 2026
 | ex:tom-req-approve-order-probe-1-permission-dsd-conflict | DSD | ex:tom | ex:pdsd-perms | ex:tom-req-approve-order-probe-1 | ex:perm-apm-approve ex:perm-sc-requisition | Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting permissions plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once) |
 | ex:tom-req-create-requisition-probe-3-permission-dsd-conflict | DSD | ex:tom | ex:pdsd-perms | ex:tom-req-create-requisition-probe-3 | ex:perm-apm-approve ex:perm-sc-requisition | Violates DSD constraint permission DSD {SC: create requisition, APM: approve order}, n = 2, conflicting permissions plan: granting the request would give its principal, with any agent counted as one with them, 2 of its permissions exercised in one instance (permissions with one operation and object scope count once) |
 
-Derived triples written to data/derived/probes-derived.ttl: 109.
+Derived triples written to data/derived/probes-derived.ttl: 133.
 
 ### Probe expectations
 
@@ -708,10 +739,12 @@ Derived triples written to data/derived/probes-derived.ttl: 109.
 | harry-request-activate-apm-probe-8 | allowed, consistent | allowed, consistent | pass |
 | harry-request-activate-sc-probe-8 | refused: task SoD, consistent | refused: task SoD, consistent | pass |
 | SSD reports at probe-issue-inh | probe-issue-inh-ssd-conflict-pssd-approve-audit-dick probe-issue-inh-ssd-conflict-pssd-approve-audit-tom probe-issue-inh-ssd-conflict-ssd-auditor-apm-dick probe-issue-inh-ssd-conflict-ssd-auditor-apm-tom probe-issue-inh-ssd-conflict-tssd-approve-audit-dick probe-issue-inh-ssd-conflict-tssd-approve-audit-tom | probe-issue-inh-ssd-conflict-pssd-approve-audit-dick probe-issue-inh-ssd-conflict-pssd-approve-audit-tom probe-issue-inh-ssd-conflict-ssd-auditor-apm-dick probe-issue-inh-ssd-conflict-ssd-auditor-apm-tom probe-issue-inh-ssd-conflict-tssd-approve-audit-dick probe-issue-inh-ssd-conflict-tssd-approve-audit-tom | pass |
+| SSD reports at dick-assign-auditor-2 | dick-assign-auditor-2-ssd-conflict-pssd-approve-audit dick-assign-auditor-2-ssd-conflict-ssd-auditor-apm dick-assign-auditor-2-ssd-conflict-tssd-approve-audit | dick-assign-auditor-2-ssd-conflict-pssd-approve-audit dick-assign-auditor-2-ssd-conflict-ssd-auditor-apm dick-assign-auditor-2-ssd-conflict-tssd-approve-audit | pass |
+| SSD reports at dick-assign-auditor-3 | (none) | (none) | pass |
 | DSD reports on tom-request-activate-apm-probe-5 | (none) | (none) | pass |
 | check-active-roles.rq rows | harry-manager-active-probe-4: outlives the assigned role it depends on | harry-manager-active-probe-4: outlives the assigned role it depends on | pass |
 
-Probe expectations: 15 of 15 pass.
+Probe expectations: 17 of 17 pass.
 
 ## ROWLBAC Figure 4 RT policy
 
@@ -799,7 +832,7 @@ Restriction holds in the access counter-state: True.
 Restriction holds in the availability counter-state: True.
 Restriction holds in the safety counter-state: True.
 
-Queries run: 32 of 32.
+Queries run: 34 of 34.
 ## ROWLBAC's own rules, re-run (tools/rowlbac_checks.py)
 
 ### 1. Section 3.3.5 DSoD rule over Bob (assigned Visitor and Temporary Resident)
@@ -829,13 +862,13 @@ Access: ops SubClassOf marketing: NOT entailed; 3 counter-assignments, e.g. true
 
 ## Partial OWL 2 RL check (tools/rl_check.py)
 
-TBox: 1613 subclass edges, 60 disjoint pairs, 214 someValuesFrom, 103 intersections, 41 unions.
+TBox: 1622 subclass edges, 60 disjoint pairs, 214 someValuesFrom, 103 intersections, 41 unions.
 
-abac: 67 typed nodes, 1423 type assertions after closure, 295 edges; clashes: 0.
-  classified as classroom printer (RBACO_0001023, a defined class): printer-p43
+abac: 103 typed nodes, 2192 type assertions after closure, 540 edges; clashes: 0.
+  classified as classroom printer (RBACO_0001023, a defined class): printer-p43, printer-p44
 code-review: 72 typed nodes, 1524 type assertions after closure, 378 edges; clashes: 0.
-probes: 742 typed nodes, 14503 type assertions after closure, 4331 edges; clashes: 0.
-purchase: 574 typed nodes, 11631 type assertions after closure, 3675 edges; clashes: 0.
+probes: 758 typed nodes, 14873 type assertions after closure, 4512 edges; clashes: 0.
+purchase: 576 typed nodes, 11685 type assertions after closure, 3699 edges; clashes: 0.
 rt-policy: 39 typed nodes, 989 type assertions after closure, 345 edges; clashes: 0.
 us-persons: 149 typed nodes, 3330 type assertions after closure, 936 edges; clashes: 0.
 

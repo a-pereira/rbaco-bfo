@@ -7,7 +7,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:abac a owl:Ontology ;
-    rdfs:comment "ROWLBAC section 4.1: faculty can use any printer located in a classroom (an OWL defined class), and a university member can use any device located in her office (a role value map, decided by query only). Marie holds both roles."@en ;
+    rdfs:comment "ROWLBAC section 4.1: faculty can use any printer located in a classroom (an OWL defined class), and a university member can use any device located in her office (a role value map, decided by query only). Marie holds both roles. Locations and offices are dated records: later in the day the two printers swap rooms and Marie moves office, and the same requests are decided the other way."@en ;
     owl:imports rbaco:rbaco-bfo-domain.owl .            #: RBACO-BFO domain module: ROWLBAC scenario and attribute examples
 
 ex:officer a cco:ont00001262 ;                          #: Person
@@ -51,19 +51,41 @@ ex:office-o13 a rbaco:RBACO_0001018 ;                   #: office
 
 ex:printer-p43 a rbaco:RBACO_0001022 ;                  #: printer
     rdfs:label "printer p43"@en ;
-    obo:BFO_0000171 ex:classroom-c101 .                 #: located in
+    obo:BFO_0000171 ex:classroom-c101,                  #: located in
+        ex:lab-l1 .
+
+ex:loc-printer-p43-1 a rbaco:RBACO_0000051 ;            #: location record
+    rdfs:label "record 1: printer-p43 is located in classroom-c101"@en ;
+    rbaco:RBACO_0000150 ex:printer-p43 ;                #: records located entity
+    rbaco:RBACO_0000151 ex:classroom-c101 .             #: records location
 
 ex:printer-p44 a rbaco:RBACO_0001022 ;                  #: printer
     rdfs:label "printer p44"@en ;
-    obo:BFO_0000171 ex:lab-l1 .                         #: located in
+    obo:BFO_0000171 ex:classroom-c101,                  #: located in
+        ex:lab-l1 .
+
+ex:loc-printer-p44-1 a rbaco:RBACO_0000051 ;            #: location record
+    rdfs:label "record 1: printer-p44 is located in lab-l1"@en ;
+    rbaco:RBACO_0000150 ex:printer-p44 ;                #: records located entity
+    rbaco:RBACO_0000151 ex:lab-l1 .                     #: records location
 
 ex:display-d7 a rbaco:RBACO_0001021 ;                   #: device
     rdfs:label "display d7"@en ;
     obo:BFO_0000171 ex:office-o12 .                     #: located in
 
+ex:loc-display-d7-1 a rbaco:RBACO_0000051 ;             #: location record
+    rdfs:label "record 1: display-d7 is located in office-o12"@en ;
+    rbaco:RBACO_0000150 ex:display-d7 ;                 #: records located entity
+    rbaco:RBACO_0000151 ex:office-o12 .                 #: records location
+
 ex:display-d8 a rbaco:RBACO_0001021 ;                   #: device
     rdfs:label "display d8"@en ;
     obo:BFO_0000171 ex:office-o13 .                     #: located in
+
+ex:loc-display-d8-1 a rbaco:RBACO_0000051 ;             #: location record
+    rdfs:label "record 1: display-d8 is located in office-o13"@en ;
+    rbaco:RBACO_0000150 ex:display-d8 ;                 #: records located entity
+    rbaco:RBACO_0000151 ex:office-o13 .                 #: records location
 
 ex:op-use-device a obo:IAO_0000104 ;                    #: plan specification
     rdfs:label "device use procedure"@en .
@@ -93,6 +115,16 @@ ex:perm-member-office-devices a rbaco:RBACO_0000007 ;   #: access permission
 ex:plan-teaching-day a rbaco:RBACO_0000005 ;            #: business process plan
     rdfs:label "teaching day plan"@en .
 
+ex:marie a cco:ont00001262 ;                            #: Person
+    rdfs:label "Marie"@en ;
+    rbaco:RBACO_0001101 ex:office-o12,                  #: has office
+        ex:office-o13 .
+
+ex:office-marie-1 a rbaco:RBACO_0001026 ;               #: office assignment record
+    rdfs:label "record 1: marie has office office-o12"@en ;
+    rbaco:RBACO_0001102 ex:marie ;                      #: records office holder
+    rbaco:RBACO_0001103 ex:office-o12 .                 #: records assigned office
+
 ex:policy-load-start a obo:BFO_0000203 ;                #: temporal instant
     rbaco:RBACO_0000205 "2026-01-01T08:00:00+00:00"^^xsd:dateTime .  #: has timestamp
 
@@ -106,13 +138,14 @@ ex:policy-load a rbaco:RBACO_0000031 ;                  #: policy issuing act
     cco:ont00001833 ex:officer ;                        #: has agent
     cco:ont00001986 ex:def-faculty,                     #: has output
         ex:def-university-member,
+        ex:loc-display-d7-1,
+        ex:loc-display-d8-1,
+        ex:loc-printer-p43-1,
+        ex:loc-printer-p44-1,
+        ex:office-marie-1,
         ex:perm-faculty-classroom-printers,
         ex:perm-member-office-devices,
         ex:plan-teaching-day .
-
-ex:marie a cco:ont00001262 ;                            #: Person
-    rdfs:label "Marie"@en ;
-    rbaco:RBACO_0001101 ex:office-o12 .                 #: has office
 
 ex:marie-faculty-assigned-1 a rbaco:RBACO_0001025 ;     #: faculty role
     rdfs:label "marie's assigned faculty role, tenure 1"@en ;
@@ -287,6 +320,131 @@ ex:marie-req-use-display-d8 a rbaco:RBACO_0000024 ;     #: access request
     rdfs:label "marie asks to op-use-device on display-d8"@en ;
     obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
     obo:BFO_0000199 ex:marie-req-use-display-d8-interval ;  #: occupies temporal region
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:display-d8 .                 #: requests access to
+
+ex:retire-printer-locations-start a obo:BFO_0000203 ;   #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:retire-printer-locations-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:retire-printer-locations-start .  #: has first instant
+
+ex:retire-printer-locations a rbaco:RBACO_0000032 ;     #: policy retiring act
+    rdfs:label "policy retiring act retire-printer-locations"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000199 ex:retire-printer-locations-interval ;  #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001921 ex:loc-printer-p43-1,               #: has input
+        ex:loc-printer-p44-1 .
+
+ex:loc-printer-p43-2 a rbaco:RBACO_0000051 ;            #: location record
+    rdfs:label "record 2: printer-p43 is located in lab-l1"@en ;
+    rbaco:RBACO_0000150 ex:printer-p43 ;                #: records located entity
+    rbaco:RBACO_0000151 ex:lab-l1 .                     #: records location
+
+ex:loc-printer-p44-2 a rbaco:RBACO_0000051 ;            #: location record
+    rdfs:label "record 2: printer-p44 is located in classroom-c101"@en ;
+    rbaco:RBACO_0000150 ex:printer-p44 ;                #: records located entity
+    rbaco:RBACO_0000151 ex:classroom-c101 .             #: records location
+
+ex:record-printer-locations-start a obo:BFO_0000203 ;   #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T10:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:record-printer-locations-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:record-printer-locations-start .  #: has first instant
+
+ex:record-printer-locations a rbaco:RBACO_0000031 ;     #: policy issuing act
+    rdfs:label "policy issuing act record-printer-locations"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000199 ex:record-printer-locations-interval ;  #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001986 ex:loc-printer-p43-2,               #: has output
+        ex:loc-printer-p44-2 .
+
+ex:retire-marie-office-start a obo:BFO_0000203 ;        #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:retire-marie-office-interval a obo:BFO_0000202 ;     #: temporal interval
+    obo:BFO_0000222 ex:retire-marie-office-start .      #: has first instant
+
+ex:retire-marie-office a rbaco:RBACO_0000032 ;          #: policy retiring act
+    rdfs:label "policy retiring act retire-marie-office"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000199 ex:retire-marie-office-interval ;   #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001921 ex:office-marie-1 .                 #: has input
+
+ex:office-marie-2 a rbaco:RBACO_0001026 ;               #: office assignment record
+    rdfs:label "record 2: marie has office office-o13"@en ;
+    rbaco:RBACO_0001102 ex:marie ;                      #: records office holder
+    rbaco:RBACO_0001103 ex:office-o13 .                 #: records assigned office
+
+ex:record-marie-office-start a obo:BFO_0000203 ;        #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T11:00:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:record-marie-office-interval a obo:BFO_0000202 ;     #: temporal interval
+    obo:BFO_0000222 ex:record-marie-office-start .      #: has first instant
+
+ex:record-marie-office a rbaco:RBACO_0000031 ;          #: policy issuing act
+    rdfs:label "policy issuing act record-marie-office"@en ;
+    obo:BFO_0000055 ex:officer-authority ;              #: realizes
+    obo:BFO_0000199 ex:record-marie-office-interval ;   #: occupies temporal region
+    cco:ont00001833 ex:officer ;                        #: has agent
+    cco:ont00001986 ex:office-marie-2 .                 #: has output
+
+ex:marie-req-use-printer-p43-2-start a obo:BFO_0000203 ;  #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T10:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:marie-req-use-printer-p43-2-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:marie-req-use-printer-p43-2-start .  #: has first instant
+
+ex:marie-req-use-printer-p43-2 a rbaco:RBACO_0000024 ;  #: access request
+    rdfs:label "marie asks to op-use-device on printer-p43"@en ;
+    obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
+    obo:BFO_0000199 ex:marie-req-use-printer-p43-2-interval ;  #: occupies temporal region
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:printer-p43 .                #: requests access to
+
+ex:marie-req-use-printer-p44-2-start a obo:BFO_0000203 ;  #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T10:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:marie-req-use-printer-p44-2-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:marie-req-use-printer-p44-2-start .  #: has first instant
+
+ex:marie-req-use-printer-p44-2 a rbaco:RBACO_0000024 ;  #: access request
+    rdfs:label "marie asks to op-use-device on printer-p44"@en ;
+    obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
+    obo:BFO_0000199 ex:marie-req-use-printer-p44-2-interval ;  #: occupies temporal region
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:printer-p44 .                #: requests access to
+
+ex:marie-req-use-display-d7-2-start a obo:BFO_0000203 ;  #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T11:05:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:marie-req-use-display-d7-2-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:marie-req-use-display-d7-2-start .  #: has first instant
+
+ex:marie-req-use-display-d7-2 a rbaco:RBACO_0000024 ;   #: access request
+    rdfs:label "marie asks to op-use-device on display-d7"@en ;
+    obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
+    obo:BFO_0000199 ex:marie-req-use-display-d7-2-interval ;  #: occupies temporal region
+    rbaco:RBACO_0000107 ex:marie ;                      #: has requester
+    rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
+    rbaco:RBACO_0000109 ex:display-d7 .                 #: requests access to
+
+ex:marie-req-use-display-d8-2-start a obo:BFO_0000203 ;  #: temporal instant
+    rbaco:RBACO_0000205 "2026-01-07T11:06:00+00:00"^^xsd:dateTime .  #: has timestamp
+
+ex:marie-req-use-display-d8-2-interval a obo:BFO_0000202 ;  #: temporal interval
+    obo:BFO_0000222 ex:marie-req-use-display-d8-2-start .  #: has first instant
+
+ex:marie-req-use-display-d8-2 a rbaco:RBACO_0000024 ;   #: access request
+    rdfs:label "marie asks to op-use-device on display-d8"@en ;
+    obo:BFO_0000132 ex:marie-day ;                      #: occurrent part of
+    obo:BFO_0000199 ex:marie-req-use-display-d8-2-interval ;  #: occupies temporal region
     rbaco:RBACO_0000107 ex:marie ;                      #: has requester
     rbaco:RBACO_0000108 ex:op-use-device ;              #: requests operation
     rbaco:RBACO_0000109 ex:display-d8 .                 #: requests access to

@@ -1,0 +1,35 @@
+# DERIVATION (intermediate). The dated facts that hold at ?evalTime, by the records in force then, written
+# with query-internal predicates outside the ontology. Run at each evaluation time, after
+# derive-in-force.rq; the runner removes the triples before the next time, as it does the in-force facts.
+#   rbacow:locatedIn - an entity and the place a location record (RBACO_0000051) in force names for it
+#   rbacow:hasOffice - an agent and the office an office assignment record (RBACO_0001026) in force
+#                      names for them
+#   rbacow:joins     - a conflicting agent designation and each agent a membership record (RBACO_0000052)
+#                      in force names as a member of the group it designates (RBACO_0000139); clif
+#                      [rbaco-u2]. derive-counted-as-one.rq writes the agents a designation names
+#                      directly, which do not depend on time, so one it also names directly is left out
+# The queries read these in place of located in (BFO_0000171), has office (RBACO_0001101) and member part
+# of (BFO_0000129). As OWL properties those carry no time: a triple says the relation held at some time
+# (BFO 2020 CLIF release of 2026-08-06, temporalized-relations [asd-1], [kax-1]) and stays true after a
+# move or a departure. check-undated-facts.rq reports such a triple that no record repeats.
+PREFIX rbaco:  <https://w3id.org/rbaco/bfo/>
+PREFIX rbacow: <https://example.org/rbaco/work#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT { ?entity rbacow:locatedIn ?place . ?holder rbacow:hasOffice ?office . ?g rbacow:joins ?member }
+WHERE {
+  {
+    ?rec a rbaco:RBACO_0000051 ; rbacow:inForceAt ?evalTime ;
+         rbaco:RBACO_0000150 ?entity ; rbaco:RBACO_0000151 ?place .
+  } UNION {
+    ?rec a rbaco:RBACO_0001026 ; rbacow:inForceAt ?evalTime ;
+         rbaco:RBACO_0001102 ?holder ; rbaco:RBACO_0001103 ?office .
+  } UNION {
+    ?rec a rbaco:RBACO_0000052 ; rbacow:inForceAt ?evalTime ;
+         rbaco:RBACO_0000152 ?member ; rbaco:RBACO_0000153 ?group .
+    ?g a rbaco:RBACO_0000045 ; rbaco:RBACO_0000139 ?group .
+    FILTER NOT EXISTS { ?g rbaco:RBACO_0000138 ?member }
+  }
+}
